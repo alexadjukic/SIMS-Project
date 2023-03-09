@@ -37,7 +37,7 @@ namespace InitialProject.Model
         {
             Id = Convert.ToInt32(values[0]);
             Url = values[1];
-            AccommodationId = Convert.ToInt32((values[2]);
+            AccommodationId = Convert.ToInt32(values[2]);
         }
     }
 }
