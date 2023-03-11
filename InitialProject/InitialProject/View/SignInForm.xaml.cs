@@ -1,6 +1,7 @@
 ﻿using InitialProject.Forms;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -46,7 +47,29 @@ namespace InitialProject
         private void SignIn(object sender, RoutedEventArgs e)
         {
             User user = _repository.GetByUsername(Username);
+
             if (user != null)
+            {
+                if (user.Role == "owner")
+                {
+                    if (user.Password == txtPassword.Password)
+                    {
+                        AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm();
+                        accommodationRegistration.Show();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wrong password!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Wrong username!");
+                }
+            }
+
+            /*if (user != null)
             {
                 if(user.Password == txtPassword.Password)
                 {
@@ -63,6 +86,7 @@ namespace InitialProject
             {
                 MessageBox.Show("Wrong username!");
             }
+            */
             
         }
     }
