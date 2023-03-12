@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.Serializer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    enum AccommodationType {apartman = 1, kuca, koliba};
-    internal class Accommodation
+    public enum AccommodationType {apartman = 1, kuca, koliba};
+    public class Accommodation : ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,7 +19,10 @@ namespace InitialProject.Model
         public int MinDaysForStay { get; set; }
         public int MinDaysBeforeCancel { get; set; }
 
-        public Accommodation() { }
+        public Accommodation() 
+        {
+            MinDaysBeforeCancel = 1;
+        }
 
         public Accommodation(int id, string name, Location location, AccommodationType type, int capacity, int minDaysForStay, int minDaysBeforeCancel)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    internal class AccommodationImage
+    public class AccommodationImage
     {
         public int Id { get; set; }
         public string Url { get; set; }
