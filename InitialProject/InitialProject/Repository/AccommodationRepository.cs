@@ -55,14 +55,14 @@ namespace InitialProject.Repository
 
             switch(type)
             {
-                case "apartman":
-                    Type = AccommodationType.apartman;
+                case "apartment":
+                    Type = AccommodationType.apartment;
                     break;
-                case "kuca":
-                    Type = AccommodationType.kuca;
+                case "house":
+                    Type = AccommodationType.house;
                     break;
-                case "koliba":
-                    Type = AccommodationType.koliba;
+                case "cottage":
+                    Type = AccommodationType.cottage;
                     break;
                 default:
                     Type = 0;
