@@ -54,8 +54,8 @@ namespace InitialProject
                 {
                     if (user.Password == txtPassword.Password)
                     {
-                        AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm();
-                        accommodationRegistration.Show();
+                        //AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm();
+                        //accommodationRegistration.Show();
                         Close();
                     }
                     else
