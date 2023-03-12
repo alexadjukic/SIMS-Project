@@ -29,6 +29,7 @@ namespace InitialProject.Model
             Id = id;
             Name = name;
             Location = location;
+            LocationId = location.Id;
             Type = type;
             Capacity = capacity;
             MinDaysForStay = minDaysForStay;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.Serializer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    public class Location
+    public class Location : ISerializable
     {
         public int Id { get; set; }
         public string City { get; set; }

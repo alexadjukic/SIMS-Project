@@ -28,10 +28,11 @@ namespace InitialProject.View
         public Accommodation SelectedAccommodation { get; set; }
 
         private readonly AccommodationRepository _repository;
+        private readonly LocationRepository _repositoryLocation;
 
         private string _name;
 
-        public string Name
+        public string AccommodationName
         {
             get => _name;
             set
@@ -126,11 +127,12 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public AccommodationRegistrationForm(AccommodationRepository repository)
+        public AccommodationRegistrationForm(AccommodationRepository repository, LocationRepository locationRepository)
         {
             InitializeComponent();
             DataContext = this;
             _repository = repository;
+            _repositoryLocation = locationRepository;
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
@@ -140,8 +142,7 @@ namespace InitialProject.View
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            //Registrate
-            _repository.Save(Name, Location, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel);
+            _repository.Save(AccommodationName, Location, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel, _repositoryLocation);
             this.Close();
         }
     }

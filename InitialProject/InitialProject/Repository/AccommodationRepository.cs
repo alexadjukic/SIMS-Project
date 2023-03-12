@@ -27,7 +27,7 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public Accommodation Save(string name, string location, string type, string capacity, string minDaysForStay, string minDaysBeforeCancel)
+        public Accommodation Save(string name, string location, string type, string capacity, string minDaysForStay, string minDaysBeforeCancel, LocationRepository _repositoryLocation)
         {
             int id = NextId();
 
@@ -50,6 +50,21 @@ namespace InitialProject.Repository
             }
             loc.City = loc.City.Trim();
             loc.Country = loc.Country.Trim();
+
+            foreach (Location locationSearch in _repositoryLocation.GetAll())
+            {
+                if (locationSearch.City != loc.City)
+                    continue;
+                if (locationSearch.Country != loc.Country)
+                    continue;
+
+                loc = locationSearch;
+            }
+
+            if (loc.Id == 0)
+            {
+                loc = _repositoryLocation.Save(loc.City, loc.Country);
+            }
 
             AccommodationType Type;
 
