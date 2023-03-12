@@ -15,6 +15,8 @@ namespace InitialProject
     {
 
         private readonly UserRepository _repository;
+        
+        private readonly AccommodationRepository _accommodationRepository;
 
         private string _username;
         public string Username
@@ -42,6 +44,7 @@ namespace InitialProject
             InitializeComponent();
             DataContext = this;
             _repository = new UserRepository();
+            _accommodationRepository = new AccommodationRepository();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -54,8 +57,8 @@ namespace InitialProject
                 {
                     if (user.Password == txtPassword.Password)
                     {
-                        //AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm();
-                        //accommodationRegistration.Show();
+                        AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository);
+                        accommodationRegistration.Show();
                         Close();
                     }
                     else
