@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Accommodation Registration" Height="450" Width="800">
+        Title="Accommodation Registration" Height="650" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="30*"/>
             <RowDefinition Height="12*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -36,10 +37,23 @@
             <TextBox TextWrapping="Wrap" Text="{Binding Path=Capacity, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
             <TextBox TextWrapping="Wrap" Text="{Binding Path=MinDaysForStay, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
             <TextBox TextWrapping="Wrap" Text="{Binding Path=MinDaysBeforeCancel, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
-            <Button Content="Add images" Width="100" Margin="0,10,0,15" Height="23.94"/>
         </StackPanel>
 
-        <Button Name="ButtonRegister" Content="Register" Grid.Row="1" Grid.Column="0" Width="100" Height="40" Click="ButtonRegister_Click"/>
-        <Button Name="ButtonCancel" Content="Cancel" Grid.Row="1" Grid.Column="1" Width="100" Height="40" Click="ButtonCancel_Click"/>
+        <StackPanel Grid.Row="1">
+            <DataGrid ItemsSource="{Binding AccommodationImages}"
+                      SelectedItem="{Binding Path=SelectedImage}"
+                      IsReadOnly="True" SelectionMode="Single" 
+                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Url" Binding="{Binding Url}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <Button Name="ButtonAddImages" Content="Add Images" Width="100" Height="40" Grid.Column="1" Margin="42,30,258,136" Grid.Row="1"/>
+        <Button Name="ButtonRemoveImages" Content="Remove Images" Width="100" Height="40" Grid.Column="1" Grid.Row="1" Margin="42,122,258,44"/>
+
+        <Button Name="ButtonRegister" Content="Register" Grid.Row="2" Grid.Column="0" Width="100" Height="40" Click="ButtonRegister_Click"/>
+        <Button Name="ButtonCancel" Content="Cancel" Grid.Row="2" Grid.Column="1" Width="100" Height="40" Click="ButtonCancel_Click"/>
     </Grid>
 </Window>
