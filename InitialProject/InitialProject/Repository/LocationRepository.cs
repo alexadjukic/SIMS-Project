@@ -27,6 +27,35 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
+        public List<string> GetAllCountries()
+        {
+            List<string> countries = new List<string>();
+
+            foreach (var location in _locations)
+            {
+                countries.Add(location.Country);
+            }
+
+            countries = countries.Distinct().ToList();
+
+            return countries;
+        }
+
+        public List<string> GetCorrespondingCities(string country)
+        {
+            List<string> cities = new List<string>();
+
+            foreach (var location in _locations)
+            {
+                if (location.Country == country)
+                {
+                    cities.Add(location.City);
+                }
+            }
+
+            return cities;
+        }
+
         public Location Save(string city, string country)
         {
             int id = NextId();

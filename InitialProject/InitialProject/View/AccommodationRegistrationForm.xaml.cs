@@ -45,17 +45,30 @@ namespace InitialProject.View
             }
         }
 
-        private string _location;
-
-        public string Location
+        private string _city;
+        public string City
         {
-            get => _location;
+            get => _city;
             set
             {
-                if (value != _location)
+                if (value != _city)
                 {
-                    _location = value;
-                    OnPropertyChanged("Location");
+                    _city = value;
+                    OnPropertyChanged("City");
+                }
+            }
+        }
+
+        private string _country;
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    OnPropertyChanged("Country");
                 }
             }
         }
@@ -142,8 +155,28 @@ namespace InitialProject.View
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            _repository.Save(AccommodationName, Location, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel, _repositoryLocation);
+            _repository.Save(AccommodationName, City, Country, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel, _repositoryLocation);
             this.Close();
+        }
+
+        private void AccommodationRegistrationLoaded(object sender, RoutedEventArgs e)
+        {
+            List<string> countries = _repositoryLocation.GetAllCountries();
+            ComboBoxCountry.ItemsSource = countries;
+        }
+
+        private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxCity.Items.Clear();
+
+            List<string> comboBoxCityItems = new List<string>();
+
+            comboBoxCityItems = _repositoryLocation.GetCorrespondingCities(ComboBoxCountry.SelectedItem.ToString());
+
+            foreach (var comboCity in comboBoxCityItems)
+            {
+                ComboBoxCity.Items.Add(comboCity);
+            }
         }
     }
 }
