@@ -1,8 +1,10 @@
 ﻿using InitialProject.Model;
 using InitialProject.Repository;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -177,6 +179,24 @@ namespace InitialProject.View
             {
                 ComboBoxCity.Items.Add(comboCity);
             }
+        }
+
+        private void AddImagesButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                TestTextBox.Text = openFileDialog.FileName;
+                Uri fileUri = new Uri(openFileDialog.FileName);
+                UploadedPicture.Source = new BitmapImage(fileUri);
+            }
+        }
+
+        private void SaveImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            File.Copy(TestTextBox.Text, System.IO.Path.Combine("../../../Resources/Images", System.IO.Path.GetFileName(TestTextBox.Text)), true);
+            PictureSavedLabel.Content = "Image added, if you want to add more images click button 'Add images'";
         }
     }
 }

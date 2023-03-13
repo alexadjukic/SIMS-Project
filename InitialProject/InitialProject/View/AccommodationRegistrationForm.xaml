@@ -42,20 +42,14 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <DataGrid ItemsSource="{Binding AccommodationImages}"
-                      SelectedItem="{Binding Path=SelectedImage}"
-                      IsReadOnly="True" SelectionMode="Single" 
-                  AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="13">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Url" Binding="{Binding Url}" Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <Button x:Name="AddImagesButton" Content="Add images" Margin="170,10,0,10" Width="100" Height="40" Click="AddImagesButton_Click"/>
+            <Button Name="SaveImageButton" Content="Save image" Margin="170,10,0,10" Width="100" Height="40" Click="SaveImageButton_Click"/>
         </StackPanel>
 
-        <Button Name="ButtonAddImages" Content="Add Images" Width="100" Height="40" Grid.Column="1" Margin="42,28,258,102" Grid.Row="1"/>
-        <Button Name="ButtonRemoveImages" Content="Remove Images" Width="100" Height="40" Grid.Column="1" Grid.Row="1" Margin="42,109,258,21"/>
-
+        <TextBox Name="TestTextBox" TextWrapping="Wrap" Text="" Height="20" Margin="0,140,0,10" Grid.Row="1"/>
         <Button Name="ButtonRegister" Content="Register" Grid.Row="2" Grid.Column="0" Width="100" Height="40" Click="ButtonRegister_Click"/>
         <Button Name="ButtonCancel" Content="Cancel" Grid.Row="2" Grid.Column="1" Width="100" Height="40" Click="ButtonCancel_Click"/>
+        <Image Name="UploadedPicture" Grid.Column="1" HorizontalAlignment="Left" Height="105" Margin="0,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="204"/>
+        <Label Name="PictureSavedLabel" Grid.Column="1" Content="" HorizontalAlignment="Center" Margin="0,134,0,0" Grid.Row="1" VerticalAlignment="Top" Width="400"/>
     </Grid>
 </Window>
