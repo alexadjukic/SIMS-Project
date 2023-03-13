@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,6 +32,9 @@ namespace InitialProject.View
 
         private readonly AccommodationRepository _repository;
         private readonly LocationRepository _repositoryLocation;
+        private readonly AccommodationImageRepository _imageRepository;
+
+        private int _imageNumber;
 
         private string _name;
 
@@ -142,22 +146,26 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public AccommodationRegistrationForm(AccommodationRepository repository, LocationRepository locationRepository)
+        public AccommodationRegistrationForm(AccommodationRepository repository, LocationRepository locationRepository, AccommodationImageRepository imageRepository)
         {
             InitializeComponent();
             DataContext = this;
             _repository = repository;
             _repositoryLocation = locationRepository;
+            _imageRepository = imageRepository; 
+            _imageNumber = 0;
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
+            _imageRepository.RemovePicturesForCanceledAccommodation();
             this.Close();
         }
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            _repository.Save(AccommodationName, City, Country, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel, _repositoryLocation);
+            int accommodationId = _repository.Save(AccommodationName, City, Country, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel, _repositoryLocation).Id;
+            _imageRepository.AddAccommodationId(accommodationId);
             this.Close();
         }
 
@@ -169,6 +177,16 @@ namespace InitialProject.View
 
         private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (IsValid)
+            {
+                ButtonRegister.IsEnabled = true;
+            }
+            else
+            {
+                ButtonRegister.IsEnabled = false;
+            }
+
+            ComboBoxCity.IsEnabled = true;
             ComboBoxCity.Items.Clear();
 
             List<string> comboBoxCityItems = new List<string>();
@@ -195,8 +213,97 @@ namespace InitialProject.View
 
         private void SaveImageButton_Click(object sender, RoutedEventArgs e)
         {
+
             File.Copy(TestTextBox.Text, System.IO.Path.Combine("../../../Resources/Images", System.IO.Path.GetFileName(TestTextBox.Text)), true);
             PictureSavedLabel.Content = "Image added, if you want to add more images click button 'Add images'";
+
+            _imageNumber++;
+            _imageRepository.Save(System.IO.Path.GetFileName(TestTextBox.Text), -1);
+
+            if (IsValid)
+            {
+                ButtonRegister.IsEnabled = true;
+            }
+            else
+            {
+                ButtonRegister.IsEnabled = false;
+            }
+        }
+
+        private void TestTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (IsValid)
+            {
+                ButtonRegister.IsEnabled = true;
+            }
+            else
+            {
+                ButtonRegister.IsEnabled = false;
+            }
+        }
+
+        private Regex _Number = new Regex(@"^[0-9]*$");
+
+        public bool IsValid
+        {
+            get
+            { 
+                if (AccommodationName == null || AccommodationName == "")
+                {
+                    return false;
+                }
+                else if (Country == null)
+                {
+                    return false;
+                }
+                else if (City == null)
+                {
+                    return false;
+                }
+                else if (Type == null)
+                {
+                    return false;
+                }
+                else if (Capacity == null || Capacity == "")
+                {
+                    return false;
+                }
+                else if (MinDaysForStay == null || MinDaysForStay == "")
+                {
+                    return false;
+                }
+                else if (MinDaysBeforeCancel == null || MinDaysBeforeCancel == "")
+                {
+                    return false;
+                }
+                else if (_imageNumber == 0)
+                {
+                    return false;
+                }
+
+                Match capacityMatch = _Number.Match(Capacity);
+                Match minDaysForStay = _Number.Match(MinDaysForStay);
+                Match minDayBeforeCancel = _Number.Match(MinDaysBeforeCancel);
+
+                if (!capacityMatch.Success || !minDaysForStay.Success || !minDayBeforeCancel.Success)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsValid)
+            {
+                ButtonRegister.IsEnabled = true;
+            }
+            else
+            {
+                ButtonRegister.IsEnabled = false;
+            }
         }
     }
 }

@@ -48,5 +48,29 @@ namespace InitialProject.Repository
 
             return _images.Max(c => c.Id) + 1;
         }
+
+        public void AddAccommodationId(int accommodationId)
+        {
+            _images = _serializer.FromCSV(FilePath);
+
+            foreach (var image in _images) 
+            { 
+                if (image.AccommodationId == -1)
+                {
+                    image.AccommodationId = accommodationId;
+                }
+            }
+
+            _serializer.ToCSV(FilePath, _images);
+        }
+
+        public void RemovePicturesForCanceledAccommodation()
+        {
+            _images = _serializer.FromCSV(FilePath);
+
+            _images.RemoveAll(image => image.AccommodationId == -1);
+
+            _serializer.ToCSV(FilePath, _images);
+        }
     }
 }

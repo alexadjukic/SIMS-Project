@@ -18,6 +18,7 @@ namespace InitialProject
         
         private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly AccommodationImageRepository _accommodationImageRepository;
 
         private string _username;
         public string Username
@@ -47,6 +48,7 @@ namespace InitialProject
             _repository = new UserRepository();
             _accommodationRepository = new AccommodationRepository();
             _locationRepository = new LocationRepository(); 
+            _accommodationImageRepository = new AccommodationImageRepository();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -59,7 +61,7 @@ namespace InitialProject
                 {
                     if (user.Password == txtPassword.Password)
                     {
-                        AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository);
+                        AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _accommodationImageRepository);
                         accommodationRegistration.Show();
                         Close();
                     }
