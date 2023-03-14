@@ -31,7 +31,7 @@
             <TextBox TextWrapping="Wrap" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}"  Width="247"  Margin="0,10,0,15" Height="23.94" TextChanged="TestTextBox_TextChanged"/>
             <ComboBox Name="ComboBoxCountry" SelectedValuePath="Content" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94" SelectionChanged="ComboBoxCountry_SelectionChanged"/>
             <ComboBox x:Name="ComboBoxCity" SelectedValuePath="Content" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94" IsEnabled="False" SelectionChanged="ComboBox_SelectionChanged"/>
-            <ComboBox Name="AccommodationType" SelectedValuePath="Content" Text="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBox Name="ComboBoxAccommodationType" SelectedValuePath="Content" Text="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94" SelectionChanged="ComboBox_SelectionChanged">
                 <ComboBoxItem Content="apartment"/>
                 <ComboBoxItem Content="house"/>
                 <ComboBoxItem Content="cottage"/>
@@ -42,14 +42,14 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <Button x:Name="AddImagesButton" Content="Add images" Margin="170,10,0,10" Width="100" Height="40" Click="AddImagesButton_Click"/>
-            <Button Name="SaveImageButton" Content="Save image" Margin="170,10,0,10" Width="100" Height="40" Click="SaveImageButton_Click"/>
+            <Button x:Name="ButtonAddImages" Content="Add images" Margin="170,10,0,10" Width="100" Height="40" Click="ButtonAddImages_Click"/>
+            <Button Name="ButtonSaveImage" Content="Save image" Margin="170,10,0,10" Width="100" Height="40" Click="ButtonSaveImage_Click"/>
         </StackPanel>
 
         <TextBox Name="TestTextBox" TextWrapping="Wrap" Text="" Height="20" Margin="0,137,0,13" Grid.Row="1" TextChanged="TestTextBox_TextChanged"/>
         <Button Name="ButtonRegister" Content="Register" Grid.Row="2" Grid.Column="0" Width="100" Height="40" Click="ButtonRegister_Click" IsEnabled="False"/>
         <Button Name="ButtonCancel" Content="Cancel" Grid.Row="2" Grid.Column="1" Width="100" Height="40" Click="ButtonCancel_Click"/>
         <Image Name="UploadedPicture" Grid.Column="1" HorizontalAlignment="Left" Height="105" Margin="0,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="204"/>
-        <Label Name="PictureSavedLabel" Grid.Column="1" Content="" HorizontalAlignment="Center" Margin="0,134,0,0" Grid.Row="1" VerticalAlignment="Top" Width="400"/>
+        <Label Name="LabelPictureSaved" Grid.Column="1" Content="" HorizontalAlignment="Center" Margin="0,134,0,0" Grid.Row="1" VerticalAlignment="Top" Width="400"/>
     </Grid>
 </Window>

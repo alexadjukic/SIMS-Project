@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -31,21 +32,21 @@ namespace InitialProject.View
         public Accommodation SelectedAccommodation { get; set; }
 
         private readonly AccommodationRepository _repository;
-        private readonly LocationRepository _repositoryLocation;
+        private readonly LocationRepository _locationRepository;
         private readonly AccommodationImageRepository _imageRepository;
 
         private int _imageNumber;
 
-        private string _name;
+        private string _accommodationName;
 
         public string AccommodationName
         {
-            get => _name;
+            get => _accommodationName;
             set
             {
-                if (value != _name)
+                if (value != _accommodationName)
                 {
-                    _name = value;
+                    _accommodationName = value;
                     OnPropertyChanged("Name");
                 }
             }
@@ -151,7 +152,7 @@ namespace InitialProject.View
             InitializeComponent();
             DataContext = this;
             _repository = repository;
-            _repositoryLocation = locationRepository;
+            _locationRepository = locationRepository;
             _imageRepository = imageRepository; 
             _imageNumber = 0;
         }
@@ -164,14 +165,23 @@ namespace InitialProject.View
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            int accommodationId = _repository.Save(AccommodationName, City, Country, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel, _repositoryLocation).Id;
+            int accommodationId = _repository.Save(AccommodationName, City, Country, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel, _locationRepository).Id;
             _imageRepository.AddAccommodationId(accommodationId);
             this.Close();
         }
 
         private void AccommodationRegistrationLoaded(object sender, RoutedEventArgs e)
         {
-            List<string> countries = _repositoryLocation.GetAllCountries();
+            //List<string> countries = _repositoryLocation.GetAllCountries();
+            List<string> countries = new List<string>();
+
+            foreach (var location in _locationRepository.GetAll())
+            {
+                countries.Add(location.Country);
+            }
+
+            countries = countries.Distinct().ToList();
+
             ComboBoxCountry.ItemsSource = countries;
         }
 
@@ -191,7 +201,20 @@ namespace InitialProject.View
 
             List<string> comboBoxCityItems = new List<string>();
 
-            comboBoxCityItems = _repositoryLocation.GetCorrespondingCities(ComboBoxCountry.SelectedItem.ToString());
+            //comboBoxCityItems = _repositoryLocation.GetCorrespondingCities(ComboBoxCountry.SelectedItem.ToString());
+
+            List<string> cities = new List<string>();
+
+            foreach (var location in _locationRepository.GetAll())
+            {
+                if (location.Country == ComboBoxCountry.SelectedItem.ToString())
+                {
+                    cities.Add(location.City);
+                }
+            }
+
+            comboBoxCityItems = cities;
+
 
             foreach (var comboCity in comboBoxCityItems)
             {
@@ -199,7 +222,7 @@ namespace InitialProject.View
             }
         }
 
-        private void AddImagesButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonAddImages_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -211,11 +234,11 @@ namespace InitialProject.View
             }
         }
 
-        private void SaveImageButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonSaveImage_Click(object sender, RoutedEventArgs e)
         {
 
             File.Copy(TestTextBox.Text, System.IO.Path.Combine("../../../Resources/Images", System.IO.Path.GetFileName(TestTextBox.Text)), true);
-            PictureSavedLabel.Content = "Image added, if you want to add more images click button 'Add images'";
+            LabelPictureSaved.Content = "Image added, if you want to add more images click button 'Add images'";
 
             _imageNumber++;
             _imageRepository.Save(System.IO.Path.GetFileName(TestTextBox.Text), -1);

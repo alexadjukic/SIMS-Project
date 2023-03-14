@@ -34,13 +34,24 @@ namespace InitialProject.Repository
 
             AccommodationImage image = new AccommodationImage(id, url, accommodationId);
             _images.Add(image);
-            _serializer.ToCSV(FilePath, _images);
+            SaveAllImages();
             return image;
+        }
+
+        public List<AccommodationImage> LoadAllImages()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
+        public void SaveAllImages()
+        {
+            _serializer.ToCSV(FilePath, _images);
         }
 
         public int NextId()
         {
             _images = _serializer.FromCSV(FilePath);
+
             if (_images.Count < 1 ) 
             {
                 return 1;
@@ -51,7 +62,7 @@ namespace InitialProject.Repository
 
         public void AddAccommodationId(int accommodationId)
         {
-            _images = _serializer.FromCSV(FilePath);
+            _images = LoadAllImages();
 
             foreach (var image in _images) 
             { 
@@ -61,16 +72,16 @@ namespace InitialProject.Repository
                 }
             }
 
-            _serializer.ToCSV(FilePath, _images);
+            SaveAllImages();
         }
 
         public void RemovePicturesForCanceledAccommodation()
         {
-            _images = _serializer.FromCSV(FilePath);
+            _images = LoadAllImages();
 
             _images.RemoveAll(image => image.AccommodationId == -1);
 
-            _serializer.ToCSV(FilePath, _images);
+            SaveAllImages();
         }
     }
 }
