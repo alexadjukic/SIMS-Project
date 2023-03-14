@@ -229,6 +229,8 @@ namespace InitialProject.View
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
+            openFileDialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp;)|*.jpg; *.jpeg; *.gif; *.bmp";
+
             if (openFileDialog.ShowDialog() == true)
             {
                 TestTextBox.Text = openFileDialog.FileName;
