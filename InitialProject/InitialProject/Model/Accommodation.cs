@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    public enum AccommodationType {apartman = 1, kuca, koliba};
+    public enum AccommodationType {apartment = 1, house, cottage};
     public class Accommodation : ISerializable
     {
         public int Id { get; set; }
@@ -19,13 +19,17 @@ namespace InitialProject.Model
         public int MinDaysForStay { get; set; }
         public int MinDaysBeforeCancel { get; set; }
 
-        public Accommodation() { }
+        public Accommodation() 
+        {
+            MinDaysBeforeCancel = 1;
+        }
 
         public Accommodation(int id, string name, Location location, AccommodationType type, int capacity, int minDaysForStay, int minDaysBeforeCancel)
         {
             Id = id;
             Name = name;
             Location = location;
+            LocationId = location.Id;
             Type = type;
             Capacity = capacity;
             MinDaysForStay = minDaysForStay;
@@ -56,14 +60,14 @@ namespace InitialProject.Model
             LocationId = Convert.ToInt32(values[2]);
             switch(values[3])
             {
-                case "apartman":
-                    Type = AccommodationType.apartman;
+                case "apartment":
+                    Type = AccommodationType.apartment;
                     break;
-                case "kuca":
-                    Type = AccommodationType.kuca;
+                case "house":
+                    Type = AccommodationType.house;
                     break;
-                case "koliba":
-                    Type = AccommodationType.koliba;
+                case "cottage":
+                    Type = AccommodationType.cottage;
                     break;
             }
             Capacity = Convert.ToInt32(values[4]);
