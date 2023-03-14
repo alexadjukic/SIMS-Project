@@ -63,8 +63,6 @@ namespace InitialProject
                     {
                         OwnerForm ownerForm = new OwnerForm(_accommodationRepository, _locationRepository, _accommodationImageRepository, user);
                         ownerForm.Show();
-                        //AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _accommodationImageRepository);
-                        //accommodationRegistration.Show();
                         Close();
                     }
                     else

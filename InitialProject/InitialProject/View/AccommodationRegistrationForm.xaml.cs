@@ -151,7 +151,7 @@ namespace InitialProject.View
         public AccommodationRegistrationForm(AccommodationRepository repository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, int ownerId)
         {
             InitializeComponent();
-            DataContext = this;
+            this.DataContext = this;
             _repository = repository;
             _locationRepository = locationRepository;
             _imageRepository = imageRepository; 
@@ -175,16 +175,7 @@ namespace InitialProject.View
 
         private void AccommodationRegistrationLoaded(object sender, RoutedEventArgs e)
         {
-            //List<string> countries = _repositoryLocation.GetAllCountries();
-            List<string> countries = new List<string>();
-
-            foreach (var location in _locationRepository.GetAll())
-            {
-                countries.Add(location.Country);
-            }
-
-            countries = countries.Distinct().ToList();
-
+            List<string> countries = _locationRepository.GetAllCountries();
             ComboBoxCountry.ItemsSource = countries;
         }
 
@@ -203,8 +194,6 @@ namespace InitialProject.View
             ComboBoxCity.Items.Clear();
 
             List<string> comboBoxCityItems = new List<string>();
-
-            //comboBoxCityItems = _repositoryLocation.GetCorrespondingCities(ComboBoxCountry.SelectedItem.ToString());
 
             List<string> cities = new List<string>();
 
