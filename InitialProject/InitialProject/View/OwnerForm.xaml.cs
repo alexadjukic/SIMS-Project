@@ -24,6 +24,8 @@ namespace InitialProject.View
         private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
         private readonly AccommodationImageRepository _imageRepository;
+
+        private int _ownerId;
         public OwnerForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, User user)
         {
             InitializeComponent();
@@ -32,11 +34,12 @@ namespace InitialProject.View
             _locationRepository = locationRepository;
             _imageRepository = imageRepository;
             LabelWelcomeUser.Content = "Welcome " + user.Username;
+            _ownerId = user.Id;
         }
 
         private void ButtonRegistrateAccommodation_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _imageRepository);
+            AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _imageRepository, _ownerId);
             accommodationRegistration.Show();
         }
 

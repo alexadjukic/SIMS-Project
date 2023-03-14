@@ -36,6 +36,7 @@ namespace InitialProject.View
         private readonly AccommodationImageRepository _imageRepository;
 
         private int _imageNumber;
+        private int _ownerId;
 
         private string _accommodationName;
 
@@ -147,7 +148,7 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public AccommodationRegistrationForm(AccommodationRepository repository, LocationRepository locationRepository, AccommodationImageRepository imageRepository)
+        public AccommodationRegistrationForm(AccommodationRepository repository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, int ownerId)
         {
             InitializeComponent();
             DataContext = this;
@@ -155,6 +156,7 @@ namespace InitialProject.View
             _locationRepository = locationRepository;
             _imageRepository = imageRepository; 
             _imageNumber = 0;
+            _ownerId = ownerId;
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
@@ -165,7 +167,7 @@ namespace InitialProject.View
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            int accommodationId = _repository.Save(AccommodationName, City, Country, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel, _locationRepository).Id;
+            int accommodationId = _repository.Save(AccommodationName, City, Country, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel, _ownerId, _locationRepository).Id;
             _imageRepository.AddAccommodationId(accommodationId);
             this.Close();
         }
