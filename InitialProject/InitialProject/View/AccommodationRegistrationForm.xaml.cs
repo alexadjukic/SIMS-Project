@@ -157,6 +157,7 @@ namespace InitialProject.View
             _imageRepository = imageRepository; 
             _imageNumber = 0;
             _ownerId = ownerId;
+            MinDaysBeforeCancel = "1";
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
@@ -267,7 +268,7 @@ namespace InitialProject.View
             }
         }
 
-        private Regex _Number = new Regex(@"^[0-9]*$");
+        private Regex _Number = new Regex(@"^[1-9][0-9]*$");
 
         public bool IsValid
         {
