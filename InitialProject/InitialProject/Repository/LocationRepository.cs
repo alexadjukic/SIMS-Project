@@ -77,5 +77,18 @@ namespace InitialProject.Repository
             return _locations.Max(c => c.Id) + 1;
         }
 
+        public Location GetById(int id)
+        {
+            Location Location = new Location();
+            foreach(Location location in _locations)
+            {
+                if(location.Id == id)
+                {
+                    return location;
+                }
+            }
+            return null; 
+        }
+
     }
 }
