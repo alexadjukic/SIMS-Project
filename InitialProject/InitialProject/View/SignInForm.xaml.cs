@@ -19,6 +19,8 @@ namespace InitialProject
         private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
         private readonly AccommodationImageRepository _accommodationImageRepository;
+        private readonly TourRepository _tourRepository;
+        private readonly TourImageRepository _tourImageRepository;
 
         private string _username;
         public string Username
@@ -49,6 +51,8 @@ namespace InitialProject
             _accommodationRepository = new AccommodationRepository();
             _locationRepository = new LocationRepository(); 
             _accommodationImageRepository = new AccommodationImageRepository();
+            _tourRepository = new TourRepository();
+            _tourImageRepository = new TourImageRepository();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -70,31 +74,24 @@ namespace InitialProject
                         MessageBox.Show("Wrong password!");
                     }
                 }
+                else if (user.Role.Equals("guest2"))
+                {
+                    if (user.Password == txtPassword.Password)
+                    {
+                        Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository);
+                        Close();
+                        guest2TourOverview.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wrong password!");
+                    }
+                }
                 else
                 {
                     MessageBox.Show("Wrong username!");
                 }
-            }
-
-            /*if (user != null)
-            {
-                if(user.Password == txtPassword.Password)
-                {
-                    CommentsOverview commentsOverview = new CommentsOverview(user);
-                    commentsOverview.Show();
-                    Close();
-                } 
-                else
-                {
-                    MessageBox.Show("Wrong password!");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Wrong username!");
-            }
-            */
-            
+            }           
         }
     }
 }
