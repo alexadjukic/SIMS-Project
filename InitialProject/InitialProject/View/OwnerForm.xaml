@@ -9,15 +9,17 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="50*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30*"/>
             <ColumnDefinition Width="30*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Name="ButtonRegistrateAccommodation" Content="Create" Grid.Row="0" Grid.Column="1" Width="100" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,30,0" Click="ButtonRegistrateAccommodation_Click"/>
+        <Button Name="ButtonRegistrateAccommodation" Content="Create" Grid.Row="0" Grid.Column="1" Width="100" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,30,00" Click="ButtonRegistrateAccommodation_Click"/>
         <Label Name="LabelWelcomeUser" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Arial Black" FontSize="18"/>
-        <Button Name="ButtonSignOut" Content="Sign out" Grid.Row="1" Grid.Column="1" Width="100" Height="50" HorizontalAlignment="Right" Margin="0,10,30,0" Click="ButtonSignOut_Click" VerticalAlignment="Top"/>
+        <Button Name="ButtonRateGuest" Content="Rate guests" Grid.Row="1" Grid.Column="1" Width="100" Height="50" HorizontalAlignment="Right" Margin="0,0,30,10" Click="ButtonRateGuest_Click"/>
+        <Button Name="ButtonSignOut" Content="Sign out" Grid.Row="2" Grid.Column="1" Width="100" Height="50" HorizontalAlignment="Right" Margin="0,10,30,0" Click="ButtonSignOut_Click" VerticalAlignment="Top"/>
     </Grid>
 </Window>

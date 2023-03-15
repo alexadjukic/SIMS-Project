@@ -49,5 +49,11 @@ namespace InitialProject.View
             signIn.Show();
             this.Close();
         }
+
+        private void ButtonRateGuest_Click(object sender, RoutedEventArgs e)
+        {
+            GuestsOverview guestsOverview = new GuestsOverview();
+            guestsOverview.Show();
+        }
     }
 }
