@@ -19,6 +19,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.WebRequestMethods;
 
 namespace InitialProject.View
 {
@@ -216,26 +217,23 @@ namespace InitialProject.View
 
         private void ButtonAddImages_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp;)|*.jpg; *.jpeg; *.gif; *.bmp";
-
-            if (openFileDialog.ShowDialog() == true)
+            String url = TestTextBox.Text;
+            if (url != null && url != "")
             {
-                TestTextBox.Text = openFileDialog.FileName;
-                Uri fileUri = new Uri(openFileDialog.FileName);
-                UploadedPicture.Source = new BitmapImage(fileUri);
+                Uri resourceUri = new Uri(url);
+                UploadedPicture.Source = new BitmapImage(resourceUri);
             }
+
+            TextBlockPictureSaved.Text = "";
         }
 
         private void ButtonSaveImage_Click(object sender, RoutedEventArgs e)
         {
 
-            File.Copy(TestTextBox.Text, System.IO.Path.Combine("../../../Resources/Images", System.IO.Path.GetFileName(TestTextBox.Text)), true);
-            LabelPictureSaved.Content = "Image added, if you want to add more images click button 'Add images'";
+            TextBlockPictureSaved.Text = "Image added, if you want to add more images, type another url and click button 'Add images'";
 
             _imageNumber++;
-            _imageRepository.Save(System.IO.Path.GetFileName(TestTextBox.Text), -1);
+            _imageRepository.Save(TestTextBox.Text, -1);
 
             if (IsValid)
             {
