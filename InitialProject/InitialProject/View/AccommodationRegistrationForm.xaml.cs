@@ -217,8 +217,11 @@ namespace InitialProject.View
 
         private void ButtonAddImages_Click(object sender, RoutedEventArgs e)
         {
-            String url = TestTextBox.Text;
-            if (url != null && url != "")
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp;)|*.jpg; *.jpeg; *.gif; *.bmp";
+
+            if (openFileDialog.ShowDialog() == true)
             {
                 Uri resourceUri = new Uri(url);
                 UploadedPicture.Source = new BitmapImage(resourceUri);
