@@ -14,8 +14,7 @@ namespace InitialProject
     public partial class SignInForm : Window
     {
 
-        private readonly UserRepository _repository;
-        
+        private readonly UserRepository _userRepository;
         private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
         private readonly AccommodationImageRepository _accommodationImageRepository;
@@ -47,7 +46,7 @@ namespace InitialProject
         {
             InitializeComponent();
             DataContext = this;
-            _repository = new UserRepository();
+            _userRepository = new UserRepository();
             _accommodationRepository = new AccommodationRepository();
             _locationRepository = new LocationRepository(); 
             _accommodationImageRepository = new AccommodationImageRepository();
@@ -57,7 +56,7 @@ namespace InitialProject
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
-            User user = _repository.GetByUsername(Username);
+            User user = _userRepository.GetByUsername(Username);
 
             if (user != null)
             {
