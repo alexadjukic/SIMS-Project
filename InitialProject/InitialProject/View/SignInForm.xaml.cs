@@ -20,6 +20,7 @@ namespace InitialProject
         private readonly AccommodationImageRepository _accommodationImageRepository;
         private readonly TourRepository _tourRepository;
         private readonly TourImageRepository _tourImageRepository;
+        private readonly PointRepository _pointRepository;
 
         private string _username;
         public string Username
@@ -58,39 +59,45 @@ namespace InitialProject
         {
             User user = _userRepository.GetByUsername(Username);
 
-            if (user != null)
+            if (user == null)
             {
-                if (user.Role == UserRole.OWNER)
-                {
-                    if (user.Password == txtPassword.Password)
-                    {
-                        OwnerForm ownerForm = new OwnerForm(_accommodationRepository, _locationRepository, _accommodationImageRepository, user);
-                        ownerForm.Show();
-                        Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Wrong password!");
-                    }
-                }
-                else if (user.Role == UserRole.GUEST2)
-                {
-                    if (user.Password == txtPassword.Password)
-                    {
-                        Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository);
-                        Close();
-                        guest2TourOverview.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Wrong password!");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Wrong username!");
-                }
-            }           
+                MessageBox.Show("Wrong username!");
+                return;
+            }
+
+            if (!user.Password.Equals(txtPassword.Password))
+            {
+                MessageBox.Show("Wrong password!");
+                return;
+            }
+
+            OpenSuitableWindow(user);
+        }
+
+        private void OpenSuitableWindow(User user)
+        {
+            if (user.Role == UserRole.OWNER)
+            {
+                OwnerForm ownerForm = new OwnerForm(_accommodationRepository, _locationRepository, _accommodationImageRepository, user);
+                ownerForm.Show();
+                Close();
+            }
+            else if (user.Role == UserRole.GUEST1)
+            {
+                //todo
+            }
+            else if (user.Role == UserRole.GUEST2)
+            {
+                Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository);
+                guest2TourOverview.Show();
+                Close();
+            }
+            else if (user.Role == UserRole.GUIDE)
+            {
+                TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _pointRepository);
+                tourCreationForm.Show();
+                Close();
+            }
         }
     }
 }
