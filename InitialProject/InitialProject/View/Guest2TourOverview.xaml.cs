@@ -280,9 +280,12 @@ namespace InitialProject.View
         {
             if (MaxGuests != 0 && MaxGuests.ToString() != "")
             {
-                if (MaxGuests != tour.MaxGuests)
+                if(MaxGuests > tour.MaxGuests) 
                 {
-                    Tours.Remove(tour);
+                    if (MaxGuests != tour.MaxGuests)
+                    {
+                        Tours.Remove(tour);
+                    }                    
                 }
             }
         }
