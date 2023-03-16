@@ -60,7 +60,7 @@ namespace InitialProject
 
             if (user != null)
             {
-                if (user.Role == "owner")
+                if (user.Role == UserRole.OWNER)
                 {
                     if (user.Password == txtPassword.Password)
                     {
@@ -73,7 +73,7 @@ namespace InitialProject
                         MessageBox.Show("Wrong password!");
                     }
                 }
-                else if (user.Role.Equals("guest2"))
+                else if (user.Role == UserRole.GUEST2)
                 {
                     if (user.Password == txtPassword.Password)
                     {
