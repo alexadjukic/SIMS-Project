@@ -84,7 +84,9 @@ namespace InitialProject
             }
             else if (user.Role == UserRole.GUEST1)
             {
-                //todo
+                Guest1AccommodationOverview guest1AccommodationOverview = new Guest1AccommodationOverview(_accommodationRepository, _locationRepository, _accommodationImageRepository);
+                guest1AccommodationOverview.Show();
+                Close();
             }
             else if (user.Role == UserRole.GUEST2)
             {
