@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Accommodation Registration" Height="750" Width="800" Loaded="AccommodationRegistrationLoaded">
+        Title="Accommodation Registration" Height="750" Width="800" Loaded="AccommodationRegistrationLoaded" Closed="Window_Closed">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70*"/>
@@ -44,7 +44,7 @@
         <StackPanel Grid.Row="1">
             <TextBlock TextWrapping="Wrap" Text="Type url of image here:" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left"/>
             <TextBox Name="TestTextBox" TextWrapping="Wrap" Text="" Height="50" Grid.Row="1" Margin="5" TextChanged="TestTextBox_TextChanged"/>
-            <Button x:Name="ButtonAddImages" Content="Add image" Width="100" Height="40" Margin="0,10,0,0" Click="ButtonAddImages_Click"/>
+            <Button x:Name="ButtonAddImages" Content="Add image" Width="100" Height="40" Margin="0,10,0,0" Click="ButtonAddImages_Click" IsEnabled="False"/>
         </StackPanel>
         
         <Button Name="ButtonSaveImage" Content="Save image" Grid.Column="1" Grid.Row="1" Margin="170,0,0,0" Width="100" Height="40" Click="ButtonSaveImage_Click" IsEnabled="False"/>
