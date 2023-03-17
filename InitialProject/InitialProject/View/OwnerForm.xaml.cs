@@ -2,6 +2,7 @@
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +27,12 @@ namespace InitialProject.View
         private readonly AccommodationImageRepository _imageRepository;
         private readonly AccommodationReservationRepository _reservationRepository;
         private readonly UserRepository _userRepository;
+        private readonly RatingRepository _ratingRepository;
+
+        public int _numberOfUnratedGuests;
 
         private int _ownerId;
-        public OwnerForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, User user, AccommodationReservationRepository reservationRepository, UserRepository userRepository)
+        public OwnerForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, User user, AccommodationReservationRepository reservationRepository, UserRepository userRepository, RatingRepository ratingRepository)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -39,6 +43,23 @@ namespace InitialProject.View
             _ownerId = user.Id;
             _reservationRepository = reservationRepository;
             _userRepository = userRepository;
+            _ratingRepository = ratingRepository;
+
+            _numberOfUnratedGuests = 0;
+
+            /*foreach (var reservation in _reservationRepository.GetAll())
+            {
+                if (_accommodationRepository.GetAll().Find(a => a.Id == reservation.AccommodationId) != null)
+                {
+                    if (_accommodationRepository.GetAll().Find(a => a.Id == reservation.AccommodationId).OwnerId == _ownerId && _ratingRepository.GetAll().Find(r => r.ReservationId == reservation.Id) == null)
+                    {
+                        RatingGuestReminderForm ratingGuestReminderForm = new RatingGuestReminderForm();
+                        ratingGuestReminderForm.Show();
+                        break;
+                    }
+                }
+                
+            }*/
         }
 
         private void ButtonRegistrateAccommodation_Click(object sender, RoutedEventArgs e)
@@ -58,6 +79,23 @@ namespace InitialProject.View
         {
             GuestsOverview guestsOverview = new GuestsOverview(_ownerId, _reservationRepository, _accommodationRepository, _userRepository);
             guestsOverview.Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+           foreach (var reservation in _reservationRepository.GetAll())
+           {
+               if (_accommodationRepository.GetAll().Find(a => a.Id == reservation.AccommodationId) != null)
+               {
+                   if (_accommodationRepository.GetAll().Find(a => a.Id == reservation.AccommodationId).OwnerId == _ownerId && _ratingRepository.GetAll().Find(r => r.ReservationId == reservation.Id) == null)
+                   {
+                       RatingGuestReminderForm ratingGuestReminderForm = new RatingGuestReminderForm();
+                       ratingGuestReminderForm.Show();
+                       break;
+                   }
+               }
+
+           }
         }
     }
 }

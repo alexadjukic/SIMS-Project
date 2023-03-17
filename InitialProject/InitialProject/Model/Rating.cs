@@ -15,10 +15,11 @@ namespace InitialProject.Model
         public string Comment { get; set; }
         public int TheOneWhoIsRatedId { get; set; }
         public int RaterId { get; set; }
+        public int ReservationId { get; set; }
 
         public Rating() { }
 
-        public Rating(int id, int cleanliness, int followingTheRules, string comment, int theOneWhoIsRatedId, int raterId)
+        public Rating(int id, int cleanliness, int followingTheRules, string comment, int theOneWhoIsRatedId, int raterId, int reservationId)
         {
             Id = id;
             Cleanliness = cleanliness;
@@ -26,6 +27,7 @@ namespace InitialProject.Model
             Comment = comment;
             TheOneWhoIsRatedId = theOneWhoIsRatedId;
             RaterId = raterId;
+            ReservationId = reservationId;
         }
 
         public string[] ToCSV()
@@ -37,7 +39,8 @@ namespace InitialProject.Model
                 FollowingTheRules.ToString(),
                 Comment,
                 TheOneWhoIsRatedId.ToString(),
-                RaterId.ToString()
+                RaterId.ToString(),
+                ReservationId.ToString()
             };
 
             return csvValues;
@@ -51,6 +54,7 @@ namespace InitialProject.Model
             Comment = values[3];
             TheOneWhoIsRatedId = Convert.ToInt32(values[4]);
             RaterId = Convert.ToInt32(values[5]);
+            ReservationId = Convert.ToInt32(values[6]);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    class RatingRepository
+    public class RatingRepository
     {
         private const string FilePath = "../../../Resources/Data/ratings.csv";
 

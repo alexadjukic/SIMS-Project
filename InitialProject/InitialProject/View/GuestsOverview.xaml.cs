@@ -42,8 +42,11 @@ namespace InitialProject.View
             _accommodationRepository = accommodationRepository;
             _userRepository = userRepository;
 
+            List<AccommodationReservation> _ownerReservations = _reservationRepository.GetAllByOwnerId(_ownerId, _accommodationRepository, _userRepository);
 
             Reservations = new ObservableCollection<AccommodationReservation>(_reservationRepository.GetAllByOwnerId(_ownerId, _accommodationRepository, _userRepository));
+
+            
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
@@ -61,8 +64,5 @@ namespace InitialProject.View
                 }
             }
         }
-
-
-
     }
 }
