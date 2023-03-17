@@ -247,8 +247,20 @@ namespace InitialProject.View
             }
         }
 
+        private Regex _Url = new Regex("^https?:\\/\\/[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$");
+
         private void TestTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            Match urlMatch = _Url.Match(TestTextBox.Text);
+
+            if (urlMatch.Success)
+            {
+                ButtonAddImages.IsEnabled = true;
+            } else
+            {
+                ButtonAddImages.IsEnabled = false;
+            }
+
             if (IsValid)
             {
                 ButtonRegister.IsEnabled = true;
@@ -326,6 +338,11 @@ namespace InitialProject.View
             {
                 ButtonRegister.IsEnabled = false;
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _imageRepository.RemovePicturesForCanceledAccommodation();
         }
     }
 }
