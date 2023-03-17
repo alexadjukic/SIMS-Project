@@ -47,7 +47,7 @@
             <Button x:Name="ButtonAddImages" Content="Add image" Width="100" Height="40" Margin="0,10,0,0" Click="ButtonAddImages_Click"/>
         </StackPanel>
         
-        <Button Name="ButtonSaveImage" Content="Save image" Grid.Column="1" Grid.Row="1" Margin="170,0,0,0" Width="100" Height="40" Click="ButtonSaveImage_Click"/>
+        <Button Name="ButtonSaveImage" Content="Save image" Grid.Column="1" Grid.Row="1" Margin="170,0,0,0" Width="100" Height="40" Click="ButtonSaveImage_Click" IsEnabled="False"/>
 
         <Button Name="ButtonRegister" Content="Register" Grid.Row="2" Grid.Column="1" Margin="50,0,0,0" Width="100" Height="40" Click="ButtonRegister_Click" IsEnabled="False" HorizontalAlignment="Left"/>
         <Button Name="ButtonCancel" Content="Cancel" Grid.Row="2" Grid.Column="1" Width="100" Height="40" Margin="0,0,50,0" Click="ButtonCancel_Click" HorizontalAlignment="Right"/>

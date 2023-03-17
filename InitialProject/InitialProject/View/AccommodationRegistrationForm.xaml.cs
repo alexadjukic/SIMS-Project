@@ -217,14 +217,13 @@ namespace InitialProject.View
 
         private void ButtonAddImages_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            String url = TestTextBox.Text;
 
-            openFileDialog.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp;)|*.jpg; *.jpeg; *.gif; *.bmp";
-
-            if (openFileDialog.ShowDialog() == true)
+            if (url != null && url != "")
             {
                 Uri resourceUri = new Uri(url);
                 UploadedPicture.Source = new BitmapImage(resourceUri);
+                ButtonSaveImage.IsEnabled = true;
             }
 
             TextBlockPictureSaved.Text = "";
@@ -257,6 +256,11 @@ namespace InitialProject.View
             else
             {
                 ButtonRegister.IsEnabled = false;
+            }
+
+            if (TestTextBox.Text == null || TestTextBox.Text == "")
+            {
+                ButtonSaveImage.IsEnabled = false;
             }
         }
 

@@ -96,8 +96,8 @@ namespace InitialProject
             }
             else if (user.Role == UserRole.GUIDE)
             {
-                TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _pointRepository);
-                tourCreationForm.Show();
+                //TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _pointRepository);
+                //tourCreationForm.Show();
                 Close();
             }
         }
