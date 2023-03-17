@@ -14,18 +14,23 @@ namespace InitialProject.Model
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int LenghtOfStay { get; set; }
+        public Accommodation Accommodation { get; set; }
         public int AccommodationId { get; set; }
+        public User Guest { get; set; }
         public int GuestId { get; set; }
 
         public AccommodationReservation() { }
-        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int lenghtOfStay, int accommodationId, int guestId)
+
+        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, User guest)
         {
             Id = id;
             StartDate = startDate;
             EndDate = endDate;
             LenghtOfStay = lenghtOfStay;
-            AccommodationId = accommodationId;
-            GuestId = guestId;
+            Accommodation = accommodation;
+            AccommodationId = accommodation.Id;
+            Guest = guest;
+            GuestId = guest.Id;
         }
 
         public string[] ToCSV()
