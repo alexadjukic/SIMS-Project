@@ -28,7 +28,7 @@ namespace InitialProject.View
         private TourRepository _tourRepository;
         private TourImageRepository _tourImageRepository;
         private LocationRepository _locationRepository;
-        private PointRepository _pointRepository;
+        private CheckpointRepository _checkpointRepository;
 
         private string _tourName;
         public string TourName
@@ -143,30 +143,30 @@ namespace InitialProject.View
             }
         }
 
-        private string _enteredPointName;
-        public string EnteredPointName
+        private string _enteredCheckpointName;
+        public string EnteredCheckpointName
         {
-            get => _enteredPointName;
+            get => _enteredCheckpointName;
             set
             {
-                if (_enteredPointName != value)
+                if (_enteredCheckpointName != value)
                 {
-                    _enteredPointName = value;
-                    OnPropertyChanged(nameof(EnteredPointName));
+                    _enteredCheckpointName = value;
+                    OnPropertyChanged(nameof(EnteredCheckpointName));
                 }
             }
         }
 
-        private string _selectedPointName;
-        public string SelectedPointName
+        private string _selectedCheckpointName;
+        public string SelectedCheckpointName
         {
-            get => _selectedPointName;
+            get => _selectedCheckpointName;
             set
             {
-                if (_selectedPointName != value)
+                if (_selectedCheckpointName != value)
                 {
-                    _selectedPointName = value;
-                    OnPropertyChanged(nameof(SelectedPointName));
+                    _selectedCheckpointName = value;
+                    OnPropertyChanged(nameof(SelectedCheckpointName));
                 }
             }
         }
@@ -204,11 +204,11 @@ namespace InitialProject.View
         public ObservableCollection<string> Countries { get; set; }
         public ObservableCollection<string> Cities { get; set; }
         public ObservableCollection<string> Languages { get; set; }
-        public ObservableCollection<string> PointNames { get; set; }
+        public ObservableCollection<string> CheckpointNames { get; set; }
         public List<BitmapImage> Images { get; set; }
 
 
-        public TourCreationForm(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, PointRepository pointRepository)
+        public TourCreationForm(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -216,13 +216,13 @@ namespace InitialProject.View
             _tourRepository = tourRepository;
             _tourImageRepository = tourImageRepository;
             _locationRepository = locationRepository;
-            _pointRepository = pointRepository;
+            _checkpointRepository = checkpointRepository;
 
             Dates = new ObservableCollection<DateTime>();
             Countries = new ObservableCollection<string>();
             Cities = new ObservableCollection<string>();
             Languages = new ObservableCollection<string>() { "Serbian", "Hungarian", "German", "Thai", "French", "Italian", "Turkish", "Chinese", "Bulgarian", "Swedish", "Finish", "Croatian", "Bosnian", "Japanese", "Eren Yeager", "Danish", "English", "Romanian", "Greek", "Albanian", "Ukranian", "Russian", "Slovenian", "Slovakian", "Belgian", "Dutch", "Portuguese", "Spanish", "Lithuanian", "Estonian" };
-            PointNames = new ObservableCollection<string>();
+            CheckpointNames = new ObservableCollection<string>();
             Images = new List<BitmapImage>();
 
             DatePickerSelectedDate = DateTime.Now;
@@ -315,9 +315,9 @@ namespace InitialProject.View
                         return "At least 1 date is required";
                     }
                 }
-                else if (columnName.Equals(nameof(PointNames)))
+                else if (columnName.Equals(nameof(CheckpointNames)))
                 {
-                    if (PointNames.Count < 2)
+                    if (CheckpointNames.Count < 2)
                     {
                         return "At least 2 checkpoints are required";
                     }
@@ -333,7 +333,7 @@ namespace InitialProject.View
             }
         }
 
-        private readonly string[] _validatedProperties = { "TourName", "SelectedCountry", "SelectedCity", "Duration", "SelectedLanguage", "MaxGuests", "Description", "Dates", "PointNames", "SelectedImage" };
+        private readonly string[] _validatedProperties = { "TourName", "SelectedCountry", "SelectedCity", "Duration", "SelectedLanguage", "MaxGuests", "Description", "Dates", "CheckpointNames", "SelectedImage" };
 
         public bool IsValid
         {
@@ -386,20 +386,20 @@ namespace InitialProject.View
             EnableConfirmButtonIfValid();
         }
 
-        private void ButtonAddPoint_Click(object sender, RoutedEventArgs e)
+        private void ButtonAddCheckpoint_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(EnteredPointName)) return;
-            if (PointNames.Contains(EnteredPointName)) return;
+            if (string.IsNullOrEmpty(EnteredCheckpointName)) return;
+            if (CheckpointNames.Contains(EnteredCheckpointName)) return;
 
-            PointNames.Add(EnteredPointName);
-            EnteredPointName = "";
+            CheckpointNames.Add(EnteredCheckpointName);
+            EnteredCheckpointName = "";
 
             EnableConfirmButtonIfValid();
         }
 
-        private void ButtonRemovePoint_Click(object sender, RoutedEventArgs e)
+        private void ButtonRemoveCheckpoint_Click(object sender, RoutedEventArgs e)
         {
-            PointNames.Remove(SelectedPointName);
+            CheckpointNames.Remove(SelectedCheckpointName);
 
             EnableConfirmButtonIfValid();
         }
@@ -547,9 +547,9 @@ namespace InitialProject.View
             foreach (var startTime in Dates)
             {
                 Tour tour = _tourRepository.Create(TourName, location, location.Id, Description, SelectedLanguage, MaxGuests, startTime, Duration, SelectedImage.ToString());
-                foreach (var pointName in PointNames)
+                foreach (var checkpointName in CheckpointNames)
                 {
-                    _pointRepository.Create(pointName, false, tour, tour.Id);
+                    _checkpointRepository.Create(checkpointName, false, tour, tour.Id);
                 }
 
                 foreach (var image in Images)

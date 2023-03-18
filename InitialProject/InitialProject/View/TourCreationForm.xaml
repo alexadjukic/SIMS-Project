@@ -109,7 +109,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Checkpoint:" Margin="20,20,0,0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" />
-                <TextBox Grid.Column="1" Margin="20,20,20,0" Height="22" Text="{Binding Path=EnteredPointName, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="1" Margin="20,20,20,0" Height="22" Text="{Binding Path=EnteredCheckpointName, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
 
             <Grid>
@@ -117,11 +117,11 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Name="AddPoint" Grid.Row="1" Grid.Column="0" Content="Add" Margin="20,20,20,0" Click="ButtonAddPoint_Click"/>
-                <Button Name="RemovePoint" Grid.Row="1" Grid.Column="1" Content="Remove" Margin="20,20,20,0" Click="ButtonRemovePoint_Click"/>
+                <Button Name="AddCheckpoint" Grid.Row="1" Grid.Column="0" Content="Add" Margin="20,20,20,0" Click="ButtonAddCheckpoint_Click"/>
+                <Button Name="RemoveCheckpoint" Grid.Row="1" Grid.Column="1" Content="Remove" Margin="20,20,20,0" Click="ButtonRemoveCheckpoint_Click"/>
             </Grid>
 
-            <DataGrid Margin="20,20,20,0" Height="250" HeadersVisibility="None" ItemsSource="{Binding Path=PointNames,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedPointName, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid Margin="20,20,20,0" Height="250" HeadersVisibility="None" ItemsSource="{Binding Path=CheckpointNames,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCheckpointName, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="319" Header="Name" Binding="{Binding}"/>
                 </DataGrid.Columns>

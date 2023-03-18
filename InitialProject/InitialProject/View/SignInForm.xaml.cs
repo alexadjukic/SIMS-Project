@@ -20,7 +20,7 @@ namespace InitialProject
         private readonly AccommodationImageRepository _accommodationImageRepository;
         private readonly TourRepository _tourRepository;
         private readonly TourImageRepository _tourImageRepository;
-        private readonly PointRepository _pointRepository;
+        private readonly CheckpointRepository _pointRepository;
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly RatingRepository _ratingRepository;
 
@@ -55,7 +55,7 @@ namespace InitialProject
             _accommodationImageRepository = new AccommodationImageRepository();
             _tourRepository = new TourRepository();
             _tourImageRepository = new TourImageRepository();
-            _pointRepository = new PointRepository();
+            _pointRepository = new CheckpointRepository();
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _ratingRepository = new RatingRepository();
         }
