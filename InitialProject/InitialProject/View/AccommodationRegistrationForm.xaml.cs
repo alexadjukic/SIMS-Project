@@ -32,7 +32,7 @@ namespace InitialProject.View
 
         public Accommodation SelectedAccommodation { get; set; }
 
-        private readonly AccommodationRepository _repository;
+        private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
         private readonly AccommodationImageRepository _imageRepository;
 
@@ -40,7 +40,6 @@ namespace InitialProject.View
         private int _ownerId;
 
         private string _accommodationName;
-
         public string AccommodationName
         {
             get => _accommodationName;
@@ -98,7 +97,6 @@ namespace InitialProject.View
         }
 
         private string _capacity;
-
         public string Capacity
         {
             get => _capacity;
@@ -113,7 +111,6 @@ namespace InitialProject.View
         }
 
         private string _minDaysForStay;
-
         public string MinDaysForStay
         {
             get => _minDaysForStay;
@@ -128,7 +125,6 @@ namespace InitialProject.View
         }
 
         private string _minDaysBeforeCancel;
-
         public string MinDaysBeforeCancel
         {
             get => _minDaysBeforeCancel;
@@ -149,16 +145,31 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public AccommodationRegistrationForm(AccommodationRepository repository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, int ownerId)
+        public AccommodationRegistrationForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, int ownerId)
         {
             InitializeComponent();
             this.DataContext = this;
-            _repository = repository;
+            _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
             _imageRepository = imageRepository; 
             _imageNumber = 0;
             _ownerId = ownerId;
             MinDaysBeforeCancel = "1";
+        }
+
+        public AccommodationType FindType(string type)
+        {
+            switch (type)
+            {
+                case "apartment":
+                    return AccommodationType.apartment;
+                case "house":
+                    return AccommodationType.house;
+                case "cottage":
+                    return AccommodationType.cottage;
+                default:
+                    return 0;
+            }
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
@@ -169,8 +180,15 @@ namespace InitialProject.View
 
         private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
-            int accommodationId = _repository.Save(AccommodationName, City, Country, Type, Capacity, MinDaysForStay, MinDaysBeforeCancel, _ownerId, _locationRepository).Id;
-            _imageRepository.AddAccommodationId(accommodationId);
+            Location location = _locationRepository.GetByCountryAndCity(Country, City);
+            AccommodationType accommodationType = FindType(Type);
+
+            if (location != null)
+            {
+                int accommodationId = _accommodationRepository.Save(AccommodationName, location, accommodationType, Capacity, MinDaysForStay, MinDaysBeforeCancel, _ownerId, _locationRepository).Id;
+                _imageRepository.AddAccommodationId(accommodationId);
+            }
+            
             this.Close();
         }
 
@@ -180,7 +198,7 @@ namespace InitialProject.View
             ComboBoxCountry.ItemsSource = countries;
         }
 
-        private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void EnableButtonIfValid()
         {
             if (IsValid)
             {
@@ -190,29 +208,28 @@ namespace InitialProject.View
             {
                 ButtonRegister.IsEnabled = false;
             }
+        }
 
-            ComboBoxCity.IsEnabled = true;
-            ComboBoxCity.Items.Clear();
-
-            List<string> comboBoxCityItems = new List<string>();
-
-            List<string> cities = new List<string>();
-
-            foreach (var location in _locationRepository.GetAll())
-            {
-                if (location.Country == ComboBoxCountry.SelectedItem.ToString())
-                {
-                    cities.Add(location.City);
-                }
-            }
-
-            comboBoxCityItems = cities;
-
+        public void FillInCities(List<string> comboBoxCityItems)
+        {
+            EnableButtonIfValid();
 
             foreach (var comboCity in comboBoxCityItems)
             {
                 ComboBoxCity.Items.Add(comboCity);
             }
+        }
+
+        private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EnableButtonIfValid();
+
+            ComboBoxCity.IsEnabled = true;
+            ComboBoxCity.Items.Clear();
+
+            List<string> comboBoxCityItems = _locationRepository.GetCitiesByCountry(ComboBoxCountry.SelectedItem.ToString());
+
+            FillInCities(comboBoxCityItems);
         }
 
         private void ButtonAddImages_Click(object sender, RoutedEventArgs e)
@@ -237,14 +254,7 @@ namespace InitialProject.View
             _imageNumber++;
             _imageRepository.Save(TestTextBox.Text, -1);
 
-            if (IsValid)
-            {
-                ButtonRegister.IsEnabled = true;
-            }
-            else
-            {
-                ButtonRegister.IsEnabled = false;
-            }
+            EnableButtonIfValid();
         }
 
         private Regex _Url = new Regex("^https?:\\/\\/[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$");
@@ -261,14 +271,7 @@ namespace InitialProject.View
                 ButtonAddImages.IsEnabled = false;
             }
 
-            if (IsValid)
-            {
-                ButtonRegister.IsEnabled = true;
-            }
-            else
-            {
-                ButtonRegister.IsEnabled = false;
-            }
+            EnableButtonIfValid();
 
             if (TestTextBox.Text == null || TestTextBox.Text == "")
             {
@@ -314,6 +317,10 @@ namespace InitialProject.View
                 {
                     return false;
                 }
+                else if (ComboBoxCity.SelectedItem == null)
+                {
+                    return false;
+                }
 
                 Match capacityMatch = _Number.Match(Capacity);
                 Match minDaysForStay = _Number.Match(MinDaysForStay);
@@ -330,14 +337,7 @@ namespace InitialProject.View
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (IsValid)
-            {
-                ButtonRegister.IsEnabled = true;
-            }
-            else
-            {
-                ButtonRegister.IsEnabled = false;
-            }
+            EnableButtonIfValid();
         }
 
         private void Window_Closed(object sender, EventArgs e)

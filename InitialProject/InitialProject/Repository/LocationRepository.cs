@@ -73,6 +73,7 @@ namespace InitialProject.Repository
             }
             return null; 
         }
+
         public Location GetByCountryAndCity(string country, string city)
         {
             _locations = _serializer.FromCSV(FilePath);
@@ -81,6 +82,22 @@ namespace InitialProject.Repository
                 if (location.City.Equals(city) && location.Country.Equals(country)) return location;
             }
             return null;
+        }
+
+        public List<string> GetCitiesByCountry(string country)
+        {
+            _locations = _serializer.FromCSV(FilePath);
+            List<string> cities = new List<string>();
+
+            foreach (var location in _locations)
+            {
+                if (location.Country == country)
+                {
+                    cities.Add(location.City);
+                }
+            }
+
+            return cities;
         }
     }
 }

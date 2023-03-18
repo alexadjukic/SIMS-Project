@@ -27,48 +27,11 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public Accommodation Save(string name, string city, string country, string type, string capacity, string minDaysForStay, string minDaysBeforeCancel, int ownerId, LocationRepository _repositoryLocation)
+        public Accommodation Save(string name, Location location, AccommodationType type, string capacity, string minDaysForStay, string minDaysBeforeCancel, int ownerId, LocationRepository _repositoryLocation)
         {
             int id = NextId();
 
-            Location location = new Location();
-
-            location.City = city;
-            location.Country = country;
-            foreach (Location locationSearch in _repositoryLocation.GetAll())
-            {
-                if (locationSearch.City != location.City)
-                    continue;
-                if (locationSearch.Country != location.Country)
-                    continue;
-
-                location = locationSearch;
-            }
-
-            if (location.Id == 0)
-            {
-                location = _repositoryLocation.Save(location.City, location.Country);
-            }
-
-            AccommodationType Type;
-
-            switch(type)
-            {
-                case "apartment":
-                    Type = AccommodationType.apartment;
-                    break;
-                case "house":
-                    Type = AccommodationType.house;
-                    break;
-                case "cottage":
-                    Type = AccommodationType.cottage;
-                    break;
-                default:
-                    Type = 0;
-                    break;
-            }
-
-            Accommodation accommodation = new Accommodation(id, name, location, Type, Convert.ToInt32(capacity), Convert.ToInt32(minDaysForStay), Convert.ToInt32(minDaysBeforeCancel), ownerId);
+            Accommodation accommodation = new Accommodation(id, name, location, type, Convert.ToInt32(capacity), Convert.ToInt32(minDaysForStay), Convert.ToInt32(minDaysBeforeCancel), ownerId);
 
             _accommodations.Add(accommodation);
             _serializer.ToCSV(FilePath, _accommodations);
@@ -86,5 +49,21 @@ namespace InitialProject.Repository
             return _accommodations.Max(c => c.Id) + 1;
         }
 
+        public List<int> AccommodationIdsByOwnerId(int ownerId)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+
+            List<int> accommodationIdsForOwner = new List<int>();
+
+            foreach (var accommodation in _accommodations)
+            {
+                if (accommodation.OwnerId == ownerId)
+                {
+                    accommodationIdsForOwner.Add(accommodation.Id);
+                }
+            }
+
+            return accommodationIdsForOwner;
+        }
     }
 }
