@@ -64,5 +64,14 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
             return tour;
         }
+
+        public Tour Create(string name, Location location, int locationId, string description, string language, int maxGuests, DateTime startTime, double duration, string coverImageUrl)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour newTour = new Tour(NextId(), name, location, locationId, description, language, maxGuests, startTime, duration, coverImageUrl);
+            _tours.Add(newTour);
+            _serializer.ToCSV(FilePath, _tours);
+            return newTour;
+        }
     }
 }

@@ -64,5 +64,14 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _points);
             return point;
         }
+
+        public Point Create(string name, bool active, Tour tour, int tourId)
+        {
+            _points = _serializer.FromCSV(FilePath);
+            Point newPoint = new Point(NextId(), name, active, tour, tourId);
+            _points.Add(newPoint);
+            _serializer.ToCSV(FilePath, _points);
+            return newPoint;
+        }
     }
 }

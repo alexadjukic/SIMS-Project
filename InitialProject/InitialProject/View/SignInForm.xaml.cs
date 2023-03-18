@@ -55,6 +55,7 @@ namespace InitialProject
             _accommodationImageRepository = new AccommodationImageRepository();
             _tourRepository = new TourRepository();
             _tourImageRepository = new TourImageRepository();
+            _pointRepository = new PointRepository();
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _ratingRepository = new RatingRepository();
         }
@@ -100,8 +101,8 @@ namespace InitialProject
             }
             else if (user.Role == UserRole.GUIDE)
             {
-                //TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _pointRepository);
-                //tourCreationForm.Show();
+                TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _pointRepository);
+                tourCreationForm.Show();
                 Close();
             }
         }
