@@ -28,6 +28,7 @@ namespace InitialProject.View
         public readonly TourRepository _tourRepository;
         public readonly LocationRepository _locationRepository;
         public readonly TourImageRepository _tourImageRepository;
+        public readonly TourReservationRepository _tourReservationRepository;
 
         private ObservableCollection<Tour> _tours;
         public ObservableCollection<Tour> Tours
@@ -176,13 +177,15 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Guest2TourOverview(TourRepository tourRepository, LocationRepository locationRepository, TourImageRepository tourImageRepository)
+        public Guest2TourOverview(TourRepository tourRepository, LocationRepository locationRepository, TourImageRepository tourImageRepository, TourReservationRepository tourReservationRepository, User user)
         {
             InitializeComponent();
             DataContext = this;
             _tourRepository = tourRepository;
             _locationRepository = locationRepository;
             _tourImageRepository = tourImageRepository;
+            _tourReservationRepository = tourReservationRepository;
+            LoggedUser = user;
             Countries = new ObservableCollection<string>();
             Cities = new ObservableCollection<string>();
             Tours = new ObservableCollection<Tour>();
@@ -230,7 +233,7 @@ namespace InitialProject.View
                 RemoveTourByMaxCapacity(tour);
                 RemoveTourByLanguage(tour);
             }
-        }
+        } 
 
         public void FillCountries()
         {
@@ -323,5 +326,15 @@ namespace InitialProject.View
             }
         }
 
+        private void ChooseTour_Click (object sender, RoutedEventArgs e)
+        {
+            if (SelectedTour == null)
+            {
+                return;
+            }
+            SelectedTourOverview selectedTourOverview = new SelectedTourOverview(_tourRepository, _locationRepository, _tourImageRepository, SelectedTour, _tourReservationRepository, LoggedUser);
+            selectedTourOverview.Show();
+            Close();
+        }
     }
 }

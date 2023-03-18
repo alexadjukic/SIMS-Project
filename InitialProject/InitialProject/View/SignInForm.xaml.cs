@@ -21,6 +21,7 @@ namespace InitialProject
         private readonly TourRepository _tourRepository;
         private readonly TourImageRepository _tourImageRepository;
         private readonly PointRepository _pointRepository;
+        private readonly TourReservationRepository _tourReservationRepository;
 
         private string _username;
         public string Username
@@ -53,6 +54,7 @@ namespace InitialProject
             _accommodationImageRepository = new AccommodationImageRepository();
             _tourRepository = new TourRepository();
             _tourImageRepository = new TourImageRepository();
+            _tourReservationRepository = new TourReservationRepository();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -90,7 +92,7 @@ namespace InitialProject
             }
             else if (user.Role == UserRole.GUEST2)
             {
-                Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository);
+                Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, user);
                 guest2TourOverview.Show();
                 Close();
             }
