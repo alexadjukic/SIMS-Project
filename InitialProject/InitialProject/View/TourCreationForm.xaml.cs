@@ -29,6 +29,7 @@ namespace InitialProject.View
         private TourImageRepository _tourImageRepository;
         private LocationRepository _locationRepository;
         private CheckpointRepository _checkpointRepository;
+        private User _guide;
 
         private string _tourName;
         public string TourName
@@ -208,7 +209,7 @@ namespace InitialProject.View
         public List<BitmapImage> Images { get; set; }
 
 
-        public TourCreationForm(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository)
+        public TourCreationForm(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository, User guide)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -217,6 +218,7 @@ namespace InitialProject.View
             _tourImageRepository = tourImageRepository;
             _locationRepository = locationRepository;
             _checkpointRepository = checkpointRepository;
+            _guide = guide;
 
             Dates = new ObservableCollection<DateTime>();
             Countries = new ObservableCollection<string>();
@@ -546,7 +548,7 @@ namespace InitialProject.View
             Location location = _locationRepository.GetByCountryAndCity(SelectedCountry, SelectedCity);
             foreach (var startTime in Dates)
             {
-                Tour tour = _tourRepository.Create(TourName, location, location.Id, Description, SelectedLanguage, MaxGuests, startTime, Duration, SelectedImage.ToString());
+                Tour tour = _tourRepository.Create(TourName, location, location.Id, Description, SelectedLanguage, MaxGuests, startTime, Duration, SelectedImage.ToString(), _guide.Id);
                 foreach (var checkpointName in CheckpointNames)
                 {
                     _checkpointRepository.Create(checkpointName, false, tour, tour.Id);

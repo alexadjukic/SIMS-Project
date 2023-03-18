@@ -101,7 +101,7 @@ namespace InitialProject
             }
             else if (user.Role == UserRole.GUIDE)
             {
-                TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _pointRepository);
+                TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _pointRepository, user);
                 tourCreationForm.Show();
                 Close();
             }
