@@ -63,19 +63,18 @@ namespace InitialProject.View
         {
             if (SelectedReservation != null)
             {
-                if (!IsDateExpired) 
-                { 
-                    ButtonRate.IsEnabled = true;
-                }
+                ButtonRate.IsEnabled = true;
             }
         }
+
+        
 
         private void ButtonRate_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedReservation != null && !IsDateExpired && _ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) == null)
             {
                 RatingGuestForm ratingGuestForm = new RatingGuestForm(_ratingRepository, SelectedReservation, _ownerId);
-                ratingGuestForm.Show();
+                ratingGuestForm.ShowDialog();
             }
             else if (IsDateExpired)
             {
