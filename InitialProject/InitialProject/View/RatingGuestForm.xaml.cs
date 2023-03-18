@@ -113,28 +113,26 @@ namespace InitialProject.View
             }
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void EnableButtonIfValid()
         {
             if (IsValid)
             {
                 ButtonRate.IsEnabled = true;
-            } 
+            }
             else
             {
                 ButtonRate.IsEnabled = false;
             }
         }
 
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EnableButtonIfValid();
+        }
+
         private void TextBoxComment_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (IsValid)
-            {
-                ButtonRate.IsEnabled = true;
-            }
-            else
-            {
-                ButtonRate.IsEnabled = false;
-            }
+            EnableButtonIfValid();
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)

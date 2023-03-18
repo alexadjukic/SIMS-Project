@@ -47,9 +47,15 @@ namespace InitialProject.View
 
             _numberOfUnratedGuests = 0;
 
+            //OpenReminderWindow();
+        }
+
+        public void OpenReminderWindow()
+        {
             foreach (var reservation in _reservationRepository.GetAll())
             {
                 TimeSpan time = DateTime.Now - reservation.EndDate;
+
                 if (time.Days > 5)
                 {
                     continue;
@@ -57,27 +63,35 @@ namespace InitialProject.View
 
                 int reservationId = reservation.Id;
                 Accommodation foundAccommodation = _accommodationRepository.GetAll().Find(a => a.Id == reservation.AccommodationId);
+
                 if (foundAccommodation != null)
                 {
-                    List<Rating> ratings = _ratingRepository.GetAll();
-                    Rating foundRating = new Rating();
-
-                    foreach (var rating in ratings)
-                    {
-                        if (rating.ReservationId == reservation.Id)
-                        {
-                            foundRating = rating;
-                        }
-                    }
+                    Rating foundRating = FindRating(reservation);
 
                     if (foundAccommodation.OwnerId == _ownerId && foundRating.Id == 0)
                     {
                         RatingGuestReminderForm ratingGuestReminderForm = new RatingGuestReminderForm(_ownerId, _reservationRepository, _accommodationRepository, _userRepository, _ratingRepository);
-                        ratingGuestReminderForm.Show();
+                        ratingGuestReminderForm.ShowDialog();
                         break;
                     }
                 }
             }
+        }
+
+        public Rating FindRating(AccommodationReservation reservation)
+        {
+            List<Rating> ratings = _ratingRepository.GetAll();
+            Rating foundRating = new Rating();
+
+            foreach (var rating in ratings)
+            {
+                if (rating.ReservationId == reservation.Id)
+                {
+                    foundRating = rating;
+                }
+            }
+
+            return foundRating;
         }
 
         private void ButtonRegistrateAccommodation_Click(object sender, RoutedEventArgs e)
@@ -101,19 +115,7 @@ namespace InitialProject.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           /*foreach (var reservation in _reservationRepository.GetAll())
-           {
-               if (_accommodationRepository.GetAll().Find(a => a.Id == reservation.AccommodationId) != null)
-               {
-                   if (_accommodationRepository.GetAll().Find(a => a.Id == reservation.AccommodationId).OwnerId == _ownerId && _ratingRepository.GetAll().Find(r => r.ReservationId == reservation.Id) == null)
-                   {
-                       RatingGuestReminderForm ratingGuestReminderForm = new RatingGuestReminderForm(_ownerId, _reservationRepository, _accommodationRepository, _userRepository);
-                       ratingGuestReminderForm.Show();
-                       break;
-                   }
-               }
-
-           }*/
+            OpenReminderWindow();
         }
     }
 }
