@@ -22,18 +22,19 @@ namespace InitialProject.View
     /// </summary>
     public partial class GuestsOverview : Window
     {
-        int _ownerId;
+        public int _ownerId;
 
         public ObservableCollection<AccommodationReservation> Reservations { get; set; }
 
         public readonly AccommodationReservationRepository _reservationRepository;
         public readonly AccommodationRepository _accommodationRepository;
         public readonly UserRepository _userRepository;
+        public readonly RatingRepository _ratingRepository;
 
         public AccommodationReservation SelectedReservation { get; set; }
 
 
-        public GuestsOverview(int ownerId, AccommodationReservationRepository accommodationReservationRepository, AccommodationRepository accommodationRepository, UserRepository userRepository)
+        public GuestsOverview(int ownerId, AccommodationReservationRepository accommodationReservationRepository, AccommodationRepository accommodationRepository, UserRepository userRepository, RatingRepository ratingRepository)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -41,6 +42,7 @@ namespace InitialProject.View
             _reservationRepository = accommodationReservationRepository;
             _accommodationRepository = accommodationRepository;
             _userRepository = userRepository;
+            _ratingRepository = ratingRepository;
 
             List<AccommodationReservation> _ownerReservations = _reservationRepository.GetAllByOwnerId(_ownerId, _accommodationRepository, _userRepository);
 
@@ -62,6 +64,23 @@ namespace InitialProject.View
                 { 
                     ButtonRate.IsEnabled = true;
                 }
+            }
+        }
+
+        private void ButtonRate_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedReservation != null && DateTime.Now.Day - SelectedReservation.EndDate.Day < 5 && _ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) == null)
+            {
+                RatingGuestForm ratingGuestForm = new RatingGuestForm();
+                ratingGuestForm.Show();
+            }
+            else if (DateTime.Now.Day - SelectedReservation.EndDate.Day > 5)
+            {
+                MessageBox.Show("Selected reservation can't be rated", "It's been more than 5 days", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (_ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) != null)
+            {
+                MessageBox.Show("Selected reservation can't be rated", "It is already rated", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
