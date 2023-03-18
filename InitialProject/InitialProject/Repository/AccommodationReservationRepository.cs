@@ -52,19 +52,8 @@ namespace InitialProject.Repository
         public List<AccommodationReservation> GetAllByOwnerId(int ownerId, AccommodationRepository accommodationRepository, UserRepository userRepository)
         {
             List<AccommodationReservation> _reservations = new List<AccommodationReservation>();
-            List<int> accommodationIdsForOwner = new List<int>();
+            List<int> accommodationIdsForOwner = accommodationRepository.AccommodationIdsByOwnerId(ownerId);
             List<Accommodation> _accommodations = new List<Accommodation>();
-
-            _accommodations = accommodationRepository.GetAll();
-
-
-            foreach (var accommodation in _accommodations)
-            {
-                if (accommodation.OwnerId == ownerId)
-                {
-                    accommodationIdsForOwner.Add(accommodation.Id);
-                }
-            }
 
             foreach (var reservation in _accommodationReservations)
             {
