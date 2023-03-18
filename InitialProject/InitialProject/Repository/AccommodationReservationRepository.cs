@@ -27,11 +27,11 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public AccommodationReservation Save(DateTime startDate, DateTime endDate, int lenghtOfStay, int accommodationId, int guestId)
+        public AccommodationReservation Save(DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, int accommodationId, User guest, int guestId)
         {
             int id = NextId();
 
-            AccommodationReservation accommodationReservation = new AccommodationReservation(id, startDate, endDate, lenghtOfStay, accommodationId, guestId);
+            AccommodationReservation accommodationReservation = new AccommodationReservation(id, startDate, endDate, lenghtOfStay, accommodation, guest);
 
             _accommodationReservations.Add(accommodationReservation);
             _serializer.ToCSV(FilePath, _accommodationReservations);
@@ -47,6 +47,35 @@ namespace InitialProject.Repository
             }
 
             return _accommodationReservations.Max(c => c.Id) + 1;
+        }
+
+        public List<AccommodationReservation> GetAllByOwnerId(int ownerId, AccommodationRepository accommodationRepository, UserRepository userRepository)
+        {
+            List<AccommodationReservation> _reservations = new List<AccommodationReservation>();
+            List<int> accommodationIdsForOwner = new List<int>();
+            List<Accommodation> _accommodations = new List<Accommodation>();
+
+            _accommodations = accommodationRepository.GetAll();
+
+
+            foreach (var accommodation in _accommodations)
+            {
+                if (accommodation.OwnerId == ownerId)
+                {
+                    accommodationIdsForOwner.Add(accommodation.Id);
+                }
+            }
+
+            foreach (var reservation in _accommodationReservations)
+            {
+                if (accommodationIdsForOwner.Find(a => a == reservation.AccommodationId) != 0)
+                {
+                    reservation.Guest = userRepository.GetAll().Find(g => g.Id == reservation.GuestId);
+                    _reservations.Add(reservation);
+                }
+            }
+
+            return _reservations;
         }
     }
 }

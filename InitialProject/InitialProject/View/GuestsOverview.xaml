@@ -13,19 +13,19 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <DataGrid IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="14">
+            <DataGrid Name="DataGridGuests" IsReadOnly="True" ItemsSource="{Binding Reservations, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="14" SelectionChanged="DataGridGuests_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="100"/>
-                    <DataGridTextColumn Header="Comming date" Width="120"/>
-                    <DataGridTextColumn Header="Leaving date" Width="120"/>
-                    <DataGridTextColumn Header="Number of guests" Binding="{Binding CreationTime}" Width="200*"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Guest.Username}" Width="100"/>
+                    <DataGridTextColumn Header="Comming date" Binding="{Binding StartDate}" Width="120"/>
+                    <DataGridTextColumn Header="Leaving date" Binding="{Binding EndDate}" Width="120"/>
+                    <DataGridTextColumn Header="Length of stay" Binding="{Binding LenghtOfStay}" Width="200*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="ButtonRate" Content="Rate" Width="100" Height="40" IsEnabled="False" Margin="45,0,30,0"/>
-            <Button Name="ButtonCancel" Content="Cancel" Width="100" Height="40" Margin="30,0,30,0"/>
+            <Button Name="ButtonRate" Content="Rate" Width="100" Height="40" IsEnabled="False" Margin="45,0,30,0" Click="ButtonRate_Click"/>
+            <Button Name="ButtonCancel" Content="Cancel" Width="100" Height="40" Margin="30,0,30,0" Click="ButtonCancel_Click"/>
         </StackPanel>
     </Grid>
 </Window>

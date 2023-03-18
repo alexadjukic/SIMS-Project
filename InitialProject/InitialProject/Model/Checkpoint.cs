@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
-    public class Point : ISerializable
+    public class Checkpoint : ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -17,9 +17,9 @@ namespace InitialProject.Model
 
         public int TourId { get; set; }
 
-        public Point() { }
+        public Checkpoint() { }
 
-        public Point(int id, string name, bool active, Tour tour, int tourId)
+        public Checkpoint(int id, string name, bool active, Tour tour, int tourId)
         {
             Id=id;
             Name=name;

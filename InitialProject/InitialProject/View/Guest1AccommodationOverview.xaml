@@ -29,7 +29,7 @@
                 <DataGridTextColumn Header="City" Width="105" Binding="{Binding Location.City}" />
                 <DataGridTextColumn Header="Type" Width="100" Binding="{Binding Type}" />
                 <DataGridTextColumn Header="Max guests" Width="80" Binding="{Binding Capacity}"/>
-                <DataGridTextColumn Header="Min reservation days" Width="130" Binding="{Binding MinDaysForStay}"/>
+                <DataGridTextColumn Header="Min. reservation days" Width="130" Binding="{Binding MinDaysForStay}"/>
                 <DataGridTextColumn Header="Min. days before cancel" Width="145" Binding="{Binding MinDaysBeforeCancel}"/>
             </DataGrid.Columns>
         </DataGrid>
