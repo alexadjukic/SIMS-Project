@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repository
 {
-    class RatingRepository
+    public class RatingRepository
     {
         private const string FilePath = "../../../Resources/Data/ratings.csv";
 
@@ -27,9 +27,12 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public Rating Save(Rating rating)
+        public Rating Save(string cleanliness, string followingTheRules, string comment, int theOneWhoIsRatedId, int raterId, int reservationId)
         {
-            rating.Id = NextId();
+            int id = NextId();
+
+            Rating rating = new Rating(id, Convert.ToInt32(cleanliness), Convert.ToInt32(followingTheRules), comment, theOneWhoIsRatedId, raterId, reservationId);
+
             _ratings = _serializer.FromCSV(FilePath);
             _ratings.Add(rating);
             _serializer.ToCSV(FilePath, _ratings);
