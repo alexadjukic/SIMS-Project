@@ -23,7 +23,6 @@ namespace InitialProject
         private readonly CheckpointRepository _pointRepository;
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly RatingRepository _ratingRepository;
-        private readonly PointRepository _pointRepository;
         private readonly TourReservationRepository _tourReservationRepository;
 
         private string _username;
