@@ -20,6 +20,9 @@ namespace InitialProject
         private readonly AccommodationImageRepository _accommodationImageRepository;
         private readonly TourRepository _tourRepository;
         private readonly TourImageRepository _tourImageRepository;
+        private readonly CheckpointRepository _pointRepository;
+        private readonly AccommodationReservationRepository _accommodationReservationRepository;
+        private readonly RatingRepository _ratingRepository;
         private readonly PointRepository _pointRepository;
         private readonly TourReservationRepository _tourReservationRepository;
 
@@ -54,6 +57,9 @@ namespace InitialProject
             _accommodationImageRepository = new AccommodationImageRepository();
             _tourRepository = new TourRepository();
             _tourImageRepository = new TourImageRepository();
+            _pointRepository = new CheckpointRepository();
+            _accommodationReservationRepository = new AccommodationReservationRepository();
+            _ratingRepository = new RatingRepository();
             _tourReservationRepository = new TourReservationRepository();
         }
 
@@ -80,7 +86,7 @@ namespace InitialProject
         {
             if (user.Role == UserRole.OWNER)
             {
-                OwnerForm ownerForm = new OwnerForm(_accommodationRepository, _locationRepository, _accommodationImageRepository, user);
+                OwnerForm ownerForm = new OwnerForm(_accommodationRepository, _locationRepository, _accommodationImageRepository, user, _accommodationReservationRepository, _userRepository, _ratingRepository);
                 ownerForm.Show();
                 Close();
             }
@@ -98,8 +104,8 @@ namespace InitialProject
             }
             else if (user.Role == UserRole.GUIDE)
             {
-                //TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _pointRepository);
-                //tourCreationForm.Show();
+                TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _pointRepository, user);
+                tourCreationForm.Show();
                 Close();
             }
         }

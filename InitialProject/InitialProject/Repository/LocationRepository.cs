@@ -64,7 +64,6 @@ namespace InitialProject.Repository
 
         public Location GetById(int id)
         {
-            Location Location = new Location();
             foreach(Location location in _locations)
             {
                 if(location.Id == id)
@@ -74,6 +73,14 @@ namespace InitialProject.Repository
             }
             return null; 
         }
-
+        public Location GetByCountryAndCity(string country, string city)
+        {
+            _locations = _serializer.FromCSV(FilePath);
+            foreach (var location in _locations)
+            {
+                if (location.City.Equals(city) && location.Country.Equals(country)) return location;
+            }
+            return null;
+        }
     }
 }

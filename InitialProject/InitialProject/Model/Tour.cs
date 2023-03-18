@@ -20,9 +20,10 @@ namespace InitialProject.Model
         public DateTime StartTime { get; set; }
         public double Duration { get; set; }
         public string CoverImageUrl { get; set; }
+        public int GuideId { get; set; }
 
         public Tour() { }
-        public Tour(int id, string name, Location location, int locationId, string description, string language, int maxGuests, DateTime startTime, double duration, string coverImageUrl)
+        public Tour(int id, string name, Location location, int locationId, string description, string language, int maxGuests, DateTime startTime, double duration, string coverImageUrl, int guideId)
         {
             Id=id;
             Name=name;
@@ -34,11 +35,12 @@ namespace InitialProject.Model
             StartTime=startTime;
             Duration=duration;
             CoverImageUrl=coverImageUrl;
+            GuideId = guideId;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxGuests.ToString(), StartTime.ToString(), Duration.ToString(), CoverImageUrl};
+            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxGuests.ToString(), StartTime.ToString(), Duration.ToString(), CoverImageUrl, GuideId.ToString()};
             return csvValues;
         }
 
@@ -53,6 +55,7 @@ namespace InitialProject.Model
             StartTime = DateTime.Parse(values[6]);
             Duration = int.Parse(values[7]);
             CoverImageUrl = values[8];
+            GuideId = int.Parse(values[9]);
         }
     }
 }
