@@ -49,6 +49,11 @@ namespace InitialProject.View
 
             foreach (var reservation in _reservationRepository.GetAll())
             {
+                if (DateTime.Now.Day - reservation.EndDate.Day > 5)
+                {
+                    continue;
+                }
+
                 int reservationId = reservation.Id;
                 Accommodation foundAccommodation = _accommodationRepository.GetAll().Find(a => a.Id == reservation.AccommodationId);
                 if (foundAccommodation != null)

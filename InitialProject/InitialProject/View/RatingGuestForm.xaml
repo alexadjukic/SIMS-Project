@@ -17,7 +17,7 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock TextWrapping="Wrap" Text="Cleanliness" TextAlignment="Center" Margin="30,10,0,15" Height="25" FontSize="18"/>
-            <ComboBox x:Name="ComboBoxCleanliness" SelectedValuePath="Content" Height="26" Width="147" Margin="50,10,0,15">
+            <ComboBox x:Name="ComboBoxCleanliness" SelectedValuePath="Content" Text="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" Height="26" Width="147" Margin="50,10,0,15" SelectionChanged="ComboBox_SelectionChanged">
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="3"/>
@@ -28,7 +28,7 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock TextWrapping="Wrap" Text="Following the rules" TextAlignment="Center" Margin="30,10,0,15" Height="49" FontSize="18" Width="89"/>
-            <ComboBox x:Name="ComboBoxFollowingTheRules" SelectedValuePath="Content" Height="26" Width="147" Margin="50,10,0,15">
+            <ComboBox x:Name="ComboBoxFollowingTheRules" SelectedValuePath="Content" Text="{Binding Path=FollowingTheRules, UpdateSourceTrigger=PropertyChanged}" Height="26" Width="147" Margin="50,10,0,15" SelectionChanged="ComboBox_SelectionChanged">
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="3"/>
@@ -37,12 +37,12 @@
             </ComboBox>
         </StackPanel>
 
-        <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Your comment:" TextAlignment="Center" Margin="0,21,236,0"/>
-        <TextBox Grid.Row="3" TextWrapping="Wrap" Margin="5"/>
+        <TextBlock Name="TextBlockComment" Grid.Row="2" TextWrapping="Wrap" Text="Your comment:" TextAlignment="Center" Margin="0,21,236,0"/>
+        <TextBox Name="TextBoxComment" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" Margin="5" TextChanged="TextBoxComment_TextChanged"/>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Button Name="ButtonRate" Content="Rate" Width="100" Height="40" IsEnabled="False" Margin="45,0,30,0"/>
-            <Button Name="ButtonCancel" Content="Cancel" Width="100" Height="40" Margin="30,0,30,0"/>
+            <Button Name="ButtonRate" Content="Rate" Width="100" Height="40" IsEnabled="False" Margin="45,0,30,0" Click="ButtonRate_Click"/>
+            <Button Name="ButtonCancel" Content="Cancel" Width="100" Height="40" Margin="30,0,30,0" Click="ButtonCancel_Click"/>
         </StackPanel>
 
     </Grid>

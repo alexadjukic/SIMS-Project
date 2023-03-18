@@ -46,6 +46,7 @@ namespace InitialProject.View
         {
             GuestsOverview guestsOverview = new GuestsOverview(_ownerId, _reservationRepository, _accommodationRepository, _userRepository, _ratingRepository);
             guestsOverview.Show();
+            this.Close();
         }
     }
 }
