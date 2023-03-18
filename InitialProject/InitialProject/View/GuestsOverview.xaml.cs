@@ -60,7 +60,7 @@ namespace InitialProject.View
         {
             if (SelectedReservation != null)
             {
-                if (DateTime.Now.Day - SelectedReservation.EndDate.Day < 5) 
+                if ((DateTime.Now - SelectedReservation.EndDate).Days < 5) 
                 { 
                     ButtonRate.IsEnabled = true;
                 }
@@ -69,12 +69,12 @@ namespace InitialProject.View
 
         private void ButtonRate_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedReservation != null && DateTime.Now.Day - SelectedReservation.EndDate.Day < 5 && _ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) == null)
+            if (SelectedReservation != null && (DateTime.Now - SelectedReservation.EndDate).Days < 5 && _ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) == null)
             {
                 RatingGuestForm ratingGuestForm = new RatingGuestForm(_ratingRepository, SelectedReservation, _ownerId);
                 ratingGuestForm.Show();
             }
-            else if (DateTime.Now.Day - SelectedReservation.EndDate.Day > 5)
+            else if ((DateTime.Now - SelectedReservation.EndDate).Days > 5)
             {
                 MessageBox.Show("Selected reservation can't be rated", "It's been more than 5 days", MessageBoxButton.OK, MessageBoxImage.Information);
             }

@@ -49,7 +49,8 @@ namespace InitialProject.View
 
             foreach (var reservation in _reservationRepository.GetAll())
             {
-                if (DateTime.Now.Day - reservation.EndDate.Day > 5)
+                TimeSpan time = DateTime.Now - reservation.EndDate;
+                if (time.Days > 5)
                 {
                     continue;
                 }
