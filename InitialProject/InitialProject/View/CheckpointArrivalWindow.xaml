@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Checkpoint arrival" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Checkpoint arrival" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -14,15 +14,15 @@
 
         <StackPanel Grid.Column="0">
             <Label Content="Arrived guests: " Margin="20,5,20,5" FontSize="16"/>
-            <DataGrid Margin="20,5,20,5" Height="300" HeadersVisibility="None" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid Margin="20,5,20,5" Height="300" HeadersVisibility="None" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Path=ArrivedGuests, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedArrivedGuest, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn/>
+                    <DataGridTextColumn Width="1*" Binding="{Binding Username}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="Remove guest" Height="50" Width="150" Margin="0,5,0,0"/>
+            <Button Content="Remove guest" Height="50" Width="150" Margin="0,5,0,0" Click="ButtonRemoveGuest_Click"/>
         </StackPanel>
 
-        <Separator Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Height="1" Width="400">
+        <Separator Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Height="1" Width="400" Margin="0,2,0,175">
             <Separator.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -35,12 +35,14 @@
 
         <StackPanel Grid.Column="1">
             <Label Content="Guests with reservation: " Margin="20,5,20,5" FontSize="16"/>
-            <DataGrid Margin="20,5,20,5" Height="300" HeadersVisibility="None" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid Margin="20,5,20,5" Height="300" HeadersVisibility="None" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Path=UnarrivedGuests, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedUnarrivedGuest, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn/>
+                    <DataGridTextColumn Width="1*" Binding="{Binding Username}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="Add guest" Height="50" Width="150" Margin="0,5,0,0"/>
+            <Button Content="Add guest" Height="50" Width="150" Margin="0,5,0,0" Click="ButtonAddGuest_Click"/>
         </StackPanel>
+
+        <Button Grid.ColumnSpan="2" Content="Ok" Height="50" Width="150" Margin="0,400,0,0" Click="ButtonOk_Click"/>
     </Grid>
 </Window>
