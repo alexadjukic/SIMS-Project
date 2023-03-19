@@ -56,7 +56,7 @@ namespace InitialProject.View
             {
                 TimeSpan time = DateTime.Now - reservation.EndDate;
 
-                if (time.Days > 5)
+                if (time.Days > 5 || DateTime.Now < reservation.EndDate)
                 {
                     continue;
                 }
