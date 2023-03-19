@@ -29,6 +29,7 @@ namespace InitialProject.View
         public readonly AccommodationRepository _accommodationRepository;
         public readonly LocationRepository _locationRepository;
         public readonly AccommodationImageRepository _accommodationImageRepository;
+        public readonly AccommodationReservationRepository _accommodationReservationRepository;
 
         private ObservableCollection<Accommodation> _accommodations;
         public ObservableCollection<Accommodation> Accommodations
@@ -152,7 +153,7 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Guest1AccommodationOverview(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository)
+        public Guest1AccommodationOverview(User user, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository, AccommodationReservationRepository accommodationReservationRepository)
         {
             InitializeComponent();
             DataContext = this;
@@ -160,6 +161,8 @@ namespace InitialProject.View
             _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
             _accommodationImageRepository = accommodationImageRepository;
+            _accommodationReservationRepository = accommodationReservationRepository;
+            LoggedUser = user;
             Countries = new ObservableCollection<string>();
             Cities = new ObservableCollection<string>();
             ShowInitialOptions();
@@ -331,6 +334,15 @@ namespace InitialProject.View
                 {
                     Accommodations.Remove(newAccommodation);
                 }
+            }
+        }
+
+        private void BookButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedAccommodation != null)
+            {
+                AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(LoggedUser, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, SelectedAccommodation);
+                accommodationReservationForm.Show();
             }
         }
     }
