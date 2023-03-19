@@ -24,6 +24,7 @@ namespace InitialProject
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly RatingRepository _ratingRepository;
         private readonly TourReservationRepository _tourReservationRepository;
+        private readonly CheckpointArrivalRepository _checkpointArrivalRepository;
 
         private string _username;
         public string Username
@@ -60,6 +61,7 @@ namespace InitialProject
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _ratingRepository = new RatingRepository();
             _tourReservationRepository = new TourReservationRepository();
+            _checkpointArrivalRepository = new CheckpointArrivalRepository();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -103,7 +105,7 @@ namespace InitialProject
             }
             else if (user.Role == UserRole.GUIDE)
             {
-                GuideMenu guideMenu = new GuideMenu(_tourRepository, _tourImageRepository, _locationRepository, _checkpointRepository, user);
+                GuideMenu guideMenu = new GuideMenu(_tourRepository, _tourImageRepository, _locationRepository, _checkpointRepository, _tourReservationRepository, _checkpointArrivalRepository, _userRepository, user);
                 guideMenu.Show();
                 Close();
             }

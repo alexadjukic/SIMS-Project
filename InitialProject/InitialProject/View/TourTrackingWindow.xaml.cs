@@ -26,10 +26,13 @@ namespace InitialProject.View
     public partial class TourTrackingWindow : Window, INotifyPropertyChanged
     {
         
-        TourRepository _tourRepository;
-        LocationRepository _locationRepository;
-        CheckpointRepository _checkpointRepository;
-        User _guide;
+        private TourRepository _tourRepository;
+        private LocationRepository _locationRepository;
+        private CheckpointRepository _checkpointRepository;
+        private TourReservationRepository _tourReservationRepository;
+        private CheckpointArrivalRepository _checkpointArrivalRepository;
+        private UserRepository _userRepository;
+        private User _guide;
 
         private Tour _selectedTour;
         public Tour SelectedTour
@@ -77,7 +80,7 @@ namespace InitialProject.View
         public ObservableCollection<Checkpoint> Checkpoints { get; set; }
         
 
-        public TourTrackingWindow(TourRepository tourRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository, User guide)
+        public TourTrackingWindow(TourRepository tourRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository, TourReservationRepository tourReservationRepository, CheckpointArrivalRepository checkpointArrivalRepository, UserRepository userRepository, User guide)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -85,6 +88,9 @@ namespace InitialProject.View
             _tourRepository = tourRepository;
             _locationRepository = locationRepository;
             _checkpointRepository = checkpointRepository;
+            _tourReservationRepository = tourReservationRepository;
+            _checkpointArrivalRepository = checkpointArrivalRepository;
+            _userRepository = userRepository;
             _guide = guide;
 
             TodaysTours = new ObservableCollection<Tour>();
@@ -206,6 +212,13 @@ namespace InitialProject.View
         {
             FinishTour();
             LoadCheckpoints();
+        }
+
+        private void ButtonGuestList_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedCheckpoint == null) return;
+            CheckpointArrivalWindow checkpointArrivalWindow = new CheckpointArrivalWindow(_tourReservationRepository, _checkpointArrivalRepository, _userRepository, SelectedCheckpoint, ActiveTour);
+            checkpointArrivalWindow.Show();
         }
     }
 
