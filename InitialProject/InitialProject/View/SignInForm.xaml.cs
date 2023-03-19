@@ -23,6 +23,7 @@ namespace InitialProject
         private readonly CheckpointRepository _checkpointRepository;
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly RatingRepository _ratingRepository;
+        private readonly TourReservationRepository _tourReservationRepository;
 
         private string _username;
         public string Username
@@ -58,6 +59,7 @@ namespace InitialProject
             _checkpointRepository = new CheckpointRepository();
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _ratingRepository = new RatingRepository();
+            _tourReservationRepository = new TourReservationRepository();
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -89,13 +91,13 @@ namespace InitialProject
             }
             else if (user.Role == UserRole.GUEST1)
             {
-                Guest1AccommodationOverview guest1AccommodationOverview = new Guest1AccommodationOverview(_accommodationRepository, _locationRepository, _accommodationImageRepository);
+                Guest1AccommodationOverview guest1AccommodationOverview = new Guest1AccommodationOverview(user, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository);
                 guest1AccommodationOverview.Show();
                 Close();
             }
             else if (user.Role == UserRole.GUEST2)
             {
-                Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository);
+                Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, user);
                 guest2TourOverview.Show();
                 Close();
             }

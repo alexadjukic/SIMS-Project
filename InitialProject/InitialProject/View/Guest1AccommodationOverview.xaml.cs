@@ -29,6 +29,7 @@ namespace InitialProject.View
         public readonly AccommodationRepository _accommodationRepository;
         public readonly LocationRepository _locationRepository;
         public readonly AccommodationImageRepository _accommodationImageRepository;
+        public readonly AccommodationReservationRepository _accommodationReservationRepository;
 
         private ObservableCollection<Accommodation> _accommodations;
         public ObservableCollection<Accommodation> Accommodations
@@ -152,14 +153,18 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Guest1AccommodationOverview(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository)
+        public Guest1AccommodationOverview(User user, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository, AccommodationReservationRepository accommodationReservationRepository)
         {
             InitializeComponent();
             DataContext = this;
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            BookButton.IsEnabled = false;
+
             _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
             _accommodationImageRepository = accommodationImageRepository;
+            _accommodationReservationRepository = accommodationReservationRepository;
+            LoggedUser = user;
             Countries = new ObservableCollection<string>();
             Cities = new ObservableCollection<string>();
             ShowInitialOptions();
@@ -202,13 +207,18 @@ namespace InitialProject.View
             }
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void SignOutButton_Click(object sender, RoutedEventArgs e)
         {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
             Close();
         }
 
         private void FilterButton_Click(object sender, RoutedEventArgs e)
         {
+            if (SelectedAccommodation == null) BookButton.IsEnabled = false;
+            if (!IsInputValid()) return;
+
             Accommodations.Clear();
             foreach (var accommodation in _accommodationRepository.GetAll())
             {   
@@ -238,14 +248,14 @@ namespace InitialProject.View
         {
             if (AccommodationName != null && AccommodationName != "")
             {
-                if (!newAccommodation.Name.Contains(AccommodationName))
+                if (!newAccommodation.Name.ToUpper().Contains(AccommodationName.ToUpper()))
                 {
                     Accommodations.Remove(newAccommodation);
                 }
             }
         }
 
-        private Regex _NaturalNumberRegex = new Regex("^[0-9]+$");
+        private Regex _NaturalNumberRegex = new Regex("^[1-9]+$");
         private void RemoveByGuestNumber(Accommodation newAccommodation)
         {
             if (GuestNumber != null && GuestNumber != "")
@@ -256,10 +266,6 @@ namespace InitialProject.View
                     {
                         Accommodations.Remove(newAccommodation);
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Please enter valid search values.");
                 }
             }
         }
@@ -274,10 +280,6 @@ namespace InitialProject.View
                     {
                         Accommodations.Remove(newAccommodation);
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Please enter valid search values.");
                 }
             }
         }
@@ -332,6 +334,42 @@ namespace InitialProject.View
                     Accommodations.Remove(newAccommodation);
                 }
             }
+        }
+        
+        private bool IsInputValid()
+        {
+            if (LenghtOfStay != null && LenghtOfStay != "")
+            {
+                if (!_NaturalNumberRegex.Match(LenghtOfStay).Success)
+                {
+                    MessageBox.Show("Please enter a valid value.");
+                    return false;
+                }
+            }
+
+            if (GuestNumber != null && GuestNumber != "")
+            {
+                if (!_NaturalNumberRegex.Match(GuestNumber).Success)
+                {
+                    MessageBox.Show("Please enter a valid value.");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void BookButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedAccommodation != null)
+            {
+                AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(LoggedUser, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, SelectedAccommodation);
+                accommodationReservationForm.Show();
+            }
+        }
+        private void DataGridAccommodations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SelectedAccommodation != null) BookButton.IsEnabled = true;
         }
     }
 }

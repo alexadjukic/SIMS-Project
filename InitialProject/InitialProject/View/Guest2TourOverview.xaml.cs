@@ -28,6 +28,7 @@ namespace InitialProject.View
         public readonly TourRepository _tourRepository;
         public readonly LocationRepository _locationRepository;
         public readonly TourImageRepository _tourImageRepository;
+        public readonly TourReservationRepository _tourReservationRepository;
 
         private ObservableCollection<Tour> _tours;
         public ObservableCollection<Tour> Tours
@@ -176,13 +177,15 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Guest2TourOverview(TourRepository tourRepository, LocationRepository locationRepository, TourImageRepository tourImageRepository)
+        public Guest2TourOverview(TourRepository tourRepository, LocationRepository locationRepository, TourImageRepository tourImageRepository, TourReservationRepository tourReservationRepository, User user)
         {
             InitializeComponent();
             DataContext = this;
             _tourRepository = tourRepository;
             _locationRepository = locationRepository;
             _tourImageRepository = tourImageRepository;
+            _tourReservationRepository = tourReservationRepository;
+            LoggedUser = user;
             Countries = new ObservableCollection<string>();
             Cities = new ObservableCollection<string>();
             Tours = new ObservableCollection<Tour>();
@@ -199,6 +202,31 @@ namespace InitialProject.View
             {
                 FillTours(tour);
             }
+        }
+
+        public void ShowAlternativeOptions(Tour tour)
+        {
+            if (IsFull(tour))
+            {
+                OfferOtherTours();
+            }
+        }
+
+        public bool IsFull(Tour tour)
+        {
+            if (tour.MaxGuests == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void OfferOtherTours()
+        {
+            AlternativeTourOffers alternativeTourOffers = new AlternativeTourOffers(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, LoggedUser, SelectedTour);
+            alternativeTourOffers.Show();
+            Close();
         }
 
         private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -230,7 +258,7 @@ namespace InitialProject.View
                 RemoveTourByMaxCapacity(tour);
                 RemoveTourByLanguage(tour);
             }
-        }
+        } 
 
         public void FillCountries()
         {
@@ -323,5 +351,23 @@ namespace InitialProject.View
             }
         }
 
+        private void ChooseTour_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedTour == null)
+            {
+                return;
+            }
+            if(SelectedTour.MaxGuests == 0)
+            {
+                MessageBox.Show("Selected tour is full, try picking alternative tour on same location.");
+                ShowAlternativeOptions(SelectedTour);
+            }
+            else
+            {
+                SelectedTourOverview selectedTourOverview = new SelectedTourOverview(_tourRepository, _locationRepository, _tourImageRepository, SelectedTour, _tourReservationRepository, LoggedUser);
+                selectedTourOverview.Show();
+            }
+            Close();
+        }
     }
 }
