@@ -86,8 +86,6 @@ namespace InitialProject.View
             }
         }
 
-        public List<TourReservation> _tourReservations { get; set; }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -105,44 +103,30 @@ namespace InitialProject.View
             _tourReservationRepository = tourReservationRepository;
             SelectedTour = selectedTour;
             LoggedUser=loggedUser;
-            _tourReservations = new List<TourReservation>();
             AvailableTours = new ObservableCollection<Tour>();
-            CalculateAvailableSlots();
-        }
-
-        public void CalculateAvailableSlots()
-        {
-            _tourReservations = _tourReservationRepository.GetAll();
-            AvailableSlots = SelectedTour.MaxGuests;
-            foreach (var tourReservation in _tourReservations)
-            {
-                if (tourReservation.TourId == SelectedTour.Id)
-                {
-                    AvailableSlots = AvailableSlots - tourReservation.NumberOfPeople;
-                }
-            }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, LoggedUser);
             guest2TourOverview.Show();
+            
             Close();
         }
 
         private void Reserve_Click(object sender, RoutedEventArgs e)
         {
-            if(AvailableSlots - NumberOfNewGuests < 0)
+            if(SelectedTour.MaxGuests - NumberOfNewGuests < 0)
             {
                 MessageBox.Show("There is no enough slots for this reservation!");
-            }
-            else if(AvailableSlots - NumberOfNewGuests == 0)
-            {
-                MessageBox.Show("Tour is already full.");
                 OfferOtherTours();
             }
-            else
+            else if(NumberOfNewGuests == 0 || NumberOfNewGuests == null)
             {
+                MessageBox.Show("This field can't be empty!");
+            }
+            else 
+            { 
                 MakeNewReservation();
                 Close();
             }
@@ -152,16 +136,19 @@ namespace InitialProject.View
         {
             TourReservation tourReservation = new TourReservation();
             _tourReservationRepository.Save(SelectedTour.Id, LoggedUser.Id, NumberOfNewGuests);
-            MessageBox.Show("Tour was reserved successfully.");
+            SelectedTour.MaxGuests = SelectedTour.MaxGuests - (int)NumberOfNewGuests;
+            _tourRepository.Update(SelectedTour);
+            
+            MessageBox.Show("Your reservation was successful");
+            
             Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, LoggedUser);
             guest2TourOverview.Show();
         }
         public void OfferOtherTours()
         {
-            foreach(var tour in _tourRepository.GetAll())
-            {
-                return;
-            }
+            AlternativeTourOffers alternativeTourOffers = new AlternativeTourOffers(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, LoggedUser, SelectedTour);
+            alternativeTourOffers.Show();
+            Close();
         }
     }
 }

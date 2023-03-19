@@ -7,11 +7,9 @@
         mc:Ignorable="d"
         Title="SelectedTourOverview" Height="470" Width="830" WindowStartupLocation="CenterScreen" >
     <Grid>
-        <Border BorderThickness="1" BorderBrush="Black" Margin="10,10,476,178">
-            <StackPanel Margin="0,0,0,0">
-                <Image Source="{Binding Path=SelectedTour.Picture, UpdateSourceTrigger=PropertyChanged}" Height="264" Width="342"/>
-            </StackPanel>
-        </Border>
+        <StackPanel Margin="10,32,472,189">
+            <Image Source="{Binding Path=SelectedTour.CoverImageUrl, UpdateSourceTrigger=PropertyChanged}" Height="233" Width="345"/>
+        </StackPanel>
         <StackPanel Margin="329,0,0,178">
             <Label HorizontalContentAlignment="Center" Content="{Binding Path=SelectedTour.Name, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Height="61" FontSize="25"/>
         </StackPanel>
@@ -46,8 +44,8 @@
             <Label Content="Available slots: " HorizontalAlignment="Center" Margin="0,0,0,0" FontWeight="Bold" Width="118"/>
         </StackPanel>
         <StackPanel Margin="550,266,198,113">
-            <TextBox Height="20" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap" Text="{Binding Path=NumberOfNewGuests, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="52"/>
-            <TextBlock Height="20" TextAlignment="Center" HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap" Text="{Binding Path=AvailableSlots, TargetNullValue='' ,UpdateSourceTrigger=PropertyChanged}" Width="52"/>
+            <TextBox Height="20" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap" Text="{Binding Path=NumberOfNewGuests, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="52" IsEnabled="True"/>
+            <TextBlock Height="20" TextAlignment="Center" HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap" Text="{Binding Path=SelectedTour.MaxGuests, TargetNullValue='' ,UpdateSourceTrigger=PropertyChanged}" Width="52"/>
         </StackPanel>
     </Grid>
 </Window>
