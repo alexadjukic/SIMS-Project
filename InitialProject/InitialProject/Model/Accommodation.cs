@@ -50,7 +50,7 @@ namespace InitialProject.Model
                 Capacity.ToString(),
                 MinDaysForStay.ToString(),
                 MinDaysBeforeCancel.ToString(),
-                OwnerId.ToString(),
+                OwnerId.ToString()
             };
 
             return csvValues;

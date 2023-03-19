@@ -91,7 +91,7 @@ namespace InitialProject
             }
             else if (user.Role == UserRole.GUEST1)
             {
-                Guest1AccommodationOverview guest1AccommodationOverview = new Guest1AccommodationOverview(_accommodationRepository, _locationRepository, _accommodationImageRepository);
+                Guest1AccommodationOverview guest1AccommodationOverview = new Guest1AccommodationOverview(user, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository);
                 guest1AccommodationOverview.Show();
                 Close();
             }

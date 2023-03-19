@@ -19,27 +19,27 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0">
             <TextBlock Margin="10,10,10,0" Text="From" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
-            <Calendar Margin="10,0,15,10"></Calendar>
+            <Calendar SelectedDate="{Binding Path=SelectedStartDate}" Margin="10,0,15,10"></Calendar>
         </StackPanel>
         
         <StackPanel Grid.Row="0" Grid.Column="1">
             <TextBlock Margin="10,10,10,0" Text="To" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Bold"></TextBlock>
-            <Calendar Margin="15,0,10,10"></Calendar>
+            <Calendar SelectedDate="{Binding Path=SelectedEndDate}" Margin="15,0,10,10"></Calendar>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <TextBlock Margin="20,10,5,10" Text="Lenght of stay:" FontWeight="Bold"/>
-            <TextBox Margin="5,10,20,10" Width="83" Height="16" HorizontalAlignment="Center" VerticalAlignment="Bottom"></TextBox>
+            <TextBlock Margin="20,10,5,10" Text="Duration of stay:" FontWeight="Bold"/>
+            <TextBox Text="{Binding Path=LenghtOfStay}" Margin="5,10,20,10" Width="83" Height="16" HorizontalAlignment="Center" VerticalAlignment="Bottom"></TextBox>
         </StackPanel>
 
-        <Button Grid.Row="1" Grid.Column="1" Margin="60,10,54,10" Content="Check available dates" FontWeight="Bold"/>
+        <Button Grid.Row="1" Grid.Column="1" Margin="60,10,54,10" Content="Check available dates" FontWeight="Bold" Click="SearchDatesButton_Click"/>
 
         <StackPanel Grid.Row="3" Grid.Column="0">
-            <TextBlock Text="Available dates" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom" ></TextBlock>
-            <DataGrid Margin="20,0,20,20" Height="230">
+            <TextBlock Text="Available dates" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Bottom"></TextBlock>
+            <DataGrid Name="DateDataGrid" ItemsSource="{Binding AvailableDates, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAvailableDate}" CanUserAddRows="False" Validation.ErrorTemplate="{x:Null}" Margin="20,0,20,20" Height="230">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="From" Width="110"/>
-                    <DataGridTextColumn Header="To" Width="110"/>
+                    <DataGridTextColumn Binding="{Binding StartDate, Mode=OneWay, StringFormat={}{0:dd.MM.yyyy}}" Header="From" Width="104"/>
+                    <DataGridTextColumn Binding="{Binding EndDate, Mode=OneWay, StringFormat={}{0:dd.MM.yyyy}}" Header="To" Width="104"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -47,8 +47,9 @@
         <StackPanel Grid.Row="3" Grid.Column="1">
             <Button Content="View images" FontWeight="Bold" Margin="20" Height="30"/>
             <TextBlock Text="Number of guests" FontWeight="Bold" Margin="30,20,30,5" HorizontalAlignment="Center" FontSize="14"/>
-            <TextBox Margin="30,0,30,20" Width="100"/>
-            <Button Content="Make reservation" FontWeight="Bold" Margin="20,63,20,20" Height="30"/>
+            <TextBox Text="{Binding Path=GuestNumber}" Margin="30,0,30,20" Width="100"/>
+            <Button Content="Make reservation" FontWeight="Bold" Margin="20,24,20,10" Height="30" Click="MakeReservationButton_Click"/>
+            <Button Content="Cancel" FontWeight="Bold" Margin="20,0,20,20" Height="30" Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>

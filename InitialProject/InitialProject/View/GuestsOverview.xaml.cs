@@ -63,42 +63,45 @@ namespace InitialProject.View
         {
             if (SelectedReservation != null)
             {
-                if (!IsDateExpired) 
-                { 
-                    ButtonRate.IsEnabled = true;
+                ButtonRate.IsEnabled = true;
+
+                if ((DateTime.Now - SelectedReservation.EndDate).Days > 5)
+                {
+                    MessageBox.Show("Selected reservation can't be rated", "It's been more than 5 days", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if ((DateTime.Now - SelectedReservation.EndDate).Days < 0)
+                {
+                    MessageBox.Show("Selected reservation can't be rated", "Guest didn't leave yet", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (_ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) != null)
+                {
+                    MessageBox.Show("Selected reservation can't be rated", "It is already rated", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
 
+        
+
         private void ButtonRate_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedReservation != null && !IsDateExpired && _ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) == null)
+
+
+            if ((DateTime.Now - SelectedReservation.EndDate).Days < 0)
+            {
+                MessageBox.Show("Selected reservation can't be rated", "Guest didn't leave yet", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (SelectedReservation != null && (DateTime.Now - SelectedReservation.EndDate).Days <= 5 && _ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) == null)
             {
                 RatingGuestForm ratingGuestForm = new RatingGuestForm(_ratingRepository, SelectedReservation, _ownerId);
-                ratingGuestForm.Show();
+                ratingGuestForm.ShowDialog();
             }
-            else if (IsDateExpired)
+            else if ((DateTime.Now - SelectedReservation.EndDate).Days > 5)
             {
                 MessageBox.Show("Selected reservation can't be rated", "It's been more than 5 days", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (_ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) != null)
             {
                 MessageBox.Show("Selected reservation can't be rated", "It is already rated", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-        public bool IsDateExpired
-        {
-            get
-            {
-                if ((DateTime.Now - SelectedReservation.EndDate).Days < 5)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
             }
         }
     }

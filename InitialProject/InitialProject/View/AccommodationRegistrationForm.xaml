@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Accommodation Registration" Height="750" Width="800" Loaded="AccommodationRegistrationLoaded" Closed="Window_Closed">
+        Title="Accommodation Registration" Height="750" Width="800" Loaded="AccommodationRegistrationLoaded" Closed="Window_Closed" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70*"/>
