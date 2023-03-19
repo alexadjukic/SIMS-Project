@@ -45,7 +45,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="1">
-            <Button Content="View images" FontWeight="Bold" Margin="20" Height="30"/>
+            <Button Content="View images" FontWeight="Bold" Margin="20" Height="30" Click="ViewImageButton_Click"/>
             <TextBlock Text="Number of guests" FontWeight="Bold" Margin="30,20,30,5" HorizontalAlignment="Center" FontSize="14"/>
             <TextBox Text="{Binding Path=GuestNumber}" Margin="30,0,30,20" Width="100"/>
             <Button Content="Make reservation" FontWeight="Bold" Margin="20,24,20,10" Height="30" Click="MakeReservationButton_Click"/>

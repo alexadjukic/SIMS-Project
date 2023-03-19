@@ -249,21 +249,21 @@ namespace InitialProject.View
                 return false;
             }
 
-            if ((SelectedEndDate.Date - SelectedStartDate.Date).Days < Convert.ToInt32(LenghtOfStay) - 1)
-            {
-                MessageBox.Show("Calendar and Duration of stay values don't match.");
-                return false;
-            }
-
             if (LenghtOfStay == null || LenghtOfStay == "")
             {
-                MessageBox.Show("Please enter a valid value.");
+                MessageBox.Show("Duration of stay field can't be empty.");
                 return false;
             }
 
             if (!_NaturalNumberRegex.Match(LenghtOfStay).Success)
             {
                 MessageBox.Show("Please enter a valid value.");
+                return false;
+            }
+
+            if ((SelectedEndDate.Date - SelectedStartDate.Date).Days < Convert.ToInt32(LenghtOfStay) - 1)
+            {
+                MessageBox.Show("Calendar and Duration of stay values don't match.");
                 return false;
             }
 
@@ -313,7 +313,7 @@ namespace InitialProject.View
         {
             if (GuestNumber == null || GuestNumber == "")
             {
-                MessageBox.Show("Please enter a valid value.");
+                MessageBox.Show("Number of guests field can't be empty.");
                 return false;
             }
 
@@ -341,6 +341,19 @@ namespace InitialProject.View
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void ViewImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_accommodationImageRepository.GetAll().Find(x => x.AccommodationId == SelectedAccommodation.Id) != null) 
+            {
+                AccommodationImagesOverview accommodationImagesOverview = new AccommodationImagesOverview(SelectedAccommodation, _accommodationImageRepository);
+                accommodationImagesOverview.Show();
+            }
+            else
+            {
+                MessageBox.Show("Image url can not be loaded.");
+            }
         }
     }
 
