@@ -20,7 +20,7 @@ namespace InitialProject
         private readonly AccommodationImageRepository _accommodationImageRepository;
         private readonly TourRepository _tourRepository;
         private readonly TourImageRepository _tourImageRepository;
-        private readonly CheckpointRepository _pointRepository;
+        private readonly CheckpointRepository _checkpointRepository;
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly RatingRepository _ratingRepository;
         private readonly TourReservationRepository _tourReservationRepository;
@@ -56,7 +56,7 @@ namespace InitialProject
             _accommodationImageRepository = new AccommodationImageRepository();
             _tourRepository = new TourRepository();
             _tourImageRepository = new TourImageRepository();
-            _pointRepository = new CheckpointRepository();
+            _checkpointRepository = new CheckpointRepository();
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _ratingRepository = new RatingRepository();
             _tourReservationRepository = new TourReservationRepository();
@@ -103,8 +103,8 @@ namespace InitialProject
             }
             else if (user.Role == UserRole.GUIDE)
             {
-                TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _pointRepository, user);
-                tourCreationForm.Show();
+                GuideMenu guideMenu = new GuideMenu(_tourRepository, _tourImageRepository, _locationRepository, _checkpointRepository, user);
+                guideMenu.Show();
                 Close();
             }
         }
