@@ -205,8 +205,10 @@ namespace InitialProject.View
             }
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void SignOutButton_Click(object sender, RoutedEventArgs e)
         {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
             Close();
         }
 

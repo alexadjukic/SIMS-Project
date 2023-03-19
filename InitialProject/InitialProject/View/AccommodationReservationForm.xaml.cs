@@ -281,7 +281,7 @@ namespace InitialProject.View
             DateTime recommendationStartDate;
             if ((SelectedStartDate.Date - DateTime.Now.Date).Days < 14)
             {
-                recommendationStartDate = DateTime.Now;
+                recommendationStartDate = DateTime.Now.Date;
             }
             else
             {
