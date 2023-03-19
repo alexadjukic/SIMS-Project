@@ -71,7 +71,7 @@ namespace InitialProject.View
                 }
                 else if ((DateTime.Now - SelectedReservation.EndDate).Days < 0)
                 {
-                    MessageBox.Show("Selected reservation can't be rated", "Guest didn't leave yet", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Selected reservation can't be rated", "Guest hasn't left yet", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else if (_ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) != null)
                 {
@@ -88,7 +88,7 @@ namespace InitialProject.View
 
             if ((DateTime.Now - SelectedReservation.EndDate).Days < 0)
             {
-                MessageBox.Show("Selected reservation can't be rated", "Guest didn't leave yet", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Selected reservation can't be rated", "Guest hasn't left yet", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (SelectedReservation != null && (DateTime.Now - SelectedReservation.EndDate).Days <= 5 && _ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) == null)
             {
