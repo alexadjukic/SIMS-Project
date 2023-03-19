@@ -51,7 +51,8 @@ namespace InitialProject.View
 
         private void ButtonTrackTours_Click(object sender, RoutedEventArgs e)
         {
-            //todo
+            TourTrackingWindow tourTrackingWindow = new TourTrackingWindow(_tourRepository, _locationRepository, _checkpointRepository, _guide);
+            tourTrackingWindow.Show();
         }
 
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
