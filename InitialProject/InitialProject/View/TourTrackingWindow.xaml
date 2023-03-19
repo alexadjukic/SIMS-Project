@@ -43,7 +43,7 @@
 
         <StackPanel Grid.Column="1">
             <Label Content="Active tours checkpoints: " Margin="20,5,20,5" FontSize="16"/>
-            <DataGrid Height="300" Margin="20,5,20,5" ItemsSource="{Binding Path=Checkpoints, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCheckpoint, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False">
+            <DataGrid Height="300" Margin="20,5,20,5" ItemsSource="{Binding Path=Checkpoints, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCheckpoint, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True" CanUserSortColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="4*" Header="Checkpoint name" Binding="{Binding Name}"/>
                     <DataGridTextColumn Width="1*" Header="Status" Binding="{Binding Active, Converter={StaticResource CheckpointStatusConverter}}"/>
