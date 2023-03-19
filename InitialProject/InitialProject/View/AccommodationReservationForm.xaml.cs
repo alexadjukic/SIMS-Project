@@ -249,7 +249,7 @@ namespace InitialProject.View
                 return false;
             }
 
-            if ((SelectedEndDate.Date - SelectedStartDate.Date).Days < Convert.ToInt32(LenghtOfStay))
+            if ((SelectedEndDate.Date - SelectedStartDate.Date).Days < Convert.ToInt32(LenghtOfStay) - 1)
             {
                 MessageBox.Show("Calendar and Duration of stay values don't match.");
                 return false;
