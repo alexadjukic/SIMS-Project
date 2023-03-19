@@ -51,7 +51,7 @@
             </DataGrid>
 
             <StackPanel Orientation="Horizontal" Margin="20,5,20,0">
-                <Button Content="Guest list" Height="50" Width="100"/>
+                <Button Content="Guest list" Height="50" Width="100" Click="ButtonGuestList_Click"/>
                 <Button Height="50" Width="100" Margin="66,0,68,0" Click="ButtonCompleteCheckpoint_Click">
                     <TextBlock Text="Complete checkpoint" TextWrapping="Wrap" TextAlignment="Center"/>
                 </Button>

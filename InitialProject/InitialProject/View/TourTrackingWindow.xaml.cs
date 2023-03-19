@@ -207,6 +207,13 @@ namespace InitialProject.View
             FinishTour();
             LoadCheckpoints();
         }
+
+        private void ButtonGuestList_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedCheckpoint == null) return;
+            CheckpointArrival checkpointsGuestListWindow = new CheckpointArrival();
+            checkpointsGuestListWindow.Show();
+        }
     }
 
     public class TourStatusConverter : IValueConverter
