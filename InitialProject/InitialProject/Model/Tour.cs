@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Model
 {
+    public enum TourStatus
+    {
+        NOT_STARTED = 1,
+        ACTIVE,
+        FINISHED
+    }
     public class Tour : ISerializable
     {
         public int Id { get; set; }
@@ -21,9 +27,10 @@ namespace InitialProject.Model
         public double Duration { get; set; }
         public string CoverImageUrl { get; set; }
         public int GuideId { get; set; }
+        public TourStatus Status { get; set; }
 
         public Tour() { }
-        public Tour(int id, string name, Location location, int locationId, string description, string language, int maxGuests, DateTime startTime, double duration, string coverImageUrl, int guideId)
+        public Tour(int id, string name, Location location, int locationId, string description, string language, int maxGuests, DateTime startTime, double duration, string coverImageUrl, int guideId, TourStatus status)
         {
             Id=id;
             Name=name;
@@ -36,11 +43,12 @@ namespace InitialProject.Model
             Duration=duration;
             CoverImageUrl=coverImageUrl;
             GuideId = guideId;
+            Status = status;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxGuests.ToString(), StartTime.ToString(), Duration.ToString(), CoverImageUrl, GuideId.ToString()};
+            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxGuests.ToString(), StartTime.ToString(), Duration.ToString(), CoverImageUrl, GuideId.ToString(), Status.ToString()};
             return csvValues;
         }
 
@@ -56,6 +64,21 @@ namespace InitialProject.Model
             Duration = int.Parse(values[7]);
             CoverImageUrl = values[8];
             GuideId = int.Parse(values[9]);
+            Status = ParseTourStatus(values[10]);
+        }
+
+        private TourStatus ParseTourStatus(string value)
+        {
+            switch (value)
+            {
+                case "NOT_STARTED":
+                    return TourStatus.NOT_STARTED;
+                case "ACTIVE":
+                    return TourStatus.ACTIVE;
+                case "FINISHED":
+                    return TourStatus.FINISHED;
+            }
+            return 0;
         }
     }
 }
