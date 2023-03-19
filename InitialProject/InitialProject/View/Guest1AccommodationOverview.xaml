@@ -12,13 +12,13 @@
         <CheckBox Content="House" IsChecked="{Binding Path=IsHouse, Mode=TwoWay}" HorizontalAlignment="Left" Margin="178,47,0,0" VerticalAlignment="Top" Width="61"></CheckBox>
         <CheckBox Content="Cottage" IsChecked="{Binding Path=IsCottage, Mode=TwoWay}" HorizontalAlignment="Left" Margin="246,47,0,0" VerticalAlignment="Top" Width="70"></CheckBox>
         <TextBox Text="{Binding Path=GuestNumber, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="342,10,0,0" VerticalAlignment="Top" Width="100" IsEnabled="True"/>
-        <TextBox Text="{Binding Path=LenghtOfStay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="559,10,0,0" VerticalAlignment="Top" Width="100" IsEnabled="True"/>
+        <TextBox Text="{Binding Path=LenghtOfStay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="564,10,0,0" VerticalAlignment="Top" Width="100" IsEnabled="True"/>
         <ComboBox IsEditable="True" SelectedValue="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Countries, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ComboBoxCountry_SelectionChanged" Name="ComboBoxCountry" HorizontalAlignment="Left" Margin="397,43,0,0" VerticalAlignment="Top" Width="110" IsEnabled="True" />
         <ComboBox IsEditable="True" SelectedValue="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Cities, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="ComboBoxCity" HorizontalAlignment="Left" Margin="554,43,0,0" VerticalAlignment="Top" Width="110" IsEnabled="False"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="26,6,0,0" VerticalAlignment="Top" Width="60" FontWeight="Bold"/>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="26,41,0,0" VerticalAlignment="Top" Width="50" FontWeight="Bold"/>
         <Label Content="Number of guests:" HorizontalAlignment="Left" Margin="221,6,0,0" VerticalAlignment="Top" Width="116" FontWeight="Bold"/>
-        <Label Content="Lenght of stay:" HorizontalAlignment="Left" Margin="461,6,0,0" VerticalAlignment="Top" Width="93" FontWeight="Bold"/>
+        <Label Content="Duration of stay:" HorizontalAlignment="Left" Margin="452,6,0,0" VerticalAlignment="Top" Width="107" FontWeight="Bold"/>
         <Label Content="Country:"  HorizontalAlignment="Left" Margin="332,41,0,0" VerticalAlignment="Top" Width="60" FontWeight="Bold"/>
         <Label Content="City:"  HorizontalAlignment="Left" Margin="508,41,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold"/>
         <Button Content="Search" HorizontalAlignment="Left" Margin="679,47,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold" Click="FilterButton_Click"/>
@@ -27,13 +27,13 @@
                 <DataGridTextColumn Header="Name" Width="105" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Country" Width="105" Binding="{Binding Location.Country}" />
                 <DataGridTextColumn Header="City" Width="105" Binding="{Binding Location.City}" />
-                <DataGridTextColumn Header="Type" Width="100" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Type" Width="90" Binding="{Binding Type}" />
                 <DataGridTextColumn Header="Max guests" Width="80" Binding="{Binding Capacity}"/>
                 <DataGridTextColumn Header="Min. reservation days" Width="130" Binding="{Binding MinDaysForStay}"/>
-                <DataGridTextColumn Header="Min. days before cancel" Width="145" Binding="{Binding MinDaysBeforeCancel}"/>
+                <DataGridTextColumn Header="Min. days before cancel" Width="140" Binding="{Binding MinDaysBeforeCancel}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="46,374,0,0" VerticalAlignment="Top" Width="90" Click="CancelButton_Click"/>
-        <Button Content="Book" HorizontalAlignment="Left" Margin="650,374,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button Content="Cancel" FontWeight="Bold" HorizontalAlignment="Left" Margin="46,374,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="CancelButton_Click"/>
+        <Button Content="See availability" FontWeight="Bold" HorizontalAlignment="Left" Margin="650,374,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="BookButton_Click"/>
     </Grid>
 </Window>
