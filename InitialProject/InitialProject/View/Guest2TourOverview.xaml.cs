@@ -204,6 +204,31 @@ namespace InitialProject.View
             }
         }
 
+        public void ShowAlternativeOptions(Tour tour)
+        {
+            if (IsFull(tour))
+            {
+                OfferOtherTours();
+            }
+        }
+
+        public bool IsFull(Tour tour)
+        {
+            if (tour.MaxGuests == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void OfferOtherTours()
+        {
+            AlternativeTourOffers alternativeTourOffers = new AlternativeTourOffers(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, LoggedUser, SelectedTour);
+            alternativeTourOffers.Show();
+            Close();
+        }
+
         private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxCity.IsEnabled = true;
@@ -326,14 +351,22 @@ namespace InitialProject.View
             }
         }
 
-        private void ChooseTour_Click (object sender, RoutedEventArgs e)
+        private void ChooseTour_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedTour == null)
             {
                 return;
             }
-            SelectedTourOverview selectedTourOverview = new SelectedTourOverview(_tourRepository, _locationRepository, _tourImageRepository, SelectedTour, _tourReservationRepository, LoggedUser);
-            selectedTourOverview.Show();
+            if(SelectedTour.MaxGuests == 0)
+            {
+                MessageBox.Show("Selected tour is full, try picking alternative tour on same location.");
+                ShowAlternativeOptions(SelectedTour);
+            }
+            else
+            {
+                SelectedTourOverview selectedTourOverview = new SelectedTourOverview(_tourRepository, _locationRepository, _tourImageRepository, SelectedTour, _tourReservationRepository, LoggedUser);
+                selectedTourOverview.Show();
+            }
             Close();
         }
     }

@@ -9,12 +9,12 @@
     <Grid>
         <ComboBox IsEditable="true" SelectedValue="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Countries, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ComboBoxCountry_SelectionChanged" Name="ComboBoxCountry" HorizontalAlignment="Left" Margin="105,10,0,0" VerticalAlignment="Top" Width="120" IsEnabled="True" />
         <ComboBox IsEditable="True" SelectedValue="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Cities, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="ComboBoxCity" HorizontalAlignment="Left" Margin="105,37,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-        <TextBox Text="{Binding Path=TourDuration, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" Width="120" IsEnabled="True"/>
+        <TextBox Text="{Binding Path=TourDuration, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" Width="110" IsEnabled="True"/>
         <TextBox Text="{Binding Path=MaxGuests, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Margin="0,39,0,0" VerticalAlignment="Top" Width="120" IsEnabled="True"/>
         <ComboBox IsEditable="True" SelectedValue="{Binding Path=SelectedLanguage, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Languages, UpdateSourceTrigger=PropertyChanged}" Name="ComboBoxLanguage" HorizontalAlignment="Left" Margin="572,10,0,0" VerticalAlignment="Top" Width="120" IsEnabled="True"/>
         <Label Content="Country:" HorizontalAlignment="Left" Margin="26,8,0,0" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
         <Label Content="City:" HorizontalAlignment="Left" Margin="26,35,0,0" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
-        <Label Content="Duration:" HorizontalAlignment="Left" Margin="261,8,0,0" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
+        <Label Content="Duration(h):" HorizontalAlignment="Left" Margin="261,8,0,0" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
         <Label Content="Language:" HorizontalAlignment="Left" Margin="488,8,0,0" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
         <Label Content="Guest"  HorizontalAlignment="Left" Margin="261,33,0,0" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
         <Label Content="Number:" HorizontalAlignment="Left" Margin="261,48,0,0" VerticalAlignment="Top" Width="79" FontWeight="Bold"/>
