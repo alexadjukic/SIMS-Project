@@ -64,6 +64,15 @@ namespace InitialProject.View
             if (SelectedReservation != null)
             {
                 ButtonRate.IsEnabled = true;
+
+                if (IsDateExpired)
+                {
+                    MessageBox.Show("Selected reservation can't be rated", "It's been more than 5 days", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (_ratingRepository.GetAll().Find(r => r.ReservationId == SelectedReservation.Id) != null)
+                {
+                    MessageBox.Show("Selected reservation can't be rated", "It is already rated", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
         }
 
