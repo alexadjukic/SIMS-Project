@@ -40,7 +40,7 @@ namespace InitialProject.View
             _locationRepository = locationRepository;
             _checkpointRepository = checkpointRepository;
             _guide = guide;
-            WelcomeMessage = String.Format("Welcome {0}", _guide.Password);
+            WelcomeMessage = String.Format("Welcome {0}", _guide.Username);
         }
 
         private void ButtonCreateTour_Click(object sender, RoutedEventArgs e)
