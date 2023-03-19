@@ -130,7 +130,7 @@ namespace InitialProject.View
             }
         }
 
-        private Regex _NaturalNumberRegex = new Regex("^[0-9]+$");
+        private Regex _NaturalNumberRegex = new Regex("^[1-9]+$");
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

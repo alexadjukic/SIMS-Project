@@ -22,7 +22,7 @@
         <Label Content="Country:"  HorizontalAlignment="Left" Margin="332,41,0,0" VerticalAlignment="Top" Width="60" FontWeight="Bold"/>
         <Label Content="City:"  HorizontalAlignment="Left" Margin="508,41,0,0" VerticalAlignment="Top" Width="36" FontWeight="Bold"/>
         <Button Content="Search" HorizontalAlignment="Left" Margin="679,47,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold" Click="FilterButton_Click"/>
-        <DataGrid x:Name="DataGridAccommodations" ItemsSource="{Binding Accommodations, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="10,77,10,59">
+        <DataGrid x:Name="DataGridAccommodations" ItemsSource="{Binding Accommodations, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" SelectionChanged="DataGridAccommodations_SelectionChanged" Margin="10,77,10,59">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="105" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Country" Width="105" Binding="{Binding Location.Country}" />
@@ -34,6 +34,6 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Sign out" FontWeight="Bold" HorizontalAlignment="Left" Margin="46,374,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="SignOutButton_Click"/>
-        <Button Content="See availability" FontWeight="Bold" HorizontalAlignment="Left" Margin="650,374,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="BookButton_Click"/>
+        <Button x:Name="BookButton" Content="See availability" FontWeight="Bold" HorizontalAlignment="Left" Margin="650,374,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="BookButton_Click"/>
     </Grid>
 </Window>
