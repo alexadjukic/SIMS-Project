@@ -8,6 +8,7 @@ using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -236,7 +237,11 @@ namespace InitialProject.View
         {
             String url = TestTextBox.Text;
 
-            if (url != null && url != "")
+            if (IsImageAlreadyAdded(url))
+            {
+                MessageBox.Show("Image already added. Type another url");
+            }
+            else if (url != null && url != "")
             {
                 Uri resourceUri = new Uri(url);
                 UploadedPicture.Source = new BitmapImage(resourceUri);
@@ -246,15 +251,29 @@ namespace InitialProject.View
             TextBlockPictureSaved.Text = "";
         }
 
+        public bool IsImageAlreadyAdded(string url)
+        {
+            AccommodationImage image = _imageRepository.GetAll().Find(i => i.Url == url && i.AccommodationId == -1);
+
+            if (image != null)
+            {
+                return true;
+            }
+            return false;
+            
+        }
+
         private void ButtonSaveImage_Click(object sender, RoutedEventArgs e)
         {
-
             TextBlockPictureSaved.Text = "Image added, if you want to add more images, type another url and click button 'Add images'";
 
             _imageNumber++;
             _imageRepository.Save(TestTextBox.Text, -1);
 
             EnableButtonIfValid();
+
+            ButtonSaveImage.IsEnabled = false;
+            ButtonAddImages.IsEnabled = false;
         }
 
         private Regex _Url = new Regex("^https?:\\/\\/[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$");
