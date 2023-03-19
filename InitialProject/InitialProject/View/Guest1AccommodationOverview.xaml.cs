@@ -255,7 +255,7 @@ namespace InitialProject.View
             }
         }
 
-        private Regex _NaturalNumberRegex = new Regex("^[1-9][0-9]+$");
+        private Regex _NaturalNumberRegex = new Regex("^[1-9][0-9]*$");
         private void RemoveByGuestNumber(Accommodation newAccommodation)
         {
             if (GuestNumber != null && GuestNumber != "")
