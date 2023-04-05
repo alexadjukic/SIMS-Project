@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repositories
 {
-    public class RatingRepository
+    public class RatingRepository : IRatingRepository
     {
         private const string FilePath = "../../../Resources/Data/ratings.csv";
 

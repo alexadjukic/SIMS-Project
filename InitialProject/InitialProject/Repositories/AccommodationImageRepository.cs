@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using Microsoft.Win32;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repositories
 {
-    public class AccommodationImageRepository
+    public class AccommodationImageRepository : IAccommodationImageRepository
     {
         private const string FilePath = "../../../Resources/Data/accommodationImages.csv";
 
