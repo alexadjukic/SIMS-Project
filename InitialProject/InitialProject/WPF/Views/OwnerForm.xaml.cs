@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views
 {
     /// <summary>
     /// Interaction logic for OwnerForm.xaml

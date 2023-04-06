@@ -1,12 +1,10 @@
 ﻿using InitialProject.Domain.Models;
-using InitialProject.Forms;
 using InitialProject.Repositories;
-using InitialProject.View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
-namespace InitialProject
+namespace InitialProject.WPF.Views
 {
     /// <summary>
     /// Interaction logic for SignInForm.xaml

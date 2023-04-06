@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 using InitialProject.Domain.Models;
 using InitialProject.Repositories;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views
 {
     /// <summary>
     /// Interaction logic for Guest1AccommodationOverview.xaml

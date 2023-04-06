@@ -22,7 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static System.Net.WebRequestMethods;
 
-namespace InitialProject.View
+namespace InitialProject.WPF.Views
 {
     /// <summary>
     /// Interaction logic for AccommodationRegistrationForm.xaml
