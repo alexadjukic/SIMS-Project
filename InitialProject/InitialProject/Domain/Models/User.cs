@@ -38,23 +38,7 @@ namespace InitialProject.Domain.Models
             Id = Convert.ToInt32(values[0]);
             Username = values[1];
             Password = values[2];
-            Role = ParseUserRole(values[3]);
-        }
-
-        private static UserRole ParseUserRole(string value)
-        {
-            switch (value)
-            {
-                case "OWNER":
-                    return UserRole.OWNER;
-                case "GUEST1":
-                    return UserRole.GUEST1;
-                case "GUEST2":
-                    return UserRole.GUEST2;
-                case "GUIDE":
-                    return UserRole.GUIDE;
-            }
-            return 0;
+            Role = Enum.Parse<UserRole>(values[3]);
         }
     }
 }

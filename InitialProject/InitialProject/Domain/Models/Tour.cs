@@ -64,21 +64,7 @@ namespace InitialProject.Domain.Models
             Duration = int.Parse(values[7]);
             CoverImageUrl = values[8];
             GuideId = int.Parse(values[9]);
-            Status = ParseTourStatus(values[10]);
-        }
-
-        private TourStatus ParseTourStatus(string value)
-        {
-            switch (value)
-            {
-                case "NOT_STARTED":
-                    return TourStatus.NOT_STARTED;
-                case "ACTIVE":
-                    return TourStatus.ACTIVE;
-                case "FINISHED":
-                    return TourStatus.FINISHED;
-            }
-            return 0;
+            Status = Enum.Parse<TourStatus>(values[10]);
         }
     }
 }
