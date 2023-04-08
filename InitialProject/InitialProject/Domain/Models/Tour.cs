@@ -12,7 +12,8 @@ namespace InitialProject.Domain.Models
     {
         NOT_STARTED = 1,
         ACTIVE,
-        FINISHED
+        FINISHED,
+        CANCELED
     }
     public class Tour : ISerializable
     {
