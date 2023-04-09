@@ -14,7 +14,7 @@ namespace InitialProject.Domain.Models
         ACTIVE,
         FINISHED
     }
-    public class Tour : ISerializable
+    public class Tour
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -44,41 +44,6 @@ namespace InitialProject.Domain.Models
             CoverImageUrl = coverImageUrl;
             GuideId = guideId;
             Status = status;
-        }
-
-        public string[] ToCSV()
-        {
-            string[] csvValues = { Id.ToString(), Name, LocationId.ToString(), Description, Language, MaxGuests.ToString(), StartTime.ToString(), Duration.ToString(), CoverImageUrl, GuideId.ToString(), Status.ToString() };
-            return csvValues;
-        }
-
-        public void FromCSV(string[] values)
-        {
-            Id = int.Parse(values[0]);
-            Name = values[1];
-            LocationId = int.Parse(values[2]);
-            Description = values[3];
-            Language = values[4];
-            MaxGuests = int.Parse(values[5]);
-            StartTime = DateTime.Parse(values[6]);
-            Duration = int.Parse(values[7]);
-            CoverImageUrl = values[8];
-            GuideId = int.Parse(values[9]);
-            Status = ParseTourStatus(values[10]);
-        }
-
-        private TourStatus ParseTourStatus(string value)
-        {
-            switch (value)
-            {
-                case "NOT_STARTED":
-                    return TourStatus.NOT_STARTED;
-                case "ACTIVE":
-                    return TourStatus.ACTIVE;
-                case "FINISHED":
-                    return TourStatus.FINISHED;
-            }
-            return 0;
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace InitialProject.Serializer
 {
-    class Serializer<T> where T: ISerializable, new()
+    public abstract class Serializer<T>
     {
         private const char Delimiter = '|';
 
@@ -15,7 +15,7 @@ namespace InitialProject.Serializer
 
             foreach(T obj in objects)
             {
-                string line = string.Join(Delimiter.ToString(), obj.ToCSV());
+                string line = string.Join(Delimiter.ToString(), GetCSVValues(obj));
                 csv.AppendLine(line);
             }
 
@@ -30,12 +30,14 @@ namespace InitialProject.Serializer
             foreach(string line in File.ReadLines(fileName))
             {
                 string[] csvValues = line.Split(Delimiter);
-                T obj = new T();
-                obj.FromCSV(csvValues);
-                objects.Add(obj);
+                objects.Add(GetObject(csvValues));
             }
 
             return objects;
         }
+
+        public abstract string[] GetCSVValues(T obj);
+
+        public abstract T GetObject(string[] csvValues);
     }
 }
