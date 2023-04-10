@@ -1,4 +1,5 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Models;
 using InitialProject.Repositories;
 using System;
@@ -15,8 +16,10 @@ namespace InitialProject.WPF.ViewModels
 {
     public class YourToursViewModel : ViewModelBase
     {
-		private Tour _selectedPastTour;
-		public Tour SelectedPastTour
+        #region PROPERTIES
+
+		private Tour? _selectedPastTour;
+		public Tour? SelectedPastTour
 		{
 			get
 			{
@@ -32,8 +35,8 @@ namespace InitialProject.WPF.ViewModels
 			}
 		}
 
-		private Tour _selectedFutureTour;
-		public Tour SelectedFutureTour
+		private Tour? _selectedFutureTour;
+		public Tour? SelectedFutureTour
 		{
 			get
 			{
@@ -44,7 +47,6 @@ namespace InitialProject.WPF.ViewModels
 				if (_selectedFutureTour != value)
 				{
 					_selectedFutureTour = value;
-					CancelTourCommand.Tour = value;
 					OnPropertyChanged(nameof(SelectedFutureTour));
 
 				}
@@ -54,28 +56,60 @@ namespace InitialProject.WPF.ViewModels
 		public ObservableCollection<Tour> PastTours { get; set; }
         public ObservableCollection<Tour> FutureTours { get; set; }
 
-		private TourRepository _tourRepository;
-
-		public CancelTourCommand CancelTourCommand { get; }
-		public CloseWindowCommand CloseWindowCommand { get; }
+        private readonly Window _yourToursView;
+		private readonly TourService _tourService;
+        #endregion
 
         public YourToursViewModel(Window yourToursView)
         {
-			_tourRepository = new TourRepository();
-			PastTours = new ObservableCollection<Tour>();
-            FutureTours = new ObservableCollection<Tour>(_tourRepository.GetAll());
+			_yourToursView = yourToursView;
+			_tourService = new TourService();
 
-			CancelTourCommand = new CancelTourCommand(this);
-			CloseWindowCommand = new CloseWindowCommand(yourToursView);
+			PastTours = new ObservableCollection<Tour>();
+            FutureTours = new ObservableCollection<Tour>();
+
+			CancelTourCommand = new RelayCommand(CancelTourCommand_Execute, CancelTourCommand_CanExecute);
+			CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
+
+			LoadFutureTours();
+			LoadPastTours();
         }
 		public void LoadFutureTours()
 		{
-			_tourRepository.Update(SelectedFutureTour);
 			FutureTours.Clear();
-			foreach (var tour in _tourRepository.GetAll())
+			foreach (var tour in _tourService.GetFutureTours())
 			{
                 FutureTours.Add(tour);
 			}
 		}
+
+        public void LoadPastTours()
+        {
+            PastTours.Clear();
+            foreach (var tour in _tourService.GetPastTours())
+            {
+                PastTours.Add(tour);
+            }
+        }
+
+        #region COMMANDS
+        public RelayCommand CancelTourCommand { get; }
+		public RelayCommand CloseWindowCommand { get; }
+        public void CancelTourCommand_Execute(object? parameter)
+		{
+			_tourService.CancelTour(SelectedFutureTour);
+			LoadFutureTours();
+		}
+
+		public bool CancelTourCommand_CanExecute(object? parameter)
+		{
+            return SelectedFutureTour is not null && SelectedFutureTour.Status != TourStatus.CANCELED && SelectedFutureTour.StartTime.Subtract(DateTime.Now).TotalHours > 48;
+        }
+
+		public void CloseWindowCommand_Execute(object? parameter)
+		{
+			_yourToursView.Close();
+		}
+        #endregion
     }
 }

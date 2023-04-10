@@ -25,11 +25,19 @@
                 </Style>
             </TabControl.Resources>
             <TabItem Header="Past">
-                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=PastTours, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedPastTour, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=PastTours, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedPastTour, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Tour name" Width="1*" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding LocationId}"/>
-                        <DataGridTextColumn Header="Start time" Width="1*" Binding="{Binding StartTime}"/>
+                        <DataGridTextColumn Header="Tour name" Width="2*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Location" Width="2*">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding StringFormat="{} {0}, {1}">
+                                    <Binding Path="Location.City"/>
+                                    <Binding Path="Location.Country"/>
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Start time" Width="1*" Binding="{Binding StartTime, StringFormat={}{0:dd.MM.yyyy HH\\:mm}}">
+                        </DataGridTextColumn>
                         <DataGridTextColumn Header="Status" Width="1*"  Binding="{Binding Status}"/>
                         <DataGridTemplateColumn Width="1*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -42,11 +50,19 @@
                 </DataGrid>
             </TabItem>
             <TabItem Header="Future">
-                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=FutureTours, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedFutureTour, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" CanUserDeleteRows="False">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=FutureTours, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedFutureTour, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Tour name" Width="1*" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Location" Width="1*" Binding="{Binding LocationId}"/>
-                        <DataGridTextColumn Header="Start time" Width="1*" Binding="{Binding StartTime}"/>
+                        <DataGridTextColumn Header="Tour name" Width="2*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Location" Width="2*">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding StringFormat="{}{0}, {1}">
+                                    <Binding Path="Location.City"/>
+                                    <Binding Path="Location.Country"/>
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Start time" Width="1*" Binding="{Binding StartTime, StringFormat={}{0:dd.MM.yyyy HH\\:mm}}">
+                        </DataGridTextColumn>
                         <DataGridTextColumn Header="Status" Width="1*" Binding="{Binding Status}"/>
                         <DataGridTemplateColumn Width="1*">
                             <DataGridTemplateColumn.CellTemplate>
