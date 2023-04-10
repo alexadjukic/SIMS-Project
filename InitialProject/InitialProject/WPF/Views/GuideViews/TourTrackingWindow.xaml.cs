@@ -221,46 +221,4 @@ namespace InitialProject.WPF.Views
             checkpointArrivalWindow.Show();
         }
     }
-
-    public class TourStatusConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            switch (value)
-            {
-                case TourStatus.NOT_STARTED:
-                    return "Not started";
-                case TourStatus.ACTIVE:
-                    return "Active";
-                case TourStatus.FINISHED:
-                    return "Finished";
-            }
-            return "";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
-    }
-
-    public class CheckpointStatusConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            switch (value)
-            {
-                case true:
-                    return "Completed";
-                case false:
-                    return "Incomplete";
-            }
-            return "";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
-    }
 }
