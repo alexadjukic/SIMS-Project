@@ -67,5 +67,12 @@ namespace InitialProject.WPF.Views
             signInForm.Show();
             this.Close();
         }
+
+        private void ButtonTodaysTours_Click(object sender, RoutedEventArgs e)
+        {
+            YourToursView yourToursView = new YourToursView();
+            yourToursView.Show();
+            this.Close();
+        }
     }
 }
