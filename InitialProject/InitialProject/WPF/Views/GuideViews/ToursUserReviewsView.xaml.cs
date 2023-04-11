@@ -1,0 +1,17 @@
+﻿using InitialProject.WPF.ViewModels;
+using System.Windows;
+
+namespace InitialProject.WPF.Views
+{
+    /// <summary>
+    /// Interaction logic for ToursUserReviewsView.xaml
+    /// </summary>
+    public partial class ToursUserReviewsView : Window
+    {
+        public ToursUserReviewsView()
+        {
+            InitializeComponent();
+            this.DataContext = new ToursUserReviewsViewModel(this);
+        }
+    }
+}

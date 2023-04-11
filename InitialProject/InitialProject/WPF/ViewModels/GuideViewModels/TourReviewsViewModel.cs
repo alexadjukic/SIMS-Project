@@ -1,6 +1,7 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using InitialProject.WPF.Views;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -59,6 +60,8 @@ namespace InitialProject.WPF.ViewModels
 
         public void OpenReviewListCommand_Execute(object? parameter)
         {
+            var toursUserReviewsView = new ToursUserReviewsView();
+            toursUserReviewsView.Show();
         }
 
         public bool OpenReviewListCommand_CanExecute(object? parameter)
