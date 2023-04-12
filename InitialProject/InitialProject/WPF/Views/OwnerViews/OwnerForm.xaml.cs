@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Repositories;
+using InitialProject.WPF.Views.OwnerViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -116,6 +117,12 @@ namespace InitialProject.WPF.Views
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             OpenReminderWindow();
+        }
+
+        private void ButtonSeeRatings_Click(object sender, RoutedEventArgs e)
+        {
+            RatedGuestsOverview ratedGuestsOverview = new RatedGuestsOverview();
+            ratedGuestsOverview.Show();
         }
     }
 }
