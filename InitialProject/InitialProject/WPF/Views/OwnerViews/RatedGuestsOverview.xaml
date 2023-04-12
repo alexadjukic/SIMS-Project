@@ -13,12 +13,12 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <DataGrid Name="DataGridGuests" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="14">
+            <DataGrid Name="DataGridGuests" ItemsSource="{Binding Path=RatedReservations, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="14">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Guest name" Width="120"/>
-                    <DataGridTextColumn Header="Accommodation name" Width="200"/>
-                    <DataGridTextColumn Header="Contry" Width="110"/>
-                    <DataGridTextColumn Header="City" Width="110"/>
+                    <DataGridTextColumn Header="Guest name" Width="120" Binding="{Binding Path=Guest.Username}"/>
+                    <DataGridTextColumn Header="Accommodation name" Width="200" Binding="{Binding Path=Accommodation.Name}"/>
+                    <DataGridTextColumn Header="Contry" Width="110" Binding="{Binding Path=Accommodation.Location.Country}"/>
+                    <DataGridTextColumn Header="City" Width="110" Binding="{Binding Path=Accommodation.Location.City}"/>
                     <DataGridTemplateColumn Header="See rating" Width="100*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

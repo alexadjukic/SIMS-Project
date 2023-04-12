@@ -11,7 +11,10 @@ namespace InitialProject
         {
             { typeof(IUserRepository), new UserRepository() },
             { typeof(ITourRepository), new TourRepository() },
-            { typeof(ILocationRepository), new LocationRepository() }
+            { typeof(ILocationRepository), new LocationRepository() },
+            { typeof(IAccommodationReservationRepository), new AccommodationReservationRepository() },
+            { typeof(IRatingRepository), new RatingRepository() },
+            { typeof(IAccommodationRepository), new AccommodationRepository() }
         };
 
         public static T CreateInstance<T>()
