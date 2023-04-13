@@ -66,5 +66,11 @@ namespace InitialProject.Repositories
 
             return accommodationIdsForOwner;
         }
+
+        public Accommodation GetById(int accommodationId)
+        {
+            Accommodation accommodation = _accommodations.Find(a => a.Id == accommodationId);
+            return accommodation;
+        }
     }
 }

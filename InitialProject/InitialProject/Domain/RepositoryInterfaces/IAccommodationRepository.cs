@@ -15,5 +15,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public Accommodation Save(string name, Location location, AccommodationType type, string capacity, string minDaysForStay, string minDaysBeforeCancel, int ownerId, LocationRepository _repositoryLocation);
         public int NextId();
         public List<int> AccommodationIdsByOwnerId(int ownerId);
+        Accommodation GetById(int accommodationId);
     }
 }

@@ -51,5 +51,14 @@ namespace InitialProject.Repositories
 
             return _ratings.Max(t => t.Id) + 1;
         }
+
+        public Rating GetByReservationId(int reservationId)
+        {
+            _ratings = _serializer.FromCSV(FilePath);
+
+            Rating rating = _ratings.Find(r => r.ReservationId == reservationId);
+
+            return rating;
+        }
     }
 }
