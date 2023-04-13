@@ -12,5 +12,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public List<AccommodationRating> GetAll();
         public AccommodationRating Save(int cleanliness, int correctness, string imageUrl, string comment, int reservationId, int ownerId, int raterId);
         public int NextId();
+        AccommodationRating FindByReservationId(int reservationId);
     }
 }

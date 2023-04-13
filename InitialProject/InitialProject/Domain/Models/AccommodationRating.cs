@@ -22,7 +22,8 @@ namespace InitialProject.Domain.Models
 
         public AccommodationRating() { }
 
-        public AccommodationRating(int id, int cleanliness, int correctness, string imageUrl, string comment, int reservationId, int ownerId, int raterId)        {
+        public AccommodationRating(int id, int cleanliness, int correctness, string imageUrl, string comment, int reservationId, int ownerId, int raterId)
+        {
             Id = id;
             Cleanliness = cleanliness;
             Correctness = correctness;

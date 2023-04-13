@@ -77,7 +77,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void SeeRatingCommand_Execute(object? parameter)
         {
-            RatingOverviewWindow ratingOverviewWindow = new RatingOverviewWindow();
+            RatingOverviewWindow ratingOverviewWindow = new RatingOverviewWindow(SelectedAccommodationReservation);
             ratingOverviewWindow.Show();
         }
 

@@ -1,4 +1,5 @@
-﻿using InitialProject.WPF.ViewModels.OwnerViewModels;
+﻿using InitialProject.Domain.Models;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class RatingOverviewWindow : Window
     {
-        public RatingOverviewWindow()
+        public RatingOverviewWindow(AccommodationReservation selectedAccommodationReservation)
         {
             InitializeComponent();
-            this.DataContext = new RatingOverviewWindowViewModel(this);
+            this.DataContext = new RatingOverviewWindowViewModel(this, selectedAccommodationReservation);
         }
     }
 }

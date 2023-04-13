@@ -21,27 +21,27 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Guest.Username}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Name}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.City}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Start date:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="End date:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
         </StackPanel>
 
@@ -51,15 +51,15 @@
             <TextBlock TextWrapping="Wrap" Text="You reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17" FontWeight="Bold" TextDecorations="Underline" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.Cleanliness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Following the rules:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.FollowingTheRules}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
                 <TextBlock TextWrapping="Wrap" Text="Comment:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.Comment}" TextAlignment="Left" Margin="15,0,0,0" Height="138" FontSize="17"/>
             </StackPanel>
         </StackPanel>
 
@@ -69,15 +69,15 @@
             <TextBlock TextWrapping="Wrap" Text="Guest reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17" FontWeight="Bold" TextDecorations="Underline" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Cleanliness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Following the rules:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="Correctness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Correctness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
                 <TextBlock TextWrapping="Wrap" Text="Comment:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Comment}" TextAlignment="Left" Margin="15,0,0,0" Height="136" FontSize="17"/>
             </StackPanel>
         </StackPanel>
 

@@ -49,5 +49,14 @@ namespace InitialProject.Repositories
 
             return _accommodationRatings.Max(c => c.Id) + 1;
         }
+
+        public AccommodationRating FindByReservationId(int reservationId)
+        {
+            _accommodationRatings = _serializer.FromCSV(FilePath);
+
+            AccommodationRating accommodationRating = _accommodationRatings.Find(ar => ar.ReservationId == reservationId);
+
+            return accommodationRating;
+        }
     }
 }
