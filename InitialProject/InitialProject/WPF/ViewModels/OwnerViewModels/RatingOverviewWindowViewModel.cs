@@ -19,6 +19,15 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RatingOverviewWindowViewModel(Window ratingOverviewWindow)
         {
             _ratingOverviewWindow = ratingOverviewWindow;
+
+            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
+        }
+
+        public RelayCommand CloseWindowCommand { get; }
+
+        public void CloseWindowCommand_Execute(object? parameter)
+        {
+            _ratingOverviewWindow.Close();
         }
     }
 }

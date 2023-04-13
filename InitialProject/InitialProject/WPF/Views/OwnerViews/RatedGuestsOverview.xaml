@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
         mc:Ignorable="d"
-        Title="RatedGuestsOveview" Height="350" Width="700">
+        Title="RatedGuestsOveview" Height="350" Width="700" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <DataGrid Name="DataGridGuests" ItemsSource="{Binding Path=RatedReservations, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="14">
+            <DataGrid Name="DataGridGuests" ItemsSource="{Binding Path=RatedReservations, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedAccommodationReservation, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False" Height="325" HeadersVisibility="Column" FontSize="14">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Guest name" Width="120" Binding="{Binding Path=Guest.Username}"/>
                     <DataGridTextColumn Header="Accommodation name" Width="200" Binding="{Binding Path=Accommodation.Name}"/>
@@ -22,7 +22,7 @@
                     <DataGridTemplateColumn Header="See rating" Width="100*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="ButtonSeeRating" Content="See rating"/>
+                                <Button Name="ButtonSeeRating" Content="See rating" Command="{Binding DataContext.SeeRatingCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -31,7 +31,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="ButtonCancel" Content="Close" Width="100" Height="40" Margin="30,0,30,0"/>
+            <Button Name="ButtonCancel" Content="Close" Width="100" Height="40" Margin="30,0,30,0" Command="{Binding CloseWindowCommand}"/>
         </StackPanel>
 
     </Grid>
