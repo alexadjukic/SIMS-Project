@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    internal interface IAccommodationImageRepository
+    public interface IAccommodationImageRepository
     {
         public List<AccommodationImage> GetAll();
         public AccommodationImage Save(string url, int accommodationId);

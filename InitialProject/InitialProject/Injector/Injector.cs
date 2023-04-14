@@ -12,6 +12,10 @@ namespace InitialProject
             { typeof(IUserRepository), new UserRepository() },
             { typeof(ITourRepository), new TourRepository() },
             { typeof(ILocationRepository), new LocationRepository() },
+            { typeof(IAccommodationReservationRepository), new AccommodationReservationRepository() },
+            { typeof(IRatingRepository), new RatingRepository() },
+            { typeof(IAccommodationRepository), new AccommodationRepository() },
+            { typeof(IAccommodationRatingRepository), new AccommodationRatingRepository() },
             { typeof(ICheckpointArrivalRepository), new CheckpointArrivalRepository() },
             { typeof(ITourReviewRepository), new TourReviewRepository() },
             { typeof(ITourReservationRepository), new TourReservationRepository() }
