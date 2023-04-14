@@ -48,10 +48,16 @@ namespace InitialProject.Repositories
             return _checkpointArrivals.Max(c => c.Id) + 1;
         }
 
-        public CheckpointArrival GetByUserId(int id)
+        public CheckpointArrival GetById(int id)
         {
             _checkpointArrivals = _serializer.FromCSV(FilePath);
-            return _checkpointArrivals.FirstOrDefault(c => c.UserId == id);
+            return _checkpointArrivals.FirstOrDefault(c => c.Id == id);  
+        }
+
+        public CheckpointArrival GetByReservationId(int id)
+        {
+            _checkpointArrivals = _serializer.FromCSV(FilePath);
+            return _checkpointArrivals.FirstOrDefault(c => c.ReservationId == id);
         }
 
         public IEnumerable<CheckpointArrival> GetAllByCheckpointId(int checkpointId)

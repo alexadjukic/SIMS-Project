@@ -13,7 +13,8 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public List<CheckpointArrival> GetAll();
         public CheckpointArrival Save(CheckpointArrival checkpointArrival);
         public int NextId();
-        public CheckpointArrival GetByUserId(int id);
+        public CheckpointArrival GetById(int id);
+        public CheckpointArrival GetByReservationId(int id);
         public IEnumerable<CheckpointArrival> GetAllByCheckpointId(int checkpointId);
         public void Delete(CheckpointArrival checkpointArrival);
         public CheckpointArrival Create(int checkpointId, int userId);

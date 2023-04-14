@@ -28,6 +28,12 @@ namespace InitialProject.Repositories
             return _serializer.FromCSV(FilePath);
         }
 
+        public TourReservation GetById(int id)
+        {
+            _tourReservations = _serializer.FromCSV(FilePath);
+            return _tourReservations.FirstOrDefault(t =>  t.Id == id);
+        }
+
         public TourReservation Save(int tourId, int userId, int? numberOfPeople)
         {
             int id = NextId();

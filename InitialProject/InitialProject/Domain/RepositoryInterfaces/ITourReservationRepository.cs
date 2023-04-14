@@ -13,5 +13,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public List<TourReservation> GetAll();
         public TourReservation Save(int tourId, int userId, int? numberOfPeople);
         public int NextId();
+        public TourReservation GetById(int id);
     }
 }
