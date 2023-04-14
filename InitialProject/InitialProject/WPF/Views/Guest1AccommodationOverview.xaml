@@ -24,7 +24,14 @@
         <Button Content="Search" HorizontalAlignment="Left" Margin="679,47,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold" Click="FilterButton_Click"/>
         <DataGrid x:Name="DataGridAccommodations" ItemsSource="{Binding Accommodations, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" SelectionChanged="DataGridAccommodations_SelectionChanged" Margin="10,77,10,59">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="105" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Name" Width="105">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{} {0}{1}">
+                            <Binding Path="SuperOwnerMark"/>
+                            <Binding Path="Name"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Country" Width="105" Binding="{Binding Location.Country}" />
                 <DataGridTextColumn Header="City" Width="105" Binding="{Binding Location.City}" />
                 <DataGridTextColumn Header="Type" Width="90" Binding="{Binding Type}" />

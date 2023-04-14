@@ -30,6 +30,7 @@ namespace InitialProject.WPF.Views
         public readonly LocationRepository _locationRepository;
         public readonly AccommodationImageRepository _accommodationImageRepository;
         public readonly AccommodationReservationRepository _accommodationReservationRepository;
+        public readonly UserRepository _userRepository;
 
         private ObservableCollection<Accommodation> _accommodations;
         public ObservableCollection<Accommodation> Accommodations
@@ -142,6 +143,7 @@ namespace InitialProject.WPF.Views
                 }
             }
         }
+
         public string AccommodationName { get; set; }
         public bool IsApartment { get; set; } 
         public bool IsHouse { get; set; }
@@ -153,7 +155,7 @@ namespace InitialProject.WPF.Views
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Guest1AccommodationOverview(User user, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository, AccommodationReservationRepository accommodationReservationRepository)
+        public Guest1AccommodationOverview(User user, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository, AccommodationReservationRepository accommodationReservationRepository, UserRepository userRepository)
         {
             InitializeComponent();
             DataContext = this;
@@ -164,6 +166,8 @@ namespace InitialProject.WPF.Views
             _locationRepository = locationRepository;
             _accommodationImageRepository = accommodationImageRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
+            _userRepository = userRepository;
+
             LoggedUser = user;
             Countries = new ObservableCollection<string>();
             Cities = new ObservableCollection<string>();
@@ -186,6 +190,8 @@ namespace InitialProject.WPF.Views
                 InsertLocation(accommodation);
                 Accommodations.Add(accommodation);
             }
+
+            SuperOwnerAccommodationPriority();
         }
 
         private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -230,6 +236,44 @@ namespace InitialProject.WPF.Views
                 RemoveByCountry(accommodation);
                 RemoveByCity(accommodation);
                 RemoveByType(accommodation);
+            }
+
+            SuperOwnerAccommodationPriority();
+        }
+
+        private void SuperOwnerAccommodationPriority()
+        {
+            List<Accommodation> ordinaryAccommodations = new List<Accommodation>();
+            List<Accommodation> superOwnerAccommodations = new List<Accommodation>();
+
+            foreach (var accommodation in Accommodations)
+            {
+                User owner = _userRepository.GetById(accommodation.OwnerId);
+
+                if (owner.Role == UserRole.SUPER_OWNER)
+                {
+                    superOwnerAccommodations.Add(accommodation);
+                    continue;
+                }
+
+                ordinaryAccommodations.Add(accommodation);
+            }
+
+            JoinSuperOwnerAndOrdinaryAccommodations(ordinaryAccommodations, superOwnerAccommodations);
+        }
+
+        private void JoinSuperOwnerAndOrdinaryAccommodations(List<Accommodation> ordinaryAccommodations, List<Accommodation> superOwnerAccommodations)
+        {
+            Accommodations.Clear();
+
+            foreach (var accommodation in superOwnerAccommodations)
+            {
+                Accommodations.Add(accommodation);
+            }
+
+            foreach (var accommodation in ordinaryAccommodations)
+            {
+                Accommodations.Add(accommodation);
             }
         }
 

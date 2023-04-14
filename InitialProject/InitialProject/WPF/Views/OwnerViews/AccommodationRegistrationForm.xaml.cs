@@ -36,6 +36,7 @@ namespace InitialProject.WPF.Views
         private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
         private readonly AccommodationImageRepository _imageRepository;
+        private readonly UserRepository _userRepository;
 
         private int _imageNumber;
         private int _ownerId;
@@ -139,6 +140,20 @@ namespace InitialProject.WPF.Views
             }
         }
 
+        private string _superOwnerMark;
+        public string SuperOwnerMark
+        {
+            get => _superOwnerMark;
+            set
+            {
+                if (_superOwnerMark != value)
+                {
+                    _superOwnerMark = value;
+                    OnPropertyChanged("SuperOwnerMark");
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -146,13 +161,14 @@ namespace InitialProject.WPF.Views
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public AccommodationRegistrationForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, int ownerId)
+        public AccommodationRegistrationForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, int ownerId, UserRepository userRepository)
         {
             InitializeComponent();
             this.DataContext = this;
             _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
-            _imageRepository = imageRepository; 
+            _imageRepository = imageRepository;
+            _userRepository = userRepository;
             _imageNumber = 0;
             _ownerId = ownerId;
             MinDaysBeforeCancel = "1";
@@ -186,11 +202,24 @@ namespace InitialProject.WPF.Views
 
             if (location != null)
             {
-                int accommodationId = _accommodationRepository.Save(AccommodationName, location, accommodationType, Capacity, MinDaysForStay, MinDaysBeforeCancel, _ownerId, _locationRepository).Id;
+                SetSuperOwnerMark();
+                int accommodationId = _accommodationRepository.Save(AccommodationName, location, accommodationType, Capacity, MinDaysForStay, MinDaysBeforeCancel, _ownerId, SuperOwnerMark, _locationRepository).Id;
                 _imageRepository.AddAccommodationId(accommodationId);
             }
             
             this.Close();
+        }
+
+        private void SetSuperOwnerMark()
+        {
+            SuperOwnerMark = " ";
+
+            User owner = _userRepository.GetById(_ownerId);
+
+            if (owner.Role == UserRole.SUPER_OWNER)
+            {
+                SuperOwnerMark = "*";
+            }
         }
 
         private void AccommodationRegistrationLoaded(object sender, RoutedEventArgs e)
