@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    internal interface IAccommodationRepository
+    public interface IAccommodationRepository
     {
         public List<Accommodation> GetAll();
         public Accommodation Save(string name, Location location, AccommodationType type, string capacity, string minDaysForStay, string minDaysBeforeCancel, int ownerId, LocationRepository _repositoryLocation);
