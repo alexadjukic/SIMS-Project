@@ -81,7 +81,7 @@ namespace InitialProject.WPF.Views
 
         private void LoadUnarrivedGuests()
         {
-            UnarrivedGuests.Clear();
+            /*UnarrivedGuests.Clear();
             foreach (var tourReservation in _tourReservationRepository.GetAll())
             {
                 var hasUserReservedTour = tourReservation.TourId == _currentTour.Id;
@@ -90,12 +90,12 @@ namespace InitialProject.WPF.Views
                 {
                     UnarrivedGuests.Add(_userRepository.GetById(tourReservation.UserId));
                 }
-            }
+            }*/
         }
 
         private void LoadArrivedGuests()
         {
-            ArrivedGuests.Clear();
+            /*ArrivedGuests.Clear();
             foreach (var tourReservation in _tourReservationRepository.GetAll())
             {
                 foreach (var checkpointArrival in _checkpointArrivalRepository.GetAll())
@@ -104,7 +104,7 @@ namespace InitialProject.WPF.Views
                     if (!hasUserWithReservationArrived) continue;
                     ArrivedGuests.Add(_userRepository.GetById(tourReservation.UserId));
                 }
-            }
+            }*/
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -132,7 +132,7 @@ namespace InitialProject.WPF.Views
 
         private void ButtonOk_Click(object sender, RoutedEventArgs e)
         {
-            List<CheckpointArrival> currentCheckpointsArrivals = _checkpointArrivalRepository.GetAllByCheckpointId(_currentCheckpoint.Id).ToList();
+            /*List<CheckpointArrival> currentCheckpointsArrivals = _checkpointArrivalRepository.GetAllByCheckpointId(_currentCheckpoint.Id).ToList();
             foreach (var arrivedGuest in ArrivedGuests)
             {
                 var arrivedGuestArrival = currentCheckpointsArrivals.Find(c => c.UserId == arrivedGuest.Id);
@@ -149,7 +149,7 @@ namespace InitialProject.WPF.Views
             {
                 _checkpointArrivalRepository.Delete(checkpointArrival);
             }
-            this.Close();
+            this.Close();*/
         }
     }
 }

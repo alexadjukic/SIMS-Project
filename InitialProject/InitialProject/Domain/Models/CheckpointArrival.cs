@@ -12,24 +12,26 @@ namespace InitialProject.Domain.Models
     public class CheckpointArrival : ISerializable
     {
         public int Id { get; set; }
+        public Checkpoint Checkpoint { get; set; }
         public int CheckpointId { get; set; }
-        public int UserId { get; set; }
+        public TourReservation Reservation { get; set; }
+        public int ReservationId { get; set; }
 
         public CheckpointArrival()
         {
 
         }
 
-        public CheckpointArrival(int id, int checkpointId, int userId)
+        public CheckpointArrival(int id, int checkpointId, int reservationId)
         {
             Id = id;
             CheckpointId = checkpointId;
-            UserId = userId;
+            ReservationId = reservationId;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), CheckpointId.ToString(), UserId.ToString() };
+            string[] csvValues = { Id.ToString(), CheckpointId.ToString(), ReservationId.ToString() };
             return csvValues;
         }
 
@@ -37,7 +39,7 @@ namespace InitialProject.Domain.Models
         {
             Id = int.Parse(values[0]);
             CheckpointId = int.Parse(values[1]);
-            UserId = int.Parse(values[2]);
+            ReservationId = int.Parse(values[2]);
         }
     }
 }

@@ -9,8 +9,8 @@ namespace InitialProject.Domain.Models
         public int GuideLanguageGrade { get; set; }
         public int InterestingnessGrade { get; set; }
         public string Comment { get; set; }
-        public int ArrivalId { get; set; }
         public CheckpointArrival Arrival { get; set; }
+        public int ArrivalId { get; set; }
 
         public TourReview()
         {
@@ -40,7 +40,7 @@ namespace InitialProject.Domain.Models
             GuideLanguageGrade = int.Parse(values[2]);
             InterestingnessGrade = int.Parse(values[3]);
             Comment = values[4];
-            ArrivalId = int.Parse(values[4]);
+            ArrivalId = int.Parse(values[5]);
         }
     }
 }

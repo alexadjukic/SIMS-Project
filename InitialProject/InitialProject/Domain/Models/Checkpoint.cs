@@ -14,7 +14,6 @@ namespace InitialProject.Domain.Models
         public string Name { get; set; }
         public bool Active { get; set; }
         public Tour Tour { get; set; }
-
         public int TourId { get; set; }
 
         public Checkpoint() { }
