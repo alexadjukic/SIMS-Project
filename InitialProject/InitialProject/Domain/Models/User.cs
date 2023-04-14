@@ -8,7 +8,8 @@ namespace InitialProject.Domain.Models
         OWNER = 1,
         GUEST1,
         GUEST2,
-        GUIDE
+        GUIDE,
+        SUPER_OWNER
     }
 
     public class User : ISerializable

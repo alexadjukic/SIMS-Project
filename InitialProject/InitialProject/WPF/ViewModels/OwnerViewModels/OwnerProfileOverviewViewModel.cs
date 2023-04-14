@@ -1,4 +1,6 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Commands;
+using InitialProject.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,16 +46,64 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private User _owner;
+
+        public User Owner
+        {
+            get
+            {
+                return _owner;
+            }
+            set
+            {
+                if (_owner != value)
+                {
+                    _owner = value;
+                    OnPropertyChanged(nameof(Owner));
+                }
+            }
+        }
+
         private readonly int _ownerId;
 
         private readonly Window _ownerProfileOverview;
+        private readonly AccommodationRatingService _accommodationRatingService;
+        private readonly UserService _userService;
 
         public OwnerProfileOverviewViewModel(Window ownerProfileOverview, int ownerId)
         {
             _ownerProfileOverview = ownerProfileOverview;
+            _accommodationRatingService = new AccommodationRatingService();
+            _userService = new UserService();
+            _ownerId = ownerId;
+            
+            SetOwnerRole();
+            FindOwner();
 
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
-            _ownerId = ownerId;
+        }
+
+        private void CalculateNumberOfRatings()
+        {
+            NumberOfRagings = _accommodationRatingService.CalculateNumberOfRatings(_ownerId);
+        }
+
+        private void CalculateTotalRating()
+        {
+            TotalRating = _accommodationRatingService.CalculateTotalRating(_ownerId);
+        }
+
+        private void FindOwner()
+        {
+            Owner = _userService.FindOwnerById(_ownerId);
+        }
+
+        private void SetOwnerRole()
+        {
+            CalculateNumberOfRatings();
+            CalculateTotalRating();
+
+            _accommodationRatingService.SetOwnerRole(_ownerId);
         }
 
         public RelayCommand CloseWindowCommand { get; }

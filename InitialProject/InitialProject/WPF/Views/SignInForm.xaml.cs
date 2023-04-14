@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Repositories;
 using System.ComponentModel;
+using System.Configuration;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
@@ -83,7 +84,7 @@ namespace InitialProject.WPF.Views
 
         private void OpenSuitableWindow(User user)
         {
-            if (user.Role == UserRole.OWNER)
+            if (user.Role == UserRole.OWNER || user.Role == UserRole.SUPER_OWNER)
             {
                 OwnerForm ownerForm = new OwnerForm(_accommodationRepository, _locationRepository, _accommodationImageRepository, user, _accommodationReservationRepository, _userRepository, _ratingRepository);
                 ownerForm.Show();

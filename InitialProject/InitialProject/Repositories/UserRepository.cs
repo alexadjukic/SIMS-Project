@@ -36,5 +36,16 @@ namespace InitialProject.Repositories
             _users = _serializer.FromCSV(FilePath);
             return _users.FirstOrDefault(u => u.Id == id);
         }
+
+        public void SetOwnerRole(int ownerId, int numberOfRatings, double totalRating)
+        {
+            _users = _serializer.FromCSV(FilePath);
+
+            if (numberOfRatings > 50 && totalRating >= 4.5)
+            {
+                _users.FirstOrDefault(u => u.Id == ownerId).Role = UserRole.SUPER_OWNER;
+                _serializer.ToCSV(FilePath, _users);
+            }
+        }
     }
 }
