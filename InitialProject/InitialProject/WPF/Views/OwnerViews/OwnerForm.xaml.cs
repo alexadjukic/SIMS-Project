@@ -124,5 +124,11 @@ namespace InitialProject.WPF.Views
             RatedGuestsOverview ratedGuestsOverview = new RatedGuestsOverview(_ownerId, _accommodationRepository, _userRepository);
             ratedGuestsOverview.Show();
         }
+
+        private void ButtonProfile_Click(object sender, RoutedEventArgs e)
+        {
+            OwnerProfileOverview ownerProfileOverview = new OwnerProfileOverview();
+            ownerProfileOverview.Show();
+        }
     }
 }
