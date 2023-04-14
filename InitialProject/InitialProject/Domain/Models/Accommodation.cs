@@ -19,13 +19,14 @@ namespace InitialProject.Domain.Models
         public int MinDaysForStay { get; set; }
         public int MinDaysBeforeCancel { get; set; }
         public int OwnerId { get; set; }
+        public string SuperOwnerMark { get; set; }
 
         public Accommodation()
         {
             MinDaysBeforeCancel = 1;
         }
 
-        public Accommodation(int id, string name, Location location, AccommodationType type, int capacity, int minDaysForStay, int minDaysBeforeCancel, int ownerId)
+        public Accommodation(int id, string name, Location location, AccommodationType type, int capacity, int minDaysForStay, int minDaysBeforeCancel, int ownerId, string superOwnerMark)
         {
             Id = id;
             Name = name;
@@ -36,6 +37,7 @@ namespace InitialProject.Domain.Models
             MinDaysForStay = minDaysForStay;
             MinDaysBeforeCancel = minDaysBeforeCancel;
             OwnerId = ownerId;
+            SuperOwnerMark = superOwnerMark;
         }
 
         public string[] ToCSV()
@@ -50,7 +52,8 @@ namespace InitialProject.Domain.Models
                 Capacity.ToString(),
                 MinDaysForStay.ToString(),
                 MinDaysBeforeCancel.ToString(),
-                OwnerId.ToString()
+                OwnerId.ToString(),
+                SuperOwnerMark
             };
 
             return csvValues;
@@ -77,6 +80,7 @@ namespace InitialProject.Domain.Models
             MinDaysForStay = Convert.ToInt32(values[5]);
             MinDaysBeforeCancel = Convert.ToInt32(values[6]);
             OwnerId = Convert.ToInt32(values[7]);
+            SuperOwnerMark = values[8];
         }
     }
 

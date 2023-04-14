@@ -90,7 +90,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void CalculateTotalRating()
         {
-            TotalRating = _accommodationRatingService.CalculateTotalRating(_ownerId);
+            TotalRating = Math.Round(_accommodationRatingService.CalculateTotalRating(_ownerId), 2);
         }
 
         private void FindOwner()

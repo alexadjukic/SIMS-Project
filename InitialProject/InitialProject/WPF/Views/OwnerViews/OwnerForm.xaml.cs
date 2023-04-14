@@ -97,7 +97,7 @@ namespace InitialProject.WPF.Views
 
         private void ButtonRegistrateAccommodation_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _imageRepository, _ownerId);
+            AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _imageRepository, _ownerId, _userRepository);
             accommodationRegistration.Show();
         }
 

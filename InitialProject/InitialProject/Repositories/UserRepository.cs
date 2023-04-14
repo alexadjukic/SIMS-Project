@@ -44,8 +44,13 @@ namespace InitialProject.Repositories
             if (numberOfRatings > 50 && totalRating >= 4.5)
             {
                 _users.FirstOrDefault(u => u.Id == ownerId).Role = UserRole.SUPER_OWNER;
-                _serializer.ToCSV(FilePath, _users);
             }
+            else
+            {
+                _users.FirstOrDefault(u => u.Id == ownerId).Role = UserRole.OWNER;
+            }
+
+            _serializer.ToCSV(FilePath, _users);
         }
     }
 }

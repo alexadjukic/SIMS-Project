@@ -12,11 +12,13 @@ namespace InitialProject.Application.UseCases
     {
         private readonly IAccommodationRatingRepository _accommodationRatingRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IAccommodationRepository _accommodationRepository;
 
         public AccommodationRatingService()
         {
             _accommodationRatingRepository = Injector.CreateInstance<IAccommodationRatingRepository>();
             _userRepository = Injector.CreateInstance<IUserRepository>();
+            _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
         }
 
         public AccommodationRating FindAccommodationRatingByReservationId(int reservationId)
@@ -43,6 +45,7 @@ namespace InitialProject.Application.UseCases
             double totalRating = CalculateTotalRating(ownerId);
 
             _userRepository.SetOwnerRole(ownerId, numberOfRatings, totalRating);
+            _accommodationRepository.SetSuperOwnerMark(ownerId, numberOfRatings, totalRating);
         }
     }
 }
