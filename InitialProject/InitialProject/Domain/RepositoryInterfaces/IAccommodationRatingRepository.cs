@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    internal interface IAccommodationRatingRepository
+    public interface IAccommodationRatingRepository
     {
         public List<AccommodationRating> GetAll();
         public AccommodationRating Save(int cleanliness, int correctness, string imageUrl, string comment, int reservationId, int ownerId, int raterId);
