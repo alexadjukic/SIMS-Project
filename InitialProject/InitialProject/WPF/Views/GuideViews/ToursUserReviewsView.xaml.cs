@@ -1,4 +1,5 @@
-﻿using InitialProject.WPF.ViewModels;
+﻿using InitialProject.Domain.Models;
+using InitialProject.WPF.ViewModels;
 using System.Windows;
 
 namespace InitialProject.WPF.Views
@@ -8,10 +9,10 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class ToursUserReviewsView : Window
     {
-        public ToursUserReviewsView()
+        public ToursUserReviewsView(Tour tour)
         {
             InitializeComponent();
-            this.DataContext = new ToursUserReviewsViewModel(this);
+            this.DataContext = new ToursUserReviewsViewModel(this, tour);
         }
     }
 }

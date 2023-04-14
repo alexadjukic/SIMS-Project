@@ -15,8 +15,8 @@ namespace InitialProject.WPF.ViewModels
     public class ToursUserReviewsViewModel : ViewModelBase
     {
         #region PROPERTIES
-        private CheckpointArrival _review;
-		public CheckpointArrival Review
+        private TourReview _review;
+		public TourReview Review
 		{
 			get
 			{
@@ -32,19 +32,34 @@ namespace InitialProject.WPF.ViewModels
 			}
 		}
 
-        public ObservableCollection<CheckpointArrival> Reviews { get; set; }
+        public ObservableCollection<TourReview> Reviews { get; set; }
 
 		private readonly Window _toursUserReviewsView;
+        private readonly Tour _tour;
+        private readonly TourReviewService _tourReviewService;
         #endregion
 
-        public ToursUserReviewsViewModel(Window toursUserReviewsView)
+        public ToursUserReviewsViewModel(Window toursUserReviewsView, Tour tour)
         {
 			_toursUserReviewsView = toursUserReviewsView;
+            _tour = tour;
 
+            _tourReviewService = new();
             Reviews = new();
 
 			OpenReviewCommand = new RelayCommand(OpenReviewCommand_Execute, OpenReviewCommand_CanExecute);
 			CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
+
+            LoadReviews();
+        }
+
+        private void LoadReviews()
+        {
+            Reviews.Clear();
+            foreach (var review in _tourReviewService.GetReviewsByTour(_tour))
+            {
+                Reviews.Add(review);
+            }
         }
 
         #region COMMANDS

@@ -14,7 +14,7 @@
 
         <DataGrid Grid.Row="0" ItemsSource="{Binding Path=Reviews, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" AutoGenerateColumns="False" Margin="25,20,25,20">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="4*"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding Arrival.Reservation.User.Username}" Width="4*"/>
                 <DataGridTemplateColumn Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

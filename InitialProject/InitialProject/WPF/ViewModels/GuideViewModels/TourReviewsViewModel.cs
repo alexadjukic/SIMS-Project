@@ -60,7 +60,7 @@ namespace InitialProject.WPF.ViewModels
 
         public void OpenReviewListCommand_Execute(object? parameter)
         {
-            var toursUserReviewsView = new ToursUserReviewsView();
+            var toursUserReviewsView = new ToursUserReviewsView(SelectedTour);
             toursUserReviewsView.Show();
         }
 
