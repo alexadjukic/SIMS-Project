@@ -20,10 +20,10 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class OwnerProfileOverview : Window
     {
-        public OwnerProfileOverview()
+        public OwnerProfileOverview(int ownerId)
         {
             InitializeComponent();
-            this.DataContext = new OwnerProfileOverviewViewModel(this);
+            this.DataContext = new OwnerProfileOverviewViewModel(this, ownerId);
         }
     }
 }

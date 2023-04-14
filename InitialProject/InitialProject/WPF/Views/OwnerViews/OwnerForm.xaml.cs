@@ -127,7 +127,7 @@ namespace InitialProject.WPF.Views
 
         private void ButtonProfile_Click(object sender, RoutedEventArgs e)
         {
-            OwnerProfileOverview ownerProfileOverview = new OwnerProfileOverview();
+            OwnerProfileOverview ownerProfileOverview = new OwnerProfileOverview(_ownerId);
             ownerProfileOverview.Show();
         }
     }
