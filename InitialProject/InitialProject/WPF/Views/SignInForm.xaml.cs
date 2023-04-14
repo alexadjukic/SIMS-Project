@@ -92,7 +92,7 @@ namespace InitialProject.WPF.Views
             }
             else if (user.Role == UserRole.GUEST1)
             {
-                Guest1AccommodationOverview guest1AccommodationOverview = new Guest1AccommodationOverview(user, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository);
+                Guest1AccommodationOverview guest1AccommodationOverview = new Guest1AccommodationOverview(user, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, _userRepository);
                 guest1AccommodationOverview.Show();
                 Close();
             }
