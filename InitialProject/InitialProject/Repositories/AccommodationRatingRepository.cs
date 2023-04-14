@@ -28,11 +28,11 @@ namespace InitialProject.Repositories
             return _serializer.FromCSV(FilePath);
         }
 
-        public AccommodationRating Save(int cleanliness, int correctness, string imageUrl, string comment, int reservationId, int ownerId, int raterId)
+        public AccommodationRating Save(int cleanliness, int correctness, string comment, int reservationId, int ownerId, int raterId)
         {
             int id = NextId();
 
-            AccommodationRating accommodationRating = new AccommodationRating(id, cleanliness, correctness, imageUrl, comment, reservationId, ownerId, raterId);
+            AccommodationRating accommodationRating = new AccommodationRating(id, cleanliness, correctness, comment, reservationId, ownerId, raterId);
 
             _accommodationRatings.Add(accommodationRating);
             _serializer.ToCSV(FilePath, _accommodationRatings);

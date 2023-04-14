@@ -14,7 +14,6 @@ namespace InitialProject.Domain.Models
         public int Id { get; set; }
         public int Cleanliness { get; set; }
         public int Correctness { get; set; }
-        public string ImageUrl { get; set; }
         public string Comment { get; set; }
         public int ReservationId { get; set; }
         public int OwnerId { get; set; }
@@ -22,12 +21,11 @@ namespace InitialProject.Domain.Models
 
         public AccommodationRating() { }
 
-        public AccommodationRating(int id, int cleanliness, int correctness, string imageUrl, string comment, int reservationId, int ownerId, int raterId)
+        public AccommodationRating(int id, int cleanliness, int correctness, string comment, int reservationId, int ownerId, int raterId)
         {
             Id = id;
             Cleanliness = cleanliness;
             Correctness = correctness;
-            ImageUrl = imageUrl;
             Comment = comment;
             ReservationId = reservationId;
             OwnerId = ownerId;
@@ -41,7 +39,6 @@ namespace InitialProject.Domain.Models
                 Id.ToString(),
                 Cleanliness.ToString(),
                 Correctness.ToString(),
-                ImageUrl,
                 Comment,
                 ReservationId.ToString(),
                 OwnerId.ToString(),
@@ -56,11 +53,10 @@ namespace InitialProject.Domain.Models
             Id = Convert.ToInt32(values[0]);
             Cleanliness = Convert.ToInt32(values[1]);
             Correctness = Convert.ToInt32(values[2]);
-            ImageUrl = values[3];
-            Comment = values[4];
-            ReservationId = Convert.ToInt32(values[5]);
-            OwnerId = Convert.ToInt32(values[6]);
-            RaterId = Convert.ToInt32(values[7]);
+            Comment = values[3];
+            ReservationId = Convert.ToInt32(values[4]);
+            OwnerId = Convert.ToInt32(values[5]);
+            RaterId = Convert.ToInt32(values[6]);
         }
     }
 }
