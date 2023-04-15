@@ -18,7 +18,8 @@ namespace InitialProject
             { typeof(IAccommodationRatingRepository), new AccommodationRatingRepository() },
             { typeof(ICheckpointArrivalRepository), new CheckpointArrivalRepository() },
             { typeof(ITourReviewRepository), new TourReviewRepository() },
-            { typeof(ITourReservationRepository), new TourReservationRepository() }
+            { typeof(ITourReservationRepository), new TourReservationRepository() },
+            { typeof(ICheckpointRepository), new CheckpointRepository() },
         };
 
         public static T CreateInstance<T>()
