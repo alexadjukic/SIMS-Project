@@ -12,13 +12,13 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" ItemsSource="{Binding Path=Reviews, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" AutoGenerateColumns="False" Margin="25,20,25,20">
+        <DataGrid Grid.Row="0" ItemsSource="{Binding Path=Reviews, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedReview, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" AutoGenerateColumns="False" Margin="25,20,25,20">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Username" Binding="{Binding Arrival.Reservation.User.Username}" Width="4*"/>
                 <DataGridTemplateColumn Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Details" Command=""/>
+                            <Button Content="Details" Command="{Binding DataContext.OpenReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
