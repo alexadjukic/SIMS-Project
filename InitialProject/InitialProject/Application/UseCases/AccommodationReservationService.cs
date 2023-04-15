@@ -68,6 +68,18 @@ namespace InitialProject.Application.UseCases
             return updatedRatedReservations;
         }
 
+        public IEnumerable<AccommodationReservation> GetGuestsReservations(int guestId)
+        {
+            var guestReservations = _accommodationReservationRepository.GetAllByGuestId(guestId);
+            guestReservations = LoadAccommodations(guestReservations);
+
+            return guestReservations;
+        }
+
+        public void CancelReservation(AccommodationReservation reservation)
+        {
+            _accommodationReservationRepository.Remove(reservation);
+        }
 
             /*public List<AccommodationReservation> LoadGuests(IEnumerable<AccommodationReservation> ratedReservations)
             {

@@ -67,5 +67,27 @@ namespace InitialProject.Repositories
 
             return _reservations;
         }
+
+        public List<AccommodationReservation> GetAllByGuestId(int guestId)
+        {
+            var guestReservations = new List<AccommodationReservation>();
+
+            foreach (var reservation in GetAll())
+            {
+                if (reservation.GuestId == guestId)
+                {
+                    guestReservations.Add(reservation);
+                }
+            }
+
+            return guestReservations;
+        }
+
+        public void Remove(AccommodationReservation reservation)
+        {
+            _accommodationReservations = _serializer.FromCSV(FilePath);
+            _accommodationReservations.Remove(_accommodationReservations.Find(x => x.Id == reservation.Id));
+            _serializer.ToCSV(FilePath, _accommodationReservations);
+        }
     }
 }
