@@ -12,6 +12,8 @@ namespace InitialProject.Domain.RepositoryInterfaces
     {
         public List<Checkpoint> GetAll();
 
+        public Checkpoint GetById(int id);
+
         public Checkpoint Save(Checkpoint checkpoint);
 
         public int NextId();

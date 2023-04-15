@@ -14,6 +14,7 @@ namespace InitialProject.Application.UseCases
         private readonly IUserRepository _userRepository;
         private readonly ICheckpointArrivalRepository _checkpointArrivalRepository;
         private readonly ITourReservationRepository _tourReservationRepository;
+        private readonly ICheckpointRepository _checkpointRepository;
 
         public TourReviewService()
         {
@@ -21,6 +22,7 @@ namespace InitialProject.Application.UseCases
             _userRepository = Injector.CreateInstance<IUserRepository>();
             _checkpointArrivalRepository = Injector.CreateInstance<ICheckpointArrivalRepository>();
             _tourReservationRepository = Injector.CreateInstance<ITourReservationRepository>();
+            _checkpointRepository = Injector.CreateInstance<ICheckpointRepository>();
         }
 
         public IEnumerable<TourReview> GetReviewsByTour(Tour tour)
@@ -31,6 +33,7 @@ namespace InitialProject.Application.UseCases
                 var arrival = _checkpointArrivalRepository.GetById(review.Id);
                 var reservation = _tourReservationRepository.GetById(arrival.ReservationId);
                 reservation.User = _userRepository.GetById(reservation.UserId);
+                arrival.Checkpoint = _checkpointRepository.GetById(arrival.CheckpointId);
                 if (reservation.TourId == tour.Id)
                 {
                     arrival.Reservation = reservation;

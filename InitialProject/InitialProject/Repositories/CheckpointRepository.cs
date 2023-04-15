@@ -28,6 +28,12 @@ namespace InitialProject.Repositories
             return _serializer.FromCSV(FilePath);
         }
 
+        public Checkpoint GetById(int id)
+        {
+            _checkpoints = _serializer.FromCSV(FilePath);
+            return _checkpoints.FirstOrDefault(c => c.Id == id);
+        }
+
         public Checkpoint Save(Checkpoint checkpoint)
         {
             checkpoint.Id = NextId();

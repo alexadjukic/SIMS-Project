@@ -15,19 +15,19 @@ namespace InitialProject.WPF.ViewModels
     public class ToursUserReviewsViewModel : ViewModelBase
     {
         #region PROPERTIES
-        private TourReview _review;
-		public TourReview Review
+        private TourReview? _selectedReview;
+		public TourReview? SelectedReview
 		{
 			get
 			{
-				return _review;
+				return _selectedReview;
 			}
 			set
 			{
-				if (_review != value)
+				if (_selectedReview != value)
 				{
-					_review = value;
-					OnPropertyChanged(nameof(Review));
+					_selectedReview = value;
+					OnPropertyChanged(nameof(SelectedReview));
 				}
 			}
 		}
@@ -68,12 +68,13 @@ namespace InitialProject.WPF.ViewModels
 
         public void OpenReviewCommand_Execute(object? parameter)
         {
-			// TO-DO: implement review window when model is created
+            var tourReviewDetailsView = new TourReviewDetailsView(SelectedReview);
+            tourReviewDetailsView.Show();
         }
 
         public bool OpenReviewCommand_CanExecute(object? parameter)
         {
-			return true;
+            return SelectedReview is not null;
         }
 
         public void CloseWindowCommand_Execute(object? parameter)
