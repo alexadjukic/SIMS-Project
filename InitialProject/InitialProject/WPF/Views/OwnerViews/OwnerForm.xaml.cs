@@ -97,7 +97,7 @@ namespace InitialProject.WPF.Views
 
         private void ButtonRegistrateAccommodation_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _imageRepository, _ownerId);
+            AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _imageRepository, _ownerId, _userRepository);
             accommodationRegistration.Show();
         }
 
@@ -123,6 +123,12 @@ namespace InitialProject.WPF.Views
         {
             RatedGuestsOverview ratedGuestsOverview = new RatedGuestsOverview(_ownerId, _accommodationRepository, _userRepository);
             ratedGuestsOverview.Show();
+        }
+
+        private void ButtonProfile_Click(object sender, RoutedEventArgs e)
+        {
+            OwnerProfileOverview ownerProfileOverview = new OwnerProfileOverview(_ownerId);
+            ownerProfileOverview.Show();
         }
     }
 }

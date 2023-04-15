@@ -13,5 +13,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public User GetByUsername(string username);
         public List<User> GetAll();
         public User GetById(int id);
+        void SetOwnerRole(int ownerId, int numberOfRatings, double totalRating);
     }
 }
