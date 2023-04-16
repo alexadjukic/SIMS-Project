@@ -1,0 +1,70 @@
+﻿using InitialProject.Serializer;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InitialProject.Domain.Models
+{
+    public enum RequestStatus
+    {
+        ON_HOLD,
+        ACCEPTED,
+        DECLINED
+    }
+    
+    public class Request : ISerializable
+    {
+        public int Id { get; set; }
+        public DateTime NewStartDate { get; set; }
+        public DateTime NewEndDate { get; set; }
+        public RequestStatus Status { get; set; }
+        public int ReservationId { get; set; }
+
+        public Request() { }
+        public Request(int id, DateTime newStartDate, DateTime newEndDate, RequestStatus status, int reservationId)
+        {
+            Id = id;
+            NewStartDate = newStartDate;
+            NewEndDate = newEndDate;
+            Status = status;
+            ReservationId = reservationId;
+        }
+
+        public string[] ToCSV()
+        {
+            string[] csvValues =
+            {
+                Id.ToString(),
+                NewStartDate.ToString(),
+                NewEndDate.ToString(),
+                Status.ToString(),
+                ReservationId.ToString()
+            };
+
+            return csvValues;
+        }
+
+        public void FromCSV(string[] values)
+        {
+            Id = Convert.ToInt32(values[0]);
+            NewStartDate = DateTime.Parse(values[1]);
+            NewEndDate = DateTime.Parse(values[2]);
+            switch (values[3])
+            {
+                case "ON_HOLD":
+                    Status = RequestStatus.ON_HOLD;
+                    break;
+                case "ACCEPTED":
+                    Status = RequestStatus.ACCEPTED;
+                    break;
+                case "DECLINED":
+                    Status = RequestStatus.DECLINED;
+                    break;
+
+            }
+            ReservationId = Convert.ToInt32(values[4]);
+        }
+    }
+}
