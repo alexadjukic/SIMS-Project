@@ -89,5 +89,12 @@ namespace InitialProject.Repositories
             _accommodationReservations.Remove(_accommodationReservations.Find(x => x.Id == reservation.Id));
             _serializer.ToCSV(FilePath, _accommodationReservations);
         }
+
+        public AccommodationReservation GetById(int reservationId)
+        {
+            _accommodationReservations = _serializer.FromCSV(FilePath);
+
+            return _accommodationReservations.FirstOrDefault(r => r.Id == reservationId);
+        }
     }
 }

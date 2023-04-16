@@ -6,67 +6,72 @@
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
         mc:Ignorable="d"
         Title="Requests overview" Height="450" Width="720" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <DataTemplate x:Key="RequestsOverviewTemplate">
-            <Grid Height="146" Width="670">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="15*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                        <TextBlock TextWrapping="Wrap" Text="Username" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                        <TextBlock TextWrapping="Wrap" Text="Accommodation name" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                        <TextBlock TextWrapping="Wrap" Text="Country" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                        <TextBlock TextWrapping="Wrap" Text="City" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock TextWrapping="Wrap" Text="Type:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                        <TextBlock TextWrapping="Wrap" Text="type" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                    </StackPanel>
-                </StackPanel>
-
-                <Separator Grid.Column="0" HorizontalAlignment="Right" Background="Black"/>
-
-                <StackPanel Grid.Column="1">
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock TextWrapping="Wrap" Text="Old reservation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                        <TextBlock TextWrapping="Wrap" Text="date1-date2" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock TextWrapping="Wrap" Text="New reservation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                        <TextBlock TextWrapping="Wrap" Text="date1-date2" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock TextWrapping="Wrap" Text="Is this accommodation available on requested days:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                        <TextBlock TextWrapping="Wrap" Text="yes/no" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <Button Grid.Column="1" Margin="220,10,10,0" Content="Accept" FontSize="20" FontWeight="Bold"></Button>
-                        <Button Grid.Column="1" Margin="20,10,0,0" Content="Decline" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.DeclineRequestCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
-                    </StackPanel>
-                </StackPanel>
-
-                <Separator Grid.ColumnSpan="2" VerticalAlignment="Bottom" Background="Black"/>
-            </Grid>
-        </DataTemplate>
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" ItemTemplate="{DynamicResource RequestsOverviewTemplate}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,32,10,10"/>
+        <ListBox Grid.Row="0" Margin="10,32,10,10" ItemsSource="{Binding Path=Requests, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="146" Width="670">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="15*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.Guest.Username}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.Accommodation.Name}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.Accommodation.Location.City}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" Text="Type:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.Accommodation.Type}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Separator Grid.Column="0" HorizontalAlignment="Right" Background="Black"/>
+
+                        <StackPanel Grid.Column="1">
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" Text="Old reservation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                                <Label Content=" - "/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" Text="New reservation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding NewStartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                                <Label Content=" - "/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding NewEndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" Text="Is this accommodation available on requested days:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                                <TextBlock TextWrapping="Wrap" Text="yes/no" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <Button Grid.Column="1" Margin="220,10,10,0" Content="Accept" FontSize="20" FontWeight="Bold"></Button>
+                                <Button Grid.Column="1" Margin="20,10,0,0" Content="Decline" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.DeclineRequestCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Separator Grid.ColumnSpan="2" VerticalAlignment="Bottom" Background="Black"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Button Grid.Row="1" Grid.Column="1" Margin="600,10,30,10" Content="Close" FontSize="20" FontWeight="Bold" Command="{Binding CloseWindowCommand}"></Button>
     </Grid>
 </Window>

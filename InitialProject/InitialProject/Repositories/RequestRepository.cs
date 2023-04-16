@@ -28,11 +28,11 @@ namespace InitialProject.Repositories
             return _serializer.FromCSV(FilePath);
         }
 
-        public Request Save(DateTime newStartDate, DateTime newEndDate, RequestStatus status, int reservationId)
+        public Request Save(DateTime newStartDate, DateTime newEndDate, RequestStatus status, AccommodationReservation reservation)
         {
             int id = NextId();
 
-            Request request = new Request(id, newStartDate, newEndDate, status, reservationId);
+            Request request = new Request(id, newStartDate, newEndDate, status, reservation);
             _requests.Add(request);
             SaveAllRequests();
             return request;

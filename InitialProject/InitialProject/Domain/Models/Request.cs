@@ -20,16 +20,18 @@ namespace InitialProject.Domain.Models
         public DateTime NewStartDate { get; set; }
         public DateTime NewEndDate { get; set; }
         public RequestStatus Status { get; set; }
+        public AccommodationReservation Reservation { get; set; }
         public int ReservationId { get; set; }
 
         public Request() { }
-        public Request(int id, DateTime newStartDate, DateTime newEndDate, RequestStatus status, int reservationId)
+        public Request(int id, DateTime newStartDate, DateTime newEndDate, RequestStatus status, AccommodationReservation reservation)
         {
             Id = id;
             NewStartDate = newStartDate;
             NewEndDate = newEndDate;
             Status = status;
-            ReservationId = reservationId;
+            Reservation = reservation;
+            ReservationId = reservation.Id;
         }
 
         public string[] ToCSV()
