@@ -54,12 +54,5 @@ namespace InitialProject.Repositories
 
             return _images.Max(c => c.Id) + 1;
         }
-
-        public void Remove(string url, int accommodationRatingId)
-        {
-            _images = _serializer.FromCSV(FilePath);
-            _images.Remove(_images.Find(x => x.Url == url && x.AccommodationRatingId == accommodationRatingId));
-            _serializer.ToCSV(FilePath, _images);
-        }
     }
 }

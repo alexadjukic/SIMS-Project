@@ -53,7 +53,7 @@
 
         <StackPanel Grid.Row="6" Orientation="Horizontal">
             <Button Name="ButtonRate" Content="Rate" Width="100" Height="40" Margin="70,0,30,0" Command="{Binding RateCommand}"/>
-            <Button Name="ButtonCancel" Content="Cancel" Width="100" Height="40" Margin="30,0,30,0"/>
+            <Button Name="ButtonCancel" Content="Cancel" Width="100" Height="40" Margin="30,0,30,0" Command="{Binding CancelCommand}"/>
         </StackPanel>
 
     </Grid>
