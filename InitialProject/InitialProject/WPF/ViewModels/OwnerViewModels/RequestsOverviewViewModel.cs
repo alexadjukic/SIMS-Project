@@ -15,6 +15,22 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
     public class RequestsOverviewViewModel : ViewModelBase
     {
         #region PROPERTIES
+        private Request _selectedRequest;
+        public Request SelectedRequest
+        {
+            get
+            { 
+                return _selectedRequest; 
+            }
+            set
+            {
+                if (value != _selectedRequest)
+                {
+                    _selectedRequest = value;
+                    OnPropertyChanged(nameof(SelectedRequest));
+                }
+            }
+        }
 
         public ObservableCollection<Request> Requests { get; set; }
 
@@ -32,6 +48,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             DeclineRequestCommand = new RelayCommand(DeclineRequestCommand_Execute, DeclineRequestCommand_CanExecute);
+            AcceptedRequestCommand = new RelayCommand(AcceptedRequestCommand_Execute, AcceptedRequestCommand_CanExecute);
         }
 
         public void LoadOnHoldRequests()
@@ -47,6 +64,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         #region COMMANDS
         public RelayCommand CloseWindowCommand { get; }
         public RelayCommand DeclineRequestCommand { get; }
+        public RelayCommand AcceptedRequestCommand { get; }
 
         public void CloseWindowCommand_Execute(object? parameter)
         {
@@ -55,13 +73,30 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public bool DeclineRequestCommand_CanExecute(object? parameter)
         {
-            return true;
+            return SelectedRequest is not null;
+        }
+
+        public void AcceptedRequestCommand_Execute(object? parameter)
+        {
+            _requestService.AcceptRequest(SelectedRequest);
+            LoadOnHoldRequests();
+        }
+
+        public bool AcceptedRequestCommand_CanExecute(object? parameter)
+        {
+            int razlikaUDanima = 0;
+
+            if (SelectedRequest != null)
+            {
+                razlikaUDanima = (SelectedRequest.Reservation.StartDate - DateTime.Now.Date).Days;
+            }
+            return SelectedRequest is not null && razlikaUDanima >= SelectedRequest.Reservation.Accommodation.MinDaysBeforeCancel;
         }
 
         public void DeclineRequestCommand_Execute(object? parameter)
         {
-            RequestDeclinedForm requestDeclinedForm = new RequestDeclinedForm();
-            requestDeclinedForm.Show();
+            _requestService.DeclineRequest(SelectedRequest);
+            LoadOnHoldRequests();
         }
         #endregion
     }

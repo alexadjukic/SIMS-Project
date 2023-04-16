@@ -142,5 +142,15 @@ namespace InitialProject.Repositories
             return resultingDates;
         }
 
+        public void AcceptRequest(Request selectedRequest)
+        {
+            _accommodationReservations = _serializer.FromCSV(FilePath);
+
+            _accommodationReservations.Find(r => r.Id == selectedRequest.ReservationId).StartDate = selectedRequest.NewStartDate;
+            _accommodationReservations.Find(r => r.Id == selectedRequest.ReservationId).EndDate = selectedRequest.NewEndDate;
+
+            _serializer.ToCSV(FilePath, _accommodationReservations);
+        }
+
     }
 }

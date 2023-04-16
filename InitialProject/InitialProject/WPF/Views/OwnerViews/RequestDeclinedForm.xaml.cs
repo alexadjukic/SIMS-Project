@@ -1,4 +1,5 @@
-﻿using InitialProject.WPF.ViewModels.OwnerViewModels;
+﻿using InitialProject.Domain.Models;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,10 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class RequestDeclinedForm : Window
     {
-        public RequestDeclinedForm()
+        public RequestDeclinedForm(Request selectedRequest)
         {
             InitializeComponent();
-            this.DataContext = new RequestDeclinedFormViewModel(this);
+            this.DataContext = new RequestDeclinedFormViewModel(this, selectedRequest);
         }
     }
 }

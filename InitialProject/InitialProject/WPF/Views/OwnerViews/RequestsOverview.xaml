@@ -11,7 +11,7 @@
             <RowDefinition Height="70*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" Margin="10,32,10,10" ItemsSource="{Binding Path=Requests, UpdateSourceTrigger=PropertyChanged}">
+        <ListBox Name ="RequestsListBox" Grid.Row="0" Margin="10,32,10,10" ItemsSource="{Binding Path=Requests, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" SelectedItem="{Binding SelectedRequest, UpdateSourceTrigger=PropertyChanged}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="146" Width="670">
@@ -62,7 +62,11 @@
                                 <TextBlock TextWrapping="Wrap" Text="{Binding IsAvailable}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
                             </StackPanel>
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <Button Grid.Column="1" Margin="220,10,10,0" Content="Accept" FontSize="20" FontWeight="Bold"></Button>
+                                <StackPanel>
+                                    <Label Content="Explanation:"></Label>
+                                    <TextBox Width="200" Height="40" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                                </StackPanel>
+                                <Button Grid.Column="1" Margin="20,10,10,0" Content="Accept" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.AcceptedRequestCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
                                 <Button Grid.Column="1" Margin="20,10,0,0" Content="Decline" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.DeclineRequestCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
                             </StackPanel>
                         </StackPanel>

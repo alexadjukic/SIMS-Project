@@ -13,5 +13,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public Request Save(DateTime newStartDate, DateTime newEndDate, RequestStatus status, AccommodationReservation reservation);
         public void SaveAllRequests();
         public int NextId();
+        public void DeclineRequest(Request selectedRequest);
+        public void AcceptRequest(Request selectedRequest);
     }
 }

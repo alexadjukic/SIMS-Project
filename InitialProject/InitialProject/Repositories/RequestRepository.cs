@@ -54,5 +54,23 @@ namespace InitialProject.Repositories
 
             return _requests.Max(c => c.Id) + 1;
         }
+
+        public void DeclineRequest(Request selectedRequest)
+        {
+            _requests = _serializer.FromCSV(FilePath);
+
+            _requests.Find(r => r.Id == selectedRequest.Id).Status = RequestStatus.DECLINED;
+
+            _serializer.ToCSV(FilePath, _requests);
+        }
+
+        public void AcceptRequest(Request selectedRequest)
+        {
+            _requests = _serializer.FromCSV(FilePath);
+
+            _requests.Find(r => r.Id == selectedRequest.Id).Status = RequestStatus.ACCEPTED;
+
+            _serializer.ToCSV(FilePath, _requests);
+        }
     }
 }
