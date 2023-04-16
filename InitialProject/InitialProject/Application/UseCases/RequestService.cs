@@ -29,8 +29,26 @@ namespace InitialProject.Application.UseCases
         public IEnumerable<Request> GetOnHoldRequests()
         {
             var onHoldRequests = _requestRepository.GetAll();
+
+            onHoldRequests = LoadOnHoldRequests(onHoldRequests);
+
             onHoldRequests = LoadReservations(onHoldRequests);
             return onHoldRequests;
+        }
+
+        private List<Request> LoadOnHoldRequests(List<Request> onHoldRequests)
+        {
+            var updatedOnHoldRequests = new List<Request>();
+
+            foreach (var request in onHoldRequests)
+            {
+                if (request.Status == RequestStatus.ON_HOLD)
+                {
+                    updatedOnHoldRequests.Add(request);
+                }
+            }
+
+            return updatedOnHoldRequests;
         }
 
         private List<Request> LoadReservations(IEnumerable<Request> onHoldRequests)
@@ -41,7 +59,7 @@ namespace InitialProject.Application.UseCases
             {
                 request.Reservation = _accommodationReservationRepository.GetById(request.ReservationId);
                 request.Reservation = LoadReservation(request.Reservation);
-                
+                request.IsAvailable = _accommodationReservationRepository.IsAvailable(request.NewStartDate, request.NewEndDate, request.ReservationId, request.Reservation.AccommodationId);
                 updatedOnHoldRequests.Add(request);
             }
 
@@ -64,6 +82,17 @@ namespace InitialProject.Application.UseCases
             updatedReservation.Accommodation.Location = _locationRepository.GetById(updatedReservation.Accommodation.LocationId);
 
             return updatedReservation;
+        }
+
+        public void DeclineRequest(Request selectedRequest)
+        {
+            _requestRepository.DeclineRequest(selectedRequest);
+        }
+
+        internal void AcceptRequest(Request selectedRequest)
+        {
+            _requestRepository.AcceptRequest(selectedRequest);
+            _accommodationReservationRepository.AcceptRequest(selectedRequest);
         }
     }
 }
