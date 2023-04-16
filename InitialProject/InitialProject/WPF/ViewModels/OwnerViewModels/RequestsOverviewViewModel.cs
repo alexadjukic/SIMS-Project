@@ -11,7 +11,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class RequestsOverviewViewModel
     {
+        #region PROPERTIES
         private readonly Window _requestsOverview;
+        #endregion
 
         public RequestsOverviewViewModel(Window requestsOverview)
         {
@@ -21,6 +23,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             DeclineRequestCommand = new RelayCommand(DeclineRequestCommand_Execute, DeclineRequestCommand_CanExecute);
         }
 
+        #region COMMANDS
         public RelayCommand CloseWindowCommand { get; }
         public RelayCommand DeclineRequestCommand { get; }
 
@@ -39,5 +42,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             RequestDeclinedForm requestDeclinedForm = new RequestDeclinedForm();
             requestDeclinedForm.Show();
         }
+        #endregion
     }
 }

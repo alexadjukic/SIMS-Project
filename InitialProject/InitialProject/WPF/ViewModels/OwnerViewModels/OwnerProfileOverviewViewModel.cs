@@ -12,6 +12,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class OwnerProfileOverviewViewModel : ViewModelBase
     {
+        #region PROPERTIES
         private int _numberOfRatings;
         public int NumberOfRagings
         {
@@ -69,6 +70,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly Window _ownerProfileOverview;
         private readonly AccommodationRatingService _accommodationRatingService;
         private readonly UserService _userService;
+        #endregion
 
         public OwnerProfileOverviewViewModel(Window ownerProfileOverview, int ownerId)
         {
@@ -106,11 +108,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _accommodationRatingService.SetOwnerRole(_ownerId);
         }
 
+        #region COMMANDS
         public RelayCommand CloseWindowCommand { get; }
         
         public void CloseWindowCommand_Execute(object? parameter)
         {
             _ownerProfileOverview.Close();
         }
+        #endregion
     }
 }
