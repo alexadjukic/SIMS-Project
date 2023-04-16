@@ -13,12 +13,14 @@ namespace InitialProject.Application.UseCases
         private readonly IAccommodationRatingRepository _accommodationRatingRepository;
         private readonly IUserRepository _userRepository;
         private readonly IAccommodationRepository _accommodationRepository;
+        private readonly IAccommodationRatingImageRepository _accommodationRatingImageRepository;
 
         public AccommodationRatingService()
         {
             _accommodationRatingRepository = Injector.CreateInstance<IAccommodationRatingRepository>();
             _userRepository = Injector.CreateInstance<IUserRepository>();
             _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
+            _accommodationRatingImageRepository = Injector.CreateInstance<IAccommodationRatingImageRepository>();
         }
 
         public AccommodationRating FindAccommodationRatingByReservationId(int reservationId)
@@ -46,6 +48,16 @@ namespace InitialProject.Application.UseCases
 
             _userRepository.SetOwnerRole(ownerId, numberOfRatings, totalRating);
             _accommodationRepository.SetSuperOwnerMark(ownerId, numberOfRatings, totalRating);
+        }
+
+        public void SaveImage(string url, int accommodationRatingId)
+        {
+            _accommodationRatingImageRepository.Save(url, accommodationRatingId);
+        }
+
+        public AccommodationRating SaveAccommodationRating(int cleanliness, int correctness, string comment, int reservationId, int ownerId, int raterId) 
+        {
+            return _accommodationRatingRepository.Save(cleanliness, correctness, comment, reservationId, ownerId, raterId);
         }
     }
 }

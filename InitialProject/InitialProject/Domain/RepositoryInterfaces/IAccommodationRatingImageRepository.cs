@@ -13,5 +13,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public AccommodationRatingImage Save(string url, int accommodationRatingId);
         public void SaveAllImages();
         public int NextId();
+        public void Remove(string url, int accommodationRatingId);
     }
 }

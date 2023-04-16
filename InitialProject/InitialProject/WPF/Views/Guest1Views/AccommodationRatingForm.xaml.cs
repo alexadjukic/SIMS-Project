@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.WPF.ViewModels;
+using InitialProject.WPF.ViewModels.Guest1ViewModels;
 
 namespace InitialProject.WPF.Views.Guest1Views
 {
@@ -19,9 +22,10 @@ namespace InitialProject.WPF.Views.Guest1Views
     /// </summary>
     public partial class AccommodationRatingForm : Window
     {
-        public AccommodationRatingForm()
+        public AccommodationRatingForm(AccommodationReservation accommodationReservation)
         {
             InitializeComponent();
+            this.DataContext = new AccommodationRatingFormViewModel(this, accommodationReservation);
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
         mc:Ignorable="d"
-        Title="Rate your stay" Height="700" Width="400">
+        Title="Rate your stay" Height="700" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"/>
@@ -19,7 +19,7 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock TextWrapping="Wrap" Text="Cleanliness" TextAlignment="Center" Margin="30,10,0,15" Height="25" FontSize="18"/>
-            <ComboBox x:Name="ComboBoxCleanliness" SelectedValuePath="Content" Text="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" Height="26" Width="147" Margin="50,10,0,15">
+            <ComboBox x:Name="ComboBoxCleanliness" SelectedValuePath="Content" Text="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" Height="26" Width="147" Margin="54,10,0,15">
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="3"/>
@@ -30,7 +30,7 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock TextWrapping="Wrap" Text="Correctness" TextAlignment="Center" Margin="30,10,0,15" Height="25" FontSize="18" Width="93"/>
-            <ComboBox x:Name="ComboBoxFollowingTheRules" SelectedValuePath="Content" Text="{Binding Path=FollowingTheRules, UpdateSourceTrigger=PropertyChanged}" Height="26" Width="147" Margin="50,10,0,15">
+            <ComboBox x:Name="ComboBoxCorrectness" SelectedValuePath="Content" Text="{Binding Path=Correctness, UpdateSourceTrigger=PropertyChanged}" Height="26" Width="147" Margin="50,10,0,15">
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="3"/>
@@ -43,14 +43,16 @@
         <TextBox Name="TextBoxComment" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <TextBlock TextWrapping="Wrap" Text="Images:" TextAlignment="Center" Margin="30,10,0,15" Height="25" FontSize="18" Width="93"/>
-            <TextBox Height="26" Width="147" Margin="30,10,0,15"/>
-            <Button Content="+" Height="26" Width="26" Margin="15,0,0,0"></Button>
-            <Button Content="-" Height="26" Width="26" Margin="10"></Button>
+            <TextBlock TextWrapping="Wrap" Text="Images:" TextAlignment="Center" Margin="15,15,0,15" Height="25" FontSize="18" Width="93"/>
+            <TextBox Height="26" Width="180" Margin="10,15,0,15" Text="{Binding Path=ImageUrl,UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="+" Height="26" Width="26" Margin="20,0,0,0" Command="{Binding AddImageCommand}"></Button>
+            <Button Content="-" Height="26" Width="26" Margin="10" Command="{Binding RemoveImageCommand}"></Button>
         </StackPanel>
 
+        <Image Source="{Binding CurrentImageUrl, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Margin="20,10,20,10"/>
+
         <StackPanel Grid.Row="6" Orientation="Horizontal">
-            <Button Name="ButtonRate" Content="Rate" Width="100" Height="40" Margin="70,0,30,0"/>
+            <Button Name="ButtonRate" Content="Rate" Width="100" Height="40" Margin="70,0,30,0" Command="{Binding RateCommand}"/>
             <Button Name="ButtonCancel" Content="Cancel" Width="100" Height="40" Margin="30,0,30,0"/>
         </StackPanel>
 

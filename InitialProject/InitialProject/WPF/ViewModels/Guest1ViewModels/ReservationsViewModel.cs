@@ -1,6 +1,7 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using InitialProject.WPF.Views.Guest1Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     public class ReservationsViewModel : ViewModelBase
     {
         #region PROPERITES
-
         private AccommodationReservation? _selectedReservation;
         public AccommodationReservation? SelectedReservation
         {
@@ -39,7 +39,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private readonly int _guestId;
         private readonly Window _reservationsView;
         private readonly AccommodationReservationService _reservationService;
-
         #endregion
 
         public ReservationsViewModel(Window reservationsView, int guestId)
@@ -51,6 +50,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Reservations = new ObservableCollection<AccommodationReservation>();
 
             CancelReservationCommand = new RelayCommand(CancelReservationCommand_Execute, CancelReservationCommand_CanExecute);
+            RateYourStayCommand = new RelayCommand(RateYourStayCommand_Execute, RateYourStayCommand_CanExecute);
 
             LoadReservations();
         }
@@ -83,6 +83,17 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public bool CancelReservationCommand_CanExecute(object? parameter)
         {
             return SelectedReservation is not null && (SelectedReservation.StartDate - DateTime.Now.Date).Days >= SelectedReservation.Accommodation.MinDaysBeforeCancel;
+        }
+
+        public void RateYourStayCommand_Execute(object? parameter)
+        {
+            AccommodationRatingForm accommodationRatingForm = new AccommodationRatingForm(SelectedReservation);
+            accommodationRatingForm.Show();
+        }
+
+        public bool RateYourStayCommand_CanExecute(object? parameter)
+        {
+            return SelectedReservation is not null && (DateTime.Now - SelectedReservation.EndDate).Days < 6 && DateTime.Compare(DateTime.Now.Date, SelectedReservation.EndDate.Date) >= 0;
         }
         #endregion
     }
