@@ -1,0 +1,28 @@
+﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InitialProject.Application.UseCases
+{
+    public class CheckpointService
+    {
+        private readonly ICheckpointRepository _checkpointRepository;
+        private readonly TourService _tourService;
+        public CheckpointService()
+        {
+            _checkpointRepository = Injector.CreateInstance<ICheckpointRepository>();
+            _tourService = new TourService();
+        }
+
+        public Checkpoint GetById(int id)
+        {
+            var checkpoint = _checkpointRepository.GetAll().FirstOrDefault(c => c.Id == id);
+            checkpoint.Tour = _tourService.GetById(checkpoint.TourId);
+            return checkpoint;
+        }
+    }
+}

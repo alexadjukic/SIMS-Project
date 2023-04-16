@@ -44,5 +44,12 @@ namespace InitialProject.Application.UseCases
                 tour.Location = _locationRepository.GetById(tour.LocationId);
             }
         }
+
+        public Tour GetById(int id)
+        {
+            var tour = _tourRepository.GetAll().FirstOrDefault(t => t.Id == id);
+            tour.Location = _locationRepository.GetById(tour.LocationId);
+            return tour;
+        }
     }
 }
