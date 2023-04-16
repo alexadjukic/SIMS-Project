@@ -18,5 +18,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public List<AccommodationReservation> GetAllByGuestId(int guestId);
         public void Remove(AccommodationReservation reservation);
         public AccommodationReservation GetById(int reservationId);
+        public string IsAvailable(DateTime newStartDate, DateTime newEndDate, int reservationId, int accommodationId);
     }
 }

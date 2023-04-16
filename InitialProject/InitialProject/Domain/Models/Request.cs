@@ -22,6 +22,7 @@ namespace InitialProject.Domain.Models
         public RequestStatus Status { get; set; }
         public AccommodationReservation Reservation { get; set; }
         public int ReservationId { get; set; }
+        public string IsAvailable { get; set; }
 
         public Request() { }
         public Request(int id, DateTime newStartDate, DateTime newEndDate, RequestStatus status, AccommodationReservation reservation)
@@ -32,6 +33,7 @@ namespace InitialProject.Domain.Models
             Status = status;
             Reservation = reservation;
             ReservationId = reservation.Id;
+            IsAvailable = "";
         }
 
         public string[] ToCSV()
@@ -42,7 +44,8 @@ namespace InitialProject.Domain.Models
                 NewStartDate.ToString(),
                 NewEndDate.ToString(),
                 Status.ToString(),
-                ReservationId.ToString()
+                ReservationId.ToString(),
+                IsAvailable
             };
 
             return csvValues;
@@ -67,6 +70,7 @@ namespace InitialProject.Domain.Models
 
             }
             ReservationId = Convert.ToInt32(values[4]);
+            IsAvailable = values[5];
         }
     }
 }

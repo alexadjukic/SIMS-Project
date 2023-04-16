@@ -97,7 +97,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        #region COMMANDS
+        
         private void FindGuestRating()
         {
             GuestRated = _accommodationRatingService.FindAccommodationRatingByReservationId(SelectedAccommodationReservation.Id);
@@ -112,6 +112,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         }
 
+        #region COMMANDS
         public RelayCommand CloseWindowCommand { get; }
 
         public void CloseWindowCommand_Execute(object? parameter)

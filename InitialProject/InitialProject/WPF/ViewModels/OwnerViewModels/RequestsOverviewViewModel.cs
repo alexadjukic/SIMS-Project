@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
-    public class RequestsOverviewViewModel
+    public class RequestsOverviewViewModel : ViewModelBase
     {
         #region PROPERTIES
 

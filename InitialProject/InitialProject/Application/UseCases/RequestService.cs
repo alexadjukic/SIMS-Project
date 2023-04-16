@@ -41,7 +41,7 @@ namespace InitialProject.Application.UseCases
             {
                 request.Reservation = _accommodationReservationRepository.GetById(request.ReservationId);
                 request.Reservation = LoadReservation(request.Reservation);
-                
+                request.IsAvailable = _accommodationReservationRepository.IsAvailable(request.NewStartDate, request.NewEndDate, request.ReservationId, request.Reservation.AccommodationId);
                 updatedOnHoldRequests.Add(request);
             }
 
