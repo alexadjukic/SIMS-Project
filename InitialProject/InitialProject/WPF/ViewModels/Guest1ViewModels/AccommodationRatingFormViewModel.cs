@@ -110,12 +110,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             AddImageCommand = new RelayCommand(AddImageCommand_Execute, AddImageCommand_CanExecute);
             RemoveImageCommand = new RelayCommand(RemoveImageCommand_Execute, RemoveImageCommand_CanExecute);
             RateCommand = new RelayCommand(RateCommand_Execute, RateCommand_CanExecute);
+            CancelCommand = new RelayCommand(CancelCommand_Execute);
         }
 
         #region COMMANDS
         public RelayCommand AddImageCommand { get; }
         public RelayCommand RemoveImageCommand { get; }
         public RelayCommand RateCommand { get; }
+        public RelayCommand CancelCommand { get; }
 
         public void AddImageCommand_Execute(object? parameter)
         {
@@ -151,9 +153,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             _accommodationRatingForm.Close();
         }
 
-        public bool RateCommand_CanExecute(object? paramete)
+        public bool RateCommand_CanExecute(object? parameter)
         {
             return Cleanliness is not null && Correctness is not null;
+        }
+
+        public void CancelCommand_Execute(object? parameter)
+        {
+            _accommodationRatingForm.Close();
         }
         #endregion
     }
