@@ -1,0 +1,98 @@
+﻿<Window x:Class="InitialProject.WPF.Views.GuideViews.MostVisitedTourView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.Views.GuideViews"
+        mc:Ignorable="d"
+        Title="MostVisitedTourView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="42*"/>
+            <RowDefinition Height="149*"/>
+            <RowDefinition Height="149*"/>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="58*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Tour info: " FontWeight="Bold" FontSize="16" Margin="10,0,0,149" Grid.RowSpan="2"/>
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Margin="15,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Name: " FontSize="14"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Country: " FontSize="14"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="City: " FontSize="14"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Language: " FontSize="14"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Guest limit: " FontSize="14"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Guest limit: " FontSize="14"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="Duration (h): " FontSize="14"/>
+            <Label Grid.Row="6" Grid.Column="0" Content="Description: " FontSize="14"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,0,0,0" Text="Text"/>
+
+            <Label Grid.Row="0" Grid.Column="1" Content="Name"/>
+            <Label Grid.Row="1" Grid.Column="1" Content="Name"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="Name"/>
+            <Label Grid.Row="3" Grid.Column="1" Content="Name"/>
+            <Label Grid.Row="4" Grid.Column="1" Content="Name"/>
+            <Label Grid.Row="5" Grid.Column="1" Content="Name"/>
+        </Grid>
+
+        <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Width="1" HorizontalAlignment="Right" BorderBrush="#FF6F6F6F" BorderThickness="1" Margin="0,0,0,15"></Border>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch">
+            <Label Content="Start times: " FontSize="14"/>
+            <ListView Margin="5" Height="105"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch">
+            <Label Content="Checkpoints: " FontSize="14"/>
+            <ListView Margin="5" Height="105"></ListView>
+        </StackPanel>
+
+        <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Height="125" Width="250"></Image>
+
+        <Button Grid.Row="2" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" Margin="70,0,0,0" BorderBrush="White" Background="White">
+            <Image Source="../../../Resources/Images/left_arrow.png"/>
+        </Button>
+
+        <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,70,0" BorderBrush="White" Background="White">
+            <Image Source="../../../Resources/Images/right_arrow.png"></Image>
+        </Button>
+
+        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+            <StackPanel Margin="0,0,5,0">
+                <RadioButton Content="All time" IsChecked="True"/>
+                <RadioButton Content="Yearly"/>
+            </StackPanel>
+            <StackPanel Margin="5,0,0,0">
+                <TextBlock Text="Pick year:"/>
+                <ComboBox></ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+        <Border Grid.Row="3" Grid.ColumnSpan="3"  BorderBrush="Black" BorderThickness="1" Background="#FF19DABB" Margin="0,47,0,0" Grid.RowSpan="2">
+            <Button Content="Close" Width="70" Height="25" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding CloseWindowCommand}"></Button>
+        </Border>
+
+
+    </Grid>
+</Window>
