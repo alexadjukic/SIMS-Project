@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.WPF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace InitialProject.WPF.Views.GuideViews
+namespace InitialProject.WPF.Views
 {
     /// <summary>
     /// Interaction logic for MostVisitedTourView.xaml
@@ -22,6 +23,7 @@ namespace InitialProject.WPF.Views.GuideViews
         public MostVisitedTourView()
         {
             InitializeComponent();
+            this.DataContext = new MostVisitedTourViewModel(this);
         }
     }
 }
