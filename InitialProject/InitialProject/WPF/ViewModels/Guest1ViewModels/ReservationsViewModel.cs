@@ -16,7 +16,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
     public class ReservationsViewModel : ViewModelBase
     {
-        #region PROPERITES
+        #region PROPERTIES
         private AccommodationReservation? _selectedReservation;
         public AccommodationReservation? SelectedReservation
         {
@@ -51,6 +51,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
             CancelReservationCommand = new RelayCommand(CancelReservationCommand_Execute, CancelReservationCommand_CanExecute);
             RateYourStayCommand = new RelayCommand(RateYourStayCommand_Execute, RateYourStayCommand_CanExecute);
+            ChangeReservationCommand = new RelayCommand(ChangeReservationCommand_Execute, ChangeReservationCommand_CanExecute);
 
             LoadReservations();
         }
@@ -94,6 +95,17 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public bool RateYourStayCommand_CanExecute(object? parameter)
         {
             return SelectedReservation is not null && (DateTime.Now - SelectedReservation.EndDate).Days < 6 && DateTime.Compare(DateTime.Now.Date, SelectedReservation.EndDate.Date) >= 0;
+        }
+
+        public void ChangeReservationCommand_Execute(object? parameter)
+        {
+            ReservationChangeView reservationChangeView = new ReservationChangeView(SelectedReservation);
+            reservationChangeView.Show();
+        }
+
+        public bool ChangeReservationCommand_CanExecute(object? parameter)
+        {
+            return SelectedReservation is not null && (SelectedReservation.StartDate - DateTime.Now.Date).Days > 0;
         }
         #endregion
     }

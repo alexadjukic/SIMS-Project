@@ -94,5 +94,10 @@ namespace InitialProject.Application.UseCases
             _requestRepository.AcceptRequest(selectedRequest);
             _accommodationReservationRepository.AcceptRequest(selectedRequest);
         }
+
+        public void CreateRequest(DateTime newStartDate, DateTime newEndDate, AccommodationReservation reservation)
+        {
+            _requestRepository.Save(newStartDate, newEndDate, RequestStatus.ON_HOLD, reservation);
+        }
     }
 }
