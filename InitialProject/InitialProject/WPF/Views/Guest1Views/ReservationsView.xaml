@@ -25,7 +25,7 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button Content="Change reservation dates" Width="150" Height="30" Margin="70,0,0,0" Command="{Binding ChangeReservationCommand}"></Button>
             <Button Content="Cancel reservation" Width="150" Height="30" Margin="20,0,0,0" Command="{Binding CancelReservationCommand}"></Button>
-            <Button Content="View all requests" Width="150" Height="30" Margin="20,0,0,0"></Button>
+            <Button Content="View all requests" Width="150" Height="30" Margin="20,0,0,0" Command="{Binding ViewAllChangeRequestsCommand}"></Button>
             <Button Content="Rate your stay" Width="150" Height="30" Margin="20,0,0,0" Command="{Binding RateYourStayCommand}"></Button>
         </StackPanel>
     </Grid>

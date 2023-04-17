@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
+using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,6 +99,22 @@ namespace InitialProject.Application.UseCases
         public void CreateRequest(DateTime newStartDate, DateTime newEndDate, AccommodationReservation reservation)
         {
             _requestRepository.Save(newStartDate, newEndDate, RequestStatus.ON_HOLD, reservation);
+        }
+
+        public IEnumerable<Request> GetRequestsByGuestId(int guestId)
+        {
+            List<Request> requests = new List<Request>();
+            var _requests = _requestRepository.GetAll();
+            _requests = LoadReservations(_requests);
+            foreach (var request in _requests)
+            {
+                if (request.Reservation.GuestId == guestId)
+                {
+                    requests.Add(request);
+                }
+            }
+
+            return requests;
         }
     }
 }
