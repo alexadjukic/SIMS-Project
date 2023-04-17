@@ -72,6 +72,6 @@ namespace InitialProject.Repositories
             _requests.Find(r => r.Id == selectedRequest.Id).Status = RequestStatus.ACCEPTED;
 
             _serializer.ToCSV(FilePath, _requests);
-        }
+        }      
     }
 }

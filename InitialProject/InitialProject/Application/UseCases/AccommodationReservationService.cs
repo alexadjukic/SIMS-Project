@@ -81,6 +81,12 @@ namespace InitialProject.Application.UseCases
             _accommodationReservationRepository.Remove(reservation);
         }
 
+        public bool IsAccommodationAvailable(DateTime startDate, DateTime endDate, int reservationId, int accommodationId)
+        {
+            string yesNoanswer = _accommodationReservationRepository.IsAvailable(startDate, endDate, reservationId, accommodationId);
+            if (yesNoanswer.Equals("yes")) return true; else return false;
+        }
+
             /*public List<AccommodationReservation> LoadGuests(IEnumerable<AccommodationReservation> ratedReservations)
             {
                 var updatedRatedReservations = new List<AccommodationReservation>();
