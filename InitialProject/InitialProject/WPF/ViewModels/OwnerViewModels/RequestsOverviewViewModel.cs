@@ -36,12 +36,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private readonly RequestService _requestService;
         private readonly Window _requestsOverview;
+        private readonly ManageRequestService _manageRequestService;
         #endregion
 
         public RequestsOverviewViewModel(Window requestsOverview)
         {
             _requestsOverview = requestsOverview;
             _requestService = new RequestService();
+            _manageRequestService = new ManageRequestService();
 
             Requests = new ObservableCollection<Request>();
             LoadOnHoldRequests();
@@ -78,7 +80,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void AcceptedRequestCommand_Execute(object? parameter)
         {
-            _requestService.AcceptRequest(SelectedRequest);
+            _manageRequestService.AcceptRequest(SelectedRequest);
             LoadOnHoldRequests();
         }
 
@@ -95,7 +97,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void DeclineRequestCommand_Execute(object? parameter)
         {
-            _requestService.DeclineRequest(SelectedRequest);
+            _manageRequestService.DeclineRequest(SelectedRequest);
             LoadOnHoldRequests();
         }
         #endregion

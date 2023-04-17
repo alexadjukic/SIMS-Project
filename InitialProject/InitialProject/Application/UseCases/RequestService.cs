@@ -59,9 +59,13 @@ namespace InitialProject.Application.UseCases
             foreach (var request in onHoldRequests)
             {
                 request.Reservation = _accommodationReservationRepository.GetById(request.ReservationId);
-                request.Reservation = LoadReservation(request.Reservation);
-                request.IsAvailable = _accommodationReservationRepository.IsAvailable(request.NewStartDate, request.NewEndDate, request.ReservationId, request.Reservation.AccommodationId);
-                updatedOnHoldRequests.Add(request);
+                if (request.Reservation != null)
+                {
+                    request.Reservation = LoadReservation(request.Reservation);
+                    request.IsAvailable = _accommodationReservationRepository.IsAvailable(request.NewStartDate, request.NewEndDate, request.ReservationId, request.Reservation.AccommodationId);
+                    updatedOnHoldRequests.Add(request);
+                }
+                
             }
 
             return updatedOnHoldRequests;
@@ -85,7 +89,7 @@ namespace InitialProject.Application.UseCases
             return updatedReservation;
         }
 
-        public void DeclineRequest(Request selectedRequest)
+        /*public void DeclineRequest(Request selectedRequest)
         {
             _requestRepository.DeclineRequest(selectedRequest);
         }
@@ -94,7 +98,7 @@ namespace InitialProject.Application.UseCases
         {
             _requestRepository.AcceptRequest(selectedRequest);
             _accommodationReservationRepository.AcceptRequest(selectedRequest);
-        }
+        }*/
 
         public void CreateRequest(DateTime newStartDate, DateTime newEndDate, AccommodationReservation reservation)
         {
