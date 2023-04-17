@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Repositories;
 using InitialProject.WPF.Views.Guest1Views;
+using InitialProject.WPF.Views.Guest2Views;
 using System.ComponentModel;
 using System.Configuration;
 using System.Runtime.CompilerServices;
@@ -103,8 +104,10 @@ namespace InitialProject.WPF.Views
             }
             else if (user.Role == UserRole.GUEST2)
             {
-                Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, user);
-                guest2TourOverview.Show();
+                /*Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, user);
+                guest2TourOverview.Show();*/
+                Guest2Menu guest2Menu = new Guest2Menu(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, user);
+                guest2Menu.Show();
                 Close();
             }
             else if (user.Role == UserRole.GUIDE)
