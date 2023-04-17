@@ -121,7 +121,7 @@ namespace InitialProject.WPF.Views
 
         private void ButtonSeeRatings_Click(object sender, RoutedEventArgs e)
         {
-            RatedGuestsOverview ratedGuestsOverview = new RatedGuestsOverview(_ownerId, _accommodationRepository, _userRepository);
+            RatedGuestsOverview ratedGuestsOverview = new RatedGuestsOverview(_ownerId);
             ratedGuestsOverview.Show();
         }
 

@@ -21,10 +21,10 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class RatedGuestsOverview : Window
     {
-        public RatedGuestsOverview(int ownerId, AccommodationRepository accommodationRepository, UserRepository userRepository)
+        public RatedGuestsOverview(int ownerId)
         {
             InitializeComponent();
-            this.DataContext = new RatedGuestsOverviewViewModel(this, ownerId, accommodationRepository, userRepository);
+            this.DataContext = new RatedGuestsOverviewViewModel(this, ownerId);
         }
     }
 }
