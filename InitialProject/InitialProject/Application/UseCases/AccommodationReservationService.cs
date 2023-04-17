@@ -90,19 +90,5 @@ namespace InitialProject.Application.UseCases
         {
             _accommodationReservationRepository.Remove(reservation);
         }
-
-            /*public List<AccommodationReservation> LoadGuests(IEnumerable<AccommodationReservation> ratedReservations)
-            {
-                var updatedRatedReservations = new List<AccommodationReservation>();
-
-                foreach (var reservation in ratedReservations)
-                {
-                    reservation.Guest = _userRepository.GetById(reservation.GuestId);
-                    updatedRatedReservations.Add(reservation);
-                }
-
-                return updatedRatedReservations;
-            }*/
-        
     }
 }
