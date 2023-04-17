@@ -96,18 +96,5 @@ namespace InitialProject.Application.UseCases
             string yesNoanswer = _accommodationReservationRepository.IsAvailable(startDate, endDate, reservationId, accommodationId);
             if (yesNoanswer.Equals("yes")) return true; else return false;
         }
-
-            /*public List<AccommodationReservation> LoadGuests(IEnumerable<AccommodationReservation> ratedReservations)
-            {
-                var updatedRatedReservations = new List<AccommodationReservation>();
-
-                foreach (var reservation in ratedReservations)
-                {
-                    reservation.Guest = _userRepository.GetById(reservation.GuestId);
-                    updatedRatedReservations.Add(reservation);
-                }
-
-                return updatedRatedReservations;
-            }*/
     }
 }

@@ -89,17 +89,6 @@ namespace InitialProject.Application.UseCases
             return updatedReservation;
         }
 
-        /*public void DeclineRequest(Request selectedRequest)
-        {
-            _requestRepository.DeclineRequest(selectedRequest);
-        }
-
-        internal void AcceptRequest(Request selectedRequest)
-        {
-            _requestRepository.AcceptRequest(selectedRequest);
-            _accommodationReservationRepository.AcceptRequest(selectedRequest);
-        }*/
-
         public void CreateRequest(DateTime newStartDate, DateTime newEndDate, AccommodationReservation reservation)
         {
             _requestRepository.Save(newStartDate, newEndDate, RequestStatus.ON_HOLD, reservation);
