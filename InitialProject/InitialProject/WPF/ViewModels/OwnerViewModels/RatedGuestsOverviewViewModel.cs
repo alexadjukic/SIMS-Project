@@ -15,6 +15,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class RatedGuestsOverviewViewModel : ViewModelBase
     {
+        #region PROPERTIES
         private AccommodationReservation _selectedAccommodationReservation;
         public AccommodationReservation SelectedAccommodationReservation
         {
@@ -39,6 +40,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly UserRepository _userRepository;
 
         public ObservableCollection<AccommodationReservation> RatedReservations { get; set; }
+        #endregion
 
         public RatedGuestsOverviewViewModel(Window ratedGuestsOverview, int ownerId, AccommodationRepository accommodationRepository, UserRepository userRepository)
         {
@@ -66,7 +68,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-
+        #region COMMANDS
         public RelayCommand SeeRatingCommand { get; }
         public RelayCommand CloseWindowCommand { get; }
 
@@ -85,5 +87,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             _ratedGuestsOverview.Close();
         }
+        #endregion
     }
 }

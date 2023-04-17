@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Repositories;
+using InitialProject.WPF.Views.Guest1Views;
 using System.ComponentModel;
 using System.Configuration;
 using System.Runtime.CompilerServices;
@@ -24,6 +25,8 @@ namespace InitialProject.WPF.Views
         private readonly RatingRepository _ratingRepository;
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly CheckpointArrivalRepository _checkpointArrivalRepository;
+        private readonly AccommodationRatingRepository _accommodationRatingRepository;
+        private readonly AccommodationRatingImageRepository _accommodationRatingImageRepository;
 
         private string _username;
         public string Username
@@ -61,6 +64,8 @@ namespace InitialProject.WPF.Views
             _ratingRepository = new RatingRepository();
             _tourReservationRepository = new TourReservationRepository();
             _checkpointArrivalRepository = new CheckpointArrivalRepository();
+            _accommodationRatingRepository = new AccommodationRatingRepository();
+            _accommodationRatingImageRepository = new AccommodationRatingImageRepository(); 
         }
 
         private void SignIn(object sender, RoutedEventArgs e)
@@ -92,8 +97,8 @@ namespace InitialProject.WPF.Views
             }
             else if (user.Role == UserRole.GUEST1)
             {
-                Guest1AccommodationOverview guest1AccommodationOverview = new Guest1AccommodationOverview(user, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, _userRepository);
-                guest1AccommodationOverview.Show();
+                Guest1Menu guest1Menu = new Guest1Menu(_accommodationRepository, _accommodationImageRepository, _locationRepository, _accommodationRatingRepository, _accommodationRatingImageRepository, _accommodationReservationRepository, _userRepository, user);
+                guest1Menu.Show();
                 Close();
             }
             else if (user.Role == UserRole.GUEST2)

@@ -14,6 +14,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
     public class RatingOverviewWindowViewModel : ViewModelBase
     {
+        #region PROPERTIES
         private AccommodationReservation _selectedAccommodationReservation;
         public AccommodationReservation SelectedAccommodationReservation
         {
@@ -69,6 +70,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly Window _ratingOverviewWindow;
         private readonly RatingService _ratingService;
         private readonly AccommodationRatingService _accommodationRatingService;
+        #endregion
 
         public RatingOverviewWindowViewModel(Window ratingOverviewWindow, AccommodationReservation selectedAccommodationReservation)
         {
@@ -95,6 +97,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        
         private void FindGuestRating()
         {
             GuestRated = _accommodationRatingService.FindAccommodationRatingByReservationId(SelectedAccommodationReservation.Id);
@@ -109,11 +112,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         }
 
+        #region COMMANDS
         public RelayCommand CloseWindowCommand { get; }
 
         public void CloseWindowCommand_Execute(object? parameter)
         {
             _ratingOverviewWindow.Close();
         }
+        #endregion
     }
 }
