@@ -30,5 +30,15 @@ namespace InitialProject.Application.UseCases
         {
             return _checkpointArrivalService.GetAll().Where(c => c.Reservation.TourId == tour.Id).Sum(c => c.Reservation.NumberOfPeople);
         }
+
+        public IEnumerable<int> GetYearsThatHaveTours()
+        {
+            return _tourService.GetPastTours().Select(t => t.StartTime.Year).ToHashSet().OrderBy(y => y);
+        }
+
+        public Tour GetMostVisitedTourByYear(int year)
+        {
+            return _tourService.GetPastTours().Where(t => t.StartTime.Year == year).OrderByDescending(t => GetAttendance(t)).FirstOrDefault();
+        }
     }
 }

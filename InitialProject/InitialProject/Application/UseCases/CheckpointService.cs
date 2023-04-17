@@ -24,5 +24,12 @@ namespace InitialProject.Application.UseCases
             checkpoint.Tour = _tourService.GetById(checkpoint.TourId);
             return checkpoint;
         }
+
+        public IEnumerable<Checkpoint> GetAllByTour(Tour tour)
+        {
+            var checkpoints = _checkpointRepository.GetAll().Where(c => c.TourId == tour.Id).ToList();
+            checkpoints.ForEach(c => c.Tour = tour);
+            return checkpoints;
+        }
     }
 }

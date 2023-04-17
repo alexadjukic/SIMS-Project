@@ -51,5 +51,10 @@ namespace InitialProject.Application.UseCases
             tour.Location = _locationRepository.GetById(tour.LocationId);
             return tour;
         }
+
+        public IEnumerable<DateTime> GetAllStartTimesForTour(Tour tour)
+        {
+            return _tourRepository.GetAll().Where(t => t.Name == tour.Name).Select(t => t.StartTime);
+        }
     }
 }
