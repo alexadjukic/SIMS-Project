@@ -115,7 +115,7 @@
         <Border Grid.Row="3" Grid.ColumnSpan="3"  BorderBrush="Black" BorderThickness="1" Background="#FF19DABB" Margin="0,47,0,0" Grid.RowSpan="2">
             <Grid>
                 <Button Content="Close" Width="70" Height="25" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding CloseWindowCommand}"></Button>
-                <Button Content="Stats" Width="70" Height="25" HorizontalAlignment="Right" Margin="0,0,10,0" Command="{Binding CloseWindowCommand}"></Button>
+                <Button Content="Stats" Width="70" Height="25" HorizontalAlignment="Right" Margin="0,0,10,0" Command="{Binding OpenStatsCommand}"></Button>
             </Grid>
         </Border>
 

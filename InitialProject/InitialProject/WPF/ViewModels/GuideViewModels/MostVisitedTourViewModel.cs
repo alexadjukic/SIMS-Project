@@ -180,7 +180,8 @@ namespace InitialProject.WPF.ViewModels
 
 		public void OpenStatsCommand_Execute(object? parameter)
 		{
-
+			var tourStatisticsView = new TourStatisticsView(DisplayedTour);
+			tourStatisticsView.Show();
 		}
 
 		public void CloseWindowCommand_Execute(object? parameter)
