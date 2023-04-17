@@ -150,6 +150,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 _accommodationRatingService.SaveImage(url, accommodationRating.Id);
             }
+
+            _accommodationRatingService.SetOwnerRole(accommodationRating.OwnerId);
             _accommodationRatingForm.Close();
         }
 
