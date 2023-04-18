@@ -131,6 +131,7 @@ namespace InitialProject.WPF.Views
             }
             else 
             {
+                UseVoucher();
                 MakeNewReservation();
                 Close();
             }
@@ -142,12 +143,9 @@ namespace InitialProject.WPF.Views
             _tourReservationRepository.Save(SelectedTour.Id, LoggedUser.Id, NumberOfNewGuests, 0); //to-do: add option to enter age
             SelectedTour.MaxGuests = SelectedTour.MaxGuests - (int)NumberOfNewGuests;
             _tourRepository.Update(SelectedTour);
-            
-            MessageBox.Show("Your reservation was successful");
-            
-            Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, LoggedUser);
-            guest2TourOverview.Show();
         }
+
+
         public void OfferOtherTours()
         {
             AlternativeTourOffers alternativeTourOffers = new AlternativeTourOffers(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, LoggedUser, SelectedTour);
@@ -155,10 +153,11 @@ namespace InitialProject.WPF.Views
             Close();
         }
 
-        private void UseVoucher_Click(object sender, RoutedEventArgs e)
+        public void UseVoucher()
         {
             UseVoucherView useVoucherView = new UseVoucherView(LoggedUser);
             useVoucherView.Show();
         }
+
     }
 }

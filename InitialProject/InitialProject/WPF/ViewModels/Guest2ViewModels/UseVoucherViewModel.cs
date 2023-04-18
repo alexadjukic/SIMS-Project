@@ -76,17 +76,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
-        /*public bool HasVouchers()
-        {
-            if (Vouchers == null)
-            {
-                IsEnabledUseVoucher = false;
-                return false;
-            }
-            IsEnabledUseVoucher = true;
-            return true;
-        }*/
-
         #region COMMANDS
         public RelayCommand CancelCommand { get; }
         public RelayCommand UseVoucherCommand { get; }
@@ -94,6 +83,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             if(SelectedVoucher != null)
             {
+                MessageBox.Show("Your reservation was successful.");
                 _voucherService.RemoveVoucher(SelectedVoucher);
                 MessageBox.Show("Congratulations, you've used one voucher!");
                 _useVouchersView.Close();
@@ -101,6 +91,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         public void CancelCommand_Execute(object? parameter)
         {
+            MessageBox.Show("Your reservation was successful.");
             _useVouchersView.Close();
         }
         #endregion
