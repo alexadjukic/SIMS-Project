@@ -55,7 +55,7 @@ namespace InitialProject.WPF.Views
             tourCreationForm.Show();
         }
 
-        private void ButtonTrackTours_Click(object sender, RoutedEventArgs e)
+        private void ButtonTodaysTours_Click(object sender, RoutedEventArgs e)
         {
             TourTrackingWindow tourTrackingWindow = new TourTrackingWindow(_tourRepository, _locationRepository, _checkpointRepository, _tourReservationRepository, _checkpointArrivalRepository, _userRepository, _guide);
             tourTrackingWindow.Show();
@@ -68,11 +68,22 @@ namespace InitialProject.WPF.Views
             this.Close();
         }
 
-        private void ButtonTodaysTours_Click(object sender, RoutedEventArgs e)
+        private void ButtonYourTours_Click(object sender, RoutedEventArgs e)
         {
             YourToursView yourToursView = new YourToursView();
             yourToursView.Show();
-            this.Close();
+        }
+
+        private void ButtonStatistics_Click(object sender, RoutedEventArgs e)
+        {
+            var tourStatisticsSelectionView = new TourStatisticsSelectionView();
+            tourStatisticsSelectionView.Show();
+        }
+
+        private void ButtonReviews_Click(object sender, RoutedEventArgs e)
+        {
+            var tourReviewsView = new TourReviewsView();
+            tourReviewsView.Show();
         }
     }
 }

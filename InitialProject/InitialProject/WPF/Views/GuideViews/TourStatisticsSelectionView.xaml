@@ -4,27 +4,54 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
+        xmlns:cnv="clr-namespace:InitialProject.Converters"
         mc:Ignorable="d"
-        Title="TourStatisticsSelectionView" Height="250" Width="300" WindowStartupLocation="CenterScreen">
+        Title="TourStatisticsSelectionView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <cnv:TourStatusConverter x:Key="TourStatusConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="157*"/>
-            <RowDefinition Height="47*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="294*"/>
+            <RowDefinition Height="67*"/>
+            <RowDefinition Height="54*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" VerticalAlignment="Center">
-            <RadioButton Content="Most visited tours" HorizontalAlignment="Center" GroupName="StatisticsViewSelection" FontSize="16" FontWeight="Bold" Margin="0,10,0,10" IsChecked="{Binding IsMostVisitedToursChecked, UpdateSourceTrigger=PropertyChanged}"/>
-            <RadioButton Content="Tour attendance" HorizontalAlignment="Center" GroupName="StatisticsViewSelection" FontSize="16" FontWeight="Bold" Margin="0,10,0,10" IsChecked="{Binding IsTourAttendanceChecked, UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
+        <Menu Grid.Row="0" Margin="0,0,0,1">
+            <MenuItem Header="_Edit"/>
+            <MenuItem Header="_Help"/>
+        </Menu>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="0" Width="70" Height="25" Content="Cancel" Command="{Binding CloseWindowCommand}"/>
-            <Button Grid.Column="1" Width="70" Height="25" Content="Open" Command="{Binding OpenStatsCommand}"/>
-        </Grid>
+
+        <DataGrid Grid.Row="1" Margin="20,20,20,20" AutoGenerateColumns="False" ItemsSource="{Binding Path=PastTours, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedTour, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tour name" Width="2*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Location" Width="2*">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{} {0}, {1}">
+                            <Binding Path="Location.City"/>
+                            <Binding Path="Location.Country"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Start time" Width="1*" Binding="{Binding StartTime, StringFormat={}{0:dd.MM.yyyy HH\\:mm}}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Status" Width="1*"  Binding="{Binding Status, Converter={StaticResource ResourceKey=TourStatusConverter}}"/>
+                <DataGridTemplateColumn Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Stats" Command="{Binding DataContext.OpenStatsCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="2" Height="40" Width="150" Content="Most visited tour" Command="{Binding MostVisitedTourCommand}"/>
+
+        <Border Grid.Row="3" BorderBrush="Black" BorderThickness="1" Background="#FF19DABB" Margin="0,2,0,0">
+            <Button Content="Close" Width="70" Height="25" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding CloseWindowCommand}"></Button>
+        </Border>
     </Grid>
 </Window>
