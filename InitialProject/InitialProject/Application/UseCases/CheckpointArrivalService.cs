@@ -97,7 +97,10 @@ namespace InitialProject.Application.UseCases
 
         public CheckpointArrival Create(Checkpoint checkpoint, TourReservation reservation)
         {
-            return _checkpointArrivalRepository.Create(checkpoint.Id, reservation.Id);
+            var arrival = _checkpointArrivalRepository.Create(checkpoint.Id, reservation.Id);
+            arrival.Reservation = _tourReservationService.GetById(arrival.ReservationId);
+            arrival.Checkpoint = _checkpointService.GetById(arrival.CheckpointId);
+            return arrival;
         }
     }
 }

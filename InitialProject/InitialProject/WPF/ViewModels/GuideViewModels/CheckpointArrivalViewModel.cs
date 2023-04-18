@@ -108,7 +108,7 @@ namespace InitialProject.WPF.ViewModels
         {
             foreach (var arrival in _checkpointArrivalService.GetAllByCheckpoint(_checkpoint))
             {
-                if (ArrivedGuests.FirstOrDefault(g => g == arrival.Reservation.User) == null)
+                if (ArrivedGuests.FirstOrDefault(g => g.Id == arrival.Reservation.User.Id) == null)
                 {
                     _checkpointArrivalService.Delete(arrival);
                 }
@@ -120,7 +120,7 @@ namespace InitialProject.WPF.ViewModels
             var existingArrivals = _checkpointArrivalService.GetAllByCheckpoint(_checkpoint);
             foreach (var user in ArrivedGuests)
             {
-                if (existingArrivals.FirstOrDefault(a => a.Reservation.User == user) == null)
+                if (existingArrivals.FirstOrDefault(a => a.Reservation.User.Id == user.Id) == null)
                 {
                     var arrival = _checkpointArrivalService.Create(_checkpoint, _tourReservationService.GetByTourIdAndUserId(_tour.Id, user.Id));
                     _tourNotificationService.Create(arrival);
