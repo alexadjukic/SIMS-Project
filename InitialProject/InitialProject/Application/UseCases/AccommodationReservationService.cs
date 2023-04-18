@@ -27,9 +27,19 @@ namespace InitialProject.Application.UseCases
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
         }
 
-        public IEnumerable<AccommodationReservation> GetRatedReservations(int ownerId, AccommodationRepository accommodationRepository, UserRepository userRepository)
+        public IEnumerable<AccommodationReservation> GetRatedReservations(int ownerId)
         {
-            var ownerReservations = _accommodationReservationRepository.GetAllByOwnerId(ownerId, accommodationRepository, userRepository);
+            List<AccommodationReservation> ownerReservations = new List<AccommodationReservation>();
+            List<int> accommodationIdsForOwner = _accommodationRepository.AccommodationIdsByOwnerId(ownerId);
+
+            foreach (var reservation in _accommodationReservationRepository.GetAll())
+            {
+                if (accommodationIdsForOwner.Find(a => a == reservation.AccommodationId) != 0)
+                {
+                    reservation.Guest = _userRepository.GetAll().Find(g => g.Id == reservation.GuestId);
+                    ownerReservations.Add(reservation);
+                }
+            }
 
             var ratedReservations = RemoveUnratedReservations(ownerReservations);
 
@@ -81,18 +91,10 @@ namespace InitialProject.Application.UseCases
             _accommodationReservationRepository.Remove(reservation);
         }
 
-            /*public List<AccommodationReservation> LoadGuests(IEnumerable<AccommodationReservation> ratedReservations)
-            {
-                var updatedRatedReservations = new List<AccommodationReservation>();
-
-                foreach (var reservation in ratedReservations)
-                {
-                    reservation.Guest = _userRepository.GetById(reservation.GuestId);
-                    updatedRatedReservations.Add(reservation);
-                }
-
-                return updatedRatedReservations;
-            }*/
-        
+        public bool IsAccommodationAvailable(DateTime startDate, DateTime endDate, int reservationId, int accommodationId)
+        {
+            string yesNoanswer = _accommodationReservationRepository.IsAvailable(startDate, endDate, reservationId, accommodationId);
+            if (yesNoanswer.Equals("yes")) return true; else return false;
+        }
     }
 }

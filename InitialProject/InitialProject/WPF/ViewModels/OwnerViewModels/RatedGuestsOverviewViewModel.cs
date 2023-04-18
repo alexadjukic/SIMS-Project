@@ -36,19 +36,15 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly Window _ratedGuestsOverview;
         private readonly AccommodationReservationService _accommodationReservationService;
         private readonly int _ownerId;
-        private readonly AccommodationRepository _accommodationRepository;
-        private readonly UserRepository _userRepository;
 
         public ObservableCollection<AccommodationReservation> RatedReservations { get; set; }
         #endregion
 
-        public RatedGuestsOverviewViewModel(Window ratedGuestsOverview, int ownerId, AccommodationRepository accommodationRepository, UserRepository userRepository)
+        public RatedGuestsOverviewViewModel(Window ratedGuestsOverview, int ownerId)
         {
             _ratedGuestsOverview = ratedGuestsOverview;
             _accommodationReservationService = new AccommodationReservationService();
             _ownerId = ownerId;
-            _accommodationRepository = accommodationRepository;
-            _userRepository = userRepository;
 
             RatedReservations = new ObservableCollection<AccommodationReservation>();
 
@@ -62,7 +58,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             RatedReservations.Clear();
 
-            foreach (var reservation in _accommodationReservationService.GetRatedReservations(_ownerId, _accommodationRepository, _userRepository))
+            foreach (var reservation in _accommodationReservationService.GetRatedReservations(_ownerId))
             {
                 RatedReservations.Add(reservation);
             }

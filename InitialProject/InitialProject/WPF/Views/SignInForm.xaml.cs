@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.Models;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Domain.Models;
 using InitialProject.Repositories;
 using InitialProject.WPF.Views.Guest1Views;
 using InitialProject.WPF.Views.Guest2Views;
@@ -28,6 +29,8 @@ namespace InitialProject.WPF.Views
         private readonly CheckpointArrivalRepository _checkpointArrivalRepository;
         private readonly AccommodationRatingRepository _accommodationRatingRepository;
         private readonly AccommodationRatingImageRepository _accommodationRatingImageRepository;
+
+        private readonly SetOwnerRoleService _setOwnerRoleService;
 
         private string _username;
         public string Username
@@ -66,7 +69,23 @@ namespace InitialProject.WPF.Views
             _tourReservationRepository = new TourReservationRepository();
             _checkpointArrivalRepository = new CheckpointArrivalRepository();
             _accommodationRatingRepository = new AccommodationRatingRepository();
-            _accommodationRatingImageRepository = new AccommodationRatingImageRepository(); 
+            _accommodationRatingImageRepository = new AccommodationRatingImageRepository();
+
+            _setOwnerRoleService = new SetOwnerRoleService();
+
+            SetOwnerRole();
+        }
+
+        private void SetOwnerRole()
+        {
+            foreach (var user in _userRepository.GetAll())
+            {
+                if (user.Role == UserRole.OWNER || user.Role == UserRole.SUPER_OWNER)
+                {
+                    _setOwnerRoleService.SetOwnerRole(user.Id);
+                }
+                
+            }
         }
 
         private void SignIn(object sender, RoutedEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
+using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,9 +59,13 @@ namespace InitialProject.Application.UseCases
             foreach (var request in onHoldRequests)
             {
                 request.Reservation = _accommodationReservationRepository.GetById(request.ReservationId);
-                request.Reservation = LoadReservation(request.Reservation);
-                request.IsAvailable = _accommodationReservationRepository.IsAvailable(request.NewStartDate, request.NewEndDate, request.ReservationId, request.Reservation.AccommodationId);
-                updatedOnHoldRequests.Add(request);
+                if (request.Reservation != null)
+                {
+                    request.Reservation = LoadReservation(request.Reservation);
+                    request.IsAvailable = _accommodationReservationRepository.IsAvailable(request.NewStartDate, request.NewEndDate, request.ReservationId, request.Reservation.AccommodationId);
+                    updatedOnHoldRequests.Add(request);
+                }
+                
             }
 
             return updatedOnHoldRequests;
@@ -84,15 +89,25 @@ namespace InitialProject.Application.UseCases
             return updatedReservation;
         }
 
-        public void DeclineRequest(Request selectedRequest)
+        public void CreateRequest(DateTime newStartDate, DateTime newEndDate, AccommodationReservation reservation)
         {
-            _requestRepository.DeclineRequest(selectedRequest);
+            _requestRepository.Save(newStartDate, newEndDate, RequestStatus.ON_HOLD, reservation);
         }
 
-        internal void AcceptRequest(Request selectedRequest)
+        public IEnumerable<Request> GetRequestsByGuestId(int guestId)
         {
-            _requestRepository.AcceptRequest(selectedRequest);
-            _accommodationReservationRepository.AcceptRequest(selectedRequest);
+            List<Request> requests = new List<Request>();
+            var _requests = _requestRepository.GetAll();
+            _requests = LoadReservations(_requests);
+            foreach (var request in _requests)
+            {
+                if (request.Reservation.GuestId == guestId)
+                {
+                    requests.Add(request);
+                }
+            }
+
+            return requests;
         }
     }
 }

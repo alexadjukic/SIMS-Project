@@ -34,11 +34,11 @@ namespace InitialProject.Repositories
             return _tourReservations.FirstOrDefault(t =>  t.Id == id);
         }
 
-        public TourReservation Save(int tourId, int userId, int? numberOfPeople)
+        public TourReservation Save(int tourId, int userId, int? numberOfPeople, float age)
         {
             int id = NextId();
 
-            TourReservation tourReservation = new TourReservation(id, tourId, userId, numberOfPeople);
+            TourReservation tourReservation = new TourReservation(id, tourId, userId, numberOfPeople, age);
 
             _tourReservations.Add(tourReservation);
             _serializer.ToCSV(FilePath, _tourReservations);

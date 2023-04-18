@@ -65,6 +65,7 @@ namespace InitialProject.Repositories
 
         public Location GetById(int id)
         {
+            _locations = _serializer.FromCSV(FilePath);
             foreach (Location location in _locations)
             {
                 if (location.Id == id)

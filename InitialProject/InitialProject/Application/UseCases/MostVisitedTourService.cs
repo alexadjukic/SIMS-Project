@@ -10,13 +10,11 @@ namespace InitialProject.Application.UseCases
 {
     public class MostVisitedTourService
     {
-        private readonly ITourRepository _tourRepository;
         private readonly CheckpointArrivalService _checkpointArrivalService;
         private readonly TourService _tourService;
 
         public MostVisitedTourService()
         {
-            _tourRepository = Injector.CreateInstance<ITourRepository>();
             _checkpointArrivalService = new CheckpointArrivalService();
             _tourService = new TourService();
         }

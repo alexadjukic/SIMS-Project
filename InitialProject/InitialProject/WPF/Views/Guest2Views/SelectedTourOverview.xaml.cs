@@ -135,7 +135,7 @@ namespace InitialProject.WPF.Views
         private void MakeNewReservation()
         {
             TourReservation tourReservation = new TourReservation();
-            _tourReservationRepository.Save(SelectedTour.Id, LoggedUser.Id, NumberOfNewGuests);
+            _tourReservationRepository.Save(SelectedTour.Id, LoggedUser.Id, NumberOfNewGuests, 0); //to-do: add option to enter age
             SelectedTour.MaxGuests = SelectedTour.MaxGuests - (int)NumberOfNewGuests;
             _tourRepository.Update(SelectedTour);
             
