@@ -39,12 +39,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private readonly int _guestId;
         private readonly Window _reservationsView;
         private readonly AccommodationReservationService _reservationService;
+        private readonly AccommodationRatingService _ratingService;
         #endregion
 
         public ReservationsViewModel(Window reservationsView, int guestId)
         {
             _reservationsView = reservationsView;
             _reservationService = new AccommodationReservationService();
+            _ratingService = new AccommodationRatingService();
             _guestId = guestId;
 
             Reservations = new ObservableCollection<AccommodationReservation>();
@@ -64,6 +66,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 Reservations.Add(reservation);
             }
+        }
+
+        private bool IsReservationRated()
+        {
+            return _ratingService.FindAccommodationRatingByReservationId(_selectedReservation.Id) != null;
         }
 
         #region COMMANDS
@@ -95,7 +102,9 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public bool RateYourStayCommand_CanExecute(object? parameter)
         {
-            return SelectedReservation is not null && (DateTime.Now - SelectedReservation.EndDate).Days < 6 && DateTime.Compare(DateTime.Now.Date, SelectedReservation.EndDate.Date) >= 0;
+            return SelectedReservation is not null && (DateTime.Now - SelectedReservation.EndDate).Days < 6 
+                && DateTime.Compare(DateTime.Now.Date, SelectedReservation.EndDate.Date) >= 0
+                && !IsReservationRated();
         }
 
         public void ChangeReservationCommand_Execute(object? parameter)
