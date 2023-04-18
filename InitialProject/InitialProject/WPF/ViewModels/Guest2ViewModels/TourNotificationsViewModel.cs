@@ -1,6 +1,8 @@
 ﻿using InitialProject.Application.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.DTOs;
 using InitialProject.Domain.Models;
+using InitialProject.WPF.Views.Guest2Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,14 +49,23 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             LoggedUser = user;
             TourNotifications = new ObservableCollection<TourNotification>();
             LoadNotifications();
+            ViewNotificationCommand = new RelayCommand(ViewNotificationCommand_Execute);
         }
 
         public void LoadNotifications()
         {
-            TourNotifications = (ObservableCollection<TourNotification>)_tourNotificationService.GetNotificationsByUser(LoggedUser.Id);
+            TourNotifications = _tourNotificationService.GetNotificationsByUser(LoggedUser.Id);
         }
 
         #region COMMANDS
+        public RelayCommand ViewNotificationCommand { get; }
+
+        public void ViewNotificationCommand_Execute(object? parameter)
+        {
+            SelectedTourNotificationView selectedTourNotificationView = new SelectedTourNotificationView(LoggedUser, SelectedNotification);
+            selectedTourNotificationView.Show();
+            _tourNotificationsView.Close();
+        }
         #endregion
     }
 }

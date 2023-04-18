@@ -17,5 +17,6 @@
         <Button Content="New Complexed Tour Request" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top" Width="170"/>
         <Button Content="Close" HorizontalAlignment="Center" Margin="0,335,0,0" VerticalAlignment="Top" Width="170" Command="{Binding CloseWindowCommand}"/>
         <Button Content="Vouchers" HorizontalAlignment="Left" Margin="319,10,0,0" VerticalAlignment="Top" Width="71" />
+        <Button Command="{Binding OpenNotificationsCommand}" Content="Notifications" HorizontalAlignment="Left" Margin="319,35,0,0" VerticalAlignment="Top" Width="71" />
     </Grid>
 </Window>
