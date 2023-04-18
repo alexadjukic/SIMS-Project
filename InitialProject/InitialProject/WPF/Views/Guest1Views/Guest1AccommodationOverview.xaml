@@ -40,7 +40,7 @@
                 <DataGridTextColumn Header="Min. days before cancel" Width="140" Binding="{Binding MinDaysBeforeCancel}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Sign out" FontWeight="Bold" HorizontalAlignment="Left" Margin="46,374,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="SignOutButton_Click"/>
+        <Button Content="Close" FontWeight="Bold" HorizontalAlignment="Left" Margin="46,374,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="SignOutButton_Click"/>
         <Button x:Name="BookButton" Content="See availability" FontWeight="Bold" HorizontalAlignment="Left" Margin="650,374,0,0" VerticalAlignment="Top" Width="100" Height="25" Click="BookButton_Click"/>
     </Grid>
 </Window>

@@ -215,8 +215,6 @@ namespace InitialProject.WPF.Views
 
         private void SignOutButton_Click(object sender, RoutedEventArgs e)
         {
-            SignInForm signInForm = new SignInForm();
-            signInForm.Show();
             Close();
         }
 
