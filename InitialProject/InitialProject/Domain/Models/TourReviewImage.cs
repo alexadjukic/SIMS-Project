@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.Models
 {
-    public class TourRatingImage : ISerializable
+    public class TourReviewImage : ISerializable
     {
         public int Id { get; set; }
         public string Url { get; set; }
         public int ReviewId { get; set; }
 
-        public TourRatingImage() { }
+        public TourReviewImage() { }
 
-        public TourRatingImage(string url, int reviewId)
+        public TourReviewImage(string url, int reviewId)
         {
             Url = url;
             ReviewId = reviewId;

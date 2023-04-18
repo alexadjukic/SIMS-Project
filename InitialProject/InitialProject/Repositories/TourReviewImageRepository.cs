@@ -9,25 +9,25 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repositories
 {
-    public class TourRatingImageRepository : ITourRatingImageRepository
+    public class TourReviewImageRepository : ITourReviewImageRepository
     {
-        private const string FilePath = "../../../Resources/Data/tourRatingImages.csv";
-        private readonly Serializer<TourRatingImage> _serializer;
+        private const string FilePath = "../../../Resources/Data/tourReviewImages.csv";
+        private readonly Serializer<TourReviewImage> _serializer;
 
-        private List<TourRatingImage> _images;
+        private List<TourReviewImage> _images;
 
-        public TourRatingImageRepository()
+        public TourReviewImageRepository()
         {
-            _serializer = new Serializer<TourRatingImage>();
+            _serializer = new Serializer<TourReviewImage>();
             _images = _serializer.FromCSV(FilePath);
         }
 
-        public List<TourRatingImage> GetAll()
+        public List<TourReviewImage> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public List<TourRatingImage> LoadAllImages()
+        public List<TourReviewImage> LoadAllImages()
         {
             return _serializer.FromCSV(FilePath);
         }
@@ -44,11 +44,11 @@ namespace InitialProject.Repositories
             return _images.Max(c => c.Id) + 1;
         }
 
-        public TourRatingImage Save(string url, int reviewId)
+        public TourReviewImage Save(string url, int reviewId)
         {
             int id = NextId();
             
-            TourRatingImage image = new TourRatingImage(url, reviewId);
+            TourReviewImage image = new TourReviewImage(url, reviewId);
             image.Id = id;
             _images.Add(image);
             SaveAllImages();

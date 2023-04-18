@@ -22,7 +22,7 @@ namespace InitialProject
             { typeof(ICheckpointRepository), new CheckpointRepository() },
             { typeof(IRequestRepository), new RequestRepository() },
             { typeof(IAccommodationRatingImageRepository), new AccommodationRatingImageRepository() },
-            { typeof(ITourRatingImageRepository), new TourRatingImageRepository() },
+            { typeof(ITourReviewImageRepository), new TourReviewImageRepository() },
             { typeof(ITourNotificationRepository), new TourNotificationRepository() }
         };
 

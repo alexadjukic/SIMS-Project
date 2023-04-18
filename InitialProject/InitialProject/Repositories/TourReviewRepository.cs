@@ -14,7 +14,7 @@ namespace InitialProject.Repositories
     {
         private const string FilePath = "../../../Resources/Data/tourReviews.csv";
         private readonly Serializer<TourReview> _serializer;
-        private readonly ITourRatingImageRepository _tourRatingImageRepository;
+        private readonly ITourReviewImageRepository _tourRatingImageRepository;
         private List<TourReview> _reviews;
 
         public TourReviewRepository()
@@ -22,7 +22,7 @@ namespace InitialProject.Repositories
             _serializer = new Serializer<TourReview>();
             _reviews = _serializer.FromCSV(FilePath);
             //_tourRatingImageRepository = Injector.CreateInstance<ITourRatingImageRepository>();
-            _tourRatingImageRepository = new TourRatingImageRepository();
+            _tourRatingImageRepository = new TourReviewImageRepository();
         }
 
         public void Delete(TourReview review)

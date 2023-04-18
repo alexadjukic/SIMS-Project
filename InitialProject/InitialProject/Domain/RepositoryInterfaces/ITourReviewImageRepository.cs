@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface ITourRatingImageRepository
+    public interface ITourReviewImageRepository
     {
-        public List<TourRatingImage> GetAll();
-        public TourRatingImage Save(string url, int reviewId);
-        public List<TourRatingImage> LoadAllImages();
+        public List<TourReviewImage> GetAll();
+        public TourReviewImage Save(string url, int reviewId);
+        public List<TourReviewImage> LoadAllImages();
         public void SaveAllImages();
         public int NextId();
     }
