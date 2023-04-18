@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.RepositoryInterfaces;
+﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,11 @@ namespace InitialProject.Application.UseCases
         public void SaveImage(string url, int reviewId)
         {
             _tourReviewImageRepository.Save(url, reviewId);
+        }
+
+        public IEnumerable<TourReviewImage> GetAll()
+        {
+            return _tourReviewImageRepository.GetAll();
         }
     }
 }

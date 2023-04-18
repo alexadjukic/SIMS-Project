@@ -23,7 +23,8 @@ namespace InitialProject
             { typeof(IRequestRepository), new RequestRepository() },
             { typeof(IAccommodationRatingImageRepository), new AccommodationRatingImageRepository() },
             { typeof(ITourReviewImageRepository), new TourReviewImageRepository() },
-            { typeof(ITourNotificationRepository), new TourNotificationRepository() }
+            { typeof(ITourNotificationRepository), new TourNotificationRepository() },
+            { typeof(ITourImageRepository), new TourImageRepository() }
         };
 
         public static T CreateInstance<T>()

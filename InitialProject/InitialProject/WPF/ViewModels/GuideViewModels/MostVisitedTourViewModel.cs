@@ -85,8 +85,8 @@ namespace InitialProject.WPF.ViewModels
 			}
 		}
 
-		private int _selectedYear;
-		public int SelectedYear
+		private int? _selectedYear;
+		public int? SelectedYear
 		{
 			get
 			{
@@ -112,6 +112,7 @@ namespace InitialProject.WPF.ViewModels
 		private readonly MostVisitedTourService _mostVisitedTourService;
 		private readonly CheckpointService _checkpointService;
 		private readonly TourService _tourService;
+		private readonly TourImageService _tourImageService;
 		#endregion
 
 		public MostVisitedTourViewModel(Window mostVisitedToursView)
@@ -121,12 +122,13 @@ namespace InitialProject.WPF.ViewModels
             _mostVisitedTourService = new MostVisitedTourService();
             _checkpointService = new CheckpointService();
 			_tourService = new TourService();
+			_tourImageService = new TourImageService();
 
 
             PossibleYears = new ObservableCollection<int>(_mostVisitedTourService.GetYearsThatHaveTours());
             Checkpoints = new ObservableCollection<Checkpoint>();
 			StartTimes = new ObservableCollection<DateTime>();
-
+			Images = new ObservableCollection<BitmapImage>();
 
             IsAllTimeRBChecked = true;
             IsYearlyRBChecked = false;
@@ -135,6 +137,8 @@ namespace InitialProject.WPF.ViewModels
 
 			OpenStatsCommand = new RelayCommand(OpenStatsCommand_Execute);
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
+			NextImageCommand = new RelayCommand(NextImageCommand_Execute, NextImageCommand_CanExecute);
+			PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute, PreviousImageCommand_CanExecute);
         }
 
         private void LoadData()
@@ -142,6 +146,25 @@ namespace InitialProject.WPF.ViewModels
             LoadDisplayedTour();
             LoadCheckpoints();
 			LoadStartTimes();
+			LoadImages();
+			LoadSelectedImage();
+        }
+
+        private void LoadSelectedImage()
+        {
+			if (Images.Count != 0)
+			{
+				SelectedImage = Images[0];
+			}
+        }
+
+        private void LoadImages()
+        {
+			Images.Clear();
+			foreach (var image in _tourImageService.GetAllByTour(DisplayedTour))
+			{
+				Images.Add(new BitmapImage(new Uri(image.Url)));
+			}
         }
 
         private void LoadStartTimes()
@@ -155,13 +178,13 @@ namespace InitialProject.WPF.ViewModels
 
         private void LoadDisplayedTour()
 		{
-			if (IsAllTimeRBChecked)
+			if (IsAllTimeRBChecked || SelectedYear is null)
 			{
 				DisplayedTour = _mostVisitedTourService.GetAllTimeMostVisitedTour();
 			}
 			else
 			{
-				DisplayedTour = _mostVisitedTourService.GetMostVisitedTourByYear(SelectedYear);
+				DisplayedTour = _mostVisitedTourService.GetMostVisitedTourByYear((int)SelectedYear);
 			}
 		}
 
@@ -177,6 +200,42 @@ namespace InitialProject.WPF.ViewModels
 		#region COMMANDS
 		public RelayCommand OpenStatsCommand { get; }
 		public RelayCommand CloseWindowCommand { get; }
+		public RelayCommand NextImageCommand { get; }
+		public RelayCommand PreviousImageCommand { get; }
+
+		public void PreviousImageCommand_Execute(object? prameter)
+		{
+            for (int i = 0; i < Images.Count; i++)
+            {
+                if (SelectedImage == Images[i])
+                {
+                    SelectedImage = Images[i - 1];
+                    return;
+                }
+            }
+        }
+
+		public bool PreviousImageCommand_CanExecute(object? parameter)
+		{
+			return SelectedImage != Images.First();
+		}
+
+		public void NextImageCommand_Execute(object? parameter)
+		{
+			for (int i = 0; i < Images.Count; i++)
+			{
+				if (SelectedImage == Images[i])
+				{
+					SelectedImage = Images[i + 1];
+					return;
+				}
+			}
+		}
+
+		public bool NextImageCommand_CanExecute(object? parameter)
+		{
+			return SelectedImage != Images.Last();
+		}
 
 		public void OpenStatsCommand_Execute(object? parameter)
 		{

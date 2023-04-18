@@ -93,11 +93,11 @@
 
         <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Height="125" Width="250" Source="{Binding SelectedImage}"></Image>
 
-        <Button Grid.Row="2" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" Margin="70,0,0,0" BorderBrush="White" Background="White">
+        <Button Grid.Row="2" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" Margin="70,0,0,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
             <Image Source="../../../Resources/Images/left_arrow.png"/>
         </Button>
 
-        <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,70,0" BorderBrush="White" Background="White">
+        <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,70,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
             <Image Source="../../../Resources/Images/right_arrow.png"></Image>
         </Button>
 
