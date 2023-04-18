@@ -17,9 +17,8 @@ namespace InitialProject.Domain.Models
 
         }
 
-        public TourReview(int id, int guideKnowledgeGrade, int guideLanguageGrade, int interestingnessGrade, string comment, int arrivalId)
+        public TourReview(int guideKnowledgeGrade, int guideLanguageGrade, int interestingnessGrade, string comment, int arrivalId)
         {
-            Id = id;
             GuideKnowledgeGrade = guideKnowledgeGrade;
             GuideLanguageGrade = guideLanguageGrade;
             InterestingnessGrade = interestingnessGrade;

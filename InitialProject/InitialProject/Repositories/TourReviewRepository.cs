@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace InitialProject.Repositories
 {
@@ -13,13 +14,15 @@ namespace InitialProject.Repositories
     {
         private const string FilePath = "../../../Resources/Data/tourReviews.csv";
         private readonly Serializer<TourReview> _serializer;
-
+        private readonly ITourRatingImageRepository _tourRatingImageRepository;
         private List<TourReview> _reviews;
 
         public TourReviewRepository()
         {
             _serializer = new Serializer<TourReview>();
             _reviews = _serializer.FromCSV(FilePath);
+            //_tourRatingImageRepository = Injector.CreateInstance<ITourRatingImageRepository>();
+            _tourRatingImageRepository = new TourRatingImageRepository();
         }
 
         public void Delete(TourReview review)
@@ -45,9 +48,14 @@ namespace InitialProject.Repositories
             return _reviews.Max(t => t.Id) + 1;
         }
 
-        public TourReview Save(TourReview review)
+        public TourReview Save(TourReview review, List<BitmapImage> images)
         {
-            review.Id = NextId();
+            int id = NextId();
+            review.Id = id;
+            foreach(var image in  images)
+            {
+                _tourRatingImageRepository.Save(image.ToString(), id);
+            }
             _reviews = _serializer.FromCSV(FilePath);
             _reviews.Add(review);
             _serializer.ToCSV(FilePath, _reviews);
