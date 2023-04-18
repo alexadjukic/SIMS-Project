@@ -1,0 +1,18 @@
+﻿<Window x:Class="InitialProject.WPF.Views.Guest2Views.TourNotifications"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
+        mc:Ignorable="d"
+        Title="TourNotifications" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="DataGridTours" ItemsSource="{Binding AlternativeTours, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding AlternativeSelectedTour, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="190,33,223,56">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="200" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Status" Width="200" Binding="{Binding Location.Country}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
