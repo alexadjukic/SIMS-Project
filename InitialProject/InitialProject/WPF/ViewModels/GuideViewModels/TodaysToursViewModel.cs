@@ -165,8 +165,8 @@ namespace InitialProject.WPF.ViewModels
 
         public void GuestListCommand_Execute(object? parameter)
         {
-            /*var checkpointArrivalWindow = new CheckpointArrivalWindow(_tourReservationRepository, _checkpointArrivalRepository, _userRepository, SelectedCheckpoint, ActiveTour);
-            checkpointArrivalWindow.Show();*/
+            var checkpointArrivalWindow = new CheckpointArrivalView(SelectedCheckpoint, ActiveTour);
+            checkpointArrivalWindow.Show();
         }
 
         public bool GuestListCommand_CanExecute(object? parameter)

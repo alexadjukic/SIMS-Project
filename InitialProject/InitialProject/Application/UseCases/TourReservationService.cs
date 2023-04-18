@@ -12,17 +12,20 @@ namespace InitialProject.Application.UseCases
     {
         private readonly ITourReservationRepository _tourReservationRepository;
         private readonly TourService _tourService;
+        private readonly UserService _userService;
 
         public TourReservationService()
         {
             _tourReservationRepository = Injector.CreateInstance<ITourReservationRepository>();
             _tourService = new TourService();
+            _userService = new UserService();
         }
 
         public TourReservation GetById(int id)
         {
             var tourReservation = _tourReservationRepository.GetById(id);
             tourReservation.Tour = _tourService.GetById(tourReservation.TourId);
+            tourReservation.User = _userService.GetById(tourReservation.UserId);
             return tourReservation;
         }
 
@@ -33,10 +36,23 @@ namespace InitialProject.Application.UseCases
             {
                 if(reservation.TourId == tourId && reservation.UserId == userId)
                 {
+                    reservation.Tour = _tourService.GetById(reservation.TourId);
+                    reservation.User = _userService.GetById(reservation.UserId);
                     return reservation;
                 }
             }
             return null;
+        }
+
+        public IEnumerable<TourReservation> GetAllByTour(Tour tour)
+        {
+            var reservations = _tourReservationRepository.GetAll().Where(r => r.TourId == tour.Id);
+            foreach (var reservation in reservations)
+            {
+                reservation.Tour = tour;
+                reservation.User = _userService.GetById(reservation.UserId);
+            }
+            return reservations;
         }
     }
 }

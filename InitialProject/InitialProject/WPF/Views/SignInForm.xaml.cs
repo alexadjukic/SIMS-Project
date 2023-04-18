@@ -131,7 +131,7 @@ namespace InitialProject.WPF.Views
             }
             else if (user.Role == UserRole.GUIDE)
             {
-                GuideMenu guideMenu = new GuideMenu(_tourRepository, _tourImageRepository, _locationRepository, _checkpointRepository, _tourReservationRepository, _checkpointArrivalRepository, _userRepository, user);
+                GuideMenu guideMenu = new GuideMenu(_tourRepository, _tourImageRepository, _locationRepository, _checkpointRepository, user);
                 guideMenu.Show();
                 Close();
             }
