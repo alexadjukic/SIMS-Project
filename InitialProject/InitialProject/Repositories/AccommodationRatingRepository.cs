@@ -59,7 +59,7 @@ namespace InitialProject.Repositories
             return accommodationRating;
         }
 
-        public int CalculateNumberOfRatings(int ownerId)
+        /*public int CalculateNumberOfRatings(int ownerId)
         {
             _accommodationRatings = _serializer.FromCSV(FilePath);
 
@@ -97,6 +97,6 @@ namespace InitialProject.Repositories
             }
 
             return sumRatings;
-        }
+        }*/
     }
 }

@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.RepositoryInterfaces;
+﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,24 @@ namespace InitialProject.Application.UseCases
 
         public int CalculateNumberOfRatings(int ownerId)
         {
-            int numberOfRatings = _accommodationRatingRepository.CalculateNumberOfRatings(ownerId);
+            //int numberOfRatings = _accommodationRatingRepository.CalculateNumberOfRatings(ownerId);
+            int numberOfRatings = _accommodationRatingRepository.GetAll().Count(ar => ar.OwnerId == ownerId);
             return numberOfRatings;
         }
 
-        internal double CalculateTotalRating(int ownerId)
+        public double CalculateTotalRating(int ownerId)
         {
-            double totalRating = _accommodationRatingRepository.CalculateTotalRating(ownerId);
-            return totalRating;
+            /*double totalRating = _accommodationRatingRepository.CalculateTotalRating(ownerId);
+            return totalRating;*/
+            int numberOfRatings = CalculateNumberOfRatings(ownerId);
+
+            if (numberOfRatings != 0)
+            {
+                int SumOfRatings = FindSumOfAllRatings(ownerId);
+                return (double)SumOfRatings / (2 * (double)numberOfRatings);
+            }
+
+            return 0;
         }
 
         public void SetOwnerRole(int ownerId)
@@ -40,6 +51,21 @@ namespace InitialProject.Application.UseCases
 
             _userRepository.SetOwnerRole(ownerId, numberOfRatings, totalRating);
             _accommodationRepository.SetSuperOwnerMark(ownerId, numberOfRatings, totalRating);
+        }
+
+        private int FindSumOfAllRatings(int ownerId)
+        {
+            List<AccommodationRating> accommodationRatingsForOwner = _accommodationRatingRepository.GetAll().FindAll(ar => ar.OwnerId == ownerId);
+
+            int sumRatings = 0;
+
+            foreach (var rating in accommodationRatingsForOwner)
+            {
+                sumRatings += rating.Cleanliness;
+                sumRatings += rating.Correctness;
+            }
+
+            return sumRatings;
         }
     }
 }

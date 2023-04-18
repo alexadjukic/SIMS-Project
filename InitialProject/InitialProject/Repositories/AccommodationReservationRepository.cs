@@ -98,7 +98,7 @@ namespace InitialProject.Repositories
             return _accommodationReservations.FirstOrDefault(r => r.Id == reservationId);
         }
 
-        public string IsAvailable(DateTime newStartDate, DateTime newEndDate, int reservationId, int accommodationId)
+        /*public string IsAvailable(DateTime newStartDate, DateTime newEndDate, int reservationId, int accommodationId)
         {
             List<DateTime> allSingleDates = FindDatesBetween(newStartDate, newEndDate);
 
@@ -140,7 +140,7 @@ namespace InitialProject.Repositories
             }
 
             return resultingDates;
-        }
+        }*/
 
         public void AcceptRequest(Request selectedRequest)
         {

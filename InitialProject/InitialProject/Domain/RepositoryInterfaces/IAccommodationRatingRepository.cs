@@ -13,7 +13,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public AccommodationRating Save(int cleanliness, int correctness, string comment, int reservationId, int ownerId, int raterId);
         public int NextId();
         AccommodationRating FindByReservationId(int reservationId);
-        int CalculateNumberOfRatings(int ownerId);
-        double CalculateTotalRating(int ownerId);
+        /*int CalculateNumberOfRatings(int ownerId);
+        double CalculateTotalRating(int ownerId);*/
     }
 }

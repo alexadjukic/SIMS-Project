@@ -133,7 +133,7 @@ namespace InitialProject.WPF.Views
 
         private void ButtonRequests_Click(object sender, RoutedEventArgs e)
         {
-            RequestsOverview requestsOverview = new RequestsOverview();
+            RequestsOverview requestsOverview = new RequestsOverview(_ownerId);
             requestsOverview.Show();
         }
     }
