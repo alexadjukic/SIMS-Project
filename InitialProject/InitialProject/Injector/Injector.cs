@@ -25,7 +25,8 @@ namespace InitialProject
             { typeof(ITourReviewImageRepository), new TourReviewImageRepository() },
             { typeof(ITourNotificationRepository), new TourNotificationRepository() },
             { typeof(ITourImageRepository), new TourImageRepository() },
-            { typeof(IAccommodationNotificationRepository), new AccommodationNotificationRepository() }
+            { typeof(IAccommodationNotificationRepository), new AccommodationNotificationRepository() },
+            { typeof(IVoucherRepository), new VoucherRepository() }
         };
 
         public static T CreateInstance<T>()

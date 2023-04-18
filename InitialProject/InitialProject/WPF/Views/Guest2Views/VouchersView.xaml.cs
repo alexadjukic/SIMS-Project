@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Domain.Models;
+using InitialProject.WPF.ViewModels.Guest2ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,10 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// </summary>
     public partial class VouchersView : Window
     {
-        public VouchersView()
+        public VouchersView(User user)
         {
             InitializeComponent();
+            this.DataContext = new VouchersViewModel(this, user);
         }
     }
 }

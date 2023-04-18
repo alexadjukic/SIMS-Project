@@ -46,9 +46,9 @@ namespace InitialProject.Application.UseCases
             _tourRepository.Update(tour);
         }
 
-        public ObservableCollection<TourCheckpoint> GetReservedTours(User user)
+        public IEnumerable<TourCheckpoint> GetReservedTours(User user)
         {
-            var reservedTours = new ObservableCollection<TourCheckpoint>();
+            var reservedTours = new List<TourCheckpoint>();
             var checkpoints = _checkpointRepository.GetAll();
             var usersReservedTours = _tourReservationRepository.GetAll().Where(t => t.UserId == user.Id);
 

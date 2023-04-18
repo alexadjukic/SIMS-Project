@@ -47,7 +47,9 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         public void ShowVouchersCommand_Execute(object? parameter)
         {
-
+            VouchersView vouchersView = new VouchersView(LoggedUser);
+            vouchersView.Show();
+            _guest2MenuView.Close();
         }
 
         public void OpenNotificationsCommand_Execute(object? parameter)

@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="VouchersView" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="DataGridTours" ItemsSource="{Binding Vouchers, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="114,46,114,64">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="280" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Expiry Date" Width="300" Binding="{Binding ExpiryDate}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

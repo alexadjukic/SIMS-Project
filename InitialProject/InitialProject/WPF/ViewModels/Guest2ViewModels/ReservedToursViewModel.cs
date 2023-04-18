@@ -74,7 +74,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         public void LoadReservedTours()
         {
-            ReservedTours = _tourService.GetReservedTours(LoggedUser);
+            foreach(var reservation in _tourService.GetReservedTours(LoggedUser))
+            {
+                ReservedTours.Add(reservation);
+            }
         }
 
         public bool HasSelectedValidReservation()
