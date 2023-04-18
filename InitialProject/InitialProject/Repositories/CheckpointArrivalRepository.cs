@@ -82,5 +82,13 @@ namespace InitialProject.Repositories
             _serializer.ToCSV(FilePath, _checkpointArrivals);
             return newCheckpointArrival;
         }
+
+        public void RemoveById(int checkpointId)
+        {
+            _checkpointArrivals = _serializer.FromCSV(FilePath);
+            CheckpointArrival current = _checkpointArrivals.Find(c => c.Id == checkpointId);
+            _checkpointArrivals.Remove(current);
+            _serializer.ToCSV(FilePath, _checkpointArrivals);
+        }
     }
 }

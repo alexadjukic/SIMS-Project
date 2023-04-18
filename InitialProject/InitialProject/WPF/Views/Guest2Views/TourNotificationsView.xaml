@@ -13,5 +13,6 @@
                 <DataGridTextColumn Header="Status" Width="200" Binding="{Binding Status}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button Command="{Binding ViewNotificationCommand}" Content="View" HorizontalAlignment="Left" Margin="336,383,0,0" VerticalAlignment="Top" Width="96" FontWeight="Bold"/>
     </Grid>
 </Window>

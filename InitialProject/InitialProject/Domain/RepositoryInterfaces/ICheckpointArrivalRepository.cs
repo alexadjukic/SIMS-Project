@@ -18,5 +18,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public IEnumerable<CheckpointArrival> GetAllByCheckpointId(int checkpointId);
         public void Delete(CheckpointArrival checkpointArrival);
         public CheckpointArrival Create(int checkpointId, int userId);
+        public void RemoveById(int checkpointId);
     }
 }

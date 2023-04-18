@@ -3,6 +3,7 @@ using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
 using InitialProject.WPF.Views;
+using InitialProject.WPF.Views.Guest2Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,12 +35,20 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             LogOutCommand = new RelayCommand(LogOutCommand_Execute);
+            OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
         }
 
         #region COMMANDS
         public RelayCommand CloseWindowCommand { get; }
         public RelayCommand LogOutCommand {  get; }
-        
+        public RelayCommand OpenNotificationsCommand { get; }
+
+        public void OpenNotificationsCommand_Execute(object? parameter)
+        {
+            TourNotificationsView tourNotificationsView = new TourNotificationsView(LoggedUser);
+            tourNotificationsView.Show();
+            _guest2MenuView.Close();
+        }
         public void LogOutCommand_Execute(object? parameter)
         {
             SignInForm signInForm = new SignInForm();

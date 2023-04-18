@@ -3,6 +3,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
@@ -28,13 +29,13 @@ namespace InitialProject.Repositories
             return _serializer.FromCSV(FilePath);
         }
 
-        public IEnumerable<TourNotification> GetAllByUserId(int userId)
+        public ObservableCollection<TourNotification> GetAllByUserId(int userId)
         {
-            var notifications = GetAll();
-            var returnedNotifications = new List<TourNotification>();
+            var notifications = _serializer.FromCSV(FilePath);
+            var returnedNotifications = new ObservableCollection<TourNotification>();
             foreach (var notification in notifications)
             {
-                if (notification.UserId == userId)
+                if (notification.UserId == userId && notification.Status == NotificationStatus.UNREAD)
                 {
                     returnedNotifications.Add(notification);
                 }
@@ -60,6 +61,15 @@ namespace InitialProject.Repositories
             _notifications.Add(tourNotification);
             _serializer.ToCSV(FilePath, _notifications);
             return tourNotification;
+        }
+
+        public void Update(TourNotification tourNotification)
+        {
+            _notifications = _serializer.FromCSV(FilePath);
+            TourNotification current = _notifications.Find(n => n.Id == tourNotification.Id);
+            _notifications.Remove(current);
+            _notifications.Add(tourNotification);
+            _serializer.ToCSV(FilePath, _notifications);
         }
     }
 }

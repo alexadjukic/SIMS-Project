@@ -54,5 +54,11 @@ namespace InitialProject.Application.UseCases
             arrival.Checkpoint = _checkpointService.GetById(arrival.CheckpointId);
             return arrival;
         }
+
+        public void Remove(int id)
+        {
+            _checkpointArrivalRepository.RemoveById(id);
+        }
+
     }
 }
