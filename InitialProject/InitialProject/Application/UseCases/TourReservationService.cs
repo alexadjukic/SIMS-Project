@@ -25,5 +25,18 @@ namespace InitialProject.Application.UseCases
             tourReservation.Tour = _tourService.GetById(tourReservation.TourId);
             return tourReservation;
         }
+
+        public TourReservation GetByTourIdAndUserId(int tourId, int userId)
+        {
+            var reservations = _tourReservationRepository.GetAll();
+            foreach (var reservation in reservations)
+            {
+                if(reservation.TourId == tourId && reservation.UserId == userId)
+                {
+                    return reservation;
+                }
+            }
+            return null;
+        }
     }
 }

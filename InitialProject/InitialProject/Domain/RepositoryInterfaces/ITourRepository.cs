@@ -15,5 +15,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public void Delete(Tour tour);
         public Tour Update(Tour tour);
         public Tour Create(string name, Location location, int locationId, string description, string language, int maxGuests, DateTime startTime, double duration, string coverImageUrl, int guideId);
+        public Tour GetById(int id);
     }
 }
