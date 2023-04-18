@@ -22,7 +22,8 @@ namespace InitialProject
             { typeof(ICheckpointRepository), new CheckpointRepository() },
             { typeof(IRequestRepository), new RequestRepository() },
             { typeof(IAccommodationRatingImageRepository), new AccommodationRatingImageRepository() },
-            { typeof(ITourRatingImageRepository), new TourRatingImageRepository() }
+            { typeof(ITourRatingImageRepository), new TourRatingImageRepository() },
+            { typeof(ITourNotificationRepository), new TourNotificationRepository() }
         };
 
         public static T CreateInstance<T>()
