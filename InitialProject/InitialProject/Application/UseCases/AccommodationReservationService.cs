@@ -58,7 +58,6 @@ namespace InitialProject.Application.UseCases
 
             foreach (var reservation in ownerReservations)
             {
-                //instead of ratingRepository here will be used accommodationRatingRepository
                 if (_ratingRepository.GetByReservationId(reservation.Id) != null)
                 {
                     filteredOwnerReservations.Add(reservation);

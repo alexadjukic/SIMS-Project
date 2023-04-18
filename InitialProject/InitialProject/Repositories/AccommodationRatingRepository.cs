@@ -58,45 +58,5 @@ namespace InitialProject.Repositories
 
             return accommodationRating;
         }
-
-        /*public int CalculateNumberOfRatings(int ownerId)
-        {
-            _accommodationRatings = _serializer.FromCSV(FilePath);
-
-            int numberOfRatings = _accommodationRatings.Count(ar => ar.OwnerId == ownerId);
-
-            return numberOfRatings;
-        }
-
-        public double CalculateTotalRating(int ownerId)
-        {
-            _accommodationRatings = _serializer.FromCSV(FilePath);
-
-            int numberOfRatings = CalculateNumberOfRatings(ownerId);
-
-            if (numberOfRatings != 0) 
-            {
-                int sumOfRatings = FindSumOfAllRatings(ownerId);
-
-                return (double)sumOfRatings / (2*(double)numberOfRatings);
-            }
-
-            return 0;
-        }
-
-        private int FindSumOfAllRatings(int ownerId)
-        {
-            List<AccommodationRating> accommodationRatingsForOwner = _accommodationRatings.FindAll(ar => ar.OwnerId == ownerId);
-
-            int sumRatings = 0;
-
-            foreach (var rating in accommodationRatingsForOwner)
-            {
-                sumRatings += rating.Cleanliness;
-                sumRatings += rating.Correctness;
-            }
-
-            return sumRatings;
-        }*/
     }
 }

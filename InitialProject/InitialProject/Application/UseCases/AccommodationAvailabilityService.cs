@@ -35,7 +35,6 @@ namespace InitialProject.Application.UseCases
 
         private bool IsSingleDateAvailable(DateTime date, int reservationId, int accommodationId)
         {
-            //_accommodationReservations = _serializer.FromCSV(FilePath);
             foreach (var accommodationReservation in _accommodationReservationRepository.GetAll())
             {
                 if (accommodationReservation.Id != reservationId && accommodationReservation.AccommodationId == accommodationId)

@@ -24,15 +24,12 @@ namespace InitialProject.Application.UseCases
 
         public int CalculateNumberOfRatings(int ownerId)
         {
-            //int numberOfRatings = _accommodationRatingRepository.CalculateNumberOfRatings(ownerId);
             int numberOfRatings = _accommodationRatingRepository.GetAll().Count(ar => ar.OwnerId == ownerId);
             return numberOfRatings;
         }
 
         public double CalculateTotalRating(int ownerId)
         {
-            /*double totalRating = _accommodationRatingRepository.CalculateTotalRating(ownerId);
-            return totalRating;*/
             int numberOfRatings = CalculateNumberOfRatings(ownerId);
 
             if (numberOfRatings != 0)
