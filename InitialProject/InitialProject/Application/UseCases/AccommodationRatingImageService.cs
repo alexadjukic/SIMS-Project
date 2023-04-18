@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.RepositoryInterfaces;
+﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,11 @@ namespace InitialProject.Application.UseCases
         public void SaveImage(string url, int accommodationRatingId)
         {
             _accommodationRatingImageRepository.Save(url, accommodationRatingId);
+        }
+
+        public IEnumerable<AccommodationRatingImage> GetAllByRatingId(int ratingId)
+        {
+            return _accommodationRatingImageRepository.GetAllByRatingId(ratingId);
         }
     }
 }

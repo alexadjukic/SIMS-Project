@@ -54,5 +54,12 @@ namespace InitialProject.Repositories
 
             return _images.Max(c => c.Id) + 1;
         }
+
+        public IEnumerable<AccommodationRatingImage> GetAllByRatingId(int ratingId)
+        {
+            _images = _serializer.FromCSV(FilePath);
+
+            return _images.FindAll(i => i.AccommodationRatingId == ratingId);
+        }
     }
 }

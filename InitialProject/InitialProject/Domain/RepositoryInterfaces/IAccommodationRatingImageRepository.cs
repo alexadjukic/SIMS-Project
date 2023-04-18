@@ -13,5 +13,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public AccommodationRatingImage Save(string url, int accommodationRatingId);
         public void SaveAllImages();
         public int NextId();
+        public IEnumerable<AccommodationRatingImage> GetAllByRatingId(int ratingId);
     }
 }

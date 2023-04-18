@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
         mc:Ignorable="d"
-        Title="Rating overview" Height="523" Width="502" WindowStartupLocation="CenterScreen">
+        Title="Rating overview" Height="523" Width="750" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="13*"/>
@@ -14,6 +14,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
@@ -45,7 +46,7 @@
             </StackPanel>
         </StackPanel>
 
-        <Separator Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Top" Background="Black"/>
+        <Separator Grid.ColumnSpan="3" Grid.Row="1" VerticalAlignment="Top" Background="Black"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
             <TextBlock TextWrapping="Wrap" Text="You reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17" FontWeight="Bold" TextDecorations="Underline" VerticalAlignment="Center"/>
@@ -81,9 +82,24 @@
             </StackPanel>
         </StackPanel>
 
-        <Separator Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Top" Background="Black"/>
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <Image Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0" Height="170"/>
 
-        <Button Grid.Row="2" Grid.Column="1" Margin="80,20,30,30" Content="Close" FontSize="20" FontWeight="Bold" Command="{Binding CloseWindowCommand}"></Button>
+            <StackPanel Orientation="Horizontal">
+                <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Left" Margin="20,0,50,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
+                <Image Source="../../../Resources/Images/left_arrow.png"/>
+            </Button>
+
+            <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Right" Margin="100,0,0,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
+                <Image Source="../../../Resources/Images/right_arrow.png"></Image>
+            </Button>
+            </StackPanel>
+            
+        </StackPanel>
+
+        <Separator Grid.ColumnSpan="3" Grid.Row="2" VerticalAlignment="Top" Background="Black"/>
+
+        <Button Grid.Row="2" Grid.Column="2" Margin="80,20,30,30" Content="Close" FontSize="20" FontWeight="Bold" Command="{Binding CloseWindowCommand}"></Button>
 
     </Grid>
 </Window>
