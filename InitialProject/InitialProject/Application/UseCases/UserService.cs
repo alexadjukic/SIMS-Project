@@ -17,7 +17,7 @@ namespace InitialProject.Application.UseCases
             _userRepository = Injector.CreateInstance<IUserRepository>();
         }
 
-        internal User FindOwnerById(int ownerId)
+        public User FindOwnerById(int ownerId)
         {
             User owner = _userRepository.GetById(ownerId);
 
