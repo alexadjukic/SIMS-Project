@@ -74,5 +74,18 @@ namespace InitialProject.Repositories
             _serializer.ToCSV(FilePath, _tours);
             return newTour;
         }
+
+        public Tour GetById(int id)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            foreach(var tour in _tours)
+            {
+                if (tour.Id == id)
+                {
+                    return tour;
+                }
+            }
+            return null;
+        }
     }
 }

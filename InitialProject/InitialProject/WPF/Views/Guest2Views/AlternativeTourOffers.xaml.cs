@@ -99,7 +99,10 @@ namespace InitialProject.WPF.Views
             }
             if(PreviouslySelectedTour.LocationId == tour.LocationId && PreviouslySelectedTour.Id != tour.Id)
             {
-                AlternativeTours.Add(tour);
+                if(tour.Status == TourStatus.ACTIVE || tour.Status == TourStatus.NOT_STARTED)
+                {
+                    AlternativeTours.Add(tour);
+                }
             }
         }
 

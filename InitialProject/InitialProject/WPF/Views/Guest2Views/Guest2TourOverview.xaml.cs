@@ -283,14 +283,17 @@ namespace InitialProject.WPF.Views
         }
         public void FillTours(Tour tour)
         {
-            foreach (var location in _locationRepository.GetAll())
+            if (tour.Status == TourStatus.ACTIVE || tour.Status == TourStatus.NOT_STARTED)
             {
-                if (location.Id == tour.LocationId)
+                foreach (var location in _locationRepository.GetAll())
                 {
-                    tour.Location = _locationRepository.GetById(location.Id);
+                    if (location.Id == tour.LocationId)
+                    {
+                        tour.Location = _locationRepository.GetById(location.Id);
+                    }
                 }
+                Tours.Add(tour);
             }
-            Tours.Add(tour);
         }
 
         public void RemoveTourByDuration(Tour tour)
