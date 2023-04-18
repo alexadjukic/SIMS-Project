@@ -18,6 +18,8 @@ namespace InitialProject.Application.UseCases
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly ILocationRepository _locationRepository;
 
+        private readonly AccommodationAvailabilityService _accommodationAvailabilityService;
+
         public AccommodationReservationService()
         {
             _accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
@@ -25,6 +27,8 @@ namespace InitialProject.Application.UseCases
             _userRepository = Injector.CreateInstance<IUserRepository>();
             _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
+
+            _accommodationAvailabilityService = new AccommodationAvailabilityService();
         }
 
         public IEnumerable<AccommodationReservation> GetRatedReservations(int ownerId)
@@ -54,7 +58,6 @@ namespace InitialProject.Application.UseCases
 
             foreach (var reservation in ownerReservations)
             {
-                //instead of ratingRepository here will be used accommodationRatingRepository
                 if (_ratingRepository.GetByReservationId(reservation.Id) != null)
                 {
                     filteredOwnerReservations.Add(reservation);
@@ -93,7 +96,7 @@ namespace InitialProject.Application.UseCases
 
         public bool IsAccommodationAvailable(DateTime startDate, DateTime endDate, int reservationId, int accommodationId)
         {
-            string yesNoanswer = _accommodationReservationRepository.IsAvailable(startDate, endDate, reservationId, accommodationId);
+            string yesNoanswer = _accommodationAvailabilityService.IsAvailable(startDate, endDate, reservationId, accommodationId);
             if (yesNoanswer.Equals("yes")) return true; else return false;
         }
     }

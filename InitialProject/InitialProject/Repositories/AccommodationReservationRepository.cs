@@ -98,50 +98,6 @@ namespace InitialProject.Repositories
             return _accommodationReservations.FirstOrDefault(r => r.Id == reservationId);
         }
 
-        public string IsAvailable(DateTime newStartDate, DateTime newEndDate, int reservationId, int accommodationId)
-        {
-            List<DateTime> allSingleDates = FindDatesBetween(newStartDate, newEndDate);
-
-            foreach (var date in allSingleDates)
-            {
-                if (!IsSingleDateAvailable(date, reservationId, accommodationId))
-                {
-                    return "no";
-                }
-            }
-
-            return "yes";
-        }
-
-        private bool IsSingleDateAvailable(DateTime date, int reservationId, int accommodationId)
-        {
-            _accommodationReservations = _serializer.FromCSV(FilePath);
-            foreach (var accommodationReservation in _accommodationReservations)
-            {
-                if (accommodationReservation.Id != reservationId && accommodationReservation.AccommodationId == accommodationId)
-                {
-                    if (FindDatesBetween(accommodationReservation.StartDate, accommodationReservation.EndDate).Contains(date))
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        private List<DateTime> FindDatesBetween(DateTime startDate, DateTime endDate)
-        {
-            List<DateTime> resultingDates = new List<DateTime>();
-
-            for (var date = startDate; date <= endDate; date = date.AddDays(1))
-            {
-                resultingDates.Add(date);
-            }
-
-            return resultingDates;
-        }
-
         public void AcceptRequest(Request selectedRequest)
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);

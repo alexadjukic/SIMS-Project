@@ -37,13 +37,15 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly RequestService _requestService;
         private readonly Window _requestsOverview;
         private readonly ManageRequestService _manageRequestService;
+        private readonly int _ownerId;
         #endregion
 
-        public RequestsOverviewViewModel(Window requestsOverview)
+        public RequestsOverviewViewModel(Window requestsOverview, int ownerId)
         {
             _requestsOverview = requestsOverview;
             _requestService = new RequestService();
             _manageRequestService = new ManageRequestService();
+            _ownerId = ownerId;
 
             Requests = new ObservableCollection<Request>();
             LoadOnHoldRequests();
@@ -51,6 +53,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             DeclineRequestCommand = new RelayCommand(DeclineRequestCommand_Execute, DeclineRequestCommand_CanExecute);
             AcceptedRequestCommand = new RelayCommand(AcceptedRequestCommand_Execute, AcceptedRequestCommand_CanExecute);
+            
         }
 
         public void LoadOnHoldRequests()
@@ -59,7 +62,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             foreach (var request in _requestService.GetOnHoldRequests())
             {
-                Requests.Add(request);
+                if (request.Reservation.Accommodation.OwnerId == _ownerId)
+                {
+                    Requests.Add(request);
+                }
             }
         }
 

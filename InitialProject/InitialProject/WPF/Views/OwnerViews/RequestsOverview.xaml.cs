@@ -20,10 +20,10 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class RequestsOverview : Window
     {
-        public RequestsOverview()
+        public RequestsOverview(int ownerId)
         {
             InitializeComponent();
-            this.DataContext = new RequestsOverviewViewModel(this);
+            this.DataContext = new RequestsOverviewViewModel(this, ownerId);
         }
     }
 }

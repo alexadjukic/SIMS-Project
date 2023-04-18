@@ -18,6 +18,8 @@ namespace InitialProject.Application.UseCases
         private readonly ILocationRepository _locationRepository;
         private readonly IUserRepository _userRepository;
 
+        private readonly AccommodationAvailabilityService _accommodationAvailabilityService;
+
         public RequestService()
         {
             _requestRepository = Injector.CreateInstance<IRequestRepository>();
@@ -25,6 +27,8 @@ namespace InitialProject.Application.UseCases
             _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
             _userRepository = Injector.CreateInstance<IUserRepository>();
+
+            _accommodationAvailabilityService = new AccommodationAvailabilityService();
         }
 
         public IEnumerable<Request> GetOnHoldRequests()
@@ -62,7 +66,7 @@ namespace InitialProject.Application.UseCases
                 if (request.Reservation != null)
                 {
                     request.Reservation = LoadReservation(request.Reservation);
-                    request.IsAvailable = _accommodationReservationRepository.IsAvailable(request.NewStartDate, request.NewEndDate, request.ReservationId, request.Reservation.AccommodationId);
+                    request.IsAvailable = _accommodationAvailabilityService.IsAvailable(request.NewStartDate, request.NewEndDate, request.ReservationId, request.Reservation.AccommodationId);
                     updatedOnHoldRequests.Add(request);
                 }
                 
@@ -88,6 +92,7 @@ namespace InitialProject.Application.UseCases
 
             return updatedReservation;
         }
+
 
         public void CreateRequest(DateTime newStartDate, DateTime newEndDate, AccommodationReservation reservation)
         {
