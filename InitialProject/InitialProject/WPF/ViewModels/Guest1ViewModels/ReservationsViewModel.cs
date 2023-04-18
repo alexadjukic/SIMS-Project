@@ -40,6 +40,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private readonly Window _reservationsView;
         private readonly AccommodationReservationService _reservationService;
         private readonly AccommodationRatingService _ratingService;
+        private readonly AccommodationNotificationService _accommodationNotificationService;
         #endregion
 
         public ReservationsViewModel(Window reservationsView, int guestId)
@@ -47,6 +48,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             _reservationsView = reservationsView;
             _reservationService = new AccommodationReservationService();
             _ratingService = new AccommodationRatingService();
+            _accommodationNotificationService = new AccommodationNotificationService();
             _guestId = guestId;
 
             Reservations = new ObservableCollection<AccommodationReservation>();
@@ -70,7 +72,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private bool IsReservationRated()
         {
-            return _ratingService.FindAccommodationRatingByReservationId(_selectedReservation.Id) != null;
+            return _ratingService.FindAccommodationRatingByReservationId(SelectedReservation.Id) != null;
         }
 
         #region COMMANDS
@@ -85,6 +87,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             if (result == MessageBoxResult.Yes)
             {
                 _reservationService.CancelReservation(SelectedReservation);
+                _accommodationNotificationService.NotifyUser($"{SelectedReservation.Guest.Username} has cancelled the reservation for {SelectedReservation.Accommodation.Name}.", _guestId, SelectedReservation.Accommodation.OwnerId);
                 LoadReservations();
             }
         }

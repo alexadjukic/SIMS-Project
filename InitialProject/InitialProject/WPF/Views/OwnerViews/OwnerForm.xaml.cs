@@ -1,5 +1,7 @@
-﻿using InitialProject.Domain.Models;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Domain.Models;
 using InitialProject.Repositories;
+using InitialProject.WPF.Views.Guest1Views;
 using InitialProject.WPF.Views.OwnerViews;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,7 @@ namespace InitialProject.WPF.Views
         private readonly AccommodationReservationRepository _reservationRepository;
         private readonly UserRepository _userRepository;
         private readonly RatingRepository _ratingRepository;
+        private readonly AccommodationNotificationService _accommodationNotificationService;
 
         public int _numberOfUnratedGuests;
 
@@ -45,6 +48,7 @@ namespace InitialProject.WPF.Views
             _reservationRepository = reservationRepository;
             _userRepository = userRepository;
             _ratingRepository = ratingRepository;
+            _accommodationNotificationService = new AccommodationNotificationService();
 
             _numberOfUnratedGuests = 0;
 
@@ -75,6 +79,23 @@ namespace InitialProject.WPF.Views
                         ratingGuestReminderForm.ShowDialog();
                         break;
                     }
+                }
+            }
+        }
+
+        public void OpenNotificationWindow()
+        {
+            var notifications = _accommodationNotificationService.GetAllByReceiverId(_ownerId);
+            notifications = _accommodationNotificationService.GetUnseenNotifications(notifications);
+
+            if (notifications.Count > 0)
+            {
+                foreach (var notification in notifications)
+                {
+                    NotificationWindow notificationWindow = new NotificationWindow(notification);
+                    notificationWindow.Show();
+
+                    _accommodationNotificationService.SetAsSeen(notification);
                 }
             }
         }
@@ -117,6 +138,7 @@ namespace InitialProject.WPF.Views
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             OpenReminderWindow();
+            OpenNotificationWindow();
         }
 
         private void ButtonSeeRatings_Click(object sender, RoutedEventArgs e)
