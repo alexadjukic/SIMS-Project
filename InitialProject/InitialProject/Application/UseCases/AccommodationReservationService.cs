@@ -81,10 +81,24 @@ namespace InitialProject.Application.UseCases
             return updatedRatedReservations;
         }
 
+        private List<AccommodationReservation> LoadGuests(IEnumerable<AccommodationReservation> oldReservations)
+        {
+            var updatedReservations = new List<AccommodationReservation>();
+
+            foreach (var reservation in oldReservations)
+            {
+                reservation.Guest = _userRepository.GetById(reservation.GuestId);
+                updatedReservations.Add(reservation);
+            }
+
+            return updatedReservations;
+        }
+
         public IEnumerable<AccommodationReservation> GetGuestsReservations(int guestId)
         {
             var guestReservations = _accommodationReservationRepository.GetAllByGuestId(guestId);
             guestReservations = LoadAccommodations(guestReservations);
+            guestReservations = LoadGuests(guestReservations);
 
             return guestReservations;
         }
