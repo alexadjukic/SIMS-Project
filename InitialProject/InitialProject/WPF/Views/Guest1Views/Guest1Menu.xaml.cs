@@ -1,5 +1,6 @@
 ﻿using InitialProject.Repositories;
 using InitialProject.Domain.Models;
+using InitialProject.Application.UseCases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace InitialProject.WPF.Views.Guest1Views
         private AccommodationRatingRepository _accommodationRatingRepository;
         private AccommodationRatingImageRepository _accommodationRatingImageRepository;
         private AccommodationReservationRepository _accommodationReservationRepository;
+        private readonly AccommodationNotificationService _accommodationNotificationService;
         private UserRepository _userRepository;
         private User _user;
         public Guest1Menu(AccommodationRepository accommodationRepository, AccommodationImageRepository accommodationImageRepository, LocationRepository locationRepository, AccommodationRatingRepository accommodationRatingRepository, AccommodationRatingImageRepository accommodationRatingImageRepository, AccommodationReservationRepository accommodationReservationRepository, UserRepository userRepository, User user)
@@ -42,6 +44,7 @@ namespace InitialProject.WPF.Views.Guest1Views
             _accommodationReservationRepository= accommodationReservationRepository;
             _userRepository = userRepository;
             _user = user;
+            _accommodationNotificationService = new AccommodationNotificationService();
         }
 
         private void ButtonAccommodations_Click(object sender, RoutedEventArgs e)
@@ -71,6 +74,23 @@ namespace InitialProject.WPF.Views.Guest1Views
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var notifications = _accommodationNotificationService.GetAllByReceiverId(_user.Id);
+            notifications = _accommodationNotificationService.GetUnseenNotifications(notifications);
+
+            if(notifications.Count > 0)
+            {
+                foreach(var notification in notifications)
+                {
+                    NotificationWindow notificationWindow = new NotificationWindow(notification);
+                    notificationWindow.Show();
+
+                    _accommodationNotificationService.SetAsSeen(notification);
+                }
+            }
         }
     }
 }
