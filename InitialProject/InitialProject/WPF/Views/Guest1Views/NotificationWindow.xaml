@@ -12,7 +12,7 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock TextWrapping="Wrap" Text="{Binding Notification.TextContent}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontSize="25" Width="330" Height="80"/>
+        <TextBlock TextWrapping="Wrap" Text="{Binding Notification.TextContent}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontSize="25" Width="330" Height="136"/>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button Name="ButtonRateNow" Content="Close" Width="100" Height="40" Margin="120,0,30,0" Click="CloseButton_Click"/>
