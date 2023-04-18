@@ -36,12 +36,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             LogOutCommand = new RelayCommand(LogOutCommand_Execute);
             OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
+            ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
         }
 
         #region COMMANDS
         public RelayCommand CloseWindowCommand { get; }
         public RelayCommand LogOutCommand {  get; }
         public RelayCommand OpenNotificationsCommand { get; }
+        public RelayCommand ShowVouchersCommand { get; }
+
+        public void ShowVouchersCommand_Execute(object? parameter)
+        {
+
+        }
 
         public void OpenNotificationsCommand_Execute(object? parameter)
         {
