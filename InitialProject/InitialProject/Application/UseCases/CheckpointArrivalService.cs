@@ -46,5 +46,13 @@ namespace InitialProject.Application.UseCases
             }
             return arrivals;
         }
+
+        public CheckpointArrival GetById(int id)
+        {
+            var arrival = _checkpointArrivalRepository.GetById(id);
+            arrival.Reservation = _tourReservationService.GetById(arrival.ReservationId);
+            arrival.Checkpoint = _checkpointService.GetById(arrival.CheckpointId);
+            return arrival;
+        }
     }
 }
