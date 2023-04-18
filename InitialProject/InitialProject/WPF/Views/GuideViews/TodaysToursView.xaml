@@ -1,4 +1,4 @@
-﻿<Window x:Class="InitialProject.WPF.Views.TourTrackingWindow"
+﻿<Window x:Class="InitialProject.WPF.Views.TodaysToursView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -28,7 +28,7 @@
                     <DataGridTextColumn Width="3*" Header="Status" Binding="{Binding Status, Converter={StaticResource TourStatusConverter}}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="Activate tour" Height="50" Width="150" Margin="0,5,0,0" Click="ButtonActivateTour_Click"/>
+            <Button Content="Activate tour" Height="50" Width="150" Margin="0,5,0,0" Command="{Binding ActivateTourCommand}"/>
         </StackPanel>
 
         <Separator Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Width="400" HorizontalAlignment="Right" Height="1" Margin="0,2,275,2">
@@ -52,11 +52,11 @@
             </DataGrid>
 
             <StackPanel Orientation="Horizontal" Margin="20,5,20,0">
-                <Button Content="Guest list" Height="50" Width="100" Click="ButtonGuestList_Click"/>
-                <Button Height="50" Width="100" Margin="66,0,68,0" Click="ButtonCompleteCheckpoint_Click">
+                <Button Content="Guest list" Height="50" Width="100" Command="{Binding GuestListCommand}"/>
+                <Button Height="50" Width="100" Margin="66,0,68,0" Command="{Binding CompleteCheckpointCommand}">
                     <TextBlock Text="Complete checkpoint" TextWrapping="Wrap" TextAlignment="Center"/>
                 </Button>
-                <Button Content="End tour" Height="50" Width="100" Click="ButtonEndTour_Click"/>
+                <Button Content="End tour" Height="50" Width="100" Command="{Binding EndTourCommand}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

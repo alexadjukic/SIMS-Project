@@ -25,15 +25,12 @@ namespace InitialProject.WPF.Views
         private TourImageRepository _tourImageRepository;
         private LocationRepository _locationRepository;
         private CheckpointRepository _checkpointRepository;
-        private TourReservationRepository _tourReservationRepository;
-        private CheckpointArrivalRepository _checkpointArrivalRepository;
-        private UserRepository _userRepository;
         private User _guide;
 
         public string _welcomeMessage;
         public string WelcomeMessage { get; set; }
 
-        public GuideMenu(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository, TourReservationRepository tourReservationRepository, CheckpointArrivalRepository checkpointArrivalRepository, UserRepository userRepository, User guide)
+        public GuideMenu(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository, User guide)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -42,9 +39,6 @@ namespace InitialProject.WPF.Views
             _tourImageRepository = tourImageRepository;
             _locationRepository = locationRepository;
             _checkpointRepository = checkpointRepository;
-            _tourReservationRepository = tourReservationRepository;
-            _checkpointArrivalRepository = checkpointArrivalRepository;
-            _userRepository = userRepository;
             _guide = guide;
             WelcomeMessage = String.Format("Welcome {0}", _guide.Username);
         }
@@ -57,8 +51,8 @@ namespace InitialProject.WPF.Views
 
         private void ButtonTodaysTours_Click(object sender, RoutedEventArgs e)
         {
-            TourTrackingWindow tourTrackingWindow = new TourTrackingWindow(_tourRepository, _locationRepository, _checkpointRepository, _tourReservationRepository, _checkpointArrivalRepository, _userRepository, _guide);
-            tourTrackingWindow.Show();
+            TodaysToursView todaysToursView = new TodaysToursView(_guide);
+            todaysToursView.Show();
         }
 
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
