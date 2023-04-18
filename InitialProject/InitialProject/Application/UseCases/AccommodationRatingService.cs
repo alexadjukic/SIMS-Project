@@ -11,12 +11,10 @@ namespace InitialProject.Application.UseCases
     public class AccommodationRatingService
     {
         private readonly IAccommodationRatingRepository _accommodationRatingRepository;
-        //private readonly IAccommodationRatingImageRepository _accommodationRatingImageRepository;
 
         public AccommodationRatingService()
         {
             _accommodationRatingRepository = Injector.CreateInstance<IAccommodationRatingRepository>();
-            //_accommodationRatingImageRepository = Injector.CreateInstance<IAccommodationRatingImageRepository>();
         }
 
         public AccommodationRating FindAccommodationRatingByReservationId(int reservationId)
@@ -24,11 +22,6 @@ namespace InitialProject.Application.UseCases
             AccommodationRating accommodationRating = _accommodationRatingRepository.FindByReservationId(reservationId);
             return accommodationRating;
         }
-
-        /*public void SaveImage(string url, int accommodationRatingId)
-        {
-            _accommodationRatingImageRepository.Save(url, accommodationRatingId);
-        }*/
 
         public AccommodationRating SaveAccommodationRating(int cleanliness, int correctness, string comment, int reservationId, int ownerId, int raterId) 
         {
