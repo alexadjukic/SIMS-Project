@@ -99,6 +99,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private readonly Window _accommodationRatingForm;
         private readonly AccommodationRatingService _accommodationRatingService;
         private readonly SetOwnerRoleService _setOwnerRoleService;
+        private readonly AccommodationRatingImageService _accommodationRatingImageService;
         #endregion
 
         public AccommodationRatingFormViewModel(Window accommodationRatingForm, AccommodationReservation reservation)
@@ -106,6 +107,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             _accommodationRatingForm = accommodationRatingForm;
             _accommodationRatingService = new AccommodationRatingService();
             _setOwnerRoleService = new SetOwnerRoleService();
+            _accommodationRatingImageService = new AccommodationRatingImageService();
             _selectedReservation = reservation;
             ImageUrls = new List<string>();
 
@@ -150,7 +152,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             AccommodationRating accommodationRating = _accommodationRatingService.SaveAccommodationRating(Convert.ToInt32(Cleanliness), Convert.ToInt32(Correctness), Comment, _selectedReservation.Id, _selectedReservation.Accommodation.OwnerId, _selectedReservation.GuestId);
             foreach (var url in ImageUrls)
             {
-                _accommodationRatingService.SaveImage(url, accommodationRating.Id);
+                _accommodationRatingImageService.SaveImage(url, accommodationRating.Id);
             }
 
             _setOwnerRoleService.SetOwnerRole(accommodationRating.OwnerId);
