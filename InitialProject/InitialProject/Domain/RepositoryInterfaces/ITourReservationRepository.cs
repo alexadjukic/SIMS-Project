@@ -14,5 +14,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public TourReservation Save(int tourId, int userId, int? numberOfPeople, float age);
         public int NextId();
         public TourReservation GetById(int id);
+        public void Delete(TourReservation reservation);
     }
 }

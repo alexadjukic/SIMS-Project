@@ -13,12 +13,14 @@ namespace InitialProject.Application.UseCases
         private readonly ITourReservationRepository _tourReservationRepository;
         private readonly TourService _tourService;
         private readonly UserService _userService;
+        private readonly VoucherService _voucherService;
 
         public TourReservationService()
         {
             _tourReservationRepository = Injector.CreateInstance<ITourReservationRepository>();
             _tourService = new TourService();
             _userService = new UserService();
+            _voucherService = new VoucherService();
         }
 
         public TourReservation GetById(int id)
@@ -53,6 +55,17 @@ namespace InitialProject.Application.UseCases
                 reservation.User = _userService.GetById(reservation.UserId);
             }
             return reservations;
+        }
+
+        public void DeleteAllReservationsForCancelledTour(Tour tour)
+        {
+            var reservations = _tourReservationRepository.GetAll().Where(r => r.TourId == tour.Id);
+            foreach (var reservation in reservations)
+            {
+                reservation.User = _userService.GetById(reservation.UserId);
+                _voucherService.Create(reservation.User);
+                _tourReservationRepository.Delete(reservation);
+            }
         }
     }
 }

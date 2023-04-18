@@ -55,5 +55,13 @@ namespace InitialProject.Repositories
 
             return _tourReservations.Max(c => c.Id) + 1;
         }
+
+        public void Delete(TourReservation reservation)
+        {
+            _tourReservations = _serializer.FromCSV(FilePath);
+            TourReservation found = _tourReservations.Find(t => t.Id == reservation.Id);
+            _tourReservations.Remove(found);
+            _serializer.ToCSV(FilePath, _tourReservations);
+        }
     }
 }

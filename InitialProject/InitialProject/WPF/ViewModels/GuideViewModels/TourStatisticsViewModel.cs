@@ -64,6 +64,40 @@ namespace InitialProject.WPF.ViewModels
             }
         }
 
+        private float? _withVoucher;
+        public float? WithVoucher
+        {
+            get
+            {
+                return _withVoucher;
+            }
+            set
+            {
+                if (_withVoucher != value)
+                {
+                    _withVoucher = value;
+                    OnPropertyChanged(nameof(WithVoucher));
+                }
+            }
+        }
+
+        private float? _withoutVoucher;
+        public float? WithoutVoucher
+        {
+            get
+            {
+                return _withoutVoucher;
+            }
+            set
+            {
+                if (_withoutVoucher != value)
+                {
+                    _withoutVoucher = value;
+                    OnPropertyChanged(nameof(WithoutVoucher));
+                }
+            }
+        }
+
         private readonly Window _tourStatisticsView;
         private readonly TourStatisticsService _tourStatisticsService;
 

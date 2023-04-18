@@ -58,12 +58,14 @@ namespace InitialProject.WPF.ViewModels
 
         private readonly Window _yourToursView;
 		private readonly TourService _tourService;
+		private readonly TourReservationService _tourReservationService;
         #endregion
 
         public YourToursViewModel(Window yourToursView)
         {
 			_yourToursView = yourToursView;
 			_tourService = new TourService();
+			_tourReservationService = new TourReservationService();
 
 			PastTours = new ObservableCollection<Tour>();
             FutureTours = new ObservableCollection<Tour>();
@@ -98,6 +100,7 @@ namespace InitialProject.WPF.ViewModels
         public void CancelTourCommand_Execute(object? parameter)
 		{
 			_tourService.CancelTour(SelectedFutureTour);
+			_tourReservationService.DeleteAllReservationsForCancelledTour(SelectedFutureTour);
 			LoadFutureTours();
 		}
 
