@@ -13,5 +13,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public List<TourNotification> GetAll();
         public int NextId();
         public TourNotification Save(TourNotification tourNotification);
+        public IEnumerable<TourNotification> GetAllByUserId(int userId);
     }
 }

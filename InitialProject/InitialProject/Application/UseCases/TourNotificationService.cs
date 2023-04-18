@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.RepositoryInterfaces;
+﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,9 @@ namespace InitialProject.Application.UseCases
             _tourNotificationRepository = Injector.CreateInstance<ITourNotificationRepository>();
         }
 
-        //TO-DO implementirati potrebne metode.
+        public IEnumerable<TourNotification> GetNotificationsByUser(int userId)
+        {
+            return _tourNotificationRepository.GetAllByUserId(userId);
+        }
     }
 }

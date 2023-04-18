@@ -28,6 +28,20 @@ namespace InitialProject.Repositories
             return _serializer.FromCSV(FilePath);
         }
 
+        public IEnumerable<TourNotification> GetAllByUserId(int userId)
+        {
+            var notifications = GetAll();
+            var returnedNotifications = new List<TourNotification>();
+            foreach (var notification in notifications)
+            {
+                if (notification.UserId == userId)
+                {
+                    returnedNotifications.Add(notification);
+                }
+            }
+            return returnedNotifications;
+        }
+
         public int NextId()
         {
             _notifications = _serializer.FromCSV(FilePath);

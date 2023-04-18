@@ -12,27 +12,29 @@ namespace InitialProject.Domain.Models
     public enum NotificationStatus
     {
         READ = 1,
-        NOT_READ
+        UNREAD
     }
     public class TourNotification : ISerializable
     {
-        public int Id{ get; set; } 
+        public int Id{ get; set; }
+        public string Name { get; set; }
         public string TextContent { get; set; }
         public NotificationStatus Status { get; set; }
-        public DateTime ArrivalTime { get; set; }
+        public DateTime NotificationArrivalTime { get; set; }
         public int UserId { get; set; }
         public int GuideId { get; set; }
-        public int TourId { get; set; }
-        public Tour Tour { get; set; }
+        public int CheckpointArrivalId { get; set; }
+        public CheckpointArrival CheckpointArrival{ get; set; }
 
-        public TourNotification(string textContent, NotificationStatus status, DateTime arrivalTime, int userId, int guideId, int tourId)
+        public TourNotification(string textContent, NotificationStatus status, DateTime notificationArrivalTime, int userId, int guideId, int checkpointArrivalId, string name)
         {
+            Name = name;
             TextContent = textContent;
             Status = status;
-            ArrivalTime = arrivalTime;
+            NotificationArrivalTime = notificationArrivalTime;
             UserId = userId;
             GuideId = guideId;
-            TourId = tourId;
+            CheckpointArrivalId = checkpointArrivalId;
         }
         public TourNotification()
         {
@@ -41,7 +43,7 @@ namespace InitialProject.Domain.Models
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), TextContent, Status.ToString(), ArrivalTime.ToString(), UserId.ToString(), GuideId.ToString(), TourId.ToString() };
+            string[] csvValues = { Id.ToString(), TextContent, Status.ToString(), NotificationArrivalTime.ToString(), UserId.ToString(), GuideId.ToString(), CheckpointArrivalId.ToString(), Name };
             return csvValues;
         }
 
@@ -50,10 +52,11 @@ namespace InitialProject.Domain.Models
             Id = int.Parse(values[0]);
             TextContent = values[1];
             Status = Enum.Parse<NotificationStatus>(values[2]);
-            ArrivalTime = DateTime.Parse(values[3]);
+            NotificationArrivalTime = DateTime.Parse(values[3]);
             UserId = int.Parse(values[4]);
             GuideId = int.Parse(values[5]);
-            TourId = int.Parse(values[6]);
+            CheckpointArrivalId = int.Parse(values[6]);
+            Name = values[7];
         }
     }
 }
