@@ -26,5 +26,12 @@ namespace InitialProject.Application.UseCases
         {
             _tourNotificationRepository.Update(notification);
         }
+
+        public TourNotification Create(CheckpointArrival arrival)
+        {
+            var text = $"You have been added to tour '{arrival.Reservation.Tour.Name}' at checkpoint '{arrival.Checkpoint.Name}'";
+            var notification = new TourNotification(text, NotificationStatus.UNREAD, DateTime.Now, arrival.Reservation.UserId, arrival.Id, "Notification");
+            return _tourNotificationRepository.Save(notification);
+        }
     }
 }

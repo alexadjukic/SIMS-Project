@@ -74,10 +74,10 @@ namespace InitialProject.Repositories
             _serializer.ToCSV(FilePath, _checkpointArrivals);
         }
 
-        public CheckpointArrival Create(int checkpointId, int userId)
+        public CheckpointArrival Create(int checkpointId, int reservationId)
         {
             _checkpointArrivals = _serializer.FromCSV(FilePath);
-            CheckpointArrival newCheckpointArrival = new CheckpointArrival(NextId(), checkpointId, userId);
+            CheckpointArrival newCheckpointArrival = new CheckpointArrival(NextId(), checkpointId, reservationId);
             _checkpointArrivals.Add(newCheckpointArrival);
             _serializer.ToCSV(FilePath, _checkpointArrivals);
             return newCheckpointArrival;

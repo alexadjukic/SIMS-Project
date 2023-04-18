@@ -23,5 +23,10 @@ namespace InitialProject.Application.UseCases
 
             return owner;
         }
+
+        public User GetById(int id)
+        {
+            return _userRepository.GetAll().FirstOrDefault(u => u.Id == id);
+        }
     }
 }

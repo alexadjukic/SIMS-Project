@@ -99,5 +99,29 @@ namespace InitialProject.Application.UseCases
         {
             return _tourRepository.GetAll().Where(t => t.Name == tour.Name).Select(t => t.StartTime);
         }
+
+        public IEnumerable<Tour> GetTodaysToursByGuideId(int guideId)
+        {
+            var tours = _tourRepository.GetAll().Where(t => t.GuideId == guideId && t.StartTime.Date == DateTime.Now.Date);
+            LoadLocations(tours);
+            return tours;
+        }
+
+        public bool IsTourActive(Tour tour)
+        {
+            return tour.Status == TourStatus.ACTIVE;
+        }
+
+        public void ActivateTour(Tour tour)
+        {
+            tour.Status = TourStatus.ACTIVE;
+            _tourRepository.Update(tour);
+        }
+
+        public void FinishTour(Tour tour)
+        {
+            tour.Status = TourStatus.FINISHED;
+            _tourRepository.Update(tour);
+        }
     }
 }

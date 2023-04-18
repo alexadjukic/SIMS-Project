@@ -60,5 +60,44 @@ namespace InitialProject.Application.UseCases
             _checkpointArrivalRepository.RemoveById(id);
         }
 
+
+        public CheckpointArrival GetByReservation(TourReservation tourReservation)
+        {
+            var arrival = _checkpointArrivalRepository.GetAll().FirstOrDefault(a => a.ReservationId == tourReservation.Id);
+            if (arrival is null) return null;
+            arrival.Reservation = tourReservation;
+            arrival.Checkpoint = _checkpointService.GetById(arrival.CheckpointId);
+            return arrival;
+        }
+
+        public CheckpointArrival GetByReservationAndCheckpoint(TourReservation tourReservation, Checkpoint checkpoint)
+        {
+            var arrival = _checkpointArrivalRepository.GetAll().FirstOrDefault(a => a.ReservationId == tourReservation.Id && a.CheckpointId == checkpoint.Id);
+            if (arrival is null) return null;
+            arrival.Reservation = tourReservation;
+            arrival.Checkpoint = checkpoint;
+            return arrival;
+        }
+
+        public IEnumerable<CheckpointArrival> GetAllByCheckpoint(Checkpoint checkpoint)
+        {
+            var arrivals = _checkpointArrivalRepository.GetAll().Where(a => a.CheckpointId == checkpoint.Id);
+            foreach (var arrival in arrivals)
+            {
+                arrival.Reservation = _tourReservationService.GetById(arrival.ReservationId);
+                arrival.Checkpoint = checkpoint;
+            }
+            return arrivals;
+        }
+
+        public void Delete(CheckpointArrival arrival)
+        {
+            _checkpointArrivalRepository.Delete(arrival);
+        }
+
+        public CheckpointArrival Create(Checkpoint checkpoint, TourReservation reservation)
+        {
+            return _checkpointArrivalRepository.Create(checkpoint.Id, reservation.Id);
+        }
     }
 }

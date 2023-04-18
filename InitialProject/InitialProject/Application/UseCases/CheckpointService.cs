@@ -31,5 +31,11 @@ namespace InitialProject.Application.UseCases
             checkpoints.ForEach(c => c.Tour = tour);
             return checkpoints;
         }
+
+        public void ActivateCheckpoint(Checkpoint checkpoint)
+        {
+            checkpoint.Active = true;
+            _checkpointRepository.Update(checkpoint);
+        }
     }
 }
