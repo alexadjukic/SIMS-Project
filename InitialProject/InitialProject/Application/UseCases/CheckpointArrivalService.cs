@@ -32,19 +32,19 @@ namespace InitialProject.Application.UseCases
             return arrivals;
         }
 
-        public CheckpointArrival GetById(int id)
+        public IEnumerable<CheckpointArrival> GetAllByTour(Tour tour)
         {
-            foreach(var arrival in _checkpointArrivalRepository.GetAll())
+            List<CheckpointArrival> arrivals = new();
+            foreach (var arrival in _checkpointArrivalRepository.GetAll())
             {
-                if(arrival.Id == id)
+                arrival.Reservation = _tourReservationService.GetById(arrival.ReservationId);
+                arrival.Checkpoint = _checkpointService.GetById(arrival.CheckpointId);
+                if (arrival.Checkpoint.TourId == tour.Id)
                 {
-                    arrival.Reservation = _tourReservationService.GetById(arrival.ReservationId);
-                    arrival.Checkpoint = _checkpointService.GetById(arrival.CheckpointId);
-                    return arrival;
+                    arrivals.Add(arrival);
                 }
             }
-            return null;
+            return arrivals;
         }
-
     }
 }

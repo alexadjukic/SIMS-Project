@@ -11,7 +11,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface ITourReservationRepository
     {
         public List<TourReservation> GetAll();
-        public TourReservation Save(int tourId, int userId, int? numberOfPeople);
+        public TourReservation Save(int tourId, int userId, int? numberOfPeople, float age);
         public int NextId();
         public TourReservation GetById(int id);
     }

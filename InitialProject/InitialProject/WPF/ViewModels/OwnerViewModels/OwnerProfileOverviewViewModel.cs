@@ -70,12 +70,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly Window _ownerProfileOverview;
         private readonly AccommodationRatingService _accommodationRatingService;
         private readonly UserService _userService;
+        private readonly SetOwnerRoleService _setOwnerRoleService;
         #endregion
 
         public OwnerProfileOverviewViewModel(Window ownerProfileOverview, int ownerId)
         {
             _ownerProfileOverview = ownerProfileOverview;
             _accommodationRatingService = new AccommodationRatingService();
+            _setOwnerRoleService = new SetOwnerRoleService();
             _userService = new UserService();
             _ownerId = ownerId;
             
@@ -87,12 +89,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void CalculateNumberOfRatings()
         {
-            NumberOfRagings = _accommodationRatingService.CalculateNumberOfRatings(_ownerId);
+            NumberOfRagings = _setOwnerRoleService.CalculateNumberOfRatings(_ownerId);
         }
 
         private void CalculateTotalRating()
         {
-            TotalRating = Math.Round(_accommodationRatingService.CalculateTotalRating(_ownerId), 2);
+            TotalRating = Math.Round(_setOwnerRoleService.CalculateTotalRating(_ownerId), 2);
         }
 
         private void FindOwner()
@@ -105,7 +107,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             CalculateNumberOfRatings();
             CalculateTotalRating();
 
-            _accommodationRatingService.SetOwnerRole(_ownerId);
+            _setOwnerRoleService.SetOwnerRole(_ownerId);
         }
 
         #region COMMANDS

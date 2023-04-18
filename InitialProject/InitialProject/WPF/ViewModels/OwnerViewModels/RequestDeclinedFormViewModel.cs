@@ -31,7 +31,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         private readonly Window _requestDeclinedForm;
-        private readonly RequestService _requestService;
+        private readonly ManageRequestService _manageRequestService;
         #endregion
 
         public RequestDeclinedFormViewModel(Window requestDeclinedForm, Request selectedRequest)
@@ -39,7 +39,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _requestDeclinedForm = requestDeclinedForm;
 
             SelectedRequest = selectedRequest;
-            _requestService = new RequestService();
+            _manageRequestService = new ManageRequestService();
 
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             ConfirmDeclineCommand = new RelayCommand(ConfirmDeclineCommand_Execute);
@@ -51,7 +51,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ConfirmDeclineCommand_Execute(object? parameter)
         {
-            _requestService.DeclineRequest(SelectedRequest);
+            _manageRequestService.DeclineRequest(SelectedRequest);
             _requestDeclinedForm.Close();
         }
         public void CloseWindowCommand_Execute(object? parameter)

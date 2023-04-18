@@ -15,15 +15,17 @@ namespace InitialProject.Domain.Models
         public User User { get; set; }
         public int UserId { get; set; }
         public int? NumberOfPeople { get; set; }
+        public float Age { get; set; }
 
         public TourReservation() { }
 
-        public TourReservation(int id, int tourId, int userId, int? numberOfPeople)
+        public TourReservation(int id, int tourId, int userId, int? numberOfPeople, float age)
         {
             Id = id;
             TourId = tourId;
             UserId = userId;
             NumberOfPeople = numberOfPeople;
+            Age = age;
         }
 
         public string[] ToCSV()
@@ -33,7 +35,8 @@ namespace InitialProject.Domain.Models
                 Id.ToString(),
                 TourId.ToString(),
                 UserId.ToString(),
-                NumberOfPeople.ToString()
+                NumberOfPeople.ToString(),
+                Age.ToString()
             };
 
             return csvValues;
@@ -45,6 +48,7 @@ namespace InitialProject.Domain.Models
             TourId = int.Parse(values[1]);
             UserId = int.Parse(values[2]);
             NumberOfPeople = int.Parse(values[3]);
+            Age = float.Parse(values[4]);
         }
     }
 }

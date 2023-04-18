@@ -1,4 +1,5 @@
-﻿using InitialProject.WPF.ViewModels;
+﻿using InitialProject.Domain.Models;
+using InitialProject.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,14 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for MostVisitedTourView.xaml
+    /// Interaction logic for TourStatisticsView.xaml
     /// </summary>
-    public partial class MostVisitedTourView : Window
+    public partial class TourStatisticsView : Window
     {
-        public MostVisitedTourView()
+        public TourStatisticsView(Tour tour)
         {
             InitializeComponent();
-            this.DataContext = new MostVisitedTourViewModel(this);
+            this.DataContext = new TourStatisticsViewModel(this, tour);
         }
     }
 }
