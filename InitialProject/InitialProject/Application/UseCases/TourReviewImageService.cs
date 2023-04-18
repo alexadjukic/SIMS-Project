@@ -24,9 +24,9 @@ namespace InitialProject.Application.UseCases
             _tourReviewImageRepository.Save(url, reviewId);
         }
 
-        public IEnumerable<TourReviewImage> GetAll()
+        public IEnumerable<TourReviewImage> GetAllByReview(TourReview review)
         {
-            return _tourReviewImageRepository.GetAll();
+            return _tourReviewImageRepository.GetAll().Where(i => i.ReviewId == review.Id);
         }
     }
 }

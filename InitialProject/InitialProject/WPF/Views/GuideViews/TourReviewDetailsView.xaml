@@ -21,11 +21,11 @@
         <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="{Binding UserInfo}"></Label>
 
         <Image Grid.Row="1" Grid.ColumnSpan="2" Height="150" Width="300" VerticalAlignment="Top" Margin="0,20,0,0" Source="{Binding Path=SelectedImage, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Name="ButtonPreviousImage" Grid.Row="1" Grid.Column="0" Width="32" Height="32" HorizontalAlignment="Left" Margin="200,0,0,0" BorderBrush="White" Background="White">
+        <Button Name="ButtonPreviousImage" Grid.Row="1" Grid.Column="0" Width="32" Height="32" HorizontalAlignment="Left" Margin="200,0,0,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
             <Image Source="../../../Resources/Images/left_arrow.png"/>
         </Button>
 
-        <Button Name="ButtonNextImage" Grid.Row="1" Grid.Column="1" Width="32" Height="32" HorizontalAlignment="Right" Margin="0,0,200,0" BorderBrush="White" Background="White">
+        <Button Name="ButtonNextImage" Grid.Row="1" Grid.Column="1" Width="32" Height="32" HorizontalAlignment="Right" Margin="0,0,200,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
             <Image Source="../../../Resources/Images/right_arrow.png"></Image>
         </Button>
 
@@ -38,7 +38,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <Label Grid.Column="0" Content="Guide knowledge: " FontWeight="Bold" FontSize="16"/>
-                <Label Grid.Column="1" Content="{Binding Path=GuideKnowledgeGrade}" FontWeight="Bold" FontSize="16"/>
+                <Label Grid.Column="1" Content="{Binding Path=Review.GuideKnowledgeGrade}" FontWeight="Bold" FontSize="16"/>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -47,7 +47,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <Label Grid.Column="0" Content="Language: " FontWeight="Bold" FontSize="16"/>
-                <Label Grid.Column="1" Content="{Binding Path=GuideLanguageGrade}" FontWeight="Bold" FontSize="16"/>
+                <Label Grid.Column="1" Content="{Binding Path=Review.GuideLanguageGrade}" FontWeight="Bold" FontSize="16"/>
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -56,13 +56,13 @@
                 </Grid.ColumnDefinitions>
                 
                 <Label Grid.Column="0" Content="Interestingness: " FontWeight="Bold" FontSize="16"/>
-                <Label Grid.Column="1" Content="{Binding Path=InterestingnessGrade}" FontWeight="Bold" FontSize="16"/>
+                <Label Grid.Column="1" Content="{Binding Path=Review.InterestingnessGrade}" FontWeight="Bold" FontSize="16"/>
             </Grid>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,0,50,0">
             <Label Content="Comment: " FontWeight="Bold" FontSize="16"/>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Path=Comment}" TextWrapping="Wrap" FontSize="14"></TextBlock>
+            <TextBlock Margin="5,0,0,0" Text="{Binding Path=Review.Comment}" TextWrapping="Wrap" FontSize="14"></TextBlock>
         </StackPanel>
 
         <Border Grid.Row="3" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" Grid.RowSpan="2" Background="#FF19DABB">
