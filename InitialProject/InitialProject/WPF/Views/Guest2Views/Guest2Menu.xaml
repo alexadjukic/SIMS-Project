@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="Guest2Menu" Height="400" Width="400">
+        Title="Guest2Menu" Height="400" Width="400" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Command="{Binding LogOutCommand}" Content="Log out" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="71"/>
         <Button Content="Tours" HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top" Width="170" Click="OpenTours_Click"/>

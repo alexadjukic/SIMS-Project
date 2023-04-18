@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="TourNotifications" Height="450" Width="800">
+        Title="TourNotifications" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid x:Name="DataGridTours" ItemsSource="{Binding TourNotifications, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedNotification, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="190,33,223,56">
             <DataGrid.Columns>

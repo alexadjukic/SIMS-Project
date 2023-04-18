@@ -47,5 +47,6 @@
             <TextBox Height="20" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap" Text="{Binding Path=NumberOfNewGuests, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="52" IsEnabled="True"/>
             <TextBlock Height="20" TextAlignment="Center" HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap" Text="{Binding Path=SelectedTour.MaxGuests, TargetNullValue='' ,UpdateSourceTrigger=PropertyChanged}" Width="52"/>
         </StackPanel>
+        <Button Content="Use voucher" HorizontalAlignment="Left" Margin="514,332,0,0" VerticalAlignment="Top" Height="36" Width="87" FontWeight="Bold" Click="UseVoucher_Click"/>
     </Grid>
 </Window>

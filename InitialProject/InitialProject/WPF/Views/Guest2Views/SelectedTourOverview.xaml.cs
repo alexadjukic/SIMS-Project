@@ -150,5 +150,10 @@ namespace InitialProject.WPF.Views
             alternativeTourOffers.Show();
             Close();
         }
+
+        private void UseVoucher_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -49,20 +49,20 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             VouchersView vouchersView = new VouchersView(LoggedUser);
             vouchersView.Show();
-            _guest2MenuView.Close();
+            //_guest2MenuView.Close();
         }
 
         public void OpenNotificationsCommand_Execute(object? parameter)
         {
             TourNotificationsView tourNotificationsView = new TourNotificationsView(LoggedUser);
             tourNotificationsView.Show();
-            _guest2MenuView.Close();
+            //_guest2MenuView.Close();
         }
         public void LogOutCommand_Execute(object? parameter)
         {
             SignInForm signInForm = new SignInForm();
             signInForm.Show();
-            _guest2MenuView.Close();
+            //_guest2MenuView.Close();
         }
         public void CloseWindowCommand_Execute(object? parameter)
         {

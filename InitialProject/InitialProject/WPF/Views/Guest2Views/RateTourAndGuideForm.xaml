@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="RateTourAndGuideForm" Height="450" Width="800">
+        Title="RateTourAndGuideForm" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Guide's knowledge:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="127" FontWeight="Bold"/>
         <Label Content="Guide's language:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="127" FontWeight="Bold"/>

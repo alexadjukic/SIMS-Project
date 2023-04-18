@@ -44,14 +44,14 @@ namespace InitialProject.WPF.Views.Guest2Views
         {
             Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, LoggedUser);
             guest2TourOverview.Show();
-            Close();
+            //Close();
         }
 
         private void OpenReservedTours_Click(object sender, RoutedEventArgs e)
         {
             ReservedToursView reservedToursView = new ReservedToursView(LoggedUser);
             reservedToursView.Show();
-            Close();
+            //Close();
         }
     }
 }
