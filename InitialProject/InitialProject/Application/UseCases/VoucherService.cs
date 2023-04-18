@@ -18,9 +18,33 @@ namespace InitialProject.Application.UseCases
             _voucherRepository = Injector.CreateInstance<IVoucherRepository>();
         }
 
+        public void RemoveVoucher(Voucher voucher)
+        {
+            _voucherRepository.Remove(voucher);
+        }
+
         public IEnumerable<Voucher> LoadAllById(int userId)
         {
-            return _voucherRepository.GetAllByUserId(userId);
+
+            var vouchersTemp = _voucherRepository.GetAll();//.Where(x => x.UserId == userId).ToList();
+            var vouchers = new List<Voucher>();
+
+            foreach(var v in vouchersTemp)
+            {
+                if(v.UserId == userId)
+                {
+                    vouchers.Add(v);
+                }
+            }
+
+            foreach (var voucher in vouchers.ToList())
+            {
+                if(DateTime.Compare(DateTime.Now, voucher.ExpiryDate) >= 0)
+                {
+                    vouchers.Remove(voucher);
+                }
+            }
+            return vouchers;
         }
     }
 }

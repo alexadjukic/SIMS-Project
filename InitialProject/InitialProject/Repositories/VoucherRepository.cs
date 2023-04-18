@@ -49,9 +49,12 @@ namespace InitialProject.Repositories
             return voucher;
         }
 
-        public IEnumerable<Voucher> GetAllByUserId(int userId)
+        public void Remove(Voucher voucher)
         {
-            return GetAll().Where(x => x.UserId == userId);
+            _vouchers = _serializer.FromCSV(FilePath);
+            Voucher found = _vouchers.Find(v => v.Id == voucher.Id);
+            _vouchers.Remove(found);
+            _serializer.ToCSV(FilePath, _vouchers);
         }
     }
 }

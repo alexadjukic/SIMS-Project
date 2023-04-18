@@ -13,6 +13,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public List<Voucher> GetAll();
         public Voucher Save(Voucher voucher);
         public int NextId();
-        public IEnumerable<Voucher> GetAllByUserId(int userId);
+        public void Remove(Voucher voucher);
     }
 }

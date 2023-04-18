@@ -1,5 +1,7 @@
-﻿using InitialProject.Domain.Models;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Domain.Models;
 using InitialProject.Repositories;
+using InitialProject.WPF.Views.Guest2Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,6 +31,7 @@ namespace InitialProject.WPF.Views
         public readonly LocationRepository _locationRepository;
         public readonly TourImageRepository _tourImageRepository;
         public readonly TourReservationRepository _tourReservationRepository;
+        public readonly VoucherService _voucherService;
 
         private ObservableCollection<Tour> _availableTours;
         public ObservableCollection<Tour> AvailableTours 
@@ -104,6 +107,7 @@ namespace InitialProject.WPF.Views
             SelectedTour = selectedTour;
             LoggedUser=loggedUser;
             AvailableTours = new ObservableCollection<Tour>();
+            _voucherService = new VoucherService();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -126,7 +130,7 @@ namespace InitialProject.WPF.Views
                 MessageBox.Show("This field can't be empty!");
             }
             else 
-            { 
+            {
                 MakeNewReservation();
                 Close();
             }
@@ -153,7 +157,8 @@ namespace InitialProject.WPF.Views
 
         private void UseVoucher_Click(object sender, RoutedEventArgs e)
         {
-
+            UseVoucherView useVoucherView = new UseVoucherView(LoggedUser);
+            useVoucherView.Show();
         }
     }
 }
