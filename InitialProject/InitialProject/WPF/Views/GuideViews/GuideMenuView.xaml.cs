@@ -17,9 +17,9 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for GuideMenu.xaml
+    /// Interaction logic for GuideMenuView.xaml
     /// </summary>
-    public partial class GuideMenu : Window
+    public partial class GuideMenuView : Window
     {
         private TourRepository _tourRepository;
         private TourImageRepository _tourImageRepository;
@@ -30,7 +30,7 @@ namespace InitialProject.WPF.Views
         public string _welcomeMessage;
         public string WelcomeMessage { get; set; }
 
-        public GuideMenu(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository, User guide)
+        public GuideMenuView(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository, User guide)
         {
             InitializeComponent();
             this.DataContext = this;
