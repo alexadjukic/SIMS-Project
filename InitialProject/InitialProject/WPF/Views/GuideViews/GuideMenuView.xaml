@@ -30,20 +30,20 @@
             <Border Style="{StaticResource MenuBorder}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,5,0,20">
-                        <iconPacks:PackIconMaterial Kind="Home" Margin="5,0,5,0" Foreground="White"/>
-                        <TextBlock Text="Username" Margin="5,0,0,0" FontSize="14" Foreground="White"/>
+                        <iconPacks:PackIconMaterial Kind="Account" Margin="5,0,5,0" Foreground="White"/>
+                        <TextBlock Text="{Binding Username}" Margin="5,0,0,0" FontSize="14" Foreground="White" FontWeight="SemiBold"/>
                     </StackPanel>
 
                     <!--Navigation menu items-->
                     <!--Section 1-->
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding CreateNewTourCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="CircleEditOutline" Margin="10,0,5,0"/>
                             <TextBlock Text="Create new tour" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding CreateMostWantedTourCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="CommentEditOutline" Margin="10,0,5,0"/>
                             <TextBlock Text="Create most wanted tour" Margin="5,0,0,0" FontSize="14"/>
@@ -53,14 +53,14 @@
                     <Separator DockPanel.Dock="Top" Foreground="White" Margin="10" Opacity="0.5"/>
 
                     <!--Section 2-->
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding YourToursCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="FileAccountOutline" Margin="10,0,5,0"/>
                             <TextBlock Text="Your tours" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding TodaysToursCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="FileAlertOutline" Margin="10,0,5,0"/>
                             <TextBlock Text="Todays tours" Margin="5,0,0,0" FontSize="14"/>
@@ -70,14 +70,14 @@
                     <Separator DockPanel.Dock="Top" Foreground="White" Margin="10" Opacity="0.5"/>
 
                     <!--Section 3-->
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding TourRequestsCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="MapMarkerAlertOutline" Margin="10,0,5,0"/>
                             <TextBlock Text="Tour requests" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding ComplexTourRequestsCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="MapMarkerDistance" Margin="10,0,5,0"/>
                             <TextBlock Text="Complex tour requests" Margin="5,0,0,0" FontSize="14"/>
@@ -87,14 +87,14 @@
                     <Separator DockPanel.Dock="Top" Foreground="White" Margin="10" Opacity="0.5"/>
 
                     <!--Section 4-->
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding YourTourStatisticsCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="ChartBellCurveCumulative" Margin="10,0,5,0"/>
                             <TextBlock Text="Your tour statistics" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding TourRequestStatisticsCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="ChartLine" Margin="10,0,5,0"/>
                             <TextBlock Text="Tour request statistics" Margin="5,0,0,0" FontSize="14"/>
@@ -104,7 +104,7 @@
                     <Separator DockPanel.Dock="Top" Foreground="White" Margin="10" Opacity="0.5"/>
 
                     <!--Section 5-->
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding ReviewsCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="BookmarkOutline" Margin="10,0,5,0"/>
                             <TextBlock Text="Reviews" Margin="5,0,0,0" FontSize="14"/>
@@ -112,14 +112,14 @@
                     </Button>
 
                     <!--Settings menu items-->
-                    <Button DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource MenuButton}" Command="{Binding LogOutCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="AccountArrowRightOutline" Margin="10,0,5,0"/>
                             <TextBlock Text="Log out" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
-                    <Button DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource MenuButton}">
+                    <Button DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource MenuButton}" Command="{Binding SettingsCommand}">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="CogOutline" Margin="10,0,5,0"/>
                             <TextBlock Text="Settings" Margin="5,0,0,0" FontSize="14"/>
@@ -130,6 +130,10 @@
                 </DockPanel>
 
             </Border>
+
+            <Frame Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
+
+
 
             <!--<StackPanel>
                 <Label Content="{Binding Path=WelcomeMessage}" Margin="0,10,0,10" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16"/>

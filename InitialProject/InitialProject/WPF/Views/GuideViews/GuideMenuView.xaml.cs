@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Repositories;
+using InitialProject.WPF.ViewModels.GuideViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace InitialProject.WPF.Views
         public GuideMenuView(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository, User guide)
         {
             InitializeComponent();
-            this.DataContext = this;
+            this.DataContext = new GuideMenuViewModel(guide);
 
             _tourRepository = tourRepository;
             _tourImageRepository = tourImageRepository;
