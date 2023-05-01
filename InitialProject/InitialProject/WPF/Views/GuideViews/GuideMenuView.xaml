@@ -30,7 +30,7 @@
             <Border Style="{StaticResource MenuBorder}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,5,0,20">
-                        <iconPacks:PackIconMaterial Kind="Account" Margin="5,0,5,0" Foreground="White"/>
+                        <iconPacks:PackIconMaterial Kind="AccountOutline" Margin="5,0,5,0" Foreground="White"/>
                         <TextBlock Text="{Binding Username}" Margin="5,0,0,0" FontSize="14" Foreground="White" FontWeight="SemiBold"/>
                     </StackPanel>
 
@@ -38,14 +38,14 @@
                     <!--Section 1-->
                     <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding CreateNewTourCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <iconPacks:PackIconMaterial Kind="CircleEditOutline" Margin="10,0,5,0"/>
+                            <iconPacks:PackIconMaterial Kind="Plus" Margin="10,0,5,0"/>
                             <TextBlock Text="Create new tour" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
                     <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding CreateMostWantedTourCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <iconPacks:PackIconMaterial Kind="CommentEditOutline" Margin="10,0,5,0"/>
+                            <iconPacks:PackIconMaterial Kind="Fire" Margin="10,0,5,0"/>
                             <TextBlock Text="Create most wanted tour" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
@@ -55,14 +55,14 @@
                     <!--Section 2-->
                     <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding YourToursCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <iconPacks:PackIconMaterial Kind="FileAccountOutline" Margin="10,0,5,0"/>
+                            <iconPacks:PackIconMaterial Kind="FormatListBulleted" Margin="10,0,5,0"/>
                             <TextBlock Text="Your tours" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
                     <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding TodaysToursCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <iconPacks:PackIconMaterial Kind="FileAlertOutline" Margin="10,0,5,0"/>
+                            <iconPacks:PackIconMaterial Kind="CalendarToday" Margin="10,0,5,0"/>
                             <TextBlock Text="Todays tours" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
@@ -106,7 +106,7 @@
                     <!--Section 5-->
                     <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Command="{Binding ReviewsCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <iconPacks:PackIconMaterial Kind="BookmarkOutline" Margin="10,0,5,0"/>
+                            <iconPacks:PackIconMaterial Kind="StarOutline" Margin="10,0,5,0"/>
                             <TextBlock Text="Reviews" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
@@ -114,7 +114,7 @@
                     <!--Settings menu items-->
                     <Button DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource MenuButton}" Command="{Binding LogOutCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <iconPacks:PackIconMaterial Kind="AccountArrowRightOutline" Margin="10,0,5,0"/>
+                            <iconPacks:PackIconMaterial Kind="Logout" Margin="10,0,5,0"/>
                             <TextBlock Text="Log out" Margin="5,0,0,0" FontSize="14"/>
                         </StackPanel>
                     </Button>
