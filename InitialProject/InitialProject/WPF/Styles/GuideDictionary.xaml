@@ -37,6 +37,11 @@
                             <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
                             <Setter TargetName="SideBorder" Property="Opacity" Value="1"/>
                         </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="White"/>
+                            <Setter TargetName="SideBorder" Property="Opacity" Value="1"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
