@@ -3,16 +3,21 @@
                     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
+    <!--#region Colors-->
+    <LinearGradientBrush x:Key="MainGradient" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF0071BC" Offset="1"/>
+        <GradientStop Color="#FE662D91"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="MainGradientLight" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#880071BC" Offset="1"/>
+        <GradientStop Color="#87662D91"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="DisabledButtonBrush" Color="#FF333232"/>
+    <!--#endregion-->
+    
     <!--#region Menu Style-->
     <Style x:Key="MenuBorder" TargetType="Border">
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF0071BC" Offset="1"/>
-                    <GradientStop Color="#FE662D91"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{StaticResource MainGradient}"/>
     </Style>
     <Style x:Key="MenuButton" TargetType="Button">
         <Setter Property="BorderThickness" Value="1"/>
@@ -95,25 +100,11 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#880071BC" Offset="1"/>
-                            <GradientStop Color="#87662D91"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Background" Value="{StaticResource MainGradientLight}"/>
             </Trigger>
 
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FF0071BC" Offset="1"/>
-                            <GradientStop Color="#FE662D91"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Background" Value="{StaticResource MainGradient}"/>
             </Trigger>
 
             <MultiTrigger>
@@ -290,8 +281,8 @@
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="#FF333232"/>
-                            <Setter Property="BorderBrush" Value="#FF333232"/>
+                            <Setter Property="Foreground" Value="{StaticResource DisabledButtonBrush}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource DisabledButtonBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -305,7 +296,6 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
-
     <Style x:Key="TabItemStyle1" TargetType="{x:Type TabItem}">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -328,23 +318,53 @@
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="#FF333232"/>
-                            <Setter Property="BorderBrush" Value="#FF333232"/>
+                            <Setter Property="Foreground" Value="{StaticResource DisabledButtonBrush}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource DisabledButtonBrush}"/>
                         </Trigger>
 
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Panel.ZIndex" Value="1"/>
                             <Setter Property="Width" TargetName="templateRoot" Value="80"/>
                             <Setter Property="Height" TargetName="templateRoot" Value="35"/>
-                            <Setter Property="Background" TargetName="mainBorder">
-                                <Setter.Value>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FF0071BC" Offset="1"/>
-                                        <GradientStop Color="#FE662D91"/>
-                                    </LinearGradientBrush>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{StaticResource MainGradient}"/>
                             <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+    
+    <!--#region Other-->
+    <Style x:Key="MostVisitedTourButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter x:Name="Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource MainGradient}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="White"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource DisabledButtonBrush}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource DisabledButtonBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

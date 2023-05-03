@@ -71,8 +71,8 @@ namespace InitialProject.WPF.Views
 
         private void ButtonStatistics_Click(object sender, RoutedEventArgs e)
         {
-            var tourStatisticsSelectionView = new TourStatisticsSelectionView();
-            tourStatisticsSelectionView.Show();
+            //var tourStatisticsSelectionView = new TourStatisticsSelectionView();
+            //tourStatisticsSelectionView.Show();
         }
 
         private void ButtonReviews_Click(object sender, RoutedEventArgs e)

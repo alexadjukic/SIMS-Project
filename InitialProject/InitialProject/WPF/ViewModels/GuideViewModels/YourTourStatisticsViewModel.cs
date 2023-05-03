@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class TourStatisticsSelectionViewModel : ViewModelBase
+    public class YourTourStatisticsViewModel : ViewModelBase
     {
         #region PROPERTIES
         private Tour? _selectedTour;
@@ -34,26 +35,21 @@ namespace InitialProject.WPF.ViewModels
 
         public ObservableCollection<Tour> PastTours { get; set; }
 
-        private readonly Window _tourStatisticsSelectionView;
-
         private readonly TourService _tourService;
         #endregion
-        public TourStatisticsSelectionViewModel(Window tourStatisticsSelectionView)
+        public YourTourStatisticsViewModel()
         {
-            _tourStatisticsSelectionView = tourStatisticsSelectionView;
 
             _tourService = new TourService();
 
             PastTours = new ObservableCollection<Tour>(_tourService.GetPastTours());
 
             OpenStatsCommand = new RelayCommand(OpenStatsCommand_Execute, OpenStatsCommand_CanExecute);
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             MostVisitedTourCommand = new RelayCommand(MostVisitedTourCommand_Execute);
         }
 
         #region COMMANDS
         public RelayCommand OpenStatsCommand { get; }
-        public RelayCommand CloseWindowCommand { get; }
         public RelayCommand MostVisitedTourCommand { get; }
 
         public void MostVisitedTourCommand_Execute(object? parameter)
@@ -64,19 +60,14 @@ namespace InitialProject.WPF.ViewModels
 
         public void OpenStatsCommand_Execute(object? parameter)
         {
-            var tourStatisticsView = new TourStatisticsView(SelectedTour);
+            var tourStatisticsView = new TourStatisticsView(parameter as Tour);
             tourStatisticsView.Show();
         }
 
         public bool OpenStatsCommand_CanExecute(object? parameter)
         {
-            return SelectedTour is not null;
+            return parameter is not null;
         }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _tourStatisticsSelectionView.Close();
-        } 
         #endregion
     }
 }

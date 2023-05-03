@@ -23,7 +23,7 @@ namespace InitialProject.WPF.Views
         public YourToursView()
         {
             InitializeComponent();
-            this.DataContext = new YourToursViewModel(this);
+            this.DataContext = new YourToursViewModel();
         }
     }
 }

@@ -130,12 +130,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void YourTourStatisticsCommand_Execute(object? parameter)
         {
-
+            CurrentPage = new YourTourStatisticsView();
         }
 
         public bool YourTourStatisticsCommand_CanExecute(object? parameter)
         {
-            return true;
+            return CurrentPage is null || !CurrentPage.Title.Equals("Your Tour Statistics");
         }
 
         public void TourRequestStatisticsCommand_Execute(object? parameter)
