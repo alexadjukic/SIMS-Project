@@ -34,7 +34,7 @@ namespace InitialProject.WPF.Views
         public GuideMenuView(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository, User guide)
         {
             InitializeComponent();
-            this.DataContext = new GuideMenuViewModel(guide);
+            this.DataContext = new GuideMenuViewModel(this, guide);
 
             _tourRepository = tourRepository;
             _tourImageRepository = tourImageRepository;
@@ -66,7 +66,7 @@ namespace InitialProject.WPF.Views
         private void ButtonYourTours_Click(object sender, RoutedEventArgs e)
         {
             YourToursView yourToursView = new YourToursView();
-            yourToursView.Show();
+            //yourToursView.Show();
         }
 
         private void ButtonStatistics_Click(object sender, RoutedEventArgs e)

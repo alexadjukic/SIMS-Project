@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels
@@ -56,12 +57,12 @@ namespace InitialProject.WPF.ViewModels
 		public ObservableCollection<Tour> PastTours { get; set; }
         public ObservableCollection<Tour> FutureTours { get; set; }
 
-        private readonly Window _yourToursView;
+        private readonly Page _yourToursView;
 		private readonly TourService _tourService;
 		private readonly TourReservationService _tourReservationService;
         #endregion
 
-        public YourToursViewModel(Window yourToursView)
+        public YourToursViewModel(Page yourToursView)
         {
 			_yourToursView = yourToursView;
 			_tourService = new TourService();
@@ -106,12 +107,13 @@ namespace InitialProject.WPF.ViewModels
 
 		public bool CancelTourCommand_CanExecute(object? parameter)
 		{
-            return SelectedFutureTour is not null && SelectedFutureTour.Status != TourStatus.CANCELED && SelectedFutureTour.StartTime.Subtract(DateTime.Now).TotalHours > 48;
+			Tour? tour = parameter as Tour;
+            return tour is not null && tour.Status != TourStatus.CANCELED && tour.StartTime.Subtract(DateTime.Now).TotalHours > 48;
         }
 
 		public void CloseWindowCommand_Execute(object? parameter)
 		{
-			_yourToursView.Close();
+			//_yourToursView.Close();
 		}
         #endregion
     }

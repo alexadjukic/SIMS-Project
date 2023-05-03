@@ -18,7 +18,7 @@ namespace InitialProject.WPF.Views
     /// <summary>
     /// Interaction logic for YourToursView.xaml
     /// </summary>
-    public partial class YourToursView : Window
+    public partial class YourToursView : Page
     {
         public YourToursView()
         {
