@@ -82,7 +82,7 @@ namespace InitialProject.Application.UseCases
             return updatedAccommodationReservation;
         }
 
-        private AccommodationReservation LoadAccommodation(AccommodationReservation accommodationReservation)
+        public AccommodationReservation LoadAccommodation(AccommodationReservation accommodationReservation)
         {
             var updatedReservation = accommodationReservation;
 

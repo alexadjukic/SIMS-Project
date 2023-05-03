@@ -5,19 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
         mc:Ignorable="d"
-        Title="Rating guest" Height="450" Width="350"  WindowStartupLocation="CenterScreen">
+        Title="Review guest" Height="450" Width="350"  WindowStartupLocation="CenterScreen" Background="White">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel>
+                <AdornedElementPlaceholder/>
+                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" />
+            </StackPanel>
+
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="10*"/>
             <RowDefinition Height="30*"/>
             <RowDefinition Height="20*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <TextBlock TextWrapping="Wrap" Text="Cleanliness" TextAlignment="Center" Margin="30,10,0,15" Height="25" FontSize="18"/>
-            <ComboBox x:Name="ComboBoxCleanliness" SelectedValuePath="Content" Text="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" Height="26" Width="147" Margin="50,10,0,15" SelectionChanged="ComboBox_SelectionChanged">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="15,0,0,0">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedReservation.Guest.Username}" TextAlignment="Left" Margin="40,0,0,0" Height="19" FontSize="13"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedReservation.Accommodation.Name}" TextAlignment="Left" Margin="11,0,0,0" Height="19" FontSize="13"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedReservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="63,0,0,0" Height="19" FontSize="13"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedReservation.Accommodation.Location.City}" TextAlignment="Left" Margin="88,0,0,0" Height="19" FontSize="13"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock TextWrapping="Wrap" Text="Reservation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedReservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="40,0,0,0" Height="19" FontSize="13"/>
+                <Label Content=" - "/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedReservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Separator Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+            <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Center" Margin="0,10,70,0" Height="25" FontSize="12" Width="75"/>
+            <ComboBox x:Name="ComboBoxCleanliness" SelectedValuePath="Content" Text="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="26" Width="135" Margin="0,0,0,15" SelectionChanged="ComboBox_SelectionChanged">
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="3"/>
@@ -26,9 +67,9 @@
             </ComboBox>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock TextWrapping="Wrap" Text="Following the rules" TextAlignment="Center" Margin="30,10,0,15" Height="49" FontSize="18" Width="89"/>
-            <ComboBox x:Name="ComboBoxFollowingTheRules" SelectedValuePath="Content" Text="{Binding Path=FollowingTheRules, UpdateSourceTrigger=PropertyChanged}" Height="26" Width="147" Margin="50,10,0,15" SelectionChanged="ComboBox_SelectionChanged">
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+            <TextBlock TextWrapping="Wrap" Text="Following the rules:" TextAlignment="Center" Margin="0,10,30,0" Height="25" FontSize="12" Width="119"/>
+            <ComboBox x:Name="ComboBoxFollowingTheRules" SelectedValuePath="Content" Text="{Binding Path=FollowingTheRules, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="26" Width="135" Margin="0,0,0,15" SelectionChanged="ComboBox_SelectionChanged">
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="3"/>
@@ -37,12 +78,14 @@
             </ComboBox>
         </StackPanel>
 
-        <TextBlock Name="TextBlockComment" Grid.Row="2" TextWrapping="Wrap" Text="Your comment:" TextAlignment="Center" Margin="0,21,236,0"/>
-        <TextBox Name="TextBoxComment" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" Margin="5" TextChanged="TextBoxComment_TextChanged"/>
+        <TextBlock Name="TextBlockComment" Grid.Row="2" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="Your comment:" TextAlignment="Center" Margin="0,21,231,0"/>
+        <TextBox Name="TextBoxComment" Grid.ColumnSpan="2" Width="310" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="5,5,5,20" TextChanged="TextBoxComment_TextChanged"/>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Button Name="ButtonRate" Content="Rate" Width="100" Height="40" IsEnabled="False" Margin="45,0,30,0" Click="ButtonRate_Click"/>
-            <Button Name="ButtonCancel" Content="Cancel" Width="100" Height="40" Margin="30,0,30,0" Click="ButtonCancel_Click"/>
+        <Separator Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
+        
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="4" Orientation="Horizontal">
+            <Button Name="ButtonCancel" Content="Close" FontSize="20" FontWeight="Bold" Width="80" Height="40" Margin="120,0,10,0" Click="ButtonCancel_Click"/>
+            <Button Name="ButtonRate" Content="Review" FontSize="20" FontWeight="Bold" Width="80" Height="40" IsEnabled="False" Margin="30,0,10,0" Click="ButtonRate_Click"/>
         </StackPanel>
 
     </Grid>

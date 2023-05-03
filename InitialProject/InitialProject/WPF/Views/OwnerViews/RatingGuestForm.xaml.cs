@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.Models;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Domain.Models;
 using InitialProject.Repositories;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace InitialProject.WPF.Views
     /// <summary>
     /// Interaction logic for RatingGuestForm.xaml
     /// </summary>
-    public partial class RatingGuestForm : Window
+    public partial class RatingGuestForm : Window, INotifyPropertyChanged, IDataErrorInfo
     {
         public User LogedInUser { get; set; }
 
@@ -32,6 +33,7 @@ namespace InitialProject.WPF.Views
         private int _reservationId;
 
         private readonly RatingRepository _ratingRepository;
+        private readonly RequestService _requestService;
         private string _cleanliness;
         public string Cleanliness
         {
@@ -74,7 +76,7 @@ namespace InitialProject.WPF.Views
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -90,11 +92,25 @@ namespace InitialProject.WPF.Views
             _theOneWhoIsRatedId = SelectedReservation.GuestId;
             _reservationId = SelectedReservation.Id;
             _raterId = ownerId;
+            _requestService = new RequestService();
+            LoadAccommodation();
         }
+
+        private void LoadAccommodation()
+        {
+            SelectedReservation = _requestService.LoadAccommodation(SelectedReservation);
+        }
+
+        private readonly string[] _validatedProperties =
+        {
+            "Cleanliness",
+            "FollowingTheRules",
+            "Comment"
+        };
 
         public bool IsValid
         {
-            get
+            /*get
             {
                 if (Cleanliness == null)
                 {
@@ -110,6 +126,47 @@ namespace InitialProject.WPF.Views
                 }
 
                 return true;
+            }*/
+            get
+            {
+                foreach (var property in _validatedProperties)
+                {
+                    if (this[property] != null)
+                        return false;
+                }
+
+                return true;
+            }
+        }
+
+        public string Error => null;
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName.Equals(nameof(Cleanliness)))
+                {
+                    if (string.IsNullOrEmpty(Cleanliness))
+                    {
+                        return "Review is required";
+                    }
+                }
+                else if (columnName.Equals(nameof(FollowingTheRules)))
+                {
+                    if (string.IsNullOrEmpty(FollowingTheRules))
+                    {
+                        return "Review is required";
+                    }
+                }
+                else if (columnName.Equals(nameof(Comment)))
+                {
+                    if (string.IsNullOrEmpty(Comment))
+                    {
+                        return "Comment is required";
+                    }
+                }
+                return null;
             }
         }
 
