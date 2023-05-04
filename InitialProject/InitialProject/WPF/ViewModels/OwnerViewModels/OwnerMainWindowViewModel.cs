@@ -49,11 +49,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             SeeMyAccommodationsCommand = new RelayCommand(SeeMyAccommodationsCommand_Execute);
+            SeeMyReservationsCommand = new RelayCommand(SeeMyReservationsCommand_Execute);
         }
 
         #region COMMANDS
         public RelayCommand? CloseWindowCommand { get; }
         public RelayCommand? SeeMyAccommodationsCommand { get; }
+        public RelayCommand? SeeMyReservationsCommand { get; }
 
         public void CloseWindowCommand_Execute(object? parameter)
         {
@@ -65,6 +67,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public void SeeMyAccommodationsCommand_Execute(object? parameter)
         {
             SelectedPage = new MyAccommodationsPage(_user, _ownerMainWindow);
+        }
+
+        public void SeeMyReservationsCommand_Execute(object? parameter)
+        {
+            SelectedPage = new MyReservationsOverviewPage(_user);
         }
         #endregion
     }

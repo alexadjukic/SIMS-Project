@@ -55,28 +55,28 @@
                 </StackPanel>
             </Button>
 
-            <Button Height="50" Grid.Row="3" Background="#FF0262E6">
+            <Button Name="ButtonReservations" Height="50" Grid.Row="3" Background="#FF0262E6" Command="{Binding SeeMyReservationsCommand}">
                 <StackPanel Orientation="Horizontal" Width="200">
                     <Image Source="../../../Resources/Images/reservation.png" Width="25" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="Reservations" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
                 </StackPanel>
             </Button>
 
-            <Button Height="50" Grid.Row="3" Background="#FF0262E6">
+            <Button Height="50" Grid.Row="4" Background="#FF0262E6">
                 <StackPanel Orientation="Horizontal" Width="200">
                     <Image Source="../../../Resources/Images/star.png" Width="25" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="Reviews" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
                 </StackPanel>
             </Button>
 
-            <Button Height="50" Grid.Row="4" Background="#FF0262E6">
+            <Button Height="50" Grid.Row="5" Background="#FF0262E6">
                 <StackPanel Orientation="Horizontal" Width="200">
                     <Image Source="../../../Resources/Images/question_mark.png" Width="25" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="Requests" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
                 </StackPanel>
             </Button>
 
-            <Button Height="50" Grid.Row="5" Background="#FF0262E6">
+            <Button Height="50" Grid.Row="6" Background="#FF0262E6">
                 <StackPanel Orientation="Horizontal" Width="200">
                     <Image Source="../../../Resources/Images/user.png" Width="25" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="Profile" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>

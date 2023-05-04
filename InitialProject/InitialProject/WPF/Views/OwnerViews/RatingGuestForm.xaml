@@ -82,8 +82,8 @@
         <TextBox Name="TextBoxComment" Grid.ColumnSpan="2" Width="310" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="5,5,5,20" TextChanged="TextBoxComment_TextChanged"/>
 
         <Separator Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
-        
-        <StackPanel Grid.ColumnSpan="2" Grid.Row="4" Orientation="Horizontal">
+
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="4" Orientation="Horizontal" Background="#FF0262E6">
             <Button Name="ButtonCancel" Content="Close" FontSize="20" FontWeight="Bold" Width="80" Height="40" Margin="120,0,10,0" Click="ButtonCancel_Click"/>
             <Button Name="ButtonRate" Content="Review" FontSize="20" FontWeight="Bold" Width="80" Height="40" IsEnabled="False" Margin="30,0,10,0" Click="ButtonRate_Click"/>
         </StackPanel>
