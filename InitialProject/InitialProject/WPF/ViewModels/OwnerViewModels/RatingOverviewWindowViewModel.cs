@@ -159,7 +159,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             {
                 CurrentImage = Images[0];
             }
-            
         }
 
         #region COMMANDS
