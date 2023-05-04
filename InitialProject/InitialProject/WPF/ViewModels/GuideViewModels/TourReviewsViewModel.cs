@@ -56,13 +56,14 @@ namespace InitialProject.WPF.ViewModels
 
         public void OpenReviewListCommand_Execute(object? parameter)
         {
-            var toursUserReviewsView = new ToursUserReviewsView(SelectedTour);
+            var toursUserReviewsView = new ToursUserReviewsView(parameter as Tour);
             toursUserReviewsView.Show();
         }
 
         public bool OpenReviewListCommand_CanExecute(object? parameter)
         {
-            return SelectedTour is not null && SelectedTour.Status != TourStatus.CANCELED;
+            Tour? tour = parameter as Tour;
+            return tour is not null && tour.Status != TourStatus.CANCELED;
         }
         #endregion
     }
