@@ -68,13 +68,13 @@ namespace InitialProject.WPF.ViewModels
 
         public void OpenReviewCommand_Execute(object? parameter)
         {
-            var tourReviewDetailsView = new TourReviewDetailsView(SelectedReview);
+            var tourReviewDetailsView = new TourReviewDetailsView(parameter as TourReview);
             tourReviewDetailsView.Show();
         }
 
         public bool OpenReviewCommand_CanExecute(object? parameter)
         {
-            return SelectedReview is not null;
+            return parameter is not null;
         }
 
         public void CloseWindowCommand_Execute(object? parameter)
