@@ -4,20 +4,22 @@
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <!--#region Colors-->
-    <LinearGradientBrush x:Key="MainGradient" EndPoint="0.5,1" StartPoint="0.5,0">
+    <LinearGradientBrush x:Key="HighlightColorGradient" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#FF0071BC" Offset="1"/>
         <GradientStop Color="#FE662D91"/>
     </LinearGradientBrush>
-    <LinearGradientBrush x:Key="MainGradientLight" EndPoint="0.5,1" StartPoint="0.5,0">
+    <LinearGradientBrush x:Key="HighlightColorGradientLight" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="#880071BC" Offset="1"/>
         <GradientStop Color="#87662D91"/>
     </LinearGradientBrush>
+    <SolidColorBrush x:Key="HighlightColorSolid" Color="#FE662D91"/>
+    <SolidColorBrush x:Key="HighlightColorSolidLight" Color="#87662D91"/>
     <SolidColorBrush x:Key="DisabledButtonBrush" Color="#FF333232"/>
     <!--#endregion-->
     
     <!--#region Menu Style-->
     <Style x:Key="MenuBorder" TargetType="Border">
-        <Setter Property="Background" Value="{StaticResource MainGradient}"/>
+        <Setter Property="Background" Value="{StaticResource HighlightColorSolid}"/>
     </Style>
     <Style x:Key="MenuButton" TargetType="Button">
         <Setter Property="BorderThickness" Value="1"/>
@@ -100,11 +102,11 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource MainGradientLight}"/>
+                <Setter Property="Background" Value="{StaticResource HighlightColorSolidLight}"/>
             </Trigger>
 
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource MainGradient}"/>
+                <Setter Property="Background" Value="{StaticResource HighlightColorSolid}"/>
             </Trigger>
 
             <MultiTrigger>
@@ -326,7 +328,7 @@
                             <Setter Property="Panel.ZIndex" Value="1"/>
                             <Setter Property="Width" TargetName="templateRoot" Value="80"/>
                             <Setter Property="Height" TargetName="templateRoot" Value="35"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{StaticResource MainGradient}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{StaticResource HighlightColorSolid}"/>
                             <Setter Property="BorderBrush" Value="Transparent"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -354,7 +356,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource MainGradient}"/>
+                            <Setter Property="Background" Value="{StaticResource HighlightColorSolid}"/>
                         </Trigger>
 
                         <Trigger Property="IsPressed" Value="True">
