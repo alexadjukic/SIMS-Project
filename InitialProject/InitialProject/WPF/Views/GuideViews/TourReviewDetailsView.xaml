@@ -4,69 +4,84 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="TourReviewDetailsView" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="38*"/>
-            <RowDefinition Height="201*"/>
-            <RowDefinition Height="130*"/>
-            <RowDefinition Height="65*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        Title="TourReviewDetailsView" Height="450" Width="800" ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/GuideDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Border Background="#FF1A1A1A">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38*"/>
+                <RowDefinition Height="201*"/>
+                <RowDefinition Height="130*"/>
+                <RowDefinition Height="65*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="{Binding UserInfo}"></Label>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="{Binding UserInfo}" Foreground="White" FontSize="14" Margin="0,10,0,0"/>
 
-        <Image Grid.Row="1" Grid.ColumnSpan="2" Height="150" Width="300" VerticalAlignment="Top" Margin="0,20,0,0" Source="{Binding Path=SelectedImage, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Name="ButtonPreviousImage" Grid.Row="1" Grid.Column="0" Width="32" Height="32" HorizontalAlignment="Left" Margin="200,0,0,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
-            <Image Source="../../../Resources/Images/left_arrow.png"/>
-        </Button>
+            <Border BorderBrush="{DynamicResource HighlightColorSolid}" Grid.Row="1" Grid.ColumnSpan="2" BorderThickness="4" Width="365">
+                <Image Width="360" Source="{Binding Path=SelectedImage, UpdateSourceTrigger=PropertyChanged}"/>
+            </Border>
+            <Button Style="{DynamicResource ImageSwitchingButtonStyle}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="180,0,0,0" Command="{Binding PreviousImageCommand}">
+                <iconPacks:PackIconMaterial Kind="ChevronLeft"/>
+            </Button>
 
-        <Button Name="ButtonNextImage" Grid.Row="1" Grid.Column="1" Width="32" Height="32" HorizontalAlignment="Right" Margin="0,0,200,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
-            <Image Source="../../../Resources/Images/right_arrow.png"></Image>
-        </Button>
+            <Button Style="{DynamicResource ImageSwitchingButtonStyle}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,180,0" Command="{Binding NextImageCommand}">
+                <iconPacks:PackIconMaterial Kind="ChevronRight"/>
+            </Button>
 
-        <StackPanel Grid.Row="2" Grid.Column="0" Margin="50,0,0,0" VerticalAlignment="Center">
+            <StackPanel Grid.Row="2" Grid.Column="0" Margin="50,0,0,0" VerticalAlignment="Center">
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                
-                <Label Grid.Column="0" Content="Guide knowledge: " FontWeight="Bold" FontSize="16"/>
-                <Label Grid.Column="1" Content="{Binding Path=Review.GuideKnowledgeGrade}" FontWeight="Bold" FontSize="16"/>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                
-                <Label Grid.Column="0" Content="Language: " FontWeight="Bold" FontSize="16"/>
-                <Label Grid.Column="1" Content="{Binding Path=Review.GuideLanguageGrade}" FontWeight="Bold" FontSize="16"/>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                
-                <Label Grid.Column="0" Content="Interestingness: " FontWeight="Bold" FontSize="16"/>
-                <Label Grid.Column="1" Content="{Binding Path=Review.InterestingnessGrade}" FontWeight="Bold" FontSize="16"/>
-            </Grid>
-        </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,0,50,0">
-            <Label Content="Comment: " FontWeight="Bold" FontSize="16"/>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Path=Review.Comment}" TextWrapping="Wrap" FontSize="14"></TextBlock>
-        </StackPanel>
+                    <Label Grid.Column="0" Content="Guide knowledge: " Style="{DynamicResource ReviewLabel}"/>
+                    <Label Grid.Column="1" Content="{Binding Path=Review.GuideKnowledgeGrade}" Style="{DynamicResource ReviewLabel}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="3" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" Grid.RowSpan="2" Background="#FF19DABB">
-            <Button Content="Close" Width="70" Height="25" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding CloseWindowCommand}"></Button>
-        </Border>
-    </Grid>
+                    <Label Grid.Column="0" Content="Language: " Style="{DynamicResource ReviewLabel}"/>
+                    <Label Grid.Column="1" Content="{Binding Path=Review.GuideLanguageGrade}" Style="{DynamicResource ReviewLabel}"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Content="Interestingness: " Style="{DynamicResource ReviewLabel}"/>
+                    <Label Grid.Column="1" Content="{Binding Path=Review.InterestingnessGrade}" Style="{DynamicResource ReviewLabel}"/>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,0,50,0">
+                <Label Content="Comment: " Style="{DynamicResource ReviewLabel}"/>
+                <TextBlock Margin="5,0,0,0" Height="95" Text="{Binding Path=Review.Comment}" Style="{DynamicResource ReviewText}"></TextBlock>
+            </StackPanel>
+
+            <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{DynamicResource MenuBorder}">
+                <Grid>
+                    <Button Content="Close" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding CloseWindowCommand}"></Button>
+                    <Button Content="Report" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Right" Margin="0,0,10,0"></Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Window>
