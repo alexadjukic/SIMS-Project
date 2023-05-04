@@ -150,12 +150,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void ReviewsCommand_Execute(object? parameter)
         {
-
+            CurrentPage = new TourReviewsView();
         }
 
         public bool ReviewsCommand_CanExecute(object? parameter)
         {
-            return true;
+            return CurrentPage is null || !CurrentPage.Title.Equals("Reviews");
         }
 
         public void SettingsCommand_Execute(object? parameter)

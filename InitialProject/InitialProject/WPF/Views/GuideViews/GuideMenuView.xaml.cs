@@ -77,8 +77,8 @@ namespace InitialProject.WPF.Views
 
         private void ButtonReviews_Click(object sender, RoutedEventArgs e)
         {
-            var tourReviewsView = new TourReviewsView();
-            tourReviewsView.Show();
+            //var tourReviewsView = new TourReviewsView();
+            //tourReviewsView.Show();
         }
     }
 }
