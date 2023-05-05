@@ -4,121 +4,117 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MostVisitedTourView" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="42*"/>
-            <RowDefinition Height="149*"/>
-            <RowDefinition Height="149*"/>
-            <RowDefinition Height="47*"/>
-            <RowDefinition Height="58*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="12*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="10*"/>
-        </Grid.ColumnDefinitions>
-
-        <Label Grid.Row="0" Grid.Column="0" Content="Tour info: " FontWeight="Bold" FontSize="16" Margin="10,0,0,149" Grid.RowSpan="2"/>
-
-        <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Margin="15,0,0,15">
+        Title="MostVisitedTourView" Height="450" Width="800" AllowsTransparency="True" Background="Transparent" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/GuideDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Border Background="{DynamicResource BackgroundColor}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42*"/>
+                <RowDefinition Height="149*"/>
+                <RowDefinition Height="149*"/>
+                <RowDefinition Height="47*"/>
+                <RowDefinition Height="58*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Tour info: " Style="{DynamicResource ReviewLabel}"  Margin="10,0,0,0"/>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="Name: " FontSize="14" FontWeight="Bold"/>
-            <Label Grid.Row="1" Grid.Column="0" Content="Country: " FontSize="14" FontWeight="Bold"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="City: " FontSize="14" FontWeight="Bold"/>
-            <Label Grid.Row="3" Grid.Column="0" Content="Language: " FontSize="14" FontWeight="Bold"/>
-            <Label Grid.Row="4" Grid.Column="0" Content="Guest limit: " FontSize="14" FontWeight="Bold"/>
-            <Label Grid.Row="4" Grid.Column="0" Content="Guest limit: " FontSize="14" FontWeight="Bold"/>
-            <Label Grid.Row="5" Grid.Column="0" Content="Duration (h): " FontSize="14" FontWeight="Bold"/>
-            <Label Grid.Row="6" Grid.Column="0" Content="Description: " FontSize="14" FontWeight="Bold"/>
-            <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,0,0,0" Text="{Binding Path=DisplayedTour.Description, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Margin="15,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=DisplayedTour.Name, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=DisplayedTour.Location.Country, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Path=DisplayedTour.Location.City, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Grid.Row="3" Grid.Column="1" Content="{Binding Path=DisplayedTour.Language, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Grid.Row="4" Grid.Column="1" Content="{Binding Path=DisplayedTour.MaxGuests, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Grid.Row="5" Grid.Column="1" Content="{Binding Path=DisplayedTour.Duration, UpdateSourceTrigger=PropertyChanged}"/>
-        </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-        <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Width="1" HorizontalAlignment="Right" BorderBrush="#FF6F6F6F" BorderThickness="1" Margin="0,0,0,15"></Border>
-        
-        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch">
-            <Label Content="Start times: " FontSize="14" FontWeight="Bold"/>
-            <ListView Margin="5" Height="105" ItemsSource="{Binding StartTimes}">
-                <ListView.Resources>
-                    <Style TargetType="GridViewColumnHeader">
-                        <Setter Property="Visibility" Value="Collapsed"></Setter>
-                    </Style>
-                </ListView.Resources>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding StringFormat={}{0:dd.MM.yyyy HH\\:mm}}">
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch">
-            <Label Content="Checkpoints: " FontSize="14" FontWeight="Bold"/>
-            <ListView Margin="5" Height="105" ItemsSource="{Binding Checkpoints}">
-                <ListView.Resources>
-                    <Style TargetType="GridViewColumnHeader">
-                        <Setter Property="Visibility" Value="Collapsed"></Setter>
-                    </Style>
-                </ListView.Resources>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="Auto" ></GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
+                <Label Grid.Row="0" Grid.Column="0" Content="Name: " Style="{DynamicResource TourReviewDetailsLabel}"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Country: " Style="{DynamicResource TourReviewDetailsLabel}"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="City: " Style="{DynamicResource TourReviewDetailsLabel}"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Language: " Style="{DynamicResource TourReviewDetailsLabel}"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="Guest limit: " Style="{DynamicResource TourReviewDetailsLabel}"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="Guest limit: " Style="{DynamicResource TourReviewDetailsLabel}"/>
+                <Label Grid.Row="5" Grid.Column="0" Content="Duration (h): " Style="{DynamicResource TourReviewDetailsLabel}"/>
+                <Label Grid.Row="6" Grid.Column="0" Content="Description: " Style="{DynamicResource TourReviewDetailsLabel}"/>
+                <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,0,0,0" Text="{Binding Path=DisplayedTour.Description, UpdateSourceTrigger=PropertyChanged}" Foreground="White" TextTrimming="WordEllipsis"/>
 
-        <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Height="125" Width="250" Source="{Binding SelectedImage}"></Image>
-
-        <Button Grid.Row="2" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" Margin="70,0,0,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
-            <Image Source="../../../Resources/Images/left_arrow.png"/>
-        </Button>
-
-        <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,70,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
-            <Image Source="../../../Resources/Images/right_arrow.png"></Image>
-        </Button>
-
-        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
-            <StackPanel Margin="0,0,10,0" VerticalAlignment="Center">
-                <RadioButton Content="All time" IsChecked="{Binding IsAllTimeRBChecked}" Margin="0,0,0,3"/>
-                <RadioButton Content="Yearly" IsChecked="{Binding IsYearlyRBChecked}" Margin="0,2,0,0"/>
-            </StackPanel>
-            <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
-                <TextBlock Text="Choose year:" Margin="0,0,0,2"/>
-                <ComboBox Width="75" Height="20" ItemsSource="{Binding PossibleYears}" SelectedItem="{Binding SelectedYear}" IsEnabled="{Binding IsYearlyRBChecked}"/>
-            </StackPanel>
-        </StackPanel>
-
-        <Border Grid.Row="3" Grid.ColumnSpan="3"  BorderBrush="Black" BorderThickness="1" Background="#FF19DABB" Margin="0,47,0,0" Grid.RowSpan="2">
-            <Grid>
-                <Button Content="Close" Width="70" Height="25" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding CloseWindowCommand}"></Button>
-                <Button Content="Stats" Width="70" Height="25" HorizontalAlignment="Right" Margin="0,0,10,0" Command="{Binding OpenStatsCommand}"></Button>
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=DisplayedTour.Name, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=DisplayedTour.Location.Country, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
+                <Label Grid.Row="2" Grid.Column="1" Content="{Binding Path=DisplayedTour.Location.City, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
+                <Label Grid.Row="3" Grid.Column="1" Content="{Binding Path=DisplayedTour.Language, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
+                <Label Grid.Row="4" Grid.Column="1" Content="{Binding Path=DisplayedTour.MaxGuests, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
+                <Label Grid.Row="5" Grid.Column="1" Content="{Binding Path=DisplayedTour.Duration, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
             </Grid>
-        </Border>
+
+            <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Width="1" HorizontalAlignment="Right" BorderBrush="#FF6F6F6F" BorderThickness="1" Margin="0,0,0,15"></Border>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch">
+                <Label Content="Start times: " Style="{DynamicResource TourReviewDetailsLabel}"/>
+                <DataGrid Style="{DynamicResource DataGridStyle2}" CellStyle="{DynamicResource DataGridCellStyle2}" RowStyle="{DynamicResource DataGridRowStyle2}" Margin="5" Height="105" ItemsSource="{Binding StartTimes}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding StringFormat={}{0:dd.MM.yyyy HH\\:mm}}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch">
+                <Label Content="Checkpoints: " Style="{DynamicResource TourReviewDetailsLabel}"/>
+                <DataGrid Style="{DynamicResource DataGridStyle2}" CellStyle="{DynamicResource DataGridCellStyle2}" RowStyle="{DynamicResource DataGridRowStyle2}" Margin="5" Height="105" ItemsSource="{Binding Checkpoints}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
 
 
-    </Grid>
+            <Border Style="{DynamicResource ImageBorder}" Height="140" Width="255" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                <Image Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Height="140" Width="250" Source="{Binding SelectedImage}"></Image>
+            </Border>
+
+            <Button Grid.Row="2" Grid.Column="1" Style="{DynamicResource ImageSwitchingButtonStyle}" HorizontalAlignment="Left" Margin="90,0,0,0" Command="{Binding PreviousImageCommand}">
+                <iconPacks:PackIconMaterial Kind="ChevronLeft"/>
+            </Button>
+
+            <Button Grid.Row="2" Grid.Column="2" Style="{DynamicResource ImageSwitchingButtonStyle}" HorizontalAlignment="Right" Margin="0,0,90,0" Command="{Binding NextImageCommand}">
+                <iconPacks:PackIconMaterial Kind="ChevronRight"/>
+            </Button>
+
+            <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                <StackPanel Margin="0,0,10,0" VerticalAlignment="Center">
+                    <RadioButton Style="{DynamicResource RadioButtonStyle1}" Content="All time" IsChecked="{Binding IsAllTimeRBChecked}" Margin="0,0,0,3"/>
+                    <RadioButton Style="{DynamicResource RadioButtonStyle1}" Content="Yearly" IsChecked="{Binding IsYearlyRBChecked}" Margin="0,2,0,0"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="Choose year:" Margin="0,0,0,2" Foreground="White"/>
+                    <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Style="{DynamicResource ComboBoxStyle1}" Width="75" Height="20" ItemsSource="{Binding PossibleYears}" SelectedItem="{Binding SelectedYear}" IsEnabled="{Binding IsYearlyRBChecked}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Border Grid.Row="4" Grid.ColumnSpan="3"  Style="{DynamicResource MenuBorder}">
+                <Grid>
+                    <Button Content="Close" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding CloseWindowCommand}"/>
+                    <Button Content="Stats" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Right" Margin="0,0,10,0" Command="{Binding OpenStatsCommand}"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Window>
