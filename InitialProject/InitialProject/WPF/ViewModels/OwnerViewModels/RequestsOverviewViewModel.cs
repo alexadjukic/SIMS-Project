@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -35,13 +36,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ObservableCollection<Request> Requests { get; set; }
 
         private readonly RequestService _requestService;
-        private readonly Window _requestsOverview;
+        private readonly Page _requestsOverview;
         private readonly ManageRequestService _manageRequestService;
         private readonly AccommodationNotificationService _accommodationNotificationService;
         private readonly int _ownerId;
         #endregion
 
-        public RequestsOverviewViewModel(Window requestsOverview, int ownerId)
+        public RequestsOverviewViewModel(Page requestsOverview, int ownerId)
         {
             _requestsOverview = requestsOverview;
             _requestService = new RequestService();
@@ -52,7 +53,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Requests = new ObservableCollection<Request>();
             LoadOnHoldRequests();
 
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             DeclineRequestCommand = new RelayCommand(DeclineRequestCommand_Execute, DeclineRequestCommand_CanExecute);
             AcceptedRequestCommand = new RelayCommand(AcceptedRequestCommand_Execute, AcceptedRequestCommand_CanExecute);
             
@@ -72,14 +72,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         #region COMMANDS
-        public RelayCommand CloseWindowCommand { get; }
         public RelayCommand DeclineRequestCommand { get; }
         public RelayCommand AcceptedRequestCommand { get; }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _requestsOverview.Close();
-        }
 
         public bool DeclineRequestCommand_CanExecute(object? parameter)
         {

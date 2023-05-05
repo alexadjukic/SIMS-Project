@@ -69,7 +69,7 @@
                 </StackPanel>
             </Button>
 
-            <Button Height="50" Grid.Row="5" Background="#FF0262E6">
+            <Button Name="ButtonRequests" Height="50" Grid.Row="5" Background="#FF0262E6" Command="{Binding SeeMyRequestsCommand}">
                 <StackPanel Orientation="Horizontal" Width="200">
                     <Image Source="../../../Resources/Images/question_mark.png" Width="25" Height="30" HorizontalAlignment="Left"/>
                     <TextBlock Text="Requests" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>

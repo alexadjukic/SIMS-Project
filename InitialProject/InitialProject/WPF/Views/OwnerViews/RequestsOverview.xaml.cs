@@ -18,7 +18,7 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// <summary>
     /// Interaction logic for RequestsOverview.xaml
     /// </summary>
-    public partial class RequestsOverview : Window
+    public partial class RequestsOverview : Page
     {
         public RequestsOverview(int ownerId)
         {

@@ -152,11 +152,5 @@ namespace InitialProject.WPF.Views
             OwnerProfileOverview ownerProfileOverview = new OwnerProfileOverview(_ownerId);
             ownerProfileOverview.Show();
         }
-
-        private void ButtonRequests_Click(object sender, RoutedEventArgs e)
-        {
-            RequestsOverview requestsOverview = new RequestsOverview(_ownerId);
-            requestsOverview.Show();
-        }
     }
 }
