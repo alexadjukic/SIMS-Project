@@ -14,38 +14,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     public class AccommodationRatingFormViewModel : ViewModelBase
     {
         #region PROPERTIES
-        private string? _cleanliness;
-        public string? Cleanliness
-        {
-            get 
-            { 
-                return _cleanliness; 
-            }
-            set
-            {
-                if (_cleanliness != value)
-                {
-                    _cleanliness = value;
-                    OnPropertyChanged(nameof(Cleanliness));
-                }
-            }
-        }
-        private string? _correctness;
-        public string? Correctness
-        {
-            get
-            {
-                return _correctness;
-            }
-            set
-            {
-                if (_correctness != value)
-                {
-                    _correctness = value;
-                    OnPropertyChanged(nameof(Correctness));
-                }
-            }
-        }
         private string? _comment;
         public string? Comment
         {
@@ -116,7 +84,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         public List<string> ImageUrls { get; set; }
 
-        private readonly AccommodationReservation _selectedReservation;
+        public AccommodationReservation SelectedReservation { get; }
         private readonly Window _accommodationRatingForm;
         private readonly AccommodationRatingService _accommodationRatingService;
         private readonly SetOwnerRoleService _setOwnerRoleService;
@@ -129,7 +97,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             _accommodationRatingService = new AccommodationRatingService();
             _setOwnerRoleService = new SetOwnerRoleService();
             _accommodationRatingImageService = new AccommodationRatingImageService();
-            _selectedReservation = reservation;
+            SelectedReservation = reservation;
             ImageUrls = new List<string>();
 
             AddImageCommand = new RelayCommand(AddImageCommand_Execute, AddImageCommand_CanExecute);
@@ -168,14 +136,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void RateCommand_Execute(object? parameter)
         {
-            AccommodationRating accommodationRating = _accommodationRatingService.SaveAccommodationRating(CleanlinessSelectedMode + 1, CorrectnessSelectedMode + 1, Comment, _selectedReservation.Id, _selectedReservation.Accommodation.OwnerId, _selectedReservation.GuestId);
+            AccommodationRating accommodationRating = _accommodationRatingService.SaveAccommodationRating(CleanlinessSelectedMode + 1, CorrectnessSelectedMode + 1, Comment, SelectedReservation.Id, SelectedReservation.Accommodation.OwnerId, SelectedReservation.GuestId);
             foreach (var url in ImageUrls)
             {
                 _accommodationRatingImageService.SaveImage(url, accommodationRating.Id);
             }
 
             _setOwnerRoleService.SetOwnerRole(accommodationRating.OwnerId);
-            MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(_accommodationRatingForm, _selectedReservation.GuestId));
+            MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(_accommodationRatingForm, SelectedReservation.GuestId));
         }
         #endregion
     }

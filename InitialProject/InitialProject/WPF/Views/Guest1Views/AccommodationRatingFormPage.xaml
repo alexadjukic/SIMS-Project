@@ -27,13 +27,24 @@
 
         <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="7">
             <Label Content="Rate your stay" FontSize="30" Margin="0,40,0,0" Padding="0"/>
-            <Label Content="Paradise" FontSize="25" Padding="0"/>
-            <TextBlock FontSize="20" Padding="0" Text="Thailand, Phuket">
+            <Label Content="{Binding SelectedReservation.Accommodation.Name}" FontSize="25" Padding="0"/>
+            <TextBlock FontSize="20" Padding="0">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0}, {1}">
+                        <Binding Path="SelectedReservation.Accommodation.Location.City"/>
+                        <Binding Path="SelectedReservation.Accommodation.Location.Country"/>
+                    </MultiBinding>
+                </TextBlock.Text>
             </TextBlock>
-            <Label Content="Apartment" FontSize="20" Padding="0"/>
+            <Label Content="{Binding Selectedreservation.Accommodation.Type}" FontSize="20" Padding="0"/>
             <Label Content="Date" FontSize="25" Padding="0" Margin="0,40,0,0"/>
-            <TextBlock FontSize="20" Padding="0" Text="05/04/2023 - 15/04/2023">
-                
+            <TextBlock FontSize="20" Padding="0">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0:dd.MM.yyyy} - {1:dd.MM.yyyy}">
+                        <Binding Path="SelectedReservation.StartDate"/>
+                        <Binding Path="SelectedReservation.EndDate"/>
+                    </MultiBinding>
+                </TextBlock.Text>
             </TextBlock>
         </StackPanel>
 

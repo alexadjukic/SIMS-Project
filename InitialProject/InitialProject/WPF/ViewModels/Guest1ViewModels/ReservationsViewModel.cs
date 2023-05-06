@@ -111,8 +111,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void ChangeReservationCommand_Execute(object? parameter)
         {
-            ReservationChangeView reservationChangeView = new ReservationChangeView(SelectedReservation);
-            reservationChangeView.Show();
+            MainWindow.mainWindow.MainPreview.Content = new ReservationChangePage(new ReservationChangeViewModel(_reservationsView, SelectedReservation));
         }
 
         public bool ChangeReservationCommand_CanExecute(object? parameter)

@@ -1,4 +1,4 @@
-﻿using InitialProject.Domain.Models;
+﻿using InitialProject.WPF.ViewModels.Guest1ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +11,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.WPF.ViewModels;
-using InitialProject.WPF.ViewModels.Guest1ViewModels;
 
 namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
-    /// Interaction logic for ReservationChangeView.xaml
+    /// Interaction logic for ReservationChangePage.xaml
     /// </summary>
-    public partial class ReservationChangeView : Window
+    public partial class ReservationChangePage : Page
     {
-        public ReservationChangeView(AccommodationReservation selectedReservation)
+        public ReservationChangePage(ReservationChangeViewModel reservationChangeViewModel)
         {
             InitializeComponent();
-            this.DataContext = new ReservationChangeViewModel(this, selectedReservation);
+            this.DataContext = reservationChangeViewModel;
+            MainWindow.mainWindow.MainPreview.Content = this;
         }
     }
 }

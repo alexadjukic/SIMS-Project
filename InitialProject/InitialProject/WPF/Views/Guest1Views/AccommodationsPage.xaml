@@ -27,10 +27,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <StackPanel Grid.Column="0">
-                <Label Content="Name:" FontSize="20" Height="38" Width="100" HorizontalAlignment="Right" Margin="0,45,15,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></Label>
-                <Label Content="Country:" FontSize="20" Height="38" Width="100" HorizontalAlignment="Right" Margin="0,0,15,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></Label>
-            </StackPanel>
+            <Grid Grid.Column="0">
+                <Label Content="Accommodations" FontSize="30" Margin="70,30,0,0"/>
+                <Label Content="Name:" FontSize="20" Height="38" Width="100" HorizontalAlignment="Right" Margin="0,45,15,45" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></Label>
+                <Label Content="Country:" FontSize="20" Height="38" Width="100" HorizontalAlignment="Right" Margin="0,0,15,-89" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></Label>
+            </Grid>
             <Label Grid.Row="1" Content="City:" FontSize="20" Height="38" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,15,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></Label>
 
             <StackPanel Grid.Column="1">
@@ -61,7 +62,7 @@
             <Button Content="Search" Click="FilterButton_Click" FontSize="18" Margin="40,0,0,0" Height="38" Width="200"></Button>
         </StackPanel>
 
-        <DataGrid x:Name="AccommodationDataGrid" FontSize="18" Grid.Row="2" Margin="80,20,80,20" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="DataGridAccommodations_SelectionChanged" SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Accommodations, UpdateSourceTrigger=PropertyChanged}">
+        <DataGrid x:Name="AccommodationDataGrid" FontSize="18" Grid.Row="2" Margin="70,20,70,40" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="DataGridAccommodations_SelectionChanged" SelectedItem="{Binding SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Accommodations, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="177">
                     <DataGridTextColumn.Binding>
@@ -77,7 +78,7 @@
                 <DataGridTextColumn Header="Max guests" Width="110" Binding="{Binding Capacity}"/>
                 <DataGridTextColumn Header="Min. reservation days" Width="180" Binding="{Binding MinDaysForStay}"/>
                 <DataGridTextColumn Header="Min. days before cancel" Width="200" Binding="{Binding MinDaysBeforeCancel}"/>
-                <DataGridTemplateColumn Width="100">
+                <DataGridTemplateColumn Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button IsEnabled="{Binding Path=BookButton}" Content="Book" Click="BookButton_Click"></Button>

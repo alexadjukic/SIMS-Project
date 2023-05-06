@@ -1,6 +1,7 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using InitialProject.WPF.Views.Guest1Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,17 +61,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             SelectedReservation = selectedReservation;
 
             RequestDateChangeCommand = new RelayCommand(RequestDateChangeCommand_Execute, RequestDateChangeCommand_CanExecute);
-            CancelCommand = new RelayCommand(CancelCommand_Execute);
         }
 
         #region COMMANDS
         public RelayCommand RequestDateChangeCommand { get; }
-        public RelayCommand CancelCommand { get; }
        
         public void RequestDateChangeCommand_Execute(object? parameter)
         {
             _requestService.CreateRequest(SelectedStartDate, SelectedEndDate, SelectedReservation);
-            _reservationChangeView.Close();
+            MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(_reservationChangeView, SelectedReservation.GuestId));
         }
 
         public bool RequestDateChangeCommand_CanExecute(object? parameter)
@@ -78,11 +77,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             return DateTime.Compare(SelectedStartDate, SelectedEndDate) < 0
                 && DateTime.Compare(DateTime.Now.Date, SelectedStartDate.Date) <= 0
                 && (SelectedEndDate.Date - SelectedStartDate.Date).Days + 1 >= SelectedReservation.Accommodation.MinDaysForStay;
-        }
-
-        public void CancelCommand_Execute(object? parameter)
-        {
-            _reservationChangeView.Close();
         }
         #endregion
     }
