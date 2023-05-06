@@ -14,34 +14,6 @@ namespace InitialProject.WPF.ViewModels
     public class CheckpointArrivalViewModel : ViewModelBase
     {
         #region PROPERTIES
-        private User _selectedArrivedGuest;
-        public User SelectedArrivedGuest
-        {
-            get => _selectedArrivedGuest;
-            set
-            {
-                if (_selectedArrivedGuest != value)
-                {
-                    _selectedArrivedGuest = value;
-                    OnPropertyChanged(nameof(SelectedArrivedGuest));
-                }
-            }
-        }
-
-        private User _selectedUnarrivedGuest;
-        public User SelectedUnarrivedGuest
-        {
-            get => _selectedUnarrivedGuest;
-            set
-            {
-                if (_selectedUnarrivedGuest != value)
-                {
-                    _selectedUnarrivedGuest = value;
-                    OnPropertyChanged(nameof(SelectedUnarrivedGuest));
-                }
-            }
-        }
-
         public ObservableCollection<User> ArrivedGuests { get; set; }
         public ObservableCollection<User> UnarrivedGuests { get; set; }
 
@@ -71,7 +43,8 @@ namespace InitialProject.WPF.ViewModels
 
             RemoveGuestCommand = new RelayCommand(RemoveGuestCommand_Execute, RemoveGuestCommand_CanExecute);
             AddGuestCommand = new RelayCommand(AddGuestCommand_Execute, AddGuestCommand_CanExecute);
-            OkCommand = new RelayCommand(OkCommand_Execute, OkCommand_CanExecute);
+            ConfirmCommand = new RelayCommand(ConfirmCommand_Execute);
+            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
         }
 
         private void LoadData()
@@ -131,31 +104,32 @@ namespace InitialProject.WPF.ViewModels
         #region COMMANDS
         public RelayCommand RemoveGuestCommand { get; }
         public RelayCommand AddGuestCommand { get; }
-        public RelayCommand OkCommand { get; }
+        public RelayCommand ConfirmCommand { get; }
+        public RelayCommand CloseWindowCommand { get; }
 
         public void RemoveGuestCommand_Execute(object? parameter)
         {
-            UnarrivedGuests.Add(SelectedArrivedGuest);
-            ArrivedGuests.Remove(SelectedArrivedGuest);
+            UnarrivedGuests.Add(parameter as User);
+            ArrivedGuests.Remove(parameter as User);
         }
 
         public bool RemoveGuestCommand_CanExecute(object? parameter)
         {
-            return SelectedArrivedGuest is not null;
+            return parameter is not null;
         }
 
         public void AddGuestCommand_Execute(object? parameter)
         {
-            ArrivedGuests.Add(SelectedUnarrivedGuest);
-            UnarrivedGuests.Remove(SelectedUnarrivedGuest);
+            ArrivedGuests.Add(parameter as User);
+            UnarrivedGuests.Remove(parameter as User);
         }
 
         public bool AddGuestCommand_CanExecute(object? parameter)
         {
-            return SelectedUnarrivedGuest is not null;
+            return parameter is not null;
         }
 
-        public void OkCommand_Execute(object? parameter)
+        public void ConfirmCommand_Execute(object? parameter)
         {
             DeleteRemovedArrivals();
 
@@ -163,11 +137,11 @@ namespace InitialProject.WPF.ViewModels
 
             _checkpointArrivalView.Close();
         }
-
-        public bool OkCommand_CanExecute(object? parameter)
+        
+        public void CloseWindowCommand_Execute(object? parameter)
         {
-            return true;
-        } 
+            _checkpointArrivalView.Close();
+        }
         #endregion
     }
 }
