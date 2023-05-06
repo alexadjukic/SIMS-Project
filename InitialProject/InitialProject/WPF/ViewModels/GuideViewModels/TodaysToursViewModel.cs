@@ -122,13 +122,14 @@ namespace InitialProject.WPF.ViewModels
 
         public void ActivateTourCommand_Execute(object? parameter)
         {
-            _tourService.ActivateTour(SelectedTour);
+            _tourService.ActivateTour(parameter as Tour);
             LoadData();
         }
 
         public bool ActivateTourCommand_CanExecute(object? parameter)
         {
-            return ActiveTour is null && SelectedTour is not null && SelectedTour.Status == TourStatus.NOT_STARTED;
+            Tour? tour = parameter as Tour;
+            return ActiveTour is null && tour is not null && tour.Status == TourStatus.NOT_STARTED;
         }
 
         public void CompleteCheckpointCommand_Execute(object? parameter)

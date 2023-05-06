@@ -31,6 +31,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 			}
 		}
 
+        public User Guide { get; set; }
         public string Username { get; set; }
 
         private readonly Window _guideMenuView;
@@ -40,6 +41,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 		{
             _guideMenuView = guideMenuView;
             Username = guide.Username;
+            Guide = guide;
 
             CreateNewTourCommand = new RelayCommand(CreateNewTourCommand_Execute, CreateNewTourCommand_CanExecute);
             CreateMostWantedTourCommand = new RelayCommand(CreateMostWantedTourCommand_Execute, CreateMostWantedTourCommand_CanExecute);
@@ -100,12 +102,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void TodaysToursCommand_Execute(object? parameter)
         {
-
+            CurrentPage = new TodaysToursView(Guide);
         }
 
         public bool TodaysToursCommand_CanExecute(object? parameter)
         {
-            return true;
+            return CurrentPage is null || !CurrentPage.Title.Equals("Todays Tours");
         }
 
         public void TourRequestsCommand_Execute(object? parameter)

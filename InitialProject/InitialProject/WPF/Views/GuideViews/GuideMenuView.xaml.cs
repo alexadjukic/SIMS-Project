@@ -52,8 +52,8 @@ namespace InitialProject.WPF.Views
 
         private void ButtonTodaysTours_Click(object sender, RoutedEventArgs e)
         {
-            TodaysToursView todaysToursView = new TodaysToursView(_guide);
-            todaysToursView.Show();
+            //TodaysToursView todaysToursView = new TodaysToursView(_guide);
+            //todaysToursView.Show();
         }
 
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
