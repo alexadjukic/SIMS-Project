@@ -121,8 +121,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void ViewAllChangeRequestsCommand_Execute(object? parameter)
         {
-            ReservationChangeRequestsView reservationChangeRequestsView = new ReservationChangeRequestsView(_guestId);
-            reservationChangeRequestsView.Show();
+            MainWindow.mainWindow.MainPreview.Content = new ReservationChangeRequestsPage(new ReservationChangeRequestsViewModel(_reservationsView, _guestId));
         }
         #endregion
     }
