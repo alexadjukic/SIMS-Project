@@ -168,13 +168,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void RateCommand_Execute(object? parameter)
         {
-            AccommodationRating accommodationRating = _accommodationRatingService.SaveAccommodationRating(CleanlinessSelectedMode, CorrectnessSelectedMode, Comment, _selectedReservation.Id, _selectedReservation.Accommodation.OwnerId, _selectedReservation.GuestId);
+            AccommodationRating accommodationRating = _accommodationRatingService.SaveAccommodationRating(CleanlinessSelectedMode + 1, CorrectnessSelectedMode + 1, Comment, _selectedReservation.Id, _selectedReservation.Accommodation.OwnerId, _selectedReservation.GuestId);
             foreach (var url in ImageUrls)
             {
                 _accommodationRatingImageService.SaveImage(url, accommodationRating.Id);
             }
 
             _setOwnerRoleService.SetOwnerRole(accommodationRating.OwnerId);
+            MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(_accommodationRatingForm, _selectedReservation.GuestId));
         }
         #endregion
     }
