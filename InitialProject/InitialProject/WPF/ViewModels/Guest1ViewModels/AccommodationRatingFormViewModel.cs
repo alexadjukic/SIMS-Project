@@ -1,6 +1,7 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using InitialProject.WPF.Views.Guest1Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +94,26 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
+
+        private bool[] _cleanlinessModeArray = new bool[] { false, false, false, false, true };
+        public bool[] CleanlinessModeArray
+        {
+            get { return _cleanlinessModeArray; }
+        }
+        public int CleanlinessSelectedMode
+        {
+            get { return Array.IndexOf(_cleanlinessModeArray, true); }
+        }
+
+        private bool[] _correctnessModeArray = new bool[] { false, false, false, false, true };
+        public bool[] CorrectnessModeArray
+        {
+            get { return _correctnessModeArray; }
+        }
+        public int CorrectnessSelectedMode
+        {
+            get { return Array.IndexOf(_correctnessModeArray, true); }
+        }
         public List<string> ImageUrls { get; set; }
 
         private readonly AccommodationReservation _selectedReservation;
@@ -113,15 +134,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
             AddImageCommand = new RelayCommand(AddImageCommand_Execute, AddImageCommand_CanExecute);
             RemoveImageCommand = new RelayCommand(RemoveImageCommand_Execute, RemoveImageCommand_CanExecute);
-            RateCommand = new RelayCommand(RateCommand_Execute, RateCommand_CanExecute);
-            CancelCommand = new RelayCommand(CancelCommand_Execute);
+            RateCommand = new RelayCommand(RateCommand_Execute);
         }
 
         #region COMMANDS
         public RelayCommand AddImageCommand { get; }
         public RelayCommand RemoveImageCommand { get; }
         public RelayCommand RateCommand { get; }
-        public RelayCommand CancelCommand { get; }
 
         public void AddImageCommand_Execute(object? parameter)
         {
@@ -149,24 +168,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void RateCommand_Execute(object? parameter)
         {
-            AccommodationRating accommodationRating = _accommodationRatingService.SaveAccommodationRating(Convert.ToInt32(Cleanliness), Convert.ToInt32(Correctness), Comment, _selectedReservation.Id, _selectedReservation.Accommodation.OwnerId, _selectedReservation.GuestId);
+            AccommodationRating accommodationRating = _accommodationRatingService.SaveAccommodationRating(CleanlinessSelectedMode, CorrectnessSelectedMode, Comment, _selectedReservation.Id, _selectedReservation.Accommodation.OwnerId, _selectedReservation.GuestId);
             foreach (var url in ImageUrls)
             {
                 _accommodationRatingImageService.SaveImage(url, accommodationRating.Id);
             }
 
             _setOwnerRoleService.SetOwnerRole(accommodationRating.OwnerId);
-            _accommodationRatingForm.Close();
-        }
-
-        public bool RateCommand_CanExecute(object? parameter)
-        {
-            return Cleanliness is not null && Correctness is not null;
-        }
-
-        public void CancelCommand_Execute(object? parameter)
-        {
-            _accommodationRatingForm.Close();
         }
         #endregion
     }

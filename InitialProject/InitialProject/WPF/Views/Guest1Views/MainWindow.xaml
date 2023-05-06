@@ -1,0 +1,31 @@
+﻿<Window x:Class="InitialProject.WPF.Views.Guest1Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+        mc:Ignorable="d"
+        Title="Accommodation booking service" Height="750" Width="1400" WindowStartupLocation="CenterScreen">
+    <Grid Background="Azure">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Height="70" Width="1400" Background="LightBlue">
+            <Image Height="60" Width="60" Margin="70,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
+            <Label Content="Language" Height="40" Width="110" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="590,0,0,0"/>
+            <ComboBox Height="40" Width="100" FontSize="18" Margin="0,10,10,10" VerticalContentAlignment="Center">
+                <ComboBoxItem IsSelected="True">English</ComboBoxItem>
+                <ComboBoxItem>Serbian</ComboBoxItem>
+            </ComboBox>
+            <Label Content="Dark theme" Height="40" Width="110" FontSize="18" Margin="10,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+            <ToggleButton x:Name="toggleSwitch" Content="OFF" Width="60" Height="40" FontSize="18"/>
+            <Image Height="40" Width="40" Margin="20,0,20,0"></Image>
+            <Image Height="40" Width="40" Margin="0,0,20,0"></Image>
+            <Button Content="Sign out" FontSize="18" Height="40" Width="120" Click="SignOutButton_Click"></Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,80,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Width="800">
+            <Button Content="Accommodations" MinWidth="200" FontSize="18" Click="AccommodationsButton_Click"/>
+            <Button Content="Reservations" MinWidth="200" FontSize="18" Click="ReservationsButton_Click" />
+            <Button Content="Reviews" MinWidth="200" FontSize="18" />
+            <Button Content="Forum" MinWidth="200" FontSize="18" />
+        </StackPanel>
+        <Frame x:Name="MainPreview" Margin="0,120,0,0" Background="Azure"></Frame>
+    </Grid>
+</Window>

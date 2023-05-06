@@ -99,8 +99,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void RateYourStayCommand_Execute(object? parameter)
         {
-            AccommodationRatingForm accommodationRatingForm = new AccommodationRatingForm(SelectedReservation);
-            accommodationRatingForm.Show();
+            MainWindow.mainWindow.MainPreview.Content = new AccommodationRatingFormPage(new AccommodationRatingFormViewModel(_reservationsView, SelectedReservation));
         }
 
         public bool RateYourStayCommand_CanExecute(object? parameter)

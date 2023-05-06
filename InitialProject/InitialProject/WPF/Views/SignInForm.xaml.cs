@@ -117,8 +117,10 @@ namespace InitialProject.WPF.Views
             }
             else if (user.Role == UserRole.GUEST1)
             {
-                Guest1Menu guest1Menu = new Guest1Menu(_accommodationRepository, _accommodationImageRepository, _locationRepository, _accommodationRatingRepository, _accommodationRatingImageRepository, _accommodationReservationRepository, _userRepository, user);
-                guest1Menu.Show();
+                //Guest1Menu guest1Menu = new Guest1Menu(_accommodationRepository, _accommodationImageRepository, _locationRepository, _accommodationRatingRepository, _accommodationRatingImageRepository, _accommodationReservationRepository, _userRepository, user);
+                //guest1Menu.Show();
+                MainWindow guest1MainWindow = new MainWindow(user, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, _userRepository);
+                guest1MainWindow.Show();
                 Close();
             }
             else if (user.Role == UserRole.GUEST2)
