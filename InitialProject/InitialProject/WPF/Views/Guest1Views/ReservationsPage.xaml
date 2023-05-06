@@ -18,9 +18,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Reservations" FontSize="30" Margin="70,30,0,0"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Reservations" FontSize="30" Margin="70,30,0,0" Style="{DynamicResource LabelStyle}"/>
 
-        <DataGrid Grid.Row="1" Grid.Column="0" FontSize="18" ItemsSource="{Binding Path=Reservations, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedReservation, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="70,0,0,40">
+        <DataGrid Grid.Row="1" Grid.Column="0" FontSize="18" ItemsSource="{Binding Path=Reservations, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedReservation, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserAddRows="False" Style="{DynamicResource DataGridStyle}" CanUserDeleteRows="False" IsReadOnly="True" Margin="70,0,0,40">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="160" Binding="{Binding Accommodation.Name}"/>
                 <DataGridTextColumn Header="Country" Width="150" Binding="{Binding Accommodation.Location.Country}"/>
@@ -33,10 +33,10 @@
         </DataGrid>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <Button Content="Rate your stay" Command="{Binding RateYourStayCommand}" Height="50" Width="200" Margin="0,60,0,0" FontSize="20"/>
-            <Button Content="Change reservation dates" Command="{Binding ChangeReservationCommand}" Height="50" Width="200" Margin="0,30,0,0" FontSize="16"/>
-            <Button Content="Cancel reservation" Command="{Binding CancelReservationCommand}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
-            <Button Content="View all requests" Command="{Binding ViewAllChangeRequestsCommand}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
+            <Button Content="Rate your stay" Command="{Binding RateYourStayCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,60,0,0" FontSize="20"/>
+            <Button Content="Change reservation dates" Command="{Binding ChangeReservationCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="16"/>
+            <Button Content="Cancel reservation" Command="{Binding CancelReservationCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
+            <Button Content="View all requests" Command="{Binding ViewAllChangeRequestsCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
         </StackPanel>
     </Grid>
 </Page>
