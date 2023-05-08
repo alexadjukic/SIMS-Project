@@ -51,6 +51,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SeeMyAccommodationsCommand = new RelayCommand(SeeMyAccommodationsCommand_Execute);
             SeeMyReservationsCommand = new RelayCommand(SeeMyReservationsCommand_Execute);
             SeeMyRequestsCommand = new RelayCommand(SeeMyRequestsCommand_Execute);
+            SeeMyReviewsCommand = new RelayCommand(SeeMyReviewsCommand_Execute);
         }
 
         #region COMMANDS
@@ -58,6 +59,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand? SeeMyAccommodationsCommand { get; }
         public RelayCommand? SeeMyReservationsCommand { get; }
         public RelayCommand? SeeMyRequestsCommand { get; }
+        public RelayCommand? SeeMyReviewsCommand { get; }
 
         public void CloseWindowCommand_Execute(object? parameter)
         {
@@ -79,6 +81,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public void SeeMyRequestsCommand_Execute(object? parameter)
         {
             SelectedPage = new RequestsOverview(_user.Id);
+        }
+
+        public void SeeMyReviewsCommand_Execute(object? parameter)
+        {
+            SelectedPage = new RatedGuestsOverview(_user.Id);
         }
         #endregion
     }

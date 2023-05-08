@@ -118,8 +118,8 @@ namespace InitialProject.WPF.Views
 
         private void ButtonRegistrateAccommodation_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _imageRepository, _ownerId, _userRepository);
-            accommodationRegistration.Show();
+            /*AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _imageRepository, _ownerId, _userRepository);
+            accommodationRegistration.Show();*/
         }
 
         private void ButtonSignOut_Click(object sender, RoutedEventArgs e)
@@ -139,12 +139,6 @@ namespace InitialProject.WPF.Views
         {
             OpenReminderWindow();
             OpenNotificationWindow();
-        }
-
-        private void ButtonSeeRatings_Click(object sender, RoutedEventArgs e)
-        {
-            RatedGuestsOverview ratedGuestsOverview = new RatedGuestsOverview(_ownerId);
-            ratedGuestsOverview.Show();
         }
 
         private void ButtonProfile_Click(object sender, RoutedEventArgs e)

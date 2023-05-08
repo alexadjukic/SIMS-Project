@@ -174,6 +174,7 @@ namespace InitialProject.WPF.Views
         }
 
         public ObservableCollection<String> Images { get; set; }
+        public ObservableCollection<Accommodation> _myAccommodations;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -182,7 +183,7 @@ namespace InitialProject.WPF.Views
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public AccommodationRegistrationForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, int ownerId, UserRepository userRepository)
+        public AccommodationRegistrationForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, int ownerId, UserRepository userRepository, ObservableCollection<Accommodation> MyAccommodations)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -194,6 +195,8 @@ namespace InitialProject.WPF.Views
             _ownerId = ownerId;
             MinDaysBeforeCancel = "1";
             LoggedInUser = _userRepository.GetById(ownerId);
+
+            _myAccommodations = MyAccommodations;
 
             Images = new ObservableCollection<String>();
             Images.Clear();
@@ -217,8 +220,8 @@ namespace InitialProject.WPF.Views
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             _imageRepository.RemovePicturesForCanceledAccommodation();
-            OwnerMainWindow ownerMainWindow = new OwnerMainWindow(LoggedInUser);
-            ownerMainWindow.Show();
+            /*OwnerMainWindow ownerMainWindow = new OwnerMainWindow(LoggedInUser);
+            ownerMainWindow.Show();*/
             this.Close();
         }
 
@@ -231,17 +234,20 @@ namespace InitialProject.WPF.Views
             if (location != null)
             {
                 SetSuperOwnerMark();
-                int accommodationId = _accommodationRepository.Save(AccommodationName, location, accommodationType, Capacity, MinDaysForStay, MinDaysBeforeCancel, _ownerId, SuperOwnerMark, _locationRepository).Id;
+                Accommodation newAccommodation = _accommodationRepository.Save(AccommodationName, location, accommodationType, Capacity, MinDaysForStay, MinDaysBeforeCancel, _ownerId, SuperOwnerMark, _locationRepository);
+                int accommodationId = newAccommodation.Id;
                 //_imageRepository.AddAccommodationId(accommodationId);
 
                 foreach (var url in Images)
                 {
                     _imageRepository.Save(url, accommodationId);
                 }
-            }
 
-            OwnerMainWindow ownerMainWindow = new OwnerMainWindow(LoggedInUser);
-            ownerMainWindow.Show();
+                _myAccommodations.Add(newAccommodation);
+            }
+            
+            /*OwnerMainWindow ownerMainWindow = new OwnerMainWindow(LoggedInUser);
+            ownerMainWindow.Show();*/
             this.Close();
         }
 

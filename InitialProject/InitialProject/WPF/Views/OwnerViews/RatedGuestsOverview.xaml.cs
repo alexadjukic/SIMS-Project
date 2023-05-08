@@ -19,7 +19,7 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// <summary>
     /// Interaction logic for RatedGuestsOveview.xaml
     /// </summary>
-    public partial class RatedGuestsOverview : Window
+    public partial class RatedGuestsOverview : Page
     {
         public RatedGuestsOverview(int ownerId)
         {

@@ -80,12 +80,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public bool SeeReviewCommand_CanExecute(object? parameter)
         {
-            return SelectedReservation is not null && _ratingService.FindRatingByReservationId(SelectedReservation.Id) != null;
+            AccommodationReservation reservation = parameter as AccommodationReservation;
+            return reservation is not null && _ratingService.FindRatingByReservationId(reservation.Id) != null;
         }
 
         public void SeeReviewCommand_Execute(object? parameter)
         {
-            RatingOverviewWindow ratingOverviewWindow = new RatingOverviewWindow(SelectedReservation);
+            AccommodationReservation reservation = parameter as AccommodationReservation;
+            RatingOverviewWindow ratingOverviewWindow = new RatingOverviewWindow(reservation);
             ratingOverviewWindow.Show();
         }
 

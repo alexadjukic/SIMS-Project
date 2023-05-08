@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -33,25 +34,43 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        private readonly Window _ratedGuestsOverview;
+        private double _totalRating;
+        public double TotalRating
+        {
+            get
+            {
+                return _totalRating;
+            }
+            set
+            {
+                if (_totalRating != value)
+                {
+                    _totalRating = value;
+                    OnPropertyChanged(nameof(TotalRating));
+                }
+            }
+        }
+
+        private readonly Page _ratedGuestsOverview;
         private readonly AccommodationReservationService _accommodationReservationService;
+        private readonly SetOwnerRoleService _setOwnerRoleService;
         private readonly int _ownerId;
 
         public ObservableCollection<AccommodationReservation> RatedReservations { get; set; }
         #endregion
 
-        public RatedGuestsOverviewViewModel(Window ratedGuestsOverview, int ownerId)
+        public RatedGuestsOverviewViewModel(Page ratedGuestsOverview, int ownerId)
         {
             _ratedGuestsOverview = ratedGuestsOverview;
             _accommodationReservationService = new AccommodationReservationService();
+            _setOwnerRoleService = new SetOwnerRoleService();
             _ownerId = ownerId;
 
             RatedReservations = new ObservableCollection<AccommodationReservation>();
 
-            SeeRatingCommand = new RelayCommand(SeeRatingCommand_Execute, SeeRatingCommand_CanExecute);
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
-
+            SeeReviewCommand = new RelayCommand(SeeReviewCommand_Execute, SeeReviewCommand_CanExecute);
             LoadRatedReservations();
+            CalculateTotalRating();
         }
 
         public void LoadRatedReservations()
@@ -64,24 +83,24 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private void CalculateTotalRating()
+        {
+            TotalRating = Math.Round(_setOwnerRoleService.CalculateTotalRating(_ownerId), 2);
+        }
+
         #region COMMANDS
-        public RelayCommand SeeRatingCommand { get; }
+        public RelayCommand SeeReviewCommand { get; }
         public RelayCommand CloseWindowCommand { get; }
 
-        public bool SeeRatingCommand_CanExecute(object? parameter)
+        public bool SeeReviewCommand_CanExecute(object? parameter)
         {
             return SelectedAccommodationReservation is not null;
         }
 
-        public void SeeRatingCommand_Execute(object? parameter)
+        public void SeeReviewCommand_Execute(object? parameter)
         {
             RatingOverviewWindow ratingOverviewWindow = new RatingOverviewWindow(SelectedAccommodationReservation);
             ratingOverviewWindow.Show();
-        }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _ratedGuestsOverview.Close();
         }
         #endregion
     }

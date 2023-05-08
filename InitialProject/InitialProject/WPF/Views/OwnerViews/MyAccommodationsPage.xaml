@@ -10,9 +10,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="7*"/>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="7*"/>
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
 
@@ -21,35 +21,35 @@
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
-            <Label Name="LabelSearch" Content="Search:"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBox Name="SearchTextBox" TextWrapping="Wrap" Text="" Height="25" Width="270" Grid.Row="1" Margin="5"/>
-                <Button Name="ButtonCreateNew" Content="Create new" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="210,0,10,0" Command="{Binding CreateNewAccommodationCommand}"/>
-            </StackPanel>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Label Name="LabelPositiveProposal" Content="You could create new accommodation on location nesto nesto:" Margin="0,10,0,10"/>
             <Button Name="ButtonCreate" Content="Create" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="150,10,0,10"/>
         </StackPanel>
 
-        <Separator Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
+        <Separator Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
 
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Label Name="LabeNegativeProposal" Content="You could delete accommodation on location nesto nesto:" Margin="0,10,0,10"/>
             <Button Name="ButtonProosedDelete" Content="Delete" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="174,10,0,10"/>
         </StackPanel>
+        
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+            <Label Name="LabelSearch" Content="Search:"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="SearchTextBox" TextWrapping="Wrap" Text="" Height="25" Width="270" Grid.Row="1" Margin="5"/>
+                
+            </StackPanel>
+        </StackPanel>
 
-        <Separator Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
+        <Separator Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
 
         <Grid Grid.Row="4" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20*" />
-                <ColumnDefinition Width="15*" />
+                <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
 
-            <DataGrid Name="MyAccommodations" HorizontalAlignment="Center" RowHeaderWidth="0" ItemsSource="{Binding MyAccommodations, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Path=SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="0,27,0,25" >
+            <DataGrid Name="MyAccommodations" HorizontalAlignment="Center" RowHeaderWidth="0" ItemsSource="{Binding MyAccommodations, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Path=SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="0,10,0,25" IsReadOnly="True" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
                     <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="*"/>
@@ -58,25 +58,24 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <StackPanel Grid.Column="1">
-                <Image Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Margin="27,27,27,20" Height="170"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="35*"/>
+                </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal">
-                    <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Left" Margin="170,10,0,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
-                        <Image Source="../../../Resources/Images/left_arrow.png"/>
-                    </Button>
+                <Button Grid.Row="0" Name="ButtonInfo" Content="Info" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0" Command="{Binding OpenAccommodationInfoCommand}"/>
+                <Button Grid.Row="1" Name="ButtonCreateNew" Content="Create new" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0" Command="{Binding CreateNewAccommodationCommand}"/>
+                <Button Grid.Row="2" Name="ButtonRenovate" Content="Renovate" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0"/>
+                <Button Grid.Row="3" Name="ButtonStatistics" Content="Statistics" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0"/>
+                <Button Grid.Row="4" Name="ButtonDelete" Content="Delete" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0"/>
 
-                    <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Right" Margin="10,10,0,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
-                        <Image Source="../../../Resources/Images/right_arrow.png"></Image>
-                    </Button>
-                </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,22,0,0">
-                    <Button Name="ButtonRenovate" Content="Renovate" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="3,20,5,0"/>
-                    <Button Name="ButtonStatistics" Content="Statistics" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0,20,5,0"/>
-                    <Button Name="ButtonDelete" Content="Delete" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0,20,0,0"/>
-                </StackPanel>
-            </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
