@@ -1,8 +1,6 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Models;
-using InitialProject.Repositories;
-using InitialProject.WPF.Views;
 using InitialProject.WPF.Views.OwnerViews;
 using System;
 using System.Collections.Generic;
@@ -11,24 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
-    public class MyAccommodationsPageViewModel : ViewModelBase
+    public class AccommodationInfoOverviewViewModel : ViewModelBase
     {
         #region PROPERTIES
-        private readonly Page _myAccommodationsPage;
-
-        private readonly AccommodationRepository _accommodationRepository;
-        private readonly LocationRepository _locationRepository;
-        private readonly AccommodationImageRepository _accommodationImageRepository;
-        private readonly UserRepository _userRepository;
-
-        private readonly AccommodationService _accommodationService;
         private readonly AccommodationImageService _accommodationImageService;
-
-        private readonly User _user;
 
         private Accommodation _selectedAccommodation;
         public Accommodation SelectedAccommodation
@@ -43,7 +30,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 {
                     _selectedAccommodation = value;
                     OnPropertyChanged(nameof(SelectedAccommodation));
-                    UploadImages();
                 }
             }
         }
@@ -67,7 +53,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private ObservableCollection<String> _images;
 
-        public ObservableCollection<String> Images 
+        public ObservableCollection<String> Images
         {
             get
             {
@@ -83,47 +69,23 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        public ObservableCollection<Accommodation> MyAccommodations { get; set; }
-
-        private Window _ownerMainWindow;
+        private Window _accommodationInfoOverview;
         #endregion
 
+        public AccommodationInfoOverviewViewModel(Window accommodationInfoOverview, Accommodation selectedAccommodation) 
+        { 
+            _accommodationInfoOverview = accommodationInfoOverview;
+            SelectedAccommodation = selectedAccommodation;
 
-        public MyAccommodationsPageViewModel(Page myAccommodationsPage, User user, Window ownerMainWindow)
-        {
-            _accommodationRepository = new AccommodationRepository();
-            _locationRepository = new LocationRepository();
-            _userRepository = new UserRepository();
-            _accommodationImageRepository = new AccommodationImageRepository();
-
-            _accommodationService = new AccommodationService();
             _accommodationImageService = new AccommodationImageService();
 
-            _myAccommodationsPage = myAccommodationsPage;
-            _ownerMainWindow = ownerMainWindow;
-
-            _user = user;
-
             Images = new ObservableCollection<String>();
-            MyAccommodations = new ObservableCollection<Accommodation>();
 
-            CreateNewAccommodationCommand = new RelayCommand(CreateNewAccommodationCommand_Execute);
-            NextImageCommand = new RelayCommand(NextImageCommand_Execute, NextImageCommand_CanExecute);
+            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute, PreviousImageCommand_CanExecute);
-            OpenAccommodationInfoCommand = new RelayCommand(OpenAccommodationInfoCommand_Execute, OpenAccommodationInfoCommand_CanExecute);
+            NextImageCommand = new RelayCommand(NextImageCommand_Execute, NextImageCommand_CanExecute);
 
-            LoadAccommodations();
             UploadImages();
-        }
-
-        public void LoadAccommodations()
-        {
-            MyAccommodations.Clear();
-
-            foreach (var accommodation in _accommodationService.GetByOwnerId(_user.Id))
-            {
-                MyAccommodations.Add(accommodation);
-            }
         }
 
         public void UploadImages()
@@ -136,7 +98,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 {
                     Images.Add(image.Url);
                 }
-                
+
             }
 
             if (Images.Count > 0)
@@ -146,16 +108,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         #region COMMANDS
-        public RelayCommand? CreateNewAccommodationCommand { get; }
+        public RelayCommand CloseWindowCommand { get; }
         public RelayCommand NextImageCommand { get; }
         public RelayCommand PreviousImageCommand { get; }
-        public RelayCommand? OpenAccommodationInfoCommand { get; }
 
-        public void CreateNewAccommodationCommand_Execute(object? parameter)
+        public void CloseWindowCommand_Execute(object? parameter)
         {
-            AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _accommodationImageRepository, _user.Id, _userRepository, MyAccommodations);
-            accommodationRegistration.Show();
-            //_ownerMainWindow.Close();
+            _accommodationInfoOverview.Close();
         }
 
         public void PreviousImageCommand_Execute(object? prameter)
@@ -190,17 +149,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public bool NextImageCommand_CanExecute(object? parameter)
         {
             return CurrentImage != null && CurrentImage != Images.Last();
-        }
-
-        public bool OpenAccommodationInfoCommand_CanExecute(object? parameter)
-        {
-            return SelectedAccommodation != null;
-        }
-
-        public void OpenAccommodationInfoCommand_Execute(object? parameter)
-        {
-            AccommodationInfoOverview accommodationInfoOverview = new AccommodationInfoOverview(SelectedAccommodation);
-            accommodationInfoOverview.Show();
         }
         #endregion
     }
