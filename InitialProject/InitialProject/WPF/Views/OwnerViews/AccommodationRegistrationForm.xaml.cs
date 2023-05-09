@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Repositories;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using InitialProject.WPF.Views.OwnerViews;
 using Microsoft.Win32;
 using System;
@@ -31,19 +32,19 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class AccommodationRegistrationForm : Window
     {
-        public User LoggedInUser { get; set; }
+        //public User LoggedInUser { get; set; }
 
         public Accommodation SelectedAccommodation { get; set; }
 
-        private readonly AccommodationRepository _accommodationRepository;
+        /*private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
         private readonly AccommodationImageRepository _imageRepository;
-        private readonly UserRepository _userRepository;
+        private readonly UserRepository _userRepository;*/
 
-        private int _imageNumber;
-        private int _ownerId;
+        //private int _imageNumber;
+        //private int _ownerId;
 
-        private string _accommodationName;
+        /*private string _accommodationName;
         public string AccommodationName
         {
             get => _accommodationName;
@@ -173,36 +174,38 @@ namespace InitialProject.WPF.Views
             }
         }
 
-        public ObservableCollection<String> Images { get; set; }
+        public ObservableCollection<String> Images { get; set; }*/
         public ObservableCollection<Accommodation> _myAccommodations;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //mozda mi ni ovo ne treba
+        /*public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        }*/
 
         public AccommodationRegistrationForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, int ownerId, UserRepository userRepository, ObservableCollection<Accommodation> MyAccommodations)
         {
             InitializeComponent();
-            this.DataContext = this;
-            _accommodationRepository = accommodationRepository;
-            _locationRepository = locationRepository;
-            _imageRepository = imageRepository;
-            _userRepository = userRepository;
-            _imageNumber = 0;
-            _ownerId = ownerId;
-            MinDaysBeforeCancel = "1";
-            LoggedInUser = _userRepository.GetById(ownerId);
+            this.DataContext = new AccommodationRegistrationFormViewModel(this, accommodationRepository, ownerId, locationRepository, imageRepository, userRepository);
+            //_accommodationRepository = accommodationRepository;
+            //_locationRepository = locationRepository;
+            //_imageRepository = imageRepository;
+            //_userRepository = userRepository;
+            //_imageNumber = 0;
+            //_ownerId = ownerId;
+            //MinDaysBeforeCancel = "1";
+            //nije dodato
+            //LoggedInUser = _userRepository.GetById(ownerId);
 
             _myAccommodations = MyAccommodations;
 
-            Images = new ObservableCollection<String>();
-            Images.Clear();
+            /*Images = new ObservableCollection<String>();
+            Images.Clear();*/
         }
 
-        public AccommodationType FindType(string type)
+        /*public AccommodationType FindType(string type)
         {
             switch (type)
             {
@@ -215,17 +218,17 @@ namespace InitialProject.WPF.Views
                 default:
                     return 0;
             }
-        }
+        }*/
 
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        /*private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             _imageRepository.RemovePicturesForCanceledAccommodation();
-            /*OwnerMainWindow ownerMainWindow = new OwnerMainWindow(LoggedInUser);
-            ownerMainWindow.Show();*/
+            *//*OwnerMainWindow ownerMainWindow = new OwnerMainWindow(LoggedInUser);
+            ownerMainWindow.Show();*//*
             this.Close();
-        }
+        }*/
 
-        private void ButtonRegister_Click(object sender, RoutedEventArgs e)
+        /*private void ButtonRegister_Click(object sender, RoutedEventArgs e)
         {
 
             Location location = _locationRepository.GetByCountryAndCity(Country, City);
@@ -246,12 +249,12 @@ namespace InitialProject.WPF.Views
                 _myAccommodations.Add(newAccommodation);
             }
             
-            /*OwnerMainWindow ownerMainWindow = new OwnerMainWindow(LoggedInUser);
-            ownerMainWindow.Show();*/
+            *//*OwnerMainWindow ownerMainWindow = new OwnerMainWindow(LoggedInUser);
+            ownerMainWindow.Show();*//*
             this.Close();
-        }
+        }*/
 
-        private void SetSuperOwnerMark()
+        /*private void SetSuperOwnerMark()
         {
             SuperOwnerMark = " ";
 
@@ -261,15 +264,18 @@ namespace InitialProject.WPF.Views
             {
                 SuperOwnerMark = "*";
             }
-        }
+        }*/
 
-        private void AccommodationRegistrationLoaded(object sender, RoutedEventArgs e)
+        /*private void AccommodationRegistrationLoaded(object sender, RoutedEventArgs e)
         {
             List<string> countries = _locationRepository.GetAllCountries();
             ComboBoxCountry.ItemsSource = countries;
-        }
+        }*/
 
-        private void EnableButtonIfValid()
+
+
+        //jos nije dodato
+        /*private void EnableButtonIfValid()
         {
             if (IsValid)
             {
@@ -279,9 +285,12 @@ namespace InitialProject.WPF.Views
             {
                 ButtonRegister.IsEnabled = false;
             }
-        }
+        }*/
 
-        public void FillInCities(List<string> comboBoxCityItems)
+
+
+
+        /*public void FillInCities(List<string> comboBoxCityItems)
         {
             EnableButtonIfValid();
 
@@ -289,9 +298,9 @@ namespace InitialProject.WPF.Views
             {
                 ComboBoxCity.Items.Add(comboCity);
             }
-        }
+        }*/
 
-        private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /*private void ComboBoxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EnableButtonIfValid();
 
@@ -301,9 +310,9 @@ namespace InitialProject.WPF.Views
             List<string> comboBoxCityItems = _locationRepository.GetCitiesByCountry(ComboBoxCountry.SelectedItem.ToString());
 
             FillInCities(comboBoxCityItems);
-        }
+        }*/
 
-        private void ButtonAddImages_Click(object sender, RoutedEventArgs e)
+        /*private void ButtonAddImages_Click(object sender, RoutedEventArgs e)
         {
             String url = TestTextBox.Text;
 
@@ -325,9 +334,13 @@ namespace InitialProject.WPF.Views
 
             CurrentImage = TestTextBox.Text;
             Images.Add(TestTextBox.Text);
-        }
+        }*/
 
-        public bool IsImageAlreadyAdded(string url)
+
+
+
+        //jos nije dodato
+        /*public bool IsImageAlreadyAdded(string url)
         {
             AccommodationImage image = _imageRepository.GetAll().Find(i => i.Url == url && i.AccommodationId == -1);
 
@@ -337,7 +350,12 @@ namespace InitialProject.WPF.Views
             }
             return false;
             
-        }
+        }*/
+
+
+
+
+
 
         /*private void ButtonSaveImage_Click(object sender, RoutedEventArgs e)
         {
@@ -353,9 +371,9 @@ namespace InitialProject.WPF.Views
             ButtonAddImages.IsEnabled = false;
         }*/
 
-        private Regex _Url = new Regex("^https?:\\/\\/[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$");
+        //private Regex _Url = new Regex("^https?:\\/\\/[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$");
 
-        private void TestTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        /*private void TestTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Match urlMatch = _Url.Match(TestTextBox.Text);
 
@@ -365,7 +383,7 @@ namespace InitialProject.WPF.Views
             } else
             {
                 ButtonAddImages.IsEnabled = false;
-            }
+            }//komanda
 
             EnableButtonIfValid();
 
@@ -373,9 +391,13 @@ namespace InitialProject.WPF.Views
             {
                 //ButtonSaveImage.IsEnabled = false;
             }
-        }
+        }*/
 
-        private Regex _Number = new Regex(@"^[1-9][0-9]*$");
+
+
+
+        //jos nije dodato
+        /*private Regex _Number = new Regex(@"^[1-9][0-9]*$");
 
         public bool IsValid
         {
@@ -439,9 +461,15 @@ namespace InitialProject.WPF.Views
         private void Window_Closed(object sender, EventArgs e)
         {
             _imageRepository.RemovePicturesForCanceledAccommodation();
-        }
+        }*/
 
-        private void ButtonLeftArrow_Click(object sender, RoutedEventArgs e)
+
+
+
+
+
+
+        /*private void ButtonLeftArrow_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentImage != null && CurrentImage != Images.First())
             {
@@ -456,9 +484,9 @@ namespace InitialProject.WPF.Views
                     }
                 }
             }
-        }
+        }*/
 
-        private void ButtonRightArrow_Click(object sender, RoutedEventArgs e)
+        /*private void ButtonRightArrow_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentImage != null && CurrentImage != Images.Last())
             {
@@ -473,9 +501,9 @@ namespace InitialProject.WPF.Views
                     }
                 }
             }
-        }
+        }*/
 
-        private void ButtonRemoveImage_Click(object sender, RoutedEventArgs e)
+        /*private void ButtonRemoveImage_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentImage != null)
             {
@@ -508,6 +536,6 @@ namespace InitialProject.WPF.Views
                     }
                 }
             }
-        }
+        }*/
     }
 }

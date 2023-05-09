@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
         mc:Ignorable="d"
-        Title="Accommodation Registration" Height="750" Width="700" Loaded="AccommodationRegistrationLoaded" Closed="Window_Closed" WindowStartupLocation="CenterScreen">
+        Title="Accommodation Registration" Height="750" Width="700" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
@@ -22,41 +22,41 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0">
             <TextBlock TextWrapping="Wrap" Text="Name:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}"  Width="247"  Margin="0,0,0,0" Height="23.94" TextChanged="TestTextBox_TextChanged"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}"  Width="247"  Margin="0,0,0,0" Height="23.94"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
             <TextBlock TextWrapping="Wrap" Text="Type:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <ComboBox Name="ComboBoxAccommodationType" SelectedValuePath="Content" Text="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,0,0,0" Height="23.94" SelectionChanged="ComboBox_SelectionChanged">
-                <ComboBoxItem Content="apartment"/>
+            <ComboBox Name="ComboBoxAccommodationType" SelectedValuePath="Content" SelectedItem="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Types}" Width="246" Height="24">
+                <!--<ComboBoxItem Content="apartment"/>
                 <ComboBoxItem Content="house"/>
-                <ComboBoxItem Content="cottage"/>
+                <ComboBoxItem Content="cottage"/>-->
             </ComboBox>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
             <TextBlock TextWrapping="Wrap" Text="Country:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <ComboBox Name="ComboBoxCountry" SelectedValuePath="Content" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94" SelectionChanged="ComboBoxCountry_SelectionChanged"/>
+            <ComboBox Name="ComboBoxCountry" SelectedValuePath="Content" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Countries}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock TextWrapping="Wrap" Text="City:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <ComboBox x:Name="ComboBoxCity" SelectedValuePath="Content" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94" IsEnabled="False" SelectionChanged="ComboBox_SelectionChanged"/>
+            <ComboBox x:Name="ComboBoxCity" SelectedValuePath="Content" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Cities}" Width="247"  Margin="0,10,0,15" Height="23.94" IsEnabled="{Binding AreCitiesGenerated}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="0">
             <TextBlock TextWrapping="Wrap" Text="Min days for reservation:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Path=MinDaysForStay, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94" TextChanged="TestTextBox_TextChanged"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=MinDaysForStay, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1">
             <TextBlock TextWrapping="Wrap" Text="Min days before cancel:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Path=MinDaysBeforeCancel, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94" TextChanged="TestTextBox_TextChanged"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=MinDaysBeforeCancel, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="0">
             <TextBlock TextWrapping="Wrap" Text="Max number of guests:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Path=Capacity, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94" TextChanged="TestTextBox_TextChanged"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=Capacity, UpdateSourceTrigger=PropertyChanged}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
         </StackPanel>
 
         <Separator Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
@@ -74,32 +74,32 @@
 
             <StackPanel Grid.Row="0" Grid.Column="0">
                 <TextBlock TextWrapping="Wrap" Text="Url:" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Margin="60,15,80,0"/>
-                <TextBox Name="TestTextBox" TextWrapping="Wrap" Text="" Height="30" Grid.Row="1" Margin="0,0,0,0" Width="240" TextChanged="TestTextBox_TextChanged"/>
-                <Button x:Name="ButtonAddImages" Content="Add image" Width="240" Height="30" Margin="0,20,0,0" Click="ButtonAddImages_Click" IsEnabled="False"/>
-                <Button Name="ButtonRemoveImage" Content="Remove image" Grid.Column="1" Grid.Row="1" Margin="0,20,0,0" Width="240" Height="30" Click="ButtonRemoveImage_Click"/>
+                <TextBox Name="TestTextBox" Text="{Binding Path=Url, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Height="30" Grid.Row="1" Margin="0,0,0,0" Width="240"/>
+                <Button x:Name="ButtonAddImages" Content="Add image" Width="240" Height="30" Margin="0,20,0,0" Command="{Binding AddImageCommand}"/>
+                <Button Name="ButtonRemoveImage" Content="Remove image" Grid.Column="1" Grid.Row="1" Margin="0,20,0,0" Width="240" Height="30" Command="{Binding RemoveImageCommand}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="1">
                 <Image Name="UploadedPicture" Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Height="138" Margin="0,20,0,0" Grid.Row="1" Width="230"/>
                 <StackPanel Orientation="Horizontal">
-                    <Button Name="ButtonLeftArrow" Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Left" Margin="230,10,0,0" BorderBrush="White" Background="White" Click="ButtonLeftArrow_Click">
+                    <Button Name="ButtonLeftArrow" Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Left" Margin="230,10,0,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
                         <Image Source="../../../Resources/Images/left_arrow.png"/>
                     </Button>
 
-                    <Button Name="ButtonRightArrow" Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Right" Margin="10,10,0,0" BorderBrush="White" Background="White" Click="ButtonRightArrow_Click">
+                    <Button Name="ButtonRightArrow" Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Right" Margin="10,10,0,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
                         <Image Source="../../../Resources/Images/right_arrow.png"></Image>
                     </Button>
                 </StackPanel>
             </StackPanel>
 
-            <TextBlock Name="TextBlockPictureSaved" Grid.ColumnSpan="2" Text="" Margin="10,5,10,0" Grid.Row="1"/>
+            <TextBlock Name="TextBlockPictureSaved" Grid.ColumnSpan="2" Text="{Binding Path=PictureSaved, UpdateSourceTrigger=PropertyChanged}" Margin="10,5,10,0" Grid.Row="1"/>
         </Grid>
 
         <Separator Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
 
         <Grid Grid.Row="5" Grid.ColumnSpan="2" Background="#FF0262E6">
-            <Button Name="ButtonRegister" Content="Register" Grid.Row="5" Grid.Column="1" Margin="0,0,50,0"  FontWeight="Bold" Width="100" Height="40" Click="ButtonRegister_Click" IsEnabled="False" HorizontalAlignment="Right"/>
-            <Button Name="ButtonCancel" Content="Close" Grid.Row="5" Grid.Column="1" Width="100" Height="40"  FontWeight="Bold" Margin="400,0,0,0" Click="ButtonCancel_Click" HorizontalAlignment="Left"/>
+            <Button Name="ButtonRegister" Content="Register" Grid.Row="5" Grid.Column="1" Margin="0,0,50,0"  FontWeight="Bold" Width="100" Height="40" HorizontalAlignment="Right" Command="{Binding RegisterCommand}"/>
+            <Button Name="ButtonCancel" Content="Close" Grid.Row="5" Grid.Column="1" Width="100" Height="40"  FontWeight="Bold" Margin="400,0,0,0" HorizontalAlignment="Left" Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>
 </Window>
