@@ -72,7 +72,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
 		public void CreateNewTourCommand_Execute(object? parameter)
 		{
-
+            CreateNewTourView createNewTourView = new CreateNewTourView(Guide);
+            createNewTourView.Show();
 		}
 
 		public bool CreateNewTourCommand_CanExecute(object? parameter)

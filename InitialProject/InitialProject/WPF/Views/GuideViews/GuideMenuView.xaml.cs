@@ -46,8 +46,8 @@ namespace InitialProject.WPF.Views
 
         private void ButtonCreateTour_Click(object sender, RoutedEventArgs e)
         {
-            TourCreationForm tourCreationForm = new TourCreationForm(_tourRepository, _tourImageRepository, _locationRepository, _checkpointRepository, _guide);
-            tourCreationForm.Show();
+            /*CreateNewTourView tourCreationForm = new CreateNewTourView(_tourRepository, _tourImageRepository, _locationRepository, _checkpointRepository, _guide);
+            tourCreationForm.Show();*/
         }
 
         private void ButtonTodaysTours_Click(object sender, RoutedEventArgs e)
