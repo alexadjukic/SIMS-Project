@@ -31,12 +31,12 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0">
             <TextBlock TextWrapping="Wrap" Text="Name:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="247"  Margin="0,0,0,0" Height="23.94"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="247"  Margin="0,0,0,0" Height="23.94"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
             <TextBlock TextWrapping="Wrap" Text="Type:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <ComboBox Name="ComboBoxAccommodationType" SelectedValuePath="Content" SelectedItem="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ItemsSource="{Binding Path=Types}" Width="246" Height="24">
+            <ComboBox Name="ComboBoxAccommodationType" SelectedValuePath="Content" SelectedItem="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ItemsSource="{Binding Path=Types}" Width="246" Height="24">
                 <!--<ComboBoxItem Content="apartment"/>
                 <ComboBoxItem Content="house"/>
                 <ComboBoxItem Content="cottage"/>-->
@@ -45,27 +45,27 @@
 
         <StackPanel Grid.Row="1" Grid.Column="0">
             <TextBlock TextWrapping="Wrap" Text="Country:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <ComboBox Name="ComboBoxCountry" SelectedValuePath="Content" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ItemsSource="{Binding Path=Countries}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
+            <ComboBox Name="ComboBoxCountry" SelectedValuePath="Content" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ItemsSource="{Binding Path=Countries}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock TextWrapping="Wrap" Text="City:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <ComboBox x:Name="ComboBoxCity" SelectedValuePath="Content" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ItemsSource="{Binding Path=Cities}" Width="247"  Margin="0,10,0,15" Height="23.94" IsEnabled="{Binding AreCitiesGenerated}"/>
+            <ComboBox x:Name="ComboBoxCity" SelectedValuePath="Content" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ItemsSource="{Binding Path=Cities}" Width="247"  Margin="0,10,0,15" Height="23.94" IsEnabled="{Binding AreCitiesGenerated}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="0">
             <TextBlock TextWrapping="Wrap" Text="Min days for reservation:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Path=MinDaysForStay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=MinDaysForStay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1">
             <TextBlock TextWrapping="Wrap" Text="Min days before cancel:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Path=MinDaysBeforeCancel, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=MinDaysBeforeCancel, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="0">
             <TextBlock TextWrapping="Wrap" Text="Max number of guests:" FontSize="18" TextAlignment="Left" Margin="50,15,0,0"/>
-            <TextBox TextWrapping="Wrap" Text="{Binding Path=Capacity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
+            <TextBox TextWrapping="Wrap" Text="{Binding Path=Capacity, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="247"  Margin="0,10,0,15" Height="23.94"/>
         </StackPanel>
 
         <Separator Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
@@ -83,7 +83,7 @@
 
             <StackPanel Grid.Row="0" Grid.Column="0">
                 <TextBlock TextWrapping="Wrap" Text="Url:" FontSize="18" TextAlignment="Center" HorizontalAlignment="Left" Margin="60,15,80,0"/>
-                <TextBox Name="TestTextBox" Text="{Binding Path=Url, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" TextWrapping="Wrap" Height="30" Grid.Row="1" Margin="0,0,0,0" Width="240"/>
+                <TextBox Name="TestTextBox" Text="{Binding Path=Url, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" TextWrapping="Wrap" Height="30" Grid.Row="1" Margin="0,0,0,0" Width="240"/>
                 <Button x:Name="ButtonAddImages" Content="Add image" Width="240" Height="30" Margin="0,20,0,0" Command="{Binding AddImageCommand}"/>
                 <Button Name="ButtonRemoveImage" Content="Remove image" Grid.Column="1" Grid.Row="1" Margin="0,20,0,0" Width="240" Height="30" Command="{Binding RemoveImageCommand}"/>
             </StackPanel>

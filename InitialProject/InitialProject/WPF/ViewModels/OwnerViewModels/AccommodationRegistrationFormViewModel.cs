@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
-    public class AccommodationRegistrationFormViewModel : ViewModelBase, IDataErrorInfo
+    public class AccommodationRegistrationFormViewModel : ViewModelBase
     {
         #region PROPERTIES
         public User LoggedInUser { get; set; }
@@ -28,6 +28,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _accommodationName;
             set
             {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Name is required!");
+                }
+
                 if (value != _accommodationName)
                 {
                     _accommodationName = value;
@@ -42,6 +47,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _city;
             set
             {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("City is required!");
+                }
+
                 if (value != _city)
                 {
                     _city = value;
@@ -56,6 +66,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _country;
             set
             {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Country is required!");
+                }
+
                 if (_country != value)
                 {
                     _country = value;
@@ -72,6 +87,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _type;
             set
             {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Type is required!");
+                }
+
                 if (value != _type)
                 {
                     _type = value;
@@ -86,6 +106,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _capacity;
             set
             {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Capacity is required!");
+                }
+
                 if (_capacity != value)
                 {
                     _capacity = value;
@@ -100,6 +125,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _minDaysForStay;
             set
             {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Min days are required!");
+                }
+
                 if (_minDaysForStay != value)
                 {
                     _minDaysForStay = value;
@@ -114,6 +144,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _minDaysBeforeCancel;
             set
             {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Min days before cancel are required!");
+                }
+
                 if (_minDaysBeforeCancel != value)
                 {
                     _minDaysBeforeCancel = value;
@@ -162,6 +197,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
             set
             {
+                if (_imageNumber == 0)
+                {
+                    throw new Exception("Minimum 1 image is required!");
+                }
+
                 if (_url != value)
                 {
                     _url = value;
@@ -366,74 +406,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 return true;
             }
         }
-
-        #region VALIDATION
-        public string Error => null;
-
-        public string this[string columnName]
-        {
-            get
-            {
-                if (columnName.Equals(nameof(AccommodationName)))
-                {
-                    if (string.IsNullOrEmpty(AccommodationName))
-                    {
-                        return "Name is required";
-                    }
-                }
-                else if (columnName.Equals(nameof(Type)))
-                {
-                    if (string.IsNullOrEmpty(Type))
-                    {
-                        return "Type is required";
-                    }
-                }
-                else if (columnName.Equals(nameof(City)))
-                {
-                    if (string.IsNullOrEmpty(City))
-                    {
-                        return "City is required";
-                    }
-                }
-                else if (columnName.Equals(nameof(Country)))
-                {
-                    if (string.IsNullOrEmpty(Country))
-                    {
-                        return "Country is required";
-                    }
-                }
-                else if (columnName.Equals(nameof(Capacity)))
-                {
-                    if (string.IsNullOrEmpty(Capacity))
-                    {
-                        return "Capacity is required";
-                    }
-                }
-                else if (columnName.Equals(nameof(MinDaysForStay)))
-                {
-                    if (string.IsNullOrEmpty(MinDaysForStay))
-                    {
-                        return "Min days are required!";
-                    }
-                }
-                else if (columnName.Equals(nameof(MinDaysBeforeCancel)))
-                {
-                    if (string.IsNullOrEmpty (MinDaysBeforeCancel))
-                    {
-                        return "Min days before cancel are required";
-                    }
-                }
-                else if (columnName.Equals(nameof(Url)))
-                {
-                    if (_imageNumber == 0)
-                    {
-                        return "Images are required";
-                    }
-                }
-                return null;
-            }
-        }
-        #endregion
 
         #region COMMANDS
         public RelayCommand AddImageCommand { get; }
