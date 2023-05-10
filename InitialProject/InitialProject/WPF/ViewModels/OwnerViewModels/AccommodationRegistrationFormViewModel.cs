@@ -6,6 +6,7 @@ using InitialProject.WPF.Views.OwnerViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -16,7 +17,7 @@ using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
-    public class AccommodationRegistrationFormViewModel : ViewModelBase
+    public class AccommodationRegistrationFormViewModel : ViewModelBase, IDataErrorInfo
     {
         #region PROPERTIES
         public User LoggedInUser { get; set; }
@@ -366,6 +367,74 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        #region VALIDATION
+        public string Error => null;
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName.Equals(nameof(AccommodationName)))
+                {
+                    if (string.IsNullOrEmpty(AccommodationName))
+                    {
+                        return "Name is required";
+                    }
+                }
+                else if (columnName.Equals(nameof(Type)))
+                {
+                    if (string.IsNullOrEmpty(Type))
+                    {
+                        return "Type is required";
+                    }
+                }
+                else if (columnName.Equals(nameof(City)))
+                {
+                    if (string.IsNullOrEmpty(City))
+                    {
+                        return "City is required";
+                    }
+                }
+                else if (columnName.Equals(nameof(Country)))
+                {
+                    if (string.IsNullOrEmpty(Country))
+                    {
+                        return "Country is required";
+                    }
+                }
+                else if (columnName.Equals(nameof(Capacity)))
+                {
+                    if (string.IsNullOrEmpty(Capacity))
+                    {
+                        return "Capacity is required";
+                    }
+                }
+                else if (columnName.Equals(nameof(MinDaysForStay)))
+                {
+                    if (string.IsNullOrEmpty(MinDaysForStay))
+                    {
+                        return "Min days are required!";
+                    }
+                }
+                else if (columnName.Equals(nameof(MinDaysBeforeCancel)))
+                {
+                    if (string.IsNullOrEmpty (MinDaysBeforeCancel))
+                    {
+                        return "Min days before cancel are required";
+                    }
+                }
+                else if (columnName.Equals(nameof(Url)))
+                {
+                    if (_imageNumber == 0)
+                    {
+                        return "Images are required";
+                    }
+                }
+                return null;
+            }
+        }
+        #endregion
+
         #region COMMANDS
         public RelayCommand AddImageCommand { get; }
         public RelayCommand RemoveImageCommand { get; }
@@ -373,6 +442,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand PreviousImageCommand { get; }
         public RelayCommand CancelCommand { get; }
         public RelayCommand RegisterCommand { get; }
+
+        
 
         public bool AddImageCommand_CanExecute(object? parameter)
         {
