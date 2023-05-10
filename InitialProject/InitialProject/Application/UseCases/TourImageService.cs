@@ -21,5 +21,10 @@ namespace InitialProject.Application.UseCases
         {
             return _tourImageRepository.GetAll().Where(i => i.TourId == tour.Id);
         }
+
+        public TourImage Create(string url,Tour tour)
+        {
+            return _tourImageRepository.Save(url, tour.Id);
+        }
     }
 }
