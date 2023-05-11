@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for TourStatisticsSelectionView.xaml
+    /// Interaction logic for YourTourStatisticsView.xaml
     /// </summary>
-    public partial class TourStatisticsSelectionView : Window
+    public partial class YourTourStatisticsView : Page
     {
-        public TourStatisticsSelectionView()
+        public YourTourStatisticsView()
         {
             InitializeComponent();
-            this.DataContext = new TourStatisticsSelectionViewModel(this);
+            this.DataContext = new YourTourStatisticsViewModel();
         }
     }
 }

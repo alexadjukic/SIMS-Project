@@ -17,34 +17,6 @@ namespace InitialProject.WPF.ViewModels
     public class TodaysToursViewModel : ViewModelBase
     {
         #region PROPERTIES
-        private Tour _selectedTour;
-        public Tour SelectedTour
-        {
-            get => _selectedTour;
-            set
-            {
-                if (_selectedTour != value)
-                {
-                    _selectedTour = value;
-                    OnPropertyChanged(nameof(SelectedTour));
-                }
-            }
-        }
-
-        private Checkpoint _selectedCheckpoint;
-        public Checkpoint SelectedCheckpoint
-        {
-            get => _selectedCheckpoint;
-            set
-            {
-                if (_selectedCheckpoint != value)
-                {
-                    _selectedCheckpoint = value;
-                    OnPropertyChanged(nameof(SelectedCheckpoint));
-                }
-            }
-        }
-
         private Tour? _activeTour;
         public Tour? ActiveTour
         {
@@ -65,28 +37,24 @@ namespace InitialProject.WPF.ViewModels
         private readonly User _guide;
 
         private readonly TourService _tourService;
-        private readonly CheckpointService _checkpointService; 
         #endregion
 
         public TodaysToursViewModel(User guide)
         {
             _tourService = new TourService();
-            _checkpointService = new CheckpointService();
 
             _guide = guide;
 
             TodaysTours = new ObservableCollection<Tour>();
             Checkpoints = new ObservableCollection<Checkpoint>();
 
-            LoadData();
+            LoadTodaysTours();
 
-            ActivateTourCommand = new RelayCommand(ActivateTourCommand_Execute, ActivateTourCommand_CanExecute);
-            CompleteCheckpointCommand = new RelayCommand(CompleteCheckpointCommand_Execute, CompleteCheckpointCommand_CanExecute);
-            EndTourCommand = new RelayCommand(EndTourCommand_Execute, EndTourCommand_CanExecute);
-            GuestListCommand = new RelayCommand(GuestListCommand_Execute, GuestListCommand_CanExecute);
+            ActivateOrFinishTourCommand = new RelayCommand(ActivateOrFinishTourCommand_Execute, ActivateOrFinishTourCommand_CanExecute);
+            CheckpointsCommand = new RelayCommand(CheckpointsCommand_Execute, CheckpointsCommand_CanExecute);
         }
 
-        private void LoadTodaysTours()
+        public void LoadTodaysTours()
         {
             TodaysTours.Clear();
             foreach (var tour in _tourService.GetTodaysToursByGuideId(_guide.Id))
@@ -98,80 +66,49 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-        private void LoadCheckpoints()
-        {
-            Checkpoints.Clear();
-            if (ActiveTour == null) return;
-            foreach (var checkpoint in _checkpointService.GetAllByTour(ActiveTour))
-            {
-                Checkpoints.Add(checkpoint);
-            }
-        }
-        
-        private void LoadData()
-        {
-            LoadTodaysTours();
-            LoadCheckpoints();
-        }
 
         #region COMMANDS
-        public RelayCommand ActivateTourCommand { get; }
-        public RelayCommand CompleteCheckpointCommand { get; }
-        public RelayCommand EndTourCommand { get; }
-        public RelayCommand GuestListCommand { get; }
+        public RelayCommand ActivateOrFinishTourCommand { get; }
+        public RelayCommand CheckpointsCommand { get; }
 
-        public void ActivateTourCommand_Execute(object? parameter)
+        public void ActivateOrFinishTourCommand_Execute(object? parameter)
         {
-            _tourService.ActivateTour(SelectedTour);
-            LoadData();
-        }
-
-        public bool ActivateTourCommand_CanExecute(object? parameter)
-        {
-            return ActiveTour is null && SelectedTour is not null && SelectedTour.Status == TourStatus.NOT_STARTED;
-        }
-
-        public void CompleteCheckpointCommand_Execute(object? parameter)
-        {
-            var isLastCheckpoint = Checkpoints.IndexOf(SelectedCheckpoint) + 1 == Checkpoints.Count;
-
-            _checkpointService.ActivateCheckpoint(SelectedCheckpoint);
-
-            if (isLastCheckpoint)
+            if(ActiveTour is null)
+            {
+                _tourService.ActivateTour(parameter as Tour);
+                LoadTodaysTours();
+            }
+            else
             {
                 _tourService.FinishTour(ActiveTour);
                 ActiveTour = null;
+                LoadTodaysTours();
             }
-
-            LoadData();
         }
 
-        public bool CompleteCheckpointCommand_CanExecute(object? parameter)
+        public bool ActivateOrFinishTourCommand_CanExecute(object? parameter)
         {
-            return SelectedCheckpoint is not null && ActiveTour is not null;
+            Tour? tour = parameter as Tour;
+            if (ActiveTour is null)
+            {
+                return tour is not null && tour.Status == TourStatus.NOT_STARTED;
+            }
+            else
+            {
+                return tour is not null && tour.Status == TourStatus.ACTIVE;
+            }
         }
 
-        public void EndTourCommand_Execute(object? parameter)
+        public void CheckpointsCommand_Execute(object? parameter)
         {
-            _tourService.FinishTour(ActiveTour);
-            ActiveTour = null;
-            LoadData();
+            var tourCheckpointsView = new TourCheckpointsView(parameter as Tour, this);
+            tourCheckpointsView.Show();
         }
 
-        public bool EndTourCommand_CanExecute(object? parameter)
+        public bool CheckpointsCommand_CanExecute(object? parameter)
         {
-            return ActiveTour is not null;
-        }
-
-        public void GuestListCommand_Execute(object? parameter)
-        {
-            var checkpointArrivalWindow = new CheckpointArrivalView(SelectedCheckpoint, ActiveTour);
-            checkpointArrivalWindow.Show();
-        }
-
-        public bool GuestListCommand_CanExecute(object? parameter)
-        {
-            return SelectedCheckpoint is not null;
+            Tour? tour = parameter as Tour;
+            return tour is not null && tour.Status == TourStatus.ACTIVE;
         }
         #endregion
     }

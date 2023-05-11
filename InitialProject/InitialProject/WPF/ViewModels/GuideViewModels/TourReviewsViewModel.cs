@@ -29,19 +29,16 @@ namespace InitialProject.WPF.ViewModels
 
         public ObservableCollection<Tour> PastTours { get; set; }
 
-        private readonly Window _tourReviewsView;
         private readonly TourService _tourService;
         #endregion
 
-        public TourReviewsViewModel(Window tourReviewsView)
+        public TourReviewsViewModel()
         {
-            _tourReviewsView = tourReviewsView;
             _tourService = new TourService();
 
             PastTours = new();
 
             OpenReviewListCommand = new RelayCommand(OpenReviewListCommand_Execute, OpenReviewListCommand_CanExecute);
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
 
             LoadPastTours();
         }
@@ -56,22 +53,17 @@ namespace InitialProject.WPF.ViewModels
 
         #region COMMANDS
         public RelayCommand OpenReviewListCommand { get; }
-        public RelayCommand CloseWindowCommand { get; }
 
         public void OpenReviewListCommand_Execute(object? parameter)
         {
-            var toursUserReviewsView = new ToursUserReviewsView(SelectedTour);
+            var toursUserReviewsView = new ToursUserReviewsView(parameter as Tour);
             toursUserReviewsView.Show();
         }
 
         public bool OpenReviewListCommand_CanExecute(object? parameter)
         {
-            return SelectedTour is not null && SelectedTour.Status != TourStatus.CANCELED;
-        }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _tourReviewsView.Close();
+            Tour? tour = parameter as Tour;
+            return tour is not null && tour.Status != TourStatus.CANCELED;
         }
         #endregion
     }

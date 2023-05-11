@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Printing;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 
 namespace InitialProject.Application.UseCases
 {
@@ -17,6 +18,7 @@ namespace InitialProject.Application.UseCases
         private readonly ILocationRepository _locationRepository;
         private readonly ICheckpointRepository _checkpointRepository;
         private readonly ITourReservationRepository _tourReservationRepository;
+        private readonly LocationService _locationService;
 
         public TourService()
         {
@@ -24,6 +26,7 @@ namespace InitialProject.Application.UseCases
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
             _checkpointRepository = Injector.CreateInstance<ICheckpointRepository>();
             _tourReservationRepository = Injector.CreateInstance<ITourReservationRepository>();
+            _locationService = new LocationService();
         }
 
         public IEnumerable<Tour> GetFutureTours()
@@ -122,6 +125,12 @@ namespace InitialProject.Application.UseCases
         {
             tour.Status = TourStatus.FINISHED;
             _tourRepository.Update(tour);
+        }
+
+        public Tour Create(string name, string country, string city, string description, string language, int maxGuests, DateTime startTime, int duration, string coverImageUrl, int guideId)
+        {
+            Location location = _locationService.GetByCountryAndCity(country, city);
+            return _tourRepository.Create(name, location, location.Id, description, language, maxGuests, startTime, duration, coverImageUrl, guideId);
         }
     }
 }

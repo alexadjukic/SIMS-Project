@@ -37,5 +37,10 @@ namespace InitialProject.Application.UseCases
             checkpoint.Active = true;
             _checkpointRepository.Update(checkpoint);
         }
+
+        public Checkpoint Create(string name, Tour tour)
+        {
+            return _checkpointRepository.Create(name, false, tour, tour.Id);
+        }
     }
 }

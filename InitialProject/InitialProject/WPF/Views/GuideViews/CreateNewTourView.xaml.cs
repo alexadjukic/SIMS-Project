@@ -1,11 +1,11 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Repositories;
 using InitialProject.WPF.ViewModels;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -22,14 +22,18 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for TodaysToursView.xaml
+    /// Interaction logic for CreateNewTourView.xaml
     /// </summary>
-    public partial class TodaysToursView : Page
+    public partial class CreateNewTourView : Window
     {
-        public TodaysToursView(User guide)
+        public CreateNewTourView(User guide)
         {
             InitializeComponent();
-            this.DataContext = new TodaysToursViewModel(guide);
+            this.DataContext = new CreateNewTourViewModel(guide);
+        }
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

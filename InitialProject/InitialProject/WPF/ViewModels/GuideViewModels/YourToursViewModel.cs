@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace InitialProject.WPF.ViewModels
@@ -56,14 +57,12 @@ namespace InitialProject.WPF.ViewModels
 		public ObservableCollection<Tour> PastTours { get; set; }
         public ObservableCollection<Tour> FutureTours { get; set; }
 
-        private readonly Window _yourToursView;
 		private readonly TourService _tourService;
 		private readonly TourReservationService _tourReservationService;
         #endregion
 
-        public YourToursViewModel(Window yourToursView)
+        public YourToursViewModel()
         {
-			_yourToursView = yourToursView;
 			_tourService = new TourService();
 			_tourReservationService = new TourReservationService();
 
@@ -71,7 +70,6 @@ namespace InitialProject.WPF.ViewModels
             FutureTours = new ObservableCollection<Tour>();
 
 			CancelTourCommand = new RelayCommand(CancelTourCommand_Execute, CancelTourCommand_CanExecute);
-			CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
 
 			LoadFutureTours();
 			LoadPastTours();
@@ -96,7 +94,6 @@ namespace InitialProject.WPF.ViewModels
 
         #region COMMANDS
         public RelayCommand CancelTourCommand { get; }
-		public RelayCommand CloseWindowCommand { get; }
         public void CancelTourCommand_Execute(object? parameter)
 		{
 			_tourService.CancelTour(SelectedFutureTour);
@@ -106,13 +103,9 @@ namespace InitialProject.WPF.ViewModels
 
 		public bool CancelTourCommand_CanExecute(object? parameter)
 		{
-            return SelectedFutureTour is not null && SelectedFutureTour.Status != TourStatus.CANCELED && SelectedFutureTour.StartTime.Subtract(DateTime.Now).TotalHours > 48;
+			Tour? tour = parameter as Tour;
+            return tour is not null && tour.Status != TourStatus.CANCELED && tour.StartTime.Subtract(DateTime.Now).TotalHours > 48;
         }
-
-		public void CloseWindowCommand_Execute(object? parameter)
-		{
-			_yourToursView.Close();
-		}
         #endregion
     }
 }
