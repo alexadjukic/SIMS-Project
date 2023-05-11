@@ -35,7 +35,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        private readonly Page _myReservationsOverviewPage;
         private readonly AccommodationReservationService _accommodationReservationService;
         private readonly RatingService _ratingService;
 
@@ -46,9 +45,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         #endregion
 
-        public MyReservationsOverviewPageViewModel(Page myReservationsOverviewPage, User user)
+        public MyReservationsOverviewPageViewModel(User user)
         {
-            _myReservationsOverviewPage = myReservationsOverviewPage;
             _accommodationReservationService = new AccommodationReservationService();
             _ratingService = new RatingService();
 

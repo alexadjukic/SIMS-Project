@@ -105,7 +105,7 @@
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="2" Grid.Column="2" Margin="80,20,30,30" Content="Close" FontSize="20" FontWeight="Bold" Command="{Binding CloseWindowCommand}"></Button>
+            <Button Grid.Row="2" Grid.Column="2" Margin="80,20,30,30" Content="Close" FontSize="20" FontWeight="Bold" Click="Button_Click"></Button>
         </Grid>
 
     </Grid>

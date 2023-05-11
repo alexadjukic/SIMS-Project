@@ -85,11 +85,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public ObservableCollection<Accommodation> MyAccommodations { get; set; }
 
-        private Window _ownerMainWindow;
         #endregion
 
 
-        public MyAccommodationsPageViewModel(Page myAccommodationsPage, User user, Window ownerMainWindow)
+        public MyAccommodationsPageViewModel(Page myAccommodationsPage, User user)
         {
             _accommodationRepository = new AccommodationRepository();
             _locationRepository = new LocationRepository();
@@ -100,7 +99,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _accommodationImageService = new AccommodationImageService();
 
             _myAccommodationsPage = myAccommodationsPage;
-            _ownerMainWindow = ownerMainWindow;
 
             _user = user;
 
@@ -155,7 +153,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             AccommodationRegistrationForm accommodationRegistration = new AccommodationRegistrationForm(_accommodationRepository, _locationRepository, _accommodationImageRepository, _user.Id, _userRepository, MyAccommodations);
             accommodationRegistration.Show();
-            //_ownerMainWindow.Close();
         }
 
         public void PreviousImageCommand_Execute(object? prameter)

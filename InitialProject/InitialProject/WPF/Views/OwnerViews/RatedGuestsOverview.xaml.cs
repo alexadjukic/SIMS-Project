@@ -24,7 +24,7 @@ namespace InitialProject.WPF.Views.OwnerViews
         public RatedGuestsOverview(int ownerId)
         {
             InitializeComponent();
-            this.DataContext = new RatedGuestsOverviewViewModel(this, ownerId);
+            this.DataContext = new RatedGuestsOverviewViewModel(ownerId);
         }
     }
 }

@@ -71,15 +71,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             "Comment"
         };
 
-        private readonly Window _ratingGuestForm;
-
         private readonly RequestService _requestService;
         private readonly RatingRepository _ratingRepository;
         #endregion
 
-        public RatingGuestFormViewModel(Window ratingGuestForm, RatingRepository ratingRepository, AccommodationReservation selectedReservation, int ownerId) 
+        public RatingGuestFormViewModel(RatingRepository ratingRepository, AccommodationReservation selectedReservation, int ownerId) 
         { 
-            _ratingGuestForm = ratingGuestForm;
             SelectedReservation = selectedReservation;
             _theOneWhoIsRatedId = SelectedReservation.GuestId;
             _reservationId = SelectedReservation.Id;
@@ -153,13 +150,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public bool RateGuestCommand_CanExecute(object? parameter)
         {
-            return IsValid();
+            return IsValid() && _ratingRepository.GetAll().Find(r => r.ReservationId == _reservationId) == null;
         }
 
         public void RateGuestCommand_Execute(object? parameter)
         {
             _ratingRepository.Save(Cleanliness, FollowingTheRules, Comment, _theOneWhoIsRatedId, _raterId, _reservationId);
-            _ratingGuestForm.Close();
         }
         #endregion
     }

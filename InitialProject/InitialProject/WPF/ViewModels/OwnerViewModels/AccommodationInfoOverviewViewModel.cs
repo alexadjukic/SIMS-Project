@@ -69,19 +69,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        private Window _accommodationInfoOverview;
         #endregion
 
-        public AccommodationInfoOverviewViewModel(Window accommodationInfoOverview, Accommodation selectedAccommodation) 
-        { 
-            _accommodationInfoOverview = accommodationInfoOverview;
+        public AccommodationInfoOverviewViewModel(Accommodation selectedAccommodation) 
+        {
             SelectedAccommodation = selectedAccommodation;
 
             _accommodationImageService = new AccommodationImageService();
 
             Images = new ObservableCollection<String>();
 
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute, PreviousImageCommand_CanExecute);
             NextImageCommand = new RelayCommand(NextImageCommand_Execute, NextImageCommand_CanExecute);
 
@@ -108,14 +105,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         #region COMMANDS
-        public RelayCommand CloseWindowCommand { get; }
         public RelayCommand NextImageCommand { get; }
         public RelayCommand PreviousImageCommand { get; }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _accommodationInfoOverview.Close();
-        }
 
         public void PreviousImageCommand_Execute(object? prameter)
         {

@@ -29,7 +29,7 @@ namespace InitialProject.WPF.Views
         public RatingGuestForm(RatingRepository ratingRepository, AccommodationReservation selectedReservation, int ownerId)
         {
             InitializeComponent();
-            this.DataContext = new RatingGuestFormViewModel(this, ratingRepository, selectedReservation, ownerId);
+            this.DataContext = new RatingGuestFormViewModel(ratingRepository, selectedReservation, ownerId);
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)

@@ -36,15 +36,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ObservableCollection<Request> Requests { get; set; }
 
         private readonly RequestService _requestService;
-        private readonly Page _requestsOverview;
         private readonly ManageRequestService _manageRequestService;
         private readonly AccommodationNotificationService _accommodationNotificationService;
         private readonly int _ownerId;
         #endregion
 
-        public RequestsOverviewViewModel(Page requestsOverview, int ownerId)
+        public RequestsOverviewViewModel(int ownerId)
         {
-            _requestsOverview = requestsOverview;
             _requestService = new RequestService();
             _manageRequestService = new ManageRequestService();
             _accommodationNotificationService = new AccommodationNotificationService();

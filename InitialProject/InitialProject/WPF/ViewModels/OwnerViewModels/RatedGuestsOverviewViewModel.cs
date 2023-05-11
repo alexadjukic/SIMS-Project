@@ -51,7 +51,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        private readonly Page _ratedGuestsOverview;
         private readonly AccommodationReservationService _accommodationReservationService;
         private readonly SetOwnerRoleService _setOwnerRoleService;
         private readonly int _ownerId;
@@ -59,9 +58,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public ObservableCollection<AccommodationReservation> RatedReservations { get; set; }
         #endregion
 
-        public RatedGuestsOverviewViewModel(Page ratedGuestsOverview, int ownerId)
+        public RatedGuestsOverviewViewModel(int ownerId)
         {
-            _ratedGuestsOverview = ratedGuestsOverview;
             _accommodationReservationService = new AccommodationReservationService();
             _setOwnerRoleService = new SetOwnerRoleService();
             _ownerId = ownerId;

@@ -25,7 +25,7 @@ namespace InitialProject.WPF.Views.OwnerViews
         public MyReservationsOverviewPage(User user)
         {
             InitializeComponent();
-            this.DataContext = new MyReservationsOverviewPageViewModel(this, user);
+            this.DataContext = new MyReservationsOverviewPageViewModel(user);
         }
     }
 }

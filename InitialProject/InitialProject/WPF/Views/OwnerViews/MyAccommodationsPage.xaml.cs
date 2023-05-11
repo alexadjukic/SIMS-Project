@@ -22,10 +22,10 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class MyAccommodationsPage : Page
     {
-        public MyAccommodationsPage(User user, Window ownerMainWindow)
+        public MyAccommodationsPage(User user)
         {
             InitializeComponent();
-            this.DataContext = new MyAccommodationsPageViewModel(this, user, ownerMainWindow);
+            this.DataContext = new MyAccommodationsPageViewModel(this, user);
         }
     }
 }

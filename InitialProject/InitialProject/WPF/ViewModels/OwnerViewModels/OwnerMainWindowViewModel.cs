@@ -43,7 +43,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             _ownerMainWindow = ownerMainWindow;
             _user = user;
-            SelectedPage = new MyAccommodationsPage(_user, _ownerMainWindow);
+            SelectedPage = new MyAccommodationsPage(_user);
 
             Username = user.Username;
 
@@ -70,7 +70,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void SeeMyAccommodationsCommand_Execute(object? parameter)
         {
-            SelectedPage = new MyAccommodationsPage(_user, _ownerMainWindow);
+            SelectedPage = new MyAccommodationsPage(_user);
         }
 
         public void SeeMyReservationsCommand_Execute(object? parameter)

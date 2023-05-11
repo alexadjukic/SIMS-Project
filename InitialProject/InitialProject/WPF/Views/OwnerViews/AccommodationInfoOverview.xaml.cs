@@ -24,7 +24,12 @@ namespace InitialProject.WPF.Views.OwnerViews
         public AccommodationInfoOverview(Accommodation selectedAccommodation)
         {
             InitializeComponent();
-            this.DataContext = new AccommodationInfoOverviewViewModel(this, selectedAccommodation);
+            this.DataContext = new AccommodationInfoOverviewViewModel(selectedAccommodation);
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

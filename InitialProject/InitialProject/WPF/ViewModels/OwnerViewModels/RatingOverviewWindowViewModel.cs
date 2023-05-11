@@ -88,15 +88,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public ObservableCollection<String> Images { get; set; }
 
-        private readonly Window _ratingOverviewWindow;
         private readonly RatingService _ratingService;
         private readonly AccommodationRatingService _accommodationRatingService;
         private readonly AccommodationRatingImageService _accommodationRatingImageService;
         #endregion
 
-        public RatingOverviewWindowViewModel(Window ratingOverviewWindow, AccommodationReservation selectedAccommodationReservation)
+        public RatingOverviewWindowViewModel(AccommodationReservation selectedAccommodationReservation)
         {
-            _ratingOverviewWindow = ratingOverviewWindow;
             SelectedAccommodationReservation = selectedAccommodationReservation;
             _ratingService = new RatingService();
             _accommodationRatingService = new AccommodationRatingService();
@@ -108,7 +106,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             FindGuestRating();
             UploadImages();
 
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             NextImageCommand = new RelayCommand(NextImageCommand_Execute, NextImageCommand_CanExecute);
             PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute, PreviousImageCommand_CanExecute);
         }
@@ -162,14 +159,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         #region COMMANDS
-        public RelayCommand CloseWindowCommand { get; }
         public RelayCommand NextImageCommand { get; }
         public RelayCommand PreviousImageCommand { get; }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _ratingOverviewWindow.Close();
-        }
 
         public void PreviousImageCommand_Execute(object? prameter)
         {

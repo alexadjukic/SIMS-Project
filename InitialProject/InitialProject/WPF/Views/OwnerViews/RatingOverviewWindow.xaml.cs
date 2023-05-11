@@ -24,7 +24,12 @@ namespace InitialProject.WPF.Views.OwnerViews
         public RatingOverviewWindow(AccommodationReservation selectedAccommodationReservation)
         {
             InitializeComponent();
-            this.DataContext = new RatingOverviewWindowViewModel(this, selectedAccommodationReservation);
+            this.DataContext = new RatingOverviewWindowViewModel(selectedAccommodationReservation);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

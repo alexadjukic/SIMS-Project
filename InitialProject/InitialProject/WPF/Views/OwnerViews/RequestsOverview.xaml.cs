@@ -23,7 +23,7 @@ namespace InitialProject.WPF.Views.OwnerViews
         public RequestsOverview(int ownerId)
         {
             InitializeComponent();
-            this.DataContext = new RequestsOverviewViewModel(this, ownerId);
+            this.DataContext = new RequestsOverviewViewModel(ownerId);
         }
     }
 }
