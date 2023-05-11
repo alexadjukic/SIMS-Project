@@ -1,6 +1,8 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,184 +24,16 @@ namespace InitialProject.WPF.Views
     /// <summary>
     /// Interaction logic for RatingGuestForm.xaml
     /// </summary>
-    public partial class RatingGuestForm : Window, INotifyPropertyChanged, IDataErrorInfo
+    public partial class RatingGuestForm : Window
     {
-        public User LogedInUser { get; set; }
-
-        public AccommodationReservation SelectedReservation { get; set; }
-
-        private int _theOneWhoIsRatedId;
-        private int _raterId;
-        private int _reservationId;
-
-        private readonly RatingRepository _ratingRepository;
-        private readonly RequestService _requestService;
-        private string _cleanliness;
-        public string Cleanliness
-        {
-            get => _cleanliness;
-            set
-            {
-                if (value != _cleanliness)
-                {
-                    _cleanliness = value;
-                    OnPropertyChanged("Cleanliness");
-                }
-            }
-        }
-
-        private string _followingTheRules;
-        public string FollowingTheRules
-        {
-            get => _followingTheRules;
-            set
-            {
-                if (value != _followingTheRules)
-                {
-                    _followingTheRules = value;
-                    OnPropertyChanged("FollowingTheRules");
-                }
-            }
-        }
-
-        private string _comment;
-        public string Comment
-        {
-            get => _comment;
-            set
-            {
-                if (value != _comment)
-                {
-                    _comment = value;
-                    OnPropertyChanged("Comment");
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public RatingGuestForm(RatingRepository ratingRepository, AccommodationReservation selectedReservation, int ownerId)
         {
             InitializeComponent();
-            DataContext = this;
-            _ratingRepository = ratingRepository;
-            SelectedReservation = selectedReservation;
-            _theOneWhoIsRatedId = SelectedReservation.GuestId;
-            _reservationId = SelectedReservation.Id;
-            _raterId = ownerId;
-            _requestService = new RequestService();
-            LoadAccommodation();
-        }
-
-        private void LoadAccommodation()
-        {
-            SelectedReservation = _requestService.LoadAccommodation(SelectedReservation);
-        }
-
-        private readonly string[] _validatedProperties =
-        {
-            "Cleanliness",
-            "FollowingTheRules",
-            "Comment"
-        };
-
-        public bool IsValid
-        {
-            /*get
-            {
-                if (Cleanliness == null)
-                {
-                    return false;
-                } 
-                else if (FollowingTheRules == null)
-                {
-                    return false;
-                }
-                else if (Comment == null || Comment == "")
-                {
-                    return false;
-                }
-
-                return true;
-            }*/
-            get
-            {
-                foreach (var property in _validatedProperties)
-                {
-                    if (this[property] != null)
-                        return false;
-                }
-
-                return true;
-            }
-        }
-
-        public string Error => null;
-
-        public string this[string columnName]
-        {
-            get
-            {
-                if (columnName.Equals(nameof(Cleanliness)))
-                {
-                    if (string.IsNullOrEmpty(Cleanliness))
-                    {
-                        return "Review is required";
-                    }
-                }
-                else if (columnName.Equals(nameof(FollowingTheRules)))
-                {
-                    if (string.IsNullOrEmpty(FollowingTheRules))
-                    {
-                        return "Review is required";
-                    }
-                }
-                else if (columnName.Equals(nameof(Comment)))
-                {
-                    if (string.IsNullOrEmpty(Comment))
-                    {
-                        return "Comment is required";
-                    }
-                }
-                return null;
-            }
-        }
-
-        public void EnableButtonIfValid()
-        {
-            if (IsValid)
-            {
-                ButtonRate.IsEnabled = true;
-            }
-            else
-            {
-                ButtonRate.IsEnabled = false;
-            }
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            EnableButtonIfValid();
-        }
-
-        private void TextBoxComment_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            EnableButtonIfValid();
+            this.DataContext = new RatingGuestFormViewModel(this, ratingRepository, selectedReservation, ownerId);
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-        }
-
-        private void ButtonRate_Click(object sender, RoutedEventArgs e)
-        {
-            _ratingRepository.Save(Cleanliness, FollowingTheRules, Comment, _theOneWhoIsRatedId, _raterId, _reservationId);
             this.Close();
         }
     }

@@ -23,8 +23,7 @@
         <Button Name="ButtonRegistrateAccommodation" Content="Create" Grid.Row="0" Grid.Column="1" Width="100" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,3,30,00" Click="ButtonRegistrateAccommodation_Click"/>
         <Label Name="LabelWelcomeUser" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Arial Black" FontSize="18"/>
         <Button Name="ButtonRateGuest" Content="Rate guests" Grid.Row="1" Grid.Column="1" Width="100" Height="50" HorizontalAlignment="Right" Margin="0,0,30,5" Click="ButtonRateGuest_Click"/>
-        <Button Name="ButtonSeeRatings" Content="See ratings" Grid.Row="2" Grid.Column="1" Width="100" Height="50" HorizontalAlignment="Right" Margin="0,0,30,5" Click="ButtonSeeRatings_Click"/>
-        <Button Name="ButtonRequests" Content="Requests" Grid.Row="3" Grid.Column="1" Width="100" Height="50" HorizontalAlignment="Right" Margin="0,0,30,5" Click="ButtonRequests_Click"/>
+        <Button Name="ButtonRequests" Content="Requests" Grid.Row="3" Grid.Column="1" Width="100" Height="50" HorizontalAlignment="Right" Margin="0,0,30,5"/>
         <Button Name="ButtonProfile" Content="Profile" Grid.Row="4" Grid.Column="1" Width="100" Height="50" HorizontalAlignment="Right" Margin="0,0,30,5" Click="ButtonProfile_Click"/>
         <Button Name="ButtonSignOut" Content="Sign out" Grid.Row="5" Grid.Column="1" Width="100" Height="50" HorizontalAlignment="Right" Margin="0,5,30,0" Click="ButtonSignOut_Click" VerticalAlignment="Top"/>
     </Grid>

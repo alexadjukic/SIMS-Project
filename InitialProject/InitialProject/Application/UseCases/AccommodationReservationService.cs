@@ -113,5 +113,23 @@ namespace InitialProject.Application.UseCases
             string yesNoanswer = _accommodationAvailabilityService.IsAvailable(startDate, endDate, reservationId, accommodationId);
             if (yesNoanswer.Equals("yes")) return true; else return false;
         }
+
+        public IEnumerable<AccommodationReservation> GetAllByOwnerId(int ownerId)
+        {
+            List<AccommodationReservation> ownerReservations = new List<AccommodationReservation>();
+            List<int> accommodationIdsForOwner = _accommodationRepository.AccommodationIdsByOwnerId(ownerId);
+
+            foreach (var reservation in _accommodationReservationRepository.GetAll())
+            {
+                if (accommodationIdsForOwner.Find(a => a == reservation.AccommodationId) != 0)
+                {
+                    reservation.Guest = _userRepository.GetAll().Find(g => g.Id == reservation.GuestId);
+                    ownerReservations.Add(reservation);
+                }
+            }
+
+            ownerReservations = LoadAccommodations(ownerReservations);
+            return ownerReservations;
+        }
     }
 }

@@ -3,6 +3,7 @@ using InitialProject.Domain.Models;
 using InitialProject.Repositories;
 using InitialProject.WPF.Views.Guest1Views;
 using InitialProject.WPF.Views.Guest2Views;
+using InitialProject.WPF.Views.OwnerViews;
 using System.ComponentModel;
 using System.Configuration;
 using System.Runtime.CompilerServices;
@@ -111,8 +112,8 @@ namespace InitialProject.WPF.Views
         {
             if (user.Role == UserRole.OWNER || user.Role == UserRole.SUPER_OWNER)
             {
-                OwnerForm ownerForm = new OwnerForm(_accommodationRepository, _locationRepository, _accommodationImageRepository, user, _accommodationReservationRepository, _userRepository, _ratingRepository);
-                ownerForm.Show();
+                OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
+                ownerMainWindow.Show();
                 Close();
             }
             else if (user.Role == UserRole.GUEST1)

@@ -1,0 +1,81 @@
+﻿<Page x:Class="InitialProject.WPF.Views.OwnerViews.MyAccommodationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="600"
+      Title="MyAccommodationsPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Label Name="LabelPositiveProposal" Content="You could create new accommodation on location nesto nesto:" Margin="0,10,0,10"/>
+            <Button Name="ButtonCreate" Content="Create" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="150,10,0,10"/>
+        </StackPanel>
+
+        <Separator Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Label Name="LabeNegativeProposal" Content="You could delete accommodation on location nesto nesto:" Margin="0,10,0,10"/>
+            <Button Name="ButtonProosedDelete" Content="Delete" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="174,10,0,10"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+            <Label Name="LabelSearch" Content="Search:"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="SearchTextBox" TextWrapping="Wrap" Text="" Height="25" Width="270" Grid.Row="1" Margin="5"/>
+                
+            </StackPanel>
+        </StackPanel>
+
+        <Separator Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
+
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Name="MyAccommodations" HorizontalAlignment="Center" RowHeaderWidth="0" ItemsSource="{Binding MyAccommodations, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Path=SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="0,10,0,25" IsReadOnly="True" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="*"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="35*"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Name="ButtonInfo" Content="Info" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0" Command="{Binding OpenAccommodationInfoCommand}"/>
+                <Button Grid.Row="1" Name="ButtonCreateNew" Content="Create new" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0" Command="{Binding CreateNewAccommodationCommand}"/>
+                <Button Grid.Row="2" Name="ButtonRenovate" Content="Renovate" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0"/>
+                <Button Grid.Row="3" Name="ButtonStatistics" Content="Statistics" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0"/>
+                <Button Grid.Row="4" Name="ButtonDelete" Content="Delete" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0"/>
+
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

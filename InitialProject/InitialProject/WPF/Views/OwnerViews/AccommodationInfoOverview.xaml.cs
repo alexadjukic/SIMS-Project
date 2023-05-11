@@ -1,4 +1,5 @@
-﻿using InitialProject.WPF.ViewModels.OwnerViewModels;
+﻿using InitialProject.Domain.Models;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,14 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.Views.OwnerViews
 {
     /// <summary>
-    /// Interaction logic for RequestsOverview.xaml
+    /// Interaction logic for AccommodationInfoOverview.xaml
     /// </summary>
-    public partial class RequestsOverview : Page
+    public partial class AccommodationInfoOverview : Window
     {
-        public RequestsOverview(int ownerId)
+        public AccommodationInfoOverview(Accommodation selectedAccommodation)
         {
             InitializeComponent();
-            this.DataContext = new RequestsOverviewViewModel(this, ownerId);
+            this.DataContext = new AccommodationInfoOverviewViewModel(this, selectedAccommodation);
         }
     }
 }
