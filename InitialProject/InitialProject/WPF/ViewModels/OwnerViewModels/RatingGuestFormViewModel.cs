@@ -94,25 +94,33 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SelectedReservation = _requestService.LoadAccommodation(SelectedReservation);
         }
 
-        public bool IsValid()
+        public bool IsValid
         {
-            if (Cleanliness == null)
+            get
             {
-                return false;
-            }
-            else if (FollowingTheRules == null)
-            {
-                return false;
-            }
-            else if (Comment == null || Comment == "")
-            {
-                return false;
-            }
+                if (Cleanliness == null)
+                {
+                    return false;
+                }
+                else if (FollowingTheRules == null)
+                {
+                    return false;
+                }
+                else if (Comment == null)
+                {
+                    return false;
+                }
+                else if (Comment == "")
+                {
+                    return false;
+                }
 
-            return true;
+                return true;
+            }
+            
         }
 
-        #region VALIDATION
+#region VALIDATION
         public string Error => null;
 
         public string this[string columnName]
@@ -144,13 +152,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
         #endregion
-
+        
         #region COMMANDS
         public RelayCommand RateGuestCommand { get; }
 
         public bool RateGuestCommand_CanExecute(object? parameter)
         {
-            return IsValid() && _ratingRepository.GetAll().Find(r => r.ReservationId == _reservationId) == null;
+            return IsValid && _ratingRepository.GetAll().Find(r => r.ReservationId == _reservationId) == null;
         }
 
         public void RateGuestCommand_Execute(object? parameter)

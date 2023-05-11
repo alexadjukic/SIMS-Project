@@ -29,10 +29,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _accommodationName;
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new Exception("Name is required!");
-                }
 
                 if (value != _accommodationName)
                 {
@@ -48,11 +44,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _city;
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new Exception("City is required!");
-                }
-
                 if (value != _city)
                 {
                     _city = value;
@@ -67,16 +58,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _country;
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new Exception("Country is required!");
-                }
-
                 if (_country != value)
                 {
                     _country = value;
                     OnPropertyChanged("Country");
-                    //FillInCities();
                 }
             }
         }
@@ -88,11 +73,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _type;
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new Exception("Type is required!");
-                }
-
                 if (value != _type)
                 {
                     _type = value;
@@ -107,11 +87,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _capacity;
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new Exception("Capacity is required!");
-                }
-
                 if (_capacity != value)
                 {
                     _capacity = value;
@@ -126,11 +101,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _minDaysForStay;
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new Exception("Min days are required!");
-                }
-
                 if (_minDaysForStay != value)
                 {
                     _minDaysForStay = value;
@@ -145,11 +115,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             get => _minDaysBeforeCancel;
             set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new Exception("Min days before cancel are required!");
-                }
-
                 if (_minDaysBeforeCancel != value)
                 {
                     _minDaysBeforeCancel = value;
@@ -198,15 +163,15 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
             set
             {
-                if (_imageNumber == 0)
-                {
-                    throw new Exception("Minimum 1 image is required!");
-                }
-
                 if (_url != value)
                 {
                     _url = value;
                     OnPropertyChanged(nameof(Url));
+
+                    if (_imageNumber == 0)
+                    {
+                        throw new Exception("Minimum 1 image is required!");
+                    }
                 }
             }
         }
@@ -227,23 +192,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 }
             }
         }
-
-        /*private bool _areCitiesGenerated;
-        public bool AreCitiesGenerated
-        {
-            get
-            {
-                return _areCitiesGenerated;
-            }
-            set
-            {
-                if (_areCitiesGenerated != value)
-                {
-                    _areCitiesGenerated = value;
-                    OnPropertyChanged(nameof(AreCitiesGenerated));
-                }
-            }
-        }*/
 
         public ObservableCollection<String> Images { get; set; }
         public List<String> Countries { get; set; }
@@ -282,8 +230,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _userRepository = userRepository;
 
             _locationService = new LocationService();
-
-            //AreCitiesGenerated = false;
 
             _ownerId = ownerId;
             _imageNumber = 0;
@@ -327,8 +273,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 }
                 
             }
-
-            //AreCitiesGenerated = true;
         }
 
         public AccommodationType FindType(string type)
@@ -419,8 +363,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand RegisterCommand { get; }
         public RelayCommand LoadCitiesCommand { get; }
 
-
-
         public bool AddImageCommand_CanExecute(object? parameter)
         {
             if (Url != null)
@@ -431,17 +373,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
                 return Url != "" && image == null && urlMatch.Success;
             }
-            
+
 
             return Url != null && Url != "";
         }
 
         public void AddImageCommand_Execute(object? parameter)
         {
+            _imageNumber++;
             CurrentImage = Url;
             PictureSaved = "Image added, if you want to add more images, type another url and click button 'Add images'";
             Images.Add(CurrentImage);
-            _imageNumber++;
         }
 
         public bool RemoveImageCommand_CanExecute(object? parameter)
@@ -451,11 +393,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void RemoveImageCommand_Execute(object? parameter)
         {
+            PictureSaved = "Picture removed, if you want to add more images, type another url and click button 'Add images'";
             for (int i = 0; i < Images.Count; i++)
             {
                 if (CurrentImage == Images[i])
                 {
                     Images.Remove(CurrentImage);
+
+                    _imageNumber--;
 
                     if (i != Images.Count)
                     {
@@ -468,11 +413,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                     else if (Images.Count == 0)
                     {
                         CurrentImage = "";
-                        _imageNumber--;
                         return;
                     }
-
-                    _imageNumber--;
                     return;
                 }
             }
@@ -480,7 +422,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public bool NextImageCommand_CanExecute(object? parameter)
         {
-            return CurrentImage != null && CurrentImage != Images.Last();
+            return CurrentImage != null && CurrentImage != "" && CurrentImage != Images.Last();
         }
 
         public void NextImageCommand_Execute(object? parameter)
@@ -497,7 +439,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public bool PreviousImageCommand_CanExecute(object? parameter)
         {
-            return CurrentImage != null && CurrentImage != Images.First();
+            return CurrentImage != null && CurrentImage != "" && CurrentImage != Images.First();
         }
 
         public void PreviousImageCommand_Execute(object? prameter)
@@ -533,13 +475,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SetSuperOwnerMark();
             Accommodation newAccommodation = _accommodationRepository.Save(AccommodationName, location, accommodationType, Capacity, MinDaysForStay, MinDaysBeforeCancel, _ownerId, SuperOwnerMark, _locationRepository);
             int accommodationId = newAccommodation.Id;
-            //_imageRepository.AddAccommodationId(accommodationId);
 
             foreach (var url in Images)
             {
                 _imageRepository.Save(url, accommodationId);
             }
 
+            MyAccommodationsPageViewModel.MyAccommodations.Add(newAccommodation);
             _accommodationRegistrationForm.Close();
         }
 

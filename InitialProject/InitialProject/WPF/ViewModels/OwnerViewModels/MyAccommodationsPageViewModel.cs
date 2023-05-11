@@ -83,7 +83,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        public ObservableCollection<Accommodation> MyAccommodations { get; set; }
+        public static ObservableCollection<Accommodation> MyAccommodations { get; set; }
 
         #endregion
 

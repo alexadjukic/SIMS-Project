@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
+        xmlns:val="clr-namespace:InitialProject.Validation"
         mc:Ignorable="d"
         Title="Review guest" Height="450" Width="350"  WindowStartupLocation="CenterScreen" Background="White">
     <Window.Resources>
@@ -13,6 +14,21 @@
                 <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" />
             </StackPanel>
 
+        </ControlTemplate>
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+            </Grid>
         </ControlTemplate>
     </Window.Resources>
     <Grid>
@@ -79,7 +95,7 @@
         </StackPanel>
 
         <TextBlock Name="TextBlockComment" Grid.Row="2" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="Your comment:" TextAlignment="Center" Margin="0,21,231,0"/>
-        <TextBox Name="TextBoxComment" Grid.ColumnSpan="2" Width="310" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="5,5,5,20"/>
+        <TextBox Name="TextBoxComment" Grid.ColumnSpan="2" Width="310" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="5,5,5,20"/>            
 
         <Separator Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
 
