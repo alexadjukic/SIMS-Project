@@ -1,7 +1,9 @@
-﻿using InitialProject.Domain.Models;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Domain.Models;
 using InitialProject.WPF.ViewModels.OwnerViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +23,10 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class RequestDeclinedForm : Window
     {
-        public RequestDeclinedForm(Request selectedRequest)
+        public RequestDeclinedForm(Request selectedRequest, int ownerId)
         {
             InitializeComponent();
-            this.DataContext = new RequestDeclinedFormViewModel(this, selectedRequest);
+            this.DataContext = new RequestDeclinedFormViewModel(this, selectedRequest, ownerId);
         }
     }
 }

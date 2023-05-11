@@ -33,7 +33,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        public ObservableCollection<Request> Requests { get; set; }
+        public static ObservableCollection<Request> Requests { get; set; }
 
         private readonly RequestService _requestService;
         private readonly ManageRequestService _manageRequestService;
@@ -82,7 +82,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             _manageRequestService.AcceptRequest(SelectedRequest);
             _accommodationNotificationService.NotifyUser($"Date change request for {SelectedRequest.Reservation.Accommodation.Name} is accepted.", _ownerId, SelectedRequest.Reservation.GuestId);
-            LoadOnHoldRequests();
+            Requests.Remove(SelectedRequest);
         }
 
         public bool AcceptedRequestCommand_CanExecute(object? parameter)
@@ -98,9 +98,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void DeclineRequestCommand_Execute(object? parameter)
         {
-            _manageRequestService.DeclineRequest(SelectedRequest);
-            _accommodationNotificationService.NotifyUser($"Date change request for {SelectedRequest.Reservation.Accommodation.Name} is declined.", _ownerId, SelectedRequest.Reservation.GuestId);
-            LoadOnHoldRequests();
+            RequestDeclinedForm requestDeclinedForm = new RequestDeclinedForm(SelectedRequest, _ownerId);
+            requestDeclinedForm.Show();
         }
         #endregion
     }
