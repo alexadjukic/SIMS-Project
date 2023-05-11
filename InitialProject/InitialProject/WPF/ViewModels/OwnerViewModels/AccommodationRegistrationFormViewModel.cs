@@ -1,4 +1,5 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
@@ -75,7 +76,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 {
                     _country = value;
                     OnPropertyChanged("Country");
-                    FillInCities();
+                    //FillInCities();
                 }
             }
         }
@@ -227,7 +228,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        private bool _areCitiesGenerated;
+        /*private bool _areCitiesGenerated;
         public bool AreCitiesGenerated
         {
             get
@@ -242,10 +243,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                     OnPropertyChanged(nameof(AreCitiesGenerated));
                 }
             }
-        }
+        }*/
 
         public ObservableCollection<String> Images { get; set; }
-        public ObservableCollection<String> Countries { get; set; }
+        public List<String> Countries { get; set; }
         public ObservableCollection<String> Cities { get; set; }
         public ObservableCollection<String> Types { get; set; }
 
@@ -255,6 +256,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly LocationRepository _locationRepository;
         private readonly AccommodationImageRepository _imageRepository;
         private readonly UserRepository _userRepository;
+
+        private readonly LocationService _locationService;
 
         private int _ownerId;
         private int _imageNumber;
@@ -269,7 +272,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             MinDaysBeforeCancel = "1";
 
             Images = new ObservableCollection<String>();
-            Countries = new ObservableCollection<String>();
+            Countries = new List<String>();
             Cities = new ObservableCollection<String>();
             Types = new ObservableCollection<String>();
 
@@ -278,7 +281,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _imageRepository = imageRepository;
             _userRepository = userRepository;
 
-            AreCitiesGenerated = false;
+            _locationService = new LocationService();
+
+            //AreCitiesGenerated = false;
 
             _ownerId = ownerId;
             _imageNumber = 0;
@@ -295,6 +300,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute, PreviousImageCommand_CanExecute);
             CancelCommand = new RelayCommand(CancelCommand_Execute);
             RegisterCommand = new RelayCommand(RegisterCommand_Execute, RegisterCommand_CanExecute);
+            LoadCitiesCommand = new RelayCommand(LoadCitiesCommand_Execute);
         }
 
         public void FillInTypes()
@@ -307,25 +313,22 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void AccommodationRegistrationLoaded()
         {
-            List<string> countries = _locationRepository.GetAllCountries();
-            
-            foreach (var country in countries)
-            {
-                Countries.Add(country);
-            }
+            Countries = _locationService.GetAllCountries().ToList();
         }
 
         public void FillInCities()
         {
             Cities.Clear();
-
-            List<string> comboBoxCityItems = _locationRepository.GetCitiesByCountry(Country);
-            foreach (var comboCity in comboBoxCityItems)
+            foreach (var location in _locationService.GetAll())
             {
-                Cities.Add(comboCity);
+                if (location.Country == Country)
+                {
+                    Cities.Add(location.City);
+                }
+                
             }
 
-            AreCitiesGenerated = true;
+            //AreCitiesGenerated = true;
         }
 
         public AccommodationType FindType(string type)
@@ -414,8 +417,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand PreviousImageCommand { get; }
         public RelayCommand CancelCommand { get; }
         public RelayCommand RegisterCommand { get; }
+        public RelayCommand LoadCitiesCommand { get; }
 
-        
+
 
         public bool AddImageCommand_CanExecute(object? parameter)
         {
@@ -537,6 +541,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
 
             _accommodationRegistrationForm.Close();
+        }
+
+        public void LoadCitiesCommand_Execute(object? parameter)
+        {
+            Cities.Clear();
+            foreach (var location in _locationService.GetAll())
+            {
+                if (location.Country != Country) continue;
+                Cities.Add(location.City);
+            }
         }
         #endregion
     }
