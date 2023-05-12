@@ -30,7 +30,13 @@
                 <Label Content="Arrived: " Margin="20,5,20,5" Style="{DynamicResource ReviewLabel}"/>
                 <DataGrid Style="{DynamicResource DataGridStyle2}" CellStyle="{DynamicResource DataGridCellStyle2}" RowStyle="{DynamicResource DataGridRowStyle1}" Margin="20,5,20,5" Height="300" ItemsSource="{Binding Path=ArrivedGuests, UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Width="1*" Binding="{Binding Username}"/>
+                        <DataGridTextColumn Width="1*" Binding="{Binding Username}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                                    <Setter Property="Focusable" Value="False"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -68,7 +74,13 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding Username}"/>
+                        <DataGridTextColumn Binding="{Binding Username}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                                    <Setter Property="Focusable" Value="False"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

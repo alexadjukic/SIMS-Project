@@ -26,8 +26,20 @@
 
             <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="0" Margin="10" ItemsSource="{Binding Checkpoints}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="4*" Header="Checkpoint" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Width="2*" Header="Status" Binding="{Binding Active, Converter={StaticResource CheckpointStatusConverter}}"/>
+                    <DataGridTextColumn Width="4*" Header="Checkpoint" Binding="{Binding Name}">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                                <Setter Property="Focusable" Value="False"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="2*" Header="Status" Binding="{Binding Active, Converter={StaticResource CheckpointStatusConverter}}">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                                <Setter Property="Focusable" Value="False"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                     <DataGridTemplateColumn Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

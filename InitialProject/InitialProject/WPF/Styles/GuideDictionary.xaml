@@ -28,6 +28,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Height" Value="35"/>
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -51,6 +52,11 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Border" Property="Background" Value="White"/>
                             <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
+                            <Setter TargetName="SideBorder" Property="Opacity" Value="1"/>
+                        </Trigger>
+
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="White"/>
                             <Setter TargetName="SideBorder" Property="Opacity" Value="1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -275,6 +281,7 @@
         <Setter Property="Margin" Value="15,0"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
@@ -292,6 +299,7 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Width" Value="75"/>
         <Setter Property="Height" Value="25"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -305,6 +313,24 @@
                             <Setter Property="Background" Value="White"/>
                             <Setter TargetName="Content" Property="TextElement.Foreground" Value="Black"/>
                         </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="True"/>
+                                <Condition Property="IsFocused" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="White"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="False"/>
+                                <Condition Property="IsFocused" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="White"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="Black"/>
+                        </MultiTrigger>
 
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" Value="Transparent"/>
@@ -371,6 +397,7 @@
         <Setter Property="Padding" Value="8,4,8,4"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -395,6 +422,10 @@
                             <Setter Property="Height" TargetName="templateRoot" Value="35"/>
                             <Setter Property="Background" TargetName="mainBorder" Value="{StaticResource HighlightColorSolid}"/>
                             <Setter Property="BorderBrush" Value="Transparent"/>
+                        </Trigger>
+
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" TargetName="mainBorder" Value="{StaticResource HighlightColorSolidLight}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -493,6 +524,13 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Fill" TargetName="arrow" Value="{StaticResource ComboBox.MouseOver.Glyph}"/>
                         </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsFocused,RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="true"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Fill" TargetName="arrow" Value="{StaticResource ComboBox.MouseOver.Glyph}"/>
+                            <Setter Property="Background" TargetName="templateRoot" Value="White"/>
+                        </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
@@ -637,6 +675,10 @@
                 <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Black"/>
             </Trigger>
 
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="Black"/>
+            </Trigger>
+
             <Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true">
                 <Setter Property="Margin" TargetName="shadow" Value="0,0,5,5"/>
                 <Setter Property="Color" TargetName="shadow" Value="#71000000"/>
@@ -668,6 +710,7 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Validation.ErrorTemplate">
             <Setter.Value>
                 <ControlTemplate>
@@ -810,6 +853,7 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Width" Value="70"/>
         <Setter Property="Height" Value="25"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -832,6 +876,11 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{StaticResource DisabledButtonBrush}"/>
                             <Setter Property="BorderBrush" Value="{StaticResource DisabledButtonBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="TextElement.Foreground" Value="Black"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -942,6 +991,7 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Width" Value="25"/>
         <Setter Property="Height" Value="25"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -950,6 +1000,9 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Foreground" Value="White"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

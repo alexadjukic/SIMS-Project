@@ -19,7 +19,13 @@
     <Grid>
         <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ItemsSource="{Binding Path=TodaysTours, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="9*" Header="Tour name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="9*" Header="Tour name" Binding="{Binding Name}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                            <Setter Property="Focusable" Value="False"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Width="6*" Header="Location">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0}, {1}">
@@ -27,9 +33,27 @@
                             <Binding Path="Location.Country"/>
                         </MultiBinding>
                     </DataGridTextColumn.Binding>
+
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                            <Setter Property="Focusable" Value="False"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Width="6*" Header="Start time" Binding="{Binding StartTime, StringFormat={}{0:dd.MM.yyyy HH\\:mm}}"/>
-                <DataGridTextColumn Width="4*" Header="Status" Binding="{Binding Status, Converter={StaticResource TourStatusConverter}}"/>
+                <DataGridTextColumn Width="6*" Header="Start time" Binding="{Binding StartTime, StringFormat={}{0:dd.MM.yyyy HH\\:mm}}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                            <Setter Property="Focusable" Value="False"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="4*" Header="Status" Binding="{Binding Status, Converter={StaticResource TourStatusConverter}}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                            <Setter Property="Focusable" Value="False"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
