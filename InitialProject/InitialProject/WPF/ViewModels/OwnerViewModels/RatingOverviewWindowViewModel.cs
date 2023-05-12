@@ -86,6 +86,23 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _reserveImage;
+        public string ReserveImage
+        {
+            get
+            {
+                return _reserveImage;
+            }
+            set
+            {
+                if (_reserveImage != value)
+                {
+                    _reserveImage = value;
+                    OnPropertyChanged(nameof(ReserveImage));
+                }
+            }
+        }
+
         public ObservableCollection<String> Images { get; set; }
 
         private readonly RatingService _ratingService;
@@ -155,6 +172,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             if (Images.Count > 0)
             {
                 CurrentImage = Images[0];
+            }
+
+            if (Images.Count == 0)
+            {
+                ReserveImage = "https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg";
             }
         }
 
