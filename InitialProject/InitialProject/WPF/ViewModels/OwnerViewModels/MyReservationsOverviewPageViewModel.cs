@@ -35,12 +35,90 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _guestName;
+        public string GuestName
+        {
+            get => _guestName;
+            set
+            {
+
+                if (value != _guestName)
+                {
+                    _guestName = value;
+                    OnPropertyChanged("GuestName");
+                }
+            }
+        }
+
+        private string _accommodationName;
+        public string AccommodationName
+        {
+            get => _accommodationName;
+            set
+            {
+
+                if (value != _accommodationName)
+                {
+                    _accommodationName = value;
+                    OnPropertyChanged("AccommodationName");
+                }
+            }
+        }
+
+        private string _city;
+        public string City
+        {
+            get => _city;
+            set
+            {
+                if (value != _city)
+                {
+                    _city = value;
+                    OnPropertyChanged("City");
+                }
+            }
+        }
+
+        private string _country;
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    OnPropertyChanged("Country");
+                }
+            }
+        }
+
+        private string _type;
+
+        public string Type
+        {
+            get => _type;
+            set
+            {
+                if (value != _type)
+                {
+                    _type = value;
+                    OnPropertyChanged("Type");
+                }
+            }
+        }
+
         private readonly AccommodationReservationService _accommodationReservationService;
         private readonly RatingService _ratingService;
+        private readonly LocationService _locationService;
 
         private readonly RatingRepository _ratingRepository;
 
         private readonly User _owner;
+
+        public List<String> Countries { get; set; }
+        public ObservableCollection<String> Cities { get; set; }
+        public ObservableCollection<String> Types { get; set; }
 
         public ObservableCollection<AccommodationReservation> AccommodationReservations { get; set; }
         #endregion
@@ -51,15 +129,39 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _ratingService = new RatingService();
 
             _ratingRepository = new RatingRepository();
+            _locationService = new LocationService();
 
             _owner = user;
 
+
+            Countries = new List<String>();
+            Cities = new ObservableCollection<String>();
+            Types = new ObservableCollection<String>();
             AccommodationReservations = new ObservableCollection<AccommodationReservation>();
 
+            Countries.Clear();
+
+            AccommodationRegistrationLoaded();
             LoadReservations();
+            FillInTypes();
 
             SeeReviewCommand = new RelayCommand(SeeReviewCommand_Execute, SeeReviewCommand_CanExecute);
             ReviewCommand = new RelayCommand(ReviewCommand_Execute, ReviewCommand_CanExecute);
+            FilterReservationsCommand = new RelayCommand(FilterReservationsCommand_Execute);
+            LoadCitiesCommand = new RelayCommand(LoadCitiesCommand_Execute);
+        }
+
+        public void FillInTypes()
+        {
+            Types.Clear();
+            Types.Add("apartment");
+            Types.Add("house");
+            Types.Add("cottage");
+        }
+
+        private void AccommodationRegistrationLoaded()
+        {
+            Countries = _locationService.GetAllCountries().ToList();
         }
 
         public void LoadReservations()
@@ -72,9 +174,29 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private void FilterReservations()
+        {
+            AccommodationReservations.Clear();
+
+            foreach (var reservation in _accommodationReservationService.GetAllByOwnerId(_owner.Id))
+            {
+                if ((GuestName == null || reservation.Guest.Username.ToUpper().Contains(GuestName.ToUpper())) &&
+                    (AccommodationName == null || reservation.Accommodation.Name.ToUpper().Contains(AccommodationName.ToUpper())) &&
+                    (Type == null || reservation.Accommodation.Type.ToString().ToUpper().Contains(Type.ToUpper())) &&
+                    (City == null || reservation.Accommodation.Location.City.ToString().ToUpper().Contains(City.ToUpper())) &&
+                    (Country == null || reservation.Accommodation.Location.Country.ToString().ToUpper().Contains(Country.ToUpper())))
+                {
+                    AccommodationReservations.Add(reservation);
+                }
+
+            }
+        }
+
         #region COMMANDS
         public RelayCommand SeeReviewCommand { get; }
         public RelayCommand ReviewCommand { get; }
+        public RelayCommand FilterReservationsCommand { get; }
+        public RelayCommand LoadCitiesCommand { get; }
 
         public bool SeeReviewCommand_CanExecute(object? parameter)
         {
@@ -120,6 +242,26 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             RatingGuestForm ratingGuestForm = new RatingGuestForm(_ratingRepository, SelectedReservation, _owner.Id);
             ratingGuestForm.Show();
+        }
+
+        public void FilterReservationsCommand_Execute(object? parameter)
+        {
+            FilterReservations();
+        }
+
+        public void LoadCitiesCommand_Execute(object? parameter)
+        {
+            Cities.Clear();
+            foreach (var location in _locationService.GetAll())
+            {
+                if (location.Country != Country) continue;
+                Cities.Add(location.City);
+            }
+
+            AccommodationReservations.Clear();
+
+            FilterReservations();
+            return;
         }
         #endregion
     }

@@ -39,11 +39,12 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="30*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="92"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0">
@@ -163,7 +164,7 @@
             </TextBox>
         </StackPanel>
 
-        <Separator Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
+        <Separator Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Top" Background="Black"/>
 
         <Grid Grid.Row="4" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -199,11 +200,18 @@
             <TextBlock Name="TextBlockPictureSaved" Grid.ColumnSpan="2" Text="{Binding Path=PictureSaved, UpdateSourceTrigger=PropertyChanged}" Margin="10,5,10,0" Grid.Row="1"/>
         </Grid>
 
-        <Separator Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
+        <Separator Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Top" Background="Black"/>
 
-        <Grid Grid.Row="5" Grid.ColumnSpan="2" Background="#FF0262E6">
-            <Button Name="ButtonRegister" Content="Register" Grid.Row="5" Grid.Column="1" Margin="0,0,50,0"  FontWeight="Bold" Width="100" Height="40" HorizontalAlignment="Right" Command="{Binding RegisterCommand}"/>
-            <Button Name="ButtonCancel" Content="Close" Grid.Row="5" Grid.Column="1" Width="100" Height="40"  FontWeight="Bold" Margin="400,0,0,0" HorizontalAlignment="Left" Command="{Binding CancelCommand}"/>
+        <Grid Grid.Row="5" Height="92" Grid.ColumnSpan="3" Background="#FF0262E6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="51.5" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" Name="ButtonRegister" Content="Register" Grid.Row="5" Margin="0,0,0,0"  FontWeight="Bold" Width="100" Height="40" HorizontalAlignment="Center" Command="{Binding RegisterCommand}"/>
+            <Button Name="ButtonCancel" Content="Close" Grid.Row="5" Grid.Column="2" Width="100" Height="40"  FontWeight="Bold" Margin="0,0,0,0" HorizontalAlignment="Center" Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>
 </Window>
