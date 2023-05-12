@@ -22,7 +22,13 @@
 
             <DataGrid Grid.Row="0" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ItemsSource="{Binding Path=Reviews, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedReview, UpdateSourceTrigger=PropertyChanged}" Margin="10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Username" Binding="{Binding Arrival.Reservation.User.Username}" Width="2*"/>
+                    <DataGridTextColumn Header="Username" Binding="{Binding Arrival.Reservation.User.Username}" Width="2*">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                                <Setter Property="Focusable" Value="False"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                     <DataGridTemplateColumn Width="1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
