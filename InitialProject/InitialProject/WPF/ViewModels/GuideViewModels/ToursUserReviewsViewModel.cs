@@ -34,21 +34,18 @@ namespace InitialProject.WPF.ViewModels
 
         public ObservableCollection<TourReview> Reviews { get; set; }
 
-		private readonly Window _toursUserReviewsView;
         private readonly Tour _tour;
         private readonly TourReviewService _tourReviewService;
         #endregion
 
-        public ToursUserReviewsViewModel(Window toursUserReviewsView, Tour tour)
+        public ToursUserReviewsViewModel(Tour tour)
         {
-			_toursUserReviewsView = toursUserReviewsView;
             _tour = tour;
 
             _tourReviewService = new();
             Reviews = new();
 
 			OpenReviewCommand = new RelayCommand(OpenReviewCommand_Execute, OpenReviewCommand_CanExecute);
-			CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
 
             LoadReviews();
         }
@@ -75,11 +72,6 @@ namespace InitialProject.WPF.ViewModels
         public bool OpenReviewCommand_CanExecute(object? parameter)
         {
             return parameter is not null;
-        }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _toursUserReviewsView.Close();
         }
         #endregion
     }

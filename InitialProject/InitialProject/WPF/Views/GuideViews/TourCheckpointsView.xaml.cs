@@ -24,7 +24,12 @@ namespace InitialProject.WPF.Views
         public TourCheckpointsView(Tour tour, TodaysToursViewModel todaysToursViewModel)
         {
             InitializeComponent();
-            this.DataContext = new TourCheckpointsViewModel(this, tour, todaysToursViewModel);
+            this.DataContext = new TourCheckpointsViewModel(tour, todaysToursViewModel);
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

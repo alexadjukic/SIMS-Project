@@ -20,16 +20,13 @@ namespace InitialProject.WPF.ViewModels
         private Checkpoint _checkpoint;
         private Tour _tour;
 
-        private readonly Window _checkpointArrivalView;
         private readonly TourReservationService _tourReservationService;
         private readonly CheckpointArrivalService _checkpointArrivalService;
         private readonly TourNotificationService _tourNotificationService;
         #endregion
 
-        public CheckpointArrivalViewModel(Checkpoint checkpoint, Tour tour, Window checkpointArrivalView)
+        public CheckpointArrivalViewModel(Checkpoint checkpoint, Tour tour)
         {
-            _checkpointArrivalView = checkpointArrivalView;
-
             _tourReservationService = new TourReservationService();
             _checkpointArrivalService = new CheckpointArrivalService();
             _tourNotificationService = new TourNotificationService();
@@ -44,7 +41,6 @@ namespace InitialProject.WPF.ViewModels
             RemoveGuestCommand = new RelayCommand(RemoveGuestCommand_Execute, RemoveGuestCommand_CanExecute);
             AddGuestCommand = new RelayCommand(AddGuestCommand_Execute, AddGuestCommand_CanExecute);
             ConfirmCommand = new RelayCommand(ConfirmCommand_Execute);
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
         }
 
         private void LoadData()
@@ -134,13 +130,6 @@ namespace InitialProject.WPF.ViewModels
             DeleteRemovedArrivals();
 
             CreateNewArrivals();
-
-            _checkpointArrivalView.Close();
-        }
-        
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _checkpointArrivalView.Close();
         }
         #endregion
     }

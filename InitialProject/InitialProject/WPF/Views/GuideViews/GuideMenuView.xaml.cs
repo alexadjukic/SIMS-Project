@@ -22,38 +22,10 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class GuideMenuView : Window
     {
-        private TourRepository _tourRepository;
-        private TourImageRepository _tourImageRepository;
-        private LocationRepository _locationRepository;
-        private CheckpointRepository _checkpointRepository;
-        private User _guide;
-
-        public string _welcomeMessage;
-        public string WelcomeMessage { get; set; }
-
-        public GuideMenuView(TourRepository tourRepository, TourImageRepository tourImageRepository, LocationRepository locationRepository, CheckpointRepository checkpointRepository, User guide)
+        public GuideMenuView(User guide)
         {
             InitializeComponent();
-            this.DataContext = new GuideMenuViewModel(this, guide);
-
-            _tourRepository = tourRepository;
-            _tourImageRepository = tourImageRepository;
-            _locationRepository = locationRepository;
-            _checkpointRepository = checkpointRepository;
-            _guide = guide;
-            WelcomeMessage = String.Format("Welcome {0}", _guide.Username);
-        }
-
-        private void ButtonCreateTour_Click(object sender, RoutedEventArgs e)
-        {
-            /*CreateNewTourView tourCreationForm = new CreateNewTourView(_tourRepository, _tourImageRepository, _locationRepository, _checkpointRepository, _guide);
-            tourCreationForm.Show();*/
-        }
-
-        private void ButtonTodaysTours_Click(object sender, RoutedEventArgs e)
-        {
-            //TodaysToursView todaysToursView = new TodaysToursView(_guide);
-            //todaysToursView.Show();
+            this.DataContext = new GuideMenuViewModel(guide);
         }
 
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
@@ -63,22 +35,9 @@ namespace InitialProject.WPF.Views
             this.Close();
         }
 
-        private void ButtonYourTours_Click(object sender, RoutedEventArgs e)
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
-            YourToursView yourToursView = new YourToursView();
-            //yourToursView.Show();
-        }
-
-        private void ButtonStatistics_Click(object sender, RoutedEventArgs e)
-        {
-            //var tourStatisticsSelectionView = new TourStatisticsSelectionView();
-            //tourStatisticsSelectionView.Show();
-        }
-
-        private void ButtonReviews_Click(object sender, RoutedEventArgs e)
-        {
-            //var tourReviewsView = new TourReviewsView();
-            //tourReviewsView.Show();
+            this.Close();
         }
     }
 }

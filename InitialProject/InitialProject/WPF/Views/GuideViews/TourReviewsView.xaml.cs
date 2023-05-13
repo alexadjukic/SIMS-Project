@@ -7,12 +7,11 @@ namespace InitialProject.WPF.Views
     /// <summary>
     /// Interaction logic for TourReviewsView.xaml
     /// </summary>
-    public partial class TourReviewsView : Page
+    public partial class TourReviewsView : UserControl
     {
         public TourReviewsView()
         {
             InitializeComponent();
-            this.DataContext = new TourReviewsViewModel();
         }
     }
 }

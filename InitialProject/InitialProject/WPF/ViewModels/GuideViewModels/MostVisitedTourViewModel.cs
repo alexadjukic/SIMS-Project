@@ -108,17 +108,14 @@ namespace InitialProject.WPF.ViewModels
 		public ObservableCollection<BitmapImage> Images { get; set; }
 		public ObservableCollection<int> PossibleYears { get; set; }
 
-		private readonly Window _mostVisitedToursView;
 		private readonly MostVisitedTourService _mostVisitedTourService;
 		private readonly CheckpointService _checkpointService;
 		private readonly TourService _tourService;
 		private readonly TourImageService _tourImageService;
 		#endregion
 
-		public MostVisitedTourViewModel(Window mostVisitedToursView)
+		public MostVisitedTourViewModel()
         {
-            _mostVisitedToursView = mostVisitedToursView;
-
             _mostVisitedTourService = new MostVisitedTourService();
             _checkpointService = new CheckpointService();
 			_tourService = new TourService();
@@ -136,7 +133,6 @@ namespace InitialProject.WPF.ViewModels
             LoadData();
 
 			OpenStatsCommand = new RelayCommand(OpenStatsCommand_Execute);
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
 			NextImageCommand = new RelayCommand(NextImageCommand_Execute, NextImageCommand_CanExecute);
 			PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute, PreviousImageCommand_CanExecute);
         }
@@ -242,11 +238,6 @@ namespace InitialProject.WPF.ViewModels
 			var tourStatisticsView = new TourStatisticsView(DisplayedTour);
 			tourStatisticsView.Show();
 		}
-
-		public void CloseWindowCommand_Execute(object? parameter)
-		{
-			_mostVisitedToursView.Close();
-		} 
 		#endregion
 	}
 }

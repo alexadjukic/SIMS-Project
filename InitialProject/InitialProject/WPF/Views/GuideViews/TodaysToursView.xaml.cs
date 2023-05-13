@@ -24,12 +24,11 @@ namespace InitialProject.WPF.Views
     /// <summary>
     /// Interaction logic for TodaysToursView.xaml
     /// </summary>
-    public partial class TodaysToursView : Page
+    public partial class TodaysToursView : UserControl
     {
-        public TodaysToursView(User guide)
+        public TodaysToursView()
         {
             InitializeComponent();
-            this.DataContext = new TodaysToursViewModel(guide);
         }
     }
 }

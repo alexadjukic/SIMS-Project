@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
+        xmlns:viewModel="clr-namespace:InitialProject.WPF.ViewModels"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Menu" Height="720" Width="1080" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
@@ -112,14 +113,14 @@
                     </Button>
 
                     <!--Settings menu items-->
-                    <Button DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource MenuButton}" Command="{Binding CloseCommand}">
+                    <Button DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource MenuButton}" Click="ButtonClose_Click">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="Close" Style="{StaticResource MenuButtonIcon}"/>
                             <TextBlock Text="Close" Style="{StaticResource MenuButtonText}"/>
                         </StackPanel>
                     </Button>
 
-                    <Button DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource MenuButton}" Command="{Binding LogOutCommand}">
+                    <Button DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource MenuButton}" Click="ButtonLogOut_Click">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconMaterial Kind="Logout" Style="{StaticResource MenuButtonIcon}"/>
                             <TextBlock Text="Log out" Style="{StaticResource MenuButtonText}"/>
@@ -148,7 +149,25 @@
                 </MenuItem>
             </Menu>
 
-            <Frame Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
+            <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewModel:YourToursViewModel}">
+                        <local:YourToursView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:CreateNewTourViewModel}">
+                        <local:CreateNewTourView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:TodaysToursViewModel}">
+                        <local:TodaysToursView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:YourTourStatisticsViewModel}">
+                        <local:YourTourStatisticsView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:TourReviewsViewModel}">
+                        <local:TourReviewsView/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
         </Grid>
     </Border>
 </Window>

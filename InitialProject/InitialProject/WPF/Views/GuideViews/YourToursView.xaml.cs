@@ -19,12 +19,11 @@ namespace InitialProject.WPF.Views
     /// <summary>
     /// Interaction logic for YourToursView.xaml
     /// </summary>
-    public partial class YourToursView : Page
+    public partial class YourToursView : UserControl
     {
         public YourToursView()
         {
             InitializeComponent();
-            this.DataContext = new YourToursViewModel();
         }
     }
 }

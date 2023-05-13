@@ -18,17 +18,15 @@ namespace InitialProject.WPF.ViewModels
         public ObservableCollection<Checkpoint> Checkpoints { get; set; }
 
         private readonly Tour _tour;
-        private readonly Window _tourCheckpointsView;
         private readonly CheckpointService _checkpointService;
         private readonly TourService _tourService;
         private readonly TodaysToursViewModel _todaysToursViewModel;
         #endregion
-        public TourCheckpointsViewModel(Window tourCheckpointsView, Tour tour, TodaysToursViewModel todaysToursViewModel)
+        public TourCheckpointsViewModel(Tour tour, TodaysToursViewModel todaysToursViewModel)
         {
             _checkpointService = new CheckpointService();
             _tourService = new TourService();
 
-            _tourCheckpointsView = tourCheckpointsView;
             _tour = tour;
             _todaysToursViewModel = todaysToursViewModel;
 
@@ -38,7 +36,6 @@ namespace InitialProject.WPF.ViewModels
 
             CompleteCheckpointCommand = new RelayCommand(CompleteCheckpointCommand_Execute, CompleteCheckpointCommand_CanExecute);
             GuestListCommand = new RelayCommand(GuestListCommand_Execute);
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
         }
 
         private void LoadCheckpoints()
@@ -86,11 +83,6 @@ namespace InitialProject.WPF.ViewModels
         {
             var checkpointArrivalView = new CheckpointArrivalView(parameter as Checkpoint, _tour);
             checkpointArrivalView.Show();
-        }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _tourCheckpointsView.Close();
         }
         #endregion
     }
