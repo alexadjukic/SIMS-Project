@@ -117,6 +117,10 @@
                 <Setter Property="Background" Value="{StaticResource HighlightColorSolid}"/>
             </Trigger>
 
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource HighlightColorSolid}"/>
+            </Trigger>
+
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="True"/>
@@ -1134,6 +1138,7 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Width" Value="150"/>
         <Setter Property="Height" Value="40"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -1156,6 +1161,11 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{StaticResource DisabledButtonBrush}"/>
                             <Setter Property="BorderBrush" Value="{StaticResource DisabledButtonBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="TextElement.Foreground" Value="Black"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
