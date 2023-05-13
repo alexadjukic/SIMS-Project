@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
         mc:Ignorable="d"
-        Title="Accommodation booking service" Height="750" Width="1400" WindowStartupLocation="CenterScreen">
+        Title="Accommodation booking service" Height="750" Width="1400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Style="{DynamicResource GridStyle}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Height="70" Width="1400" Style="{DynamicResource MainStackPanelStyle}">
             <Image Height="60" Width="60" Margin="70,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
