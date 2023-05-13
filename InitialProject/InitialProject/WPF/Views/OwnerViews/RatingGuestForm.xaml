@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
         xmlns:val="clr-namespace:InitialProject.Validation"
         mc:Ignorable="d"
-        Title="Review guest" Height="450" Width="400"  WindowStartupLocation="CenterScreen" Background="White">
+        Title="Review guest" Height="470" Width="400"  WindowStartupLocation="CenterScreen" Background="White">
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding RateGuestCommand}" Gesture="CTRL+S" />
@@ -40,9 +40,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="118"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="35*"/>
+            <RowDefinition Height="93"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="*" />
             <RowDefinition Height="59"/>
         </Grid.RowDefinitions>
 
@@ -80,8 +81,8 @@
         <Separator Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Top" Background="Black"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
-            <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Center" Margin="0,10,70,0" Height="25" FontSize="12" Width="75"/>
-            <ComboBox x:Name="ComboBoxCleanliness" SelectedValuePath="Content" Text="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="26" Width="150" Margin="0,0,0,15">
+            <Label Content="Cleanliness:" HorizontalAlignment="Center" Margin="0,10,0,0" Height="25" FontSize="12" Width="150"/>
+            <ComboBox x:Name="ComboBoxCleanliness" SelectedValuePath="Content" Text="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" HorizontalAlignment="Center" Height="26" Width="150" Margin="0,0,0,15">
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="3"/>
@@ -91,8 +92,8 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
-            <TextBlock TextWrapping="Wrap" Text="Following the rules:" TextAlignment="Center" Margin="0,10,30,0" Height="25" FontSize="12" Width="119"/>
-            <ComboBox x:Name="ComboBoxFollowingTheRules" SelectedValuePath="Content" Text="{Binding Path=FollowingTheRules, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="26" Width="150" Margin="0,0,0,15">
+            <Label Content="Following the rules:" HorizontalAlignment="Center" Margin="0,10,0,0" Height="25" FontSize="12" Width="150"/>
+            <ComboBox x:Name="ComboBoxFollowingTheRules" SelectedValuePath="Content" Text="{Binding Path=FollowingTheRules, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="26" HorizontalAlignment="Center" Width="150" Margin="0,0,0,15">
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="3"/>
@@ -101,12 +102,12 @@
             </ComboBox>
         </StackPanel>
 
-        <TextBlock Name="TextBlockComment" Grid.Row="2" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="Your comment:" TextAlignment="Center" Margin="0,21,231,0"/>
-        <TextBox Name="TextBoxComment" Grid.ColumnSpan="2" Width="340" Grid.Row="3" TextWrapping="Wrap" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="5,5,5,20"/>            
+        <Label Name="TextBlockComment" Grid.Row="2" Grid.ColumnSpan="2" Content="Your comment:" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+        <TextBox Name="TextBoxComment" Grid.ColumnSpan="2" Width="340" Grid.Row="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="5,5,5,20"/>            
 
-        <Separator Grid.Row="4" Grid.ColumnSpan="3" VerticalAlignment="Top" Background="Black"/>
+        <Separator Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Top" Background="Black"/>
 
-        <Grid Grid.ColumnSpan="3" Grid.Row="4" Background="#FF0262E6">
+        <Grid Grid.ColumnSpan="3" Grid.Row="5" Background="#FF0262E6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="100"/>

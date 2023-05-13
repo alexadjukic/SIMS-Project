@@ -22,36 +22,35 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*" MinWidth="250"/>
+            <ColumnDefinition Width="10*" MinWidth="250"/>
+            <ColumnDefinition Width="10*" MinWidth="250"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Guest.Username}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Guest.Username}" TextAlignment="Left" Margin="40,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Name}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Name}" TextAlignment="Left" Margin="11,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="63,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.City}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.City}" TextAlignment="Left" Margin="88,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Start date:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="52,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="End date:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="59,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
         </StackPanel>
 
@@ -92,12 +91,12 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="2">
-            <Image Source="{Binding ReserveImage, UpdateSourceTrigger=PropertyChanged}" Margin="0,10,0,0" Height="170"/>
+            <Image Source="{Binding ReserveImage, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="250" Margin="0,10,0,0" Height="170"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2">
-            <Image Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0" Height="170"/>
+            <Image Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Width="250" HorizontalAlignment="Center" Margin="0,0,0,0" Height="170"/>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Width="250">
                 <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Left" Margin="20,0,50,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
                 <Image Source="../../../Resources/Images/left_arrow.png"/>
             </Button>

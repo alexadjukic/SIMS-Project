@@ -16,29 +16,29 @@
         <StackPanel Grid.Row="0" Margin="10,0,0,0">
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.Guest.Username}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.Guest.Username}" TextAlignment="Left" Margin="40,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.Accommodation.Name}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.Accommodation.Name}" TextAlignment="Left" Margin="11,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="63,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.Accommodation.Location.City}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.Accommodation.Location.City}" TextAlignment="Left" Margin="88,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Old reservation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="18,0,0,0" Height="19" FontSize="13"/>
                 <Label Content=" - "/>
                 <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.Reservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="New reservation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.NewStartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.NewStartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="13,0,0,0" Height="19" FontSize="13"/>
                 <Label Content=" - "/>
                 <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRequest.NewEndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
             </StackPanel>
