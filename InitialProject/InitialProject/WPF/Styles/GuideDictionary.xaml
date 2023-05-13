@@ -1223,6 +1223,7 @@
         <Setter Property="Padding" Value="1"/>
         <Setter Property="Width" Value="25"/>
         <Setter Property="Height" Value="25"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -1238,6 +1239,9 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="TextElement.Foreground" Value="{StaticResource DisabledButtonBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="TextElement.Foreground" Value="{StaticResource HighlightColorSolid}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1258,6 +1262,7 @@
         <Setter Property="BorderBrush" Value="White"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
@@ -1278,6 +1283,10 @@
                             <Setter Property="Padding" Value="4,-1,0,0"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource HighlightColorSolid}"/>
+                            <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource HighlightColorSolid}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
                             <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{StaticResource HighlightColorSolid}"/>
                             <Setter Property="Fill" TargetName="optionMark" Value="{StaticResource HighlightColorSolid}"/>
                         </Trigger>
