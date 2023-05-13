@@ -11,7 +11,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="Create New Tour" Height="500" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent" WindowStyle="None">
+        Title="Create New Tour" Height="550" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent" WindowStyle="None">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

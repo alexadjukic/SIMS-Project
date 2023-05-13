@@ -545,6 +545,7 @@ namespace InitialProject.WPF.ViewModels
         public void AddDateCommand_Execute(object? parameter)
         {
             Dates.Add(DatePickerSelectedDate);
+            Validate();
         }
 
         public bool AddDateCommand_CanExecute(object? parameter)
@@ -556,6 +557,7 @@ namespace InitialProject.WPF.ViewModels
         {
             DateTime date = (DateTime)parameter;
             Dates.Remove(date);
+            Validate();
         }
 
         public bool RemoveDateCommand_CanExecute(object? parameter)
@@ -567,6 +569,7 @@ namespace InitialProject.WPF.ViewModels
         {
             CheckpointNames.Add(EnteredCheckpointName);
             EnteredCheckpointName = "";
+            Validate();
         }
 
         public bool AddCheckpointCommand_CanExecute(object? parameter)
@@ -578,6 +581,7 @@ namespace InitialProject.WPF.ViewModels
         {
             string checkpointName = parameter as string;
             CheckpointNames.Remove(checkpointName);
+            Validate();
         }
 
         public bool RemoveCheckpointCommand_CanExecute(object? parameter)
@@ -592,6 +596,8 @@ namespace InitialProject.WPF.ViewModels
             dlg.Filter = "JPG Files (*.jpg)|*.jpg|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|GIF Files (*.gif)|*.gif";
 
             if ((bool)dlg.ShowDialog()) AddImage(dlg.FileName);
+
+            Validate();
         }
 
         public void RemoveImageCommand_Execute(object? parameter)
@@ -608,6 +614,8 @@ namespace InitialProject.WPF.ViewModels
                 SelectedImage = Images[index];
             }
             IsCoverImageSelected = SelectedImage == CoverImage;
+
+            Validate();
         }
 
         public bool RemoveImageCommand_CanExecute(object? parameter)
@@ -684,7 +692,7 @@ namespace InitialProject.WPF.ViewModels
 
         public bool ConfirmCommand_CanExecute(object? parameter)
         {
-            return true;
+            return !HasErrors;
         }
 
         public void NextCommand_Execute(object? parameter)
@@ -761,6 +769,7 @@ namespace InitialProject.WPF.ViewModels
                 IsNextButtonVisible = true;
                 IsConfirmButtonVisible = false;
             }
+            Validate();
         }
         #endregion
     }
