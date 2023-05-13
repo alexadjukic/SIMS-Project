@@ -38,15 +38,11 @@ namespace InitialProject.WPF.ViewModels
 
         public ObservableCollection<BitmapImage> Images;
 
-        private readonly Window _tourReviewDetailsView;
-
         private readonly TourReviewImageService _tourReviewImageService;
         #endregion
 
-        public TourReviewDetailsViewModel(Window tourReviewDetailsView, TourReview review)
+        public TourReviewDetailsViewModel(TourReview review)
         {
-            _tourReviewDetailsView = tourReviewDetailsView;
-
             _tourReviewImageService = new TourReviewImageService();
 
             Review = review;
@@ -58,7 +54,6 @@ namespace InitialProject.WPF.ViewModels
             LoadImages();
             LoadSelectedImage();
 
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             NextImageCommand = new RelayCommand(NextImageCommand_Execute, NextImageCommand_CanExecute);
             PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute, PreviousImageCommand_CanExecute);
         }
@@ -114,11 +109,6 @@ namespace InitialProject.WPF.ViewModels
         public bool NextImageCommand_CanExecute(object? parameter)
         {
             return SelectedImage != Images.Last();
-        }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _tourReviewDetailsView.Close();
         }
         #endregion
     }

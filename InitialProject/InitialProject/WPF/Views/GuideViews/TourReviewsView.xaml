@@ -1,4 +1,4 @@
-﻿<Page x:Class="InitialProject.WPF.Views.TourReviewsView"
+﻿<UserControl x:Class="InitialProject.WPF.Views.TourReviewsView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
         xmlns:cnv="clr-namespace:InitialProject.Converters"
         mc:Ignorable="d"
-        Title="Reviews" Height="650" Width="850">
-    <Page.Resources>
+        Height="650" Width="850">
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Styles/GuideDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <cnv:TourStatusConverter x:Key="TourStatusConverter"/>
         </ResourceDictionary>
-    </Page.Resources>
+    </UserControl.Resources>
     <Grid>
         <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ItemsSource="{Binding Path=PastTours, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedTour, UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
@@ -63,4 +63,4 @@
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
-</Page>
+</UserControl>

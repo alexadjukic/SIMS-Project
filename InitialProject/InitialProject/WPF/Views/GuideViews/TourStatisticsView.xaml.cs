@@ -24,7 +24,12 @@ namespace InitialProject.WPF.Views
         public TourStatisticsView(Tour tour)
         {
             InitializeComponent();
-            this.DataContext = new TourStatisticsViewModel(this, tour);
+            this.DataContext = new TourStatisticsViewModel(tour);
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -87,7 +87,7 @@
 
             <Border Grid.Row="2" Grid.ColumnSpan="2" Style="{DynamicResource MenuBorder}">
                 <Grid>
-                    <Button Content="Close" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding CloseWindowCommand}"/>
+                    <Button Content="Close" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Left" Margin="10,0,0,0" Click="ButtonClose_Click"/>
                     <Button Content="Confirm" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Right" Margin="0,0,10,0" Command="{Binding ConfirmCommand}"/>
                 </Grid>
             </Border>

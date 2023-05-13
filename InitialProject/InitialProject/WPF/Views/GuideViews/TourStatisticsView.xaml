@@ -58,7 +58,7 @@
             </StackPanel>
 
             <Border Grid.Row="1" Style="{DynamicResource MenuBorder}">
-                <Button Content="Close" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Center" Command="{Binding CloseWindowCommand}"/>
+                <Button Content="Close" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Center" Click="ButtonClose_Click"/>
             </Border>
         </Grid>
     </Border>
