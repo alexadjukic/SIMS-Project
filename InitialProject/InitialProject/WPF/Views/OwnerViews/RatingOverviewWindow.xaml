@@ -5,7 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
         mc:Ignorable="d"
-        Title="Rating overview" Height="523" Width="750" WindowStartupLocation="CenterScreen">
+        Title="Rating overview" Height="523" Width="750" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding NextImageCommand}" Gesture="Right" />
+        <KeyBinding Command="{Binding NextImageCommand}" Gesture="CTRL+N" />
+        <KeyBinding Command="{Binding PreviousImageCommand}" Gesture="Left" />
+        <KeyBinding Command="{Binding PreviousImageCommand}" Gesture="CTRL+P" />
+    </Window.InputBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="124"/>

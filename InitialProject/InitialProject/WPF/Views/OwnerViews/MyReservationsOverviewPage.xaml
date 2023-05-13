@@ -9,6 +9,11 @@
       d:DesignHeight="550" d:DesignWidth="700"
       Title="MyReservationsOverviewPage">
 
+    <Page.InputBindings>
+        <KeyBinding Command="{Binding SeeReviewCommand}" Gesture="CTRL+S"/>
+        <KeyBinding Command="{Binding ReviewCommand}" Gesture="CTRL+R" />
+    </Page.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
@@ -148,7 +153,7 @@
                             </StackPanel>
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                 <Button Grid.Column="1" Margin="70,5,0,0" Content="See review" Width="105" Height="30" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.SeeReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}"></Button>
-                                <Button Grid.Column="1" Margin="20,5,0,0" Content="Review" Width="105" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.ReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
+                                <Button Grid.Column="1" Margin="20,5,10,0" Content="Review" Width="105" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.ReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
                             </StackPanel>
                         </StackPanel>
 

@@ -31,5 +31,13 @@ namespace InitialProject.WPF.Views.OwnerViews
         {
             this.Close();
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.X && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                this.Close();
+            }
+        }
     }
 }

@@ -73,9 +73,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private readonly RequestService _requestService;
         private readonly RatingRepository _ratingRepository;
+
+        private readonly Window _ratingGuestForm;
         #endregion
 
-        public RatingGuestFormViewModel(RatingRepository ratingRepository, AccommodationReservation selectedReservation, int ownerId) 
+        public RatingGuestFormViewModel(Window ratingGuestForm, RatingRepository ratingRepository, AccommodationReservation selectedReservation, int ownerId) 
         { 
             SelectedReservation = selectedReservation;
             _theOneWhoIsRatedId = SelectedReservation.GuestId;
@@ -84,9 +86,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             _requestService = new RequestService();
             _ratingRepository = ratingRepository;
+
+            _ratingGuestForm = ratingGuestForm;
+
             LoadAccommodation();
 
             RateGuestCommand = new RelayCommand(RateGuestCommand_Execute, RateGuestCommand_CanExecute);
+            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
         }
 
         private void LoadAccommodation()
@@ -155,6 +161,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         
         #region COMMANDS
         public RelayCommand RateGuestCommand { get; }
+        public RelayCommand CloseWindowCommand { get; }
 
         public bool RateGuestCommand_CanExecute(object? parameter)
         {
@@ -164,7 +171,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public void RateGuestCommand_Execute(object? parameter)
         {
             _ratingRepository.Save(Cleanliness, FollowingTheRules, Comment, _theOneWhoIsRatedId, _raterId, _reservationId);
+            _ratingGuestForm.Close();
         }
+
+        public void CloseWindowCommand_Execute(object? parameter)
+        {
+            _ratingGuestForm.Close();
+        }
+
         #endregion
     }
 }

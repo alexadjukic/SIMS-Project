@@ -7,6 +7,11 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         d:DesignHeight="550" d:DesignWidth="700" Title="MyReviewspage">
+
+    <Page.InputBindings>
+        <KeyBinding Command="{Binding SeeReviewCommand}" Gesture="CTRL+S" />
+    </Page.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>

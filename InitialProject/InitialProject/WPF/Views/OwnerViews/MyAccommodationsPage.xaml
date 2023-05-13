@@ -7,7 +7,12 @@
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="600"
       Title="MyAccommodationsPage">
-
+    
+    <Page.InputBindings>
+        <KeyBinding Command="{Binding CreateNewAccommodationCommand}" Gesture="CTRL+N" />
+        <KeyBinding Command="{Binding OpenAccommodationInfoCommand}" Gesture="CTRL+I" />
+    </Page.InputBindings>  
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="7*"/>
