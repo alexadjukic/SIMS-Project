@@ -35,5 +35,11 @@ namespace InitialProject.WPF.Views
         {
             this.Close();
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            e.Handled = true;
+            return;
+        }
     }
 }

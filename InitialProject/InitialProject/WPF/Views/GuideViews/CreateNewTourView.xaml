@@ -68,15 +68,9 @@
                         <Label Grid.Row="6" Content="Duration (h): " VerticalAlignment="Center" Style="{DynamicResource ReviewLabel}"/>
 
                         <TextBox Text="{Binding Path=TourName,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1}" Grid.Row="0" Grid.Column="1" Height="25"/>
-                        <ComboBox SelectedValue="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ItemsSource="{Binding Countries}"  Grid.Row="1" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding LoadCitiesCommand}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </ComboBox>
-                        <ComboBox SelectedValue="{Binding Path=SelectedCity,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Cities, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}"/>
-                        <ComboBox SelectedValue="{Binding Path=SelectedLanguage,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Languages}" Grid.Row="3" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}"/>
+                        <ComboBox SelectedValue="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Countries}"  Grid.Row="1" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" SelectionChanged="ComboBox_SelectionChanged"/>
+                        <ComboBox SelectedValue="{Binding Path=SelectedCity,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Cities, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" SelectionChanged="ComboBox_SelectionChanged"/>
+                        <ComboBox SelectedValue="{Binding Path=SelectedLanguage,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Languages}" Grid.Row="3" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" SelectionChanged="ComboBox_SelectionChanged"/>
                         <TextBox Text="{Binding Path=Description,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,5" Style="{DynamicResource TextBoxStyle1}" TextWrapping="Wrap"/>
                         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
                             <TextBox Text="{Binding Path=MaxGuests,UpdateSourceTrigger=PropertyChanged}" Height="25" Width="40" Style="{DynamicResource TextBoxStyle1}">
