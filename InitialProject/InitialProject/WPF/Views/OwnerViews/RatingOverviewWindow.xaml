@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="124"/>
             <RowDefinition Height="30*"/>
-            <RowDefinition Height="95"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -57,36 +57,36 @@
         <Separator Grid.ColumnSpan="4" Grid.Row="1" VerticalAlignment="Top" Background="Black"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <TextBlock TextWrapping="Wrap" Text="You reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17" FontWeight="Bold" TextDecorations="Underline" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="You reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12" FontWeight="Bold" TextDecorations="Underline" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.Cleanliness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.Cleanliness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Following the rules:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.FollowingTheRules}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="Following the rules:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.FollowingTheRules}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <TextBlock TextWrapping="Wrap" Text="Comment:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.Comment}" TextAlignment="Left" Margin="15,0,0,0" Height="138" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="Comment:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.Comment}" TextAlignment="Left" Margin="15,0,0,0" Height="138" FontSize="12"/>
             </StackPanel>
         </StackPanel>
 
         <Separator Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Background="Black"/>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock TextWrapping="Wrap" Text="Guest reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17" FontWeight="Bold" TextDecorations="Underline" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="Guest reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12" FontWeight="Bold" TextDecorations="Underline" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Cleanliness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Cleanliness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Correctness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Correctness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="Correctness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Correctness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <TextBlock TextWrapping="Wrap" Text="Comment:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="17"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Comment}" TextAlignment="Left" Margin="15,0,0,0" Height="136" FontSize="17"/>
+                <TextBlock TextWrapping="Wrap" Text="Comment:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Comment}" TextAlignment="Left" Margin="15,0,0,0" Height="136" FontSize="12"/>
             </StackPanel>
         </StackPanel>
 
@@ -117,7 +117,7 @@
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="2" Width="140" Height="45" Grid.Column="3" Content="Close" Margin="20" FontSize="20" FontWeight="Bold" Click="Button_Click" HorizontalAlignment="Right"></Button>
+            <Button Grid.Row="2" Width="80" Height="25" Grid.Column="3" Content="Close" Margin="0,0,30,0" FontSize="12" FontWeight="Bold" Click="Button_Click" HorizontalAlignment="Right"></Button>
         </Grid>
 
     </Grid>

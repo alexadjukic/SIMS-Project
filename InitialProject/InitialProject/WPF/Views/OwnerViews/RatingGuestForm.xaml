@@ -115,8 +115,8 @@
                 <ColumnDefinition Width="17"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Name="ButtonCancel" Content="Close" FontSize="20" FontWeight="Bold" Width="80" Height="40" Command="{Binding CloseWindowCommand}"/>
-            <Button Grid.Column="2" Name="ButtonRate" Content="Review" FontSize="20" FontWeight="Bold" Width="80" Height="40" Command="{Binding RateGuestCommand}"/>
+            <Button Grid.Column="1" Name="ButtonCancel" Content="Close" FontSize="12" FontWeight="Bold" Width="80" Height="25" Command="{Binding CloseWindowCommand}"/>
+            <Button Grid.Column="2" Name="ButtonRate" Content="Review" FontSize="12" FontWeight="Bold" Width="80" Height="25" Command="{Binding RateGuestCommand}"/>
         </Grid>
     </Grid>
 </Window>

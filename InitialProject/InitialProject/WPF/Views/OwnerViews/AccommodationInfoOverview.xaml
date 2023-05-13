@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="19*"/>
             <RowDefinition Height="30*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
@@ -88,11 +88,11 @@
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            
-            <Button Name="ButtonClose" Grid.Column="4" Margin="10,20,10,20" Content="Close" FontSize="17" FontWeight="Bold" Click="ButtonClose_Click"/>
-            <Button Grid.Column="0" Name="ButtonRenovate1" Content="Renovate" FontSize="17" FontWeight="Bold" Width="80" Margin="10,20,10,20"/>
-            <Button Grid.Column="1" Name="ButtonStatistics1" Content="Statistics" FontSize="17" FontWeight="Bold" Width="80" Margin="10,20,10,20"/>
-            <Button Grid.Column="2" Name="ButtonDelete1" Content="Delete" FontSize="17" FontWeight="Bold" Width="80" Margin="10,20,10,20"/>
+
+            <Button Name="ButtonClose" Grid.Column="4" Height="25" Width="80" Content="Close" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Click="ButtonClose_Click"/>
+            <Button Grid.Column="0" Name="ButtonRenovate1" Content="Renovate" Height="25" Width="80" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Button Grid.Column="1" Name="ButtonStatistics1" Content="Statistics" FontSize="12" FontWeight="Bold" Height="25" Width="80" HorizontalAlignment="Center" />
+            <Button Grid.Column="2" Name="ButtonDelete1" Content="Delete" FontSize="12" FontWeight="Bold" Height="25" Width="80" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>

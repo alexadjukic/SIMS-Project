@@ -151,8 +151,8 @@
                                 <TextBlock TextWrapping="Wrap" Text="{Binding IsReviewed}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
                             </StackPanel>
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <Button Grid.Column="1" Margin="70,5,0,0" Content="See review" Width="105" Height="30" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.SeeReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}"></Button>
-                                <Button Grid.Column="1" Margin="20,5,10,0" Content="Review" Width="105" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.ReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
+                                <Button Grid.Column="1" Margin="70,5,0,0" Content="See review" Width="80" Height="25" FontSize="12" FontWeight="Bold" Command="{Binding DataContext.SeeReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}"></Button>
+                                <Button Grid.Column="1" Margin="20,5,0,0" Content="Review" Width="80" Height="25" FontSize="12" FontWeight="Bold" Command="{Binding DataContext.ReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
                             </StackPanel>
                         </StackPanel>
 

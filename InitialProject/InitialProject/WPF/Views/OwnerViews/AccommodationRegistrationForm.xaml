@@ -7,7 +7,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:val="clr-namespace:InitialProject.Validation"
         mc:Ignorable="d"
-        Title="Accommodation Registration" Height="750" Width="700" WindowStartupLocation="CenterScreen">
+        Title="Accommodation Registration" Height="700" Width="700" WindowStartupLocation="CenterScreen">
     <Window.InputBindings>
         <KeyBinding Command="{Binding AddImageCommand}" Gesture="CTRL+I" />
         <KeyBinding Command="{Binding RemoveImageCommand}" Gesture="CTRL+R" />
@@ -49,7 +49,7 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="30*"/>
-            <RowDefinition Height="92"/>
+            <RowDefinition Height="65"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*" MinWidth="350"/>
@@ -57,7 +57,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0">
-            <Label Content="Name:" Width="247" FontSize="18" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+            <Label Content="Name:" Width="247" FontSize="12" HorizontalAlignment="Center" Margin="0,15,0,0"/>
             <TextBox TextWrapping="Wrap" Width="247"  Margin="0,10,0,15" Height="23.94" HorizontalAlignment="Center">
                 <TextBox.Text>
                     <Binding Path="AccommodationName" UpdateSourceTrigger="PropertyChanged">
@@ -73,7 +73,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <Label Content="Type:" FontSize="18" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
+            <Label Content="Type:" FontSize="12" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <ComboBox IsEditable="True" Name="ComboBoxAccommodationType" HorizontalAlignment="Center" Margin="0,10,0,15" Width="247" Height="24" SelectedValuePath="Content" ItemsSource="{Binding Path=Types}">
                 <ComboBox.SelectedItem>
                     <Binding  Path="Type" UpdateSourceTrigger="PropertyChanged">
@@ -89,7 +89,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Label Content="Country:" FontSize="18" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
+            <Label Content="Country:" FontSize="12" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <ComboBox Name="ComboBoxCountry" IsEditable="True" Width="247" HorizontalAlignment="Center" Margin="0,10,0,15" Height="23.94" ItemsSource="{Binding Path=Countries}">
                 <ComboBox.SelectedItem>
                     <Binding  Path="Country" UpdateSourceTrigger="PropertyChanged">
@@ -110,7 +110,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <Label Content="City:" FontSize="18" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
+            <Label Content="City:" FontSize="12" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <ComboBox x:Name="ComboBoxCity" IsEditable="True" HorizontalAlignment="Center" Width="247" Margin="0,10,0,15" Height="23.94" ItemsSource="{Binding Path=Cities}">
                 <ComboBox.SelectedItem>
                     <Binding  Path="City" UpdateSourceTrigger="PropertyChanged">
@@ -126,7 +126,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="0">
-            <Label Content="Min days for reservation:" FontSize="18" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
+            <Label Content="Min days for reservation:" FontSize="12" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <TextBox TextWrapping="Wrap" Width="247" HorizontalAlignment="Center" Margin="0,10,0,15" Height="23.94">
                 <TextBox.Text>
                     <Binding Path="MinDaysForStay" UpdateSourceTrigger="PropertyChanged">
@@ -142,7 +142,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1">
-            <Label Content="Min days before cancel:" FontSize="18" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
+            <Label Content="Min days before cancel:" FontSize="12" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <TextBox TextWrapping="Wrap" Width="247" HorizontalAlignment="Center" Margin="0,10,0,15" Height="23.94">
                 <TextBox.Text>
                     <Binding Path="MinDaysBeforeCancel" UpdateSourceTrigger="PropertyChanged">
@@ -158,7 +158,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="0">
-            <Label Content="Max number of guests:" FontSize="18" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
+            <Label Content="Max number of guests:" FontSize="12" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <TextBox TextWrapping="Wrap" Width="247" HorizontalAlignment="Center"  Margin="0,10,0,15" Height="23.94">
                 <TextBox.Text>
                     <Binding Path="Capacity" UpdateSourceTrigger="PropertyChanged">
@@ -187,7 +187,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Grid.Column="0">
-                <Label Content="Url:" FontSize="18" HorizontalAlignment="Center" Width="240" Margin="0,15,0,0"/>
+                <Label Content="Url:" FontSize="12" HorizontalAlignment="Center" Width="240" Margin="0,15,0,0"/>
                 <TextBox Name="TestTextBox" Text="{Binding Path=Url, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" TextWrapping="Wrap" Height="30" Grid.Row="1" HorizontalAlignment="Center" Margin="0,0,0,0" Width="240"/>
                 <Button x:Name="ButtonAddImages" Content="Add image" Width="240" HorizontalAlignment="Center" Height="30" Margin="0,20,0,0" Command="{Binding AddImageCommand}"/>
                 <Button Name="ButtonRemoveImage" Content="Remove image" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Margin="0,20,0,0" Width="240" Height="30" Command="{Binding RemoveImageCommand}"/>
@@ -211,16 +211,16 @@
 
         <Separator Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
 
-        <Grid Grid.Row="5" Height="92" Grid.ColumnSpan="2" Background="#FF0262E6">
+        <Grid Grid.Row="5" Grid.ColumnSpan="2" Background="#FF0262E6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="51.5" />
+                <ColumnDefinition Width="30" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Name="ButtonRegister" Content="Register" Grid.Row="5" Margin="0,0,0,0"  FontWeight="Bold" Width="100" Height="40" HorizontalAlignment="Center" Command="{Binding RegisterCommand}"/>
-            <Button Name="ButtonCancel" Content="Close" Grid.Row="5" Grid.Column="2" Width="100" Height="40"  FontWeight="Bold" Margin="0,0,0,0" HorizontalAlignment="Center" Command="{Binding CancelCommand}"/>
+            <Button Grid.Column="1" Name="ButtonRegister" Content="Register" Grid.Row="5" Margin="0,0,0,0"  FontWeight="Bold" Width="80" Height="25" HorizontalAlignment="Center" Command="{Binding RegisterCommand}" FontSize="12"/>
+            <Button Name="ButtonCancel" Content="Close" Grid.Row="5" Grid.Column="2" Width="80" Height="25"  FontWeight="Bold" Margin="0,0,0,0" HorizontalAlignment="Center" Command="{Binding CancelCommand}" FontSize="12"/>
         </Grid>
     </Grid>
 </Window>
