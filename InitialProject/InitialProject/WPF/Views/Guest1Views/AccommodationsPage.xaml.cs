@@ -1,4 +1,7 @@
-﻿using System;
+﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,16 +17,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.Domain.Models;
-using InitialProject.Repositories;
 
-namespace InitialProject.WPF.Views
+namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
-    /// Interaction logic for Guest1AccommodationOverview.xaml
+    /// Interaction logic for AccommodationsPage.xaml
     /// </summary>
-    public partial class Guest1AccommodationOverview : Window, INotifyPropertyChanged
+    public partial class AccommodationsPage : Page, INotifyPropertyChanged
     {
         public User LoggedUser { get; set; }
         public readonly AccommodationRepository _accommodationRepository;
@@ -145,22 +147,21 @@ namespace InitialProject.WPF.Views
         }
 
         public string AccommodationName { get; set; }
-        public bool IsApartment { get; set; } 
+        public bool IsApartment { get; set; }
         public bool IsHouse { get; set; }
         public bool IsCottage { get; set; }
+        public bool BookButton { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public Guest1AccommodationOverview(User user, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository, AccommodationReservationRepository accommodationReservationRepository, UserRepository userRepository)
+        public AccommodationsPage(User user, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository, AccommodationReservationRepository accommodationReservationRepository, UserRepository userRepository)
         {
             InitializeComponent();
             DataContext = this;
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            BookButton.IsEnabled = false;
+            BookButton = false;
 
             _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
@@ -206,26 +207,21 @@ namespace InitialProject.WPF.Views
                     Cities.Add(location.City);
                 }
             }
-            
+
             if (SelectedCountry == null)
             {
                 ComboBoxCity.IsEnabled = false;
             }
         }
 
-        private void SignOutButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void FilterButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedAccommodation == null) BookButton.IsEnabled = false;
+            if (SelectedAccommodation == null) BookButton = false;
             if (!IsInputValid()) return;
 
             Accommodations.Clear();
             foreach (var accommodation in _accommodationRepository.GetAll())
-            {   
+            {
                 InsertLocation(accommodation);
                 Accommodations.Add(accommodation);
                 RemoveByName(accommodation);
@@ -377,7 +373,7 @@ namespace InitialProject.WPF.Views
                 }
             }
         }
-        
+
         private bool IsInputValid()
         {
             if (LenghtOfStay != null && LenghtOfStay != "")
@@ -405,13 +401,12 @@ namespace InitialProject.WPF.Views
         {
             if (SelectedAccommodation != null)
             {
-                AccommodationReservationForm accommodationReservationForm = new AccommodationReservationForm(LoggedUser, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, SelectedAccommodation);
-                accommodationReservationForm.Show();
+                MainWindow.mainWindow.MainPreview.Content = new AccommodationReservationFormPage(LoggedUser, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, _userRepository, SelectedAccommodation);
             }
         }
         private void DataGridAccommodations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (SelectedAccommodation != null) BookButton.IsEnabled = true;
+            if (SelectedAccommodation != null) BookButton = true;
         }
     }
 }

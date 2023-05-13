@@ -10,21 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.WPF.ViewModels;
 using InitialProject.WPF.ViewModels.Guest1ViewModels;
 
 namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
-    /// Interaction logic for ReservationChangeRequestsView.xaml
+    /// Interaction logic for AccommodationRatingFormPage.xaml
     /// </summary>
-    public partial class ReservationChangeRequestsView : Window
+    public partial class AccommodationRatingFormPage : Page
     {
-        public ReservationChangeRequestsView(int guestId)
+        public AccommodationRatingFormPage(AccommodationRatingFormViewModel ratingFormViewModel)
         {
             InitializeComponent();
-            this.DataContext = new ReservationChangeRequestsViewModel(this, guestId);
+            this.DataContext = ratingFormViewModel;
+            MainWindow.mainWindow.MainPreview.Content = this;
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -17,21 +18,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InitialProject.WPF.Views
+namespace InitialProject.WPF.Views.Guest1Views
 {
     /// <summary>
-    /// Interaction logic for AccommodationReservationForm.xaml
+    /// Interaction logic for AccommodationReservationFormPage.xaml
     /// </summary>
-    public partial class AccommodationReservationForm : Window, INotifyPropertyChanged
+    public partial class AccommodationReservationFormPage : Page, INotifyPropertyChanged
     {
         public readonly AccommodationRepository _accommodationRepository;
         public readonly AccommodationImageRepository _accommodationImageRepository;
         public readonly LocationRepository _locationRepository;
         public readonly AccommodationReservationRepository _accommodationReservationRepository;
+        public readonly UserRepository _userRepository;
+
         public User LoggedUser { get; set; }
-        
+
         private Accommodation _accommodation;
         public Accommodation SelectedAccommodation
         {
@@ -87,7 +91,7 @@ namespace InitialProject.WPF.Views
                 }
             }
         }
-        
+
         private string _guestNumber;
         public string GuestNumber
         {
@@ -130,26 +134,47 @@ namespace InitialProject.WPF.Views
             }
         }
 
+        private AccommodationImage _currentImage;
+        public AccommodationImage CurrentImage
+        {
+            get => _currentImage;
+            set
+            {
+                if (_currentImage != value)
+                {
+                    _currentImage = value;
+                    OnPropertyChanged(nameof(CurrentImage));
+                }
+            }
+        }
+        public List<AccommodationImage> AccommodationImages { get; set; }
+
         private Regex _NaturalNumberRegex = new Regex("^[1-9][0-9]*$");
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public AccommodationReservationForm(User user, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository, AccommodationReservationRepository accommodationReservationRepository, Accommodation selectedAccommodation)
+        public AccommodationReservationFormPage(User user, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository, AccommodationReservationRepository accommodationReservationRepository, UserRepository userRepository,Accommodation selectedAccommodation)
         {
             InitializeComponent();
             DataContext = this;
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
             _accommodationRepository = accommodationRepository;
             _locationRepository = locationRepository;
             _accommodationImageRepository = accommodationImageRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
+            _userRepository = userRepository;
             LoggedUser = user;
             SelectedAccommodation = selectedAccommodation;
             AvailableDates = new ObservableCollection<AvailableDate>();
+            AccommodationImages = FindSelectedAccommodationImages();
+            CurrentImage = AccommodationImages[0];
+            if (AccommodationImages.Count > 1)
+            {
+                ButtonNextImage.IsEnabled = true;
+                ButtonNextImage.Opacity = 100;
+            }
         }
 
         private void SearchDatesButton_Click(object sender, RoutedEventArgs e)
@@ -171,11 +196,11 @@ namespace InitialProject.WPF.Views
             }
 
             List<AvailableDate> availableDates = FindConnectedDates(availableSingleDates, SelectedEndDate);
-            foreach(var date in availableDates)
+            foreach (var date in availableDates)
             {
                 AvailableDates.Add(date);
-            }     
-            
+            }
+
             if (AvailableDates.Count() == 0)
             {
                 List<AvailableDate> recommendedDates = FindRecommendedDates();
@@ -190,7 +215,7 @@ namespace InitialProject.WPF.Views
 
         private List<DateTime> FindDatesBetween(DateTime startDate, DateTime endDate)
         {
-            List<DateTime> resultingDates= new List<DateTime>();
+            List<DateTime> resultingDates = new List<DateTime>();
             for (var date = startDate; date <= endDate; date = date.AddDays(1))
             {
                 resultingDates.Add(date);
@@ -212,7 +237,7 @@ namespace InitialProject.WPF.Views
 
         private List<AvailableDate> FindConnectedDates(List<DateTime> singleDates, DateTime finishEndDate)
         {
-            List<AvailableDate> connectedDates = new List<AvailableDate>(); 
+            List<AvailableDate> connectedDates = new List<AvailableDate>();
             foreach (var singleDate in singleDates)
             {
                 AvailableDate newDate = new AvailableDate(singleDate, singleDate.AddDays(Convert.ToInt32(LenghtOfStay) - 1));
@@ -229,9 +254,9 @@ namespace InitialProject.WPF.Views
                             connectedDates.Add(newDate);
                         }
                     }
-                }             
+                }
             }
-            
+
             return connectedDates;
         }
 
@@ -243,7 +268,7 @@ namespace InitialProject.WPF.Views
                 return false;
             }
 
-            if (DateTime.Compare(DateTime.Now.Date, SelectedStartDate.Date) > 0) 
+            if (DateTime.Compare(DateTime.Now.Date, SelectedStartDate.Date) > 0)
             {
                 MessageBox.Show("You can't travel to the past.");
                 return false;
@@ -305,7 +330,7 @@ namespace InitialProject.WPF.Views
             if (!IsMakeReservationInputValid()) return;
 
             _accommodationReservationRepository.Save(SelectedAvailableDate.StartDate, SelectedAvailableDate.EndDate, Convert.ToInt32(LenghtOfStay), SelectedAccommodation, SelectedAccommodation.Id, LoggedUser, LoggedUser.Id);
-            Close();
+            MainWindow.mainWindow.MainPreview.Content = new AccommodationsPage(LoggedUser, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, _userRepository);
             MessageBox.Show("Reservation for " + SelectedAccommodation.Name + " (" + LenghtOfStay + " days) is successfully made!");
         }
 
@@ -338,29 +363,65 @@ namespace InitialProject.WPF.Views
             return true;
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private List<AccommodationImage> FindSelectedAccommodationImages()
         {
-            Close();
+            List<AccommodationImage> accommodationImages = new List<AccommodationImage>();
+            foreach (var image in _accommodationImageRepository.GetAll())
+            {
+                if (image.AccommodationId == SelectedAccommodation.Id)
+                {
+                    accommodationImages.Add(image);
+                }
+            }
+            return accommodationImages;
+        }
+        private int GetImageIndex()
+        {
+            return AccommodationImages.IndexOf(CurrentImage);
         }
 
-        private void ViewImageButton_Click(object sender, RoutedEventArgs e)
+        private void RightArrowButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_accommodationImageRepository.GetAll().Find(x => x.AccommodationId == SelectedAccommodation.Id) != null) 
+            var currentIndex = GetImageIndex();
+            var isSecondToLastImage = currentIndex == AccommodationImages.Count - 2;
+
+            if (isSecondToLastImage)
             {
-                AccommodationImagesOverview accommodationImagesOverview = new AccommodationImagesOverview(SelectedAccommodation, _accommodationImageRepository);
-                accommodationImagesOverview.Show();
+                DisableButton(ButtonNextImage);
             }
-            else
+            EnableButton(ButtonPreviousImage);
+
+            CurrentImage = AccommodationImages[currentIndex + 1];
+        }
+
+        private void LeftArrowButton_Click(object sender, RoutedEventArgs e)
+        {
+            var currentIndex = GetImageIndex();
+            var isSecondImage = currentIndex == 1;
+            if (isSecondImage)
             {
-                MessageBox.Show("Image url can not be loaded.");
+                DisableButton(ButtonPreviousImage);
             }
+            EnableButton(ButtonNextImage);
+
+            CurrentImage = AccommodationImages[currentIndex - 1];
+        }
+        private void EnableButton(Button button)
+        {
+            button.IsEnabled = true;
+            button.Opacity = 100;
+        }
+        private void DisableButton(Button button)
+        {
+            button.IsEnabled = false;
+            button.Opacity = 0;
         }
     }
 
-    public class AvailableDate 
+    public class AvailableDate
     {
-        public DateTime StartDate { get; set;}
-        public DateTime EndDate { get; set;}
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public AvailableDate() { }
         public AvailableDate(DateTime startDate, DateTime endDate)
         {
@@ -369,5 +430,3 @@ namespace InitialProject.WPF.Views
         }
     }
 }
-
-

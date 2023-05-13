@@ -99,8 +99,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void RateYourStayCommand_Execute(object? parameter)
         {
-            AccommodationRatingForm accommodationRatingForm = new AccommodationRatingForm(SelectedReservation);
-            accommodationRatingForm.Show();
+            MainWindow.mainWindow.MainPreview.Content = new AccommodationRatingFormPage(new AccommodationRatingFormViewModel(_reservationsView, SelectedReservation));
         }
 
         public bool RateYourStayCommand_CanExecute(object? parameter)
@@ -112,8 +111,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void ChangeReservationCommand_Execute(object? parameter)
         {
-            ReservationChangeView reservationChangeView = new ReservationChangeView(SelectedReservation);
-            reservationChangeView.Show();
+            MainWindow.mainWindow.MainPreview.Content = new ReservationChangePage(new ReservationChangeViewModel(_reservationsView, SelectedReservation));
         }
 
         public bool ChangeReservationCommand_CanExecute(object? parameter)
@@ -123,8 +121,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void ViewAllChangeRequestsCommand_Execute(object? parameter)
         {
-            ReservationChangeRequestsView reservationChangeRequestsView = new ReservationChangeRequestsView(_guestId);
-            reservationChangeRequestsView.Show();
+            MainWindow.mainWindow.MainPreview.Content = new ReservationChangeRequestsPage(new ReservationChangeRequestsViewModel(_reservationsView, _guestId));
         }
         #endregion
     }

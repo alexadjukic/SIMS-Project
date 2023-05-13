@@ -9,7 +9,7 @@ namespace InitialProject.Domain.Models
 {
     public enum RequestStatus
     {
-        ON_HOLD,
+        ON_HOLD = 1,
         ACCEPTED,
         DECLINED
     }
