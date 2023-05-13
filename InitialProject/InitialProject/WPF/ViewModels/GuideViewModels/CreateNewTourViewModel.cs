@@ -3,8 +3,10 @@ using InitialProject.Commands;
 using InitialProject.Domain.Models;
 using Microsoft.Win32;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class CreateNewTourViewModel : ViewModelBase
+    public class CreateNewTourViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         #region PROPERTIES
         private string _tourName;
@@ -25,6 +27,13 @@ namespace InitialProject.WPF.ViewModels
                 if (_tourName != value)
                 {
                     _tourName = value;
+
+                    _errorsViewModel.ClearErrors(nameof(TourName));
+                    if (string.IsNullOrEmpty(_tourName))
+                    {
+                        _errorsViewModel.AddError(nameof(TourName), "Name is required");
+                    }
+
                     OnPropertyChanged(nameof(TourName));
                 }
             }
@@ -39,6 +48,13 @@ namespace InitialProject.WPF.ViewModels
                 if (_selectedCountry != value)
                 {
                     _selectedCountry = value;
+
+                    _errorsViewModel.ClearErrors(nameof(SelectedCountry));
+                    if (string.IsNullOrEmpty(_selectedCountry))
+                    {
+                        _errorsViewModel.AddError(nameof(SelectedCountry), "Country is required");
+                    }
+
                     OnPropertyChanged(nameof(SelectedCountry));
                 }
             }
@@ -53,6 +69,13 @@ namespace InitialProject.WPF.ViewModels
                 if (_selectedCity != value)
                 {
                     _selectedCity = value;
+
+                    _errorsViewModel.ClearErrors(nameof(SelectedCity));
+                    if (string.IsNullOrEmpty(_selectedCity))
+                    {
+                        _errorsViewModel.AddError(nameof(SelectedCity), "City is required");
+                    }
+
                     OnPropertyChanged(nameof(SelectedCity));
                 }
             }
@@ -67,6 +90,13 @@ namespace InitialProject.WPF.ViewModels
                 if (_selectedLanguage != value)
                 {
                     _selectedLanguage = value;
+
+                    _errorsViewModel.ClearErrors(nameof(SelectedLanguage));
+                    if (string.IsNullOrEmpty(_selectedLanguage))
+                    {
+                        _errorsViewModel.AddError(nameof(SelectedLanguage), "Language is required");
+                    }
+
                     OnPropertyChanged(nameof(SelectedLanguage));
                 }
             }
@@ -81,6 +111,13 @@ namespace InitialProject.WPF.ViewModels
                 if (_description != value)
                 {
                     _description = value;
+
+                    _errorsViewModel.ClearErrors(nameof(Description));
+                    if (string.IsNullOrEmpty(_description))
+                    {
+                        _errorsViewModel.AddError(nameof(Description), "Language is required");
+                    }
+
                     OnPropertyChanged(nameof(Description));
                 }
             }
@@ -95,6 +132,17 @@ namespace InitialProject.WPF.ViewModels
                 if (_maxGuests != value)
                 {
                     _maxGuests = value;
+
+                    _errorsViewModel.ClearErrors(nameof(MaxGuests));
+                    if (_maxGuests < 1)
+                    {
+                        _errorsViewModel.AddError(nameof(MaxGuests), "Must be more than 0");
+                    }
+                    else if (_maxGuests > 1000)
+                    {
+                        _errorsViewModel.AddError(nameof(MaxGuests), "Must be less than 1001");
+                    }
+
                     OnPropertyChanged(nameof(MaxGuests));
                 }
             }
@@ -109,6 +157,17 @@ namespace InitialProject.WPF.ViewModels
                 if (_duration != value)
                 {
                     _duration = value;
+
+                    _errorsViewModel.ClearErrors(nameof(Duration));
+                    if (_duration < 1)
+                    {
+                        _errorsViewModel.AddError(nameof(Duration), "Must be more than 0");
+                    }
+                    else if (_duration > 1000)
+                    {
+                        _errorsViewModel.AddError(nameof(Duration), "Must be less than 1001");
+                    }
+
                     OnPropertyChanged(nameof(Duration));
                 }
             }
@@ -127,20 +186,6 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-
-        private DateTime _dataGridSelectedDate;
-        public DateTime DataGridSelectedDate
-        {
-            get => _dataGridSelectedDate;
-            set
-            {
-                if (_dataGridSelectedDate != value)
-                {
-                    _dataGridSelectedDate = value;
-                    OnPropertyChanged(nameof(DataGridSelectedDate));
-                }
-            }
-        }
         
         private string _enteredCheckpointName;
         public string EnteredCheckpointName
@@ -152,20 +197,6 @@ namespace InitialProject.WPF.ViewModels
                 {
                     _enteredCheckpointName = value;
                     OnPropertyChanged(nameof(EnteredCheckpointName));
-                }
-            }
-        }
-
-        private string _selectedCheckpointName;
-        public string SelectedCheckpointName
-        {
-            get => _selectedCheckpointName;
-            set
-            {
-                if (_selectedCheckpointName != value)
-                {
-                    _selectedCheckpointName = value;
-                    OnPropertyChanged(nameof(SelectedCheckpointName));
                 }
             }
         }
@@ -336,6 +367,97 @@ namespace InitialProject.WPF.ViewModels
         private readonly User _guide;
         #endregion
 
+        #region VALIDATION
+        private readonly ErrorsViewModel _errorsViewModel;
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+        public bool HasErrors => _errorsViewModel.HasErrors;
+        public bool IsValid => !HasErrors;
+
+        public IEnumerable GetErrors(string? propertyName)
+        {
+            return _errorsViewModel.GetErrors(propertyName);
+        }
+        private void ErrorsViewModel_ErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        {
+            ErrorsChanged?.Invoke(this, e);
+            OnPropertyChanged(nameof(IsValid));
+        }
+
+        private bool Validate()
+        {
+            _errorsViewModel.ClearErrors(nameof(TourName));
+            if (string.IsNullOrEmpty(TourName))
+            {
+                _errorsViewModel.AddError(nameof(TourName), "Name is required");
+            }
+
+
+            _errorsViewModel.ClearErrors(nameof(SelectedCountry));
+            if (string.IsNullOrEmpty(SelectedCountry))
+            {
+                _errorsViewModel.AddError(nameof(SelectedCountry), "Country is required");
+            }
+
+            _errorsViewModel.ClearErrors(nameof(SelectedCity));
+            if (string.IsNullOrEmpty(SelectedCity))
+            {
+                _errorsViewModel.AddError(nameof(SelectedCity), "City is required");
+            }
+
+            _errorsViewModel.ClearErrors(nameof(SelectedLanguage));
+            if (string.IsNullOrEmpty(SelectedLanguage))
+            {
+                _errorsViewModel.AddError(nameof(SelectedLanguage), "Language is required");
+            }
+
+            _errorsViewModel.ClearErrors(nameof(Description));
+            if (string.IsNullOrEmpty(Description))
+            {
+                _errorsViewModel.AddError(nameof(Description), "Description is required");
+            }
+
+            _errorsViewModel.ClearErrors(nameof(MaxGuests));
+            if (MaxGuests < 1)
+            {
+                _errorsViewModel.AddError(nameof(MaxGuests), "Must be more than 0");
+            }
+            else if (MaxGuests > 1000)
+            {
+                _errorsViewModel.AddError(nameof(MaxGuests), "Must be less than 1001");
+            }
+
+            _errorsViewModel.ClearErrors(nameof(Duration));
+            if (Duration < 1)
+            {
+                _errorsViewModel.AddError(nameof(Duration), "Must be more than 0");
+            }
+            else if (Duration > 1000)
+            {
+                _errorsViewModel.AddError(nameof(Duration), "Must be less than 1001");
+            }
+
+            _errorsViewModel.ClearErrors(nameof(Dates));
+            if (Dates.Count == 0)
+            {
+                _errorsViewModel.AddError(nameof(Dates), "Must set at least 1 start date & time");
+            }
+
+            _errorsViewModel.ClearErrors(nameof(CheckpointNames));
+            if (CheckpointNames.Count < 2)
+            {
+                _errorsViewModel.AddError(nameof(CheckpointNames), "Must set at least 2 checkpoints");
+            }
+
+            _errorsViewModel.ClearErrors(nameof(Images));
+            if (Images.Count == 0)
+            {
+                _errorsViewModel.AddError(nameof(Images), "Must add at least 1 image");
+            }
+
+            return !HasErrors;
+        }
+        #endregion
+
         public CreateNewTourViewModel(User guide)
         {
             _guide = guide;
@@ -344,6 +466,9 @@ namespace InitialProject.WPF.ViewModels
             _locationService = new LocationService();
             _checkpointService = new CheckpointService();
             _tourImageService = new TourImageService();
+
+            _errorsViewModel = new ErrorsViewModel();
+            _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
 
             Dates = new ObservableCollection<DateTime>();
             Countries = new List<string>();
@@ -539,6 +664,8 @@ namespace InitialProject.WPF.ViewModels
 
         public void ConfirmCommand_Execute(object? parameter)
         {
+            if (!Validate()) return;
+
             CoverImage ??= Images.First();
             foreach (var startTime in Dates)
             {
@@ -557,7 +684,7 @@ namespace InitialProject.WPF.ViewModels
 
         public bool ConfirmCommand_CanExecute(object? parameter)
         {
-            return IsImagesTabSelected;
+            return true;
         }
 
         public void NextCommand_Execute(object? parameter)

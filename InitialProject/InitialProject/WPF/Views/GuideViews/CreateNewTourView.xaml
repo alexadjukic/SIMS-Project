@@ -68,7 +68,7 @@
                         <Label Grid.Row="6" Content="Duration (h): " VerticalAlignment="Center" Style="{DynamicResource ReviewLabel}"/>
 
                         <TextBox Text="{Binding Path=TourName,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1}" Grid.Row="0" Grid.Column="1" Height="25"/>
-                        <ComboBox SelectedValue="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Countries}"  Grid.Row="1" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}">
+                        <ComboBox SelectedValue="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ItemsSource="{Binding Countries}"  Grid.Row="1" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding LoadCitiesCommand}"/>
@@ -79,11 +79,33 @@
                         <ComboBox SelectedValue="{Binding Path=SelectedLanguage,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Languages}" Grid.Row="3" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}"/>
                         <TextBox Text="{Binding Path=Description,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,5" Style="{DynamicResource TextBoxStyle1}" TextWrapping="Wrap"/>
                         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
-                            <TextBox Text="{Binding Path=MaxGuests,UpdateSourceTrigger=PropertyChanged}" Height="25" Width="40" Style="{DynamicResource TextBoxStyle1}"/>
+                            <TextBox Text="{Binding Path=MaxGuests,UpdateSourceTrigger=PropertyChanged}" Height="25" Width="40" Style="{DynamicResource TextBoxStyle1}">
+                                <Validation.ErrorTemplate>
+                                    <ControlTemplate>
+                                        <StackPanel>
+                                            <Border BorderBrush="Red" BorderThickness="1" Width="42" HorizontalAlignment="Left">
+                                                <AdornedElementPlaceholder/>
+                                            </Border>
+                                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                        </StackPanel>
+                                    </ControlTemplate>
+                                </Validation.ErrorTemplate>
+                            </TextBox>
                             <Slider Value="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SliderStyle1}" VerticalAlignment="Center" Width="335" Margin="10,0,0,0" Maximum="1000" Minimum="1"/>
                         </StackPanel>
                         <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
-                            <TextBox Text="{Binding Path=Duration,UpdateSourceTrigger=PropertyChanged}" Height="25" Width="40" Style="{DynamicResource TextBoxStyle1}"/>
+                            <TextBox Text="{Binding Path=Duration,UpdateSourceTrigger=PropertyChanged}" Height="25" Width="40" Style="{DynamicResource TextBoxStyle1}">
+                                <Validation.ErrorTemplate>
+                                    <ControlTemplate>
+                                        <StackPanel>
+                                            <Border BorderBrush="Red" BorderThickness="1" Width="42" HorizontalAlignment="Left">
+                                                <AdornedElementPlaceholder/>
+                                            </Border>
+                                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                                        </StackPanel>
+                                    </ControlTemplate>
+                                </Validation.ErrorTemplate>
+                            </TextBox>
                             <Slider Value="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SliderStyle1}" VerticalAlignment="Center" Width="335" Margin="10,0,0,0" Minimum="1" Maximum="1000"/>
                         </StackPanel>
                     </Grid>
@@ -101,7 +123,7 @@
                             <ColumnDefinition Width="99*"/>
                         </Grid.ColumnDefinitions>
 
-                        <DataGrid Style="{DynamicResource DataGridStyle2}" CellStyle="{DynamicResource DataGridCellStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,10" ItemsSource="{Binding Path=Dates, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid Style="{DynamicResource DataGridStyle2}" CellStyle="{DynamicResource DataGridCellStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,10" ItemsSource="{Binding Path=Dates, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="1*" Binding="{Binding StringFormat={}{0:dd.MM.yyyy HH\\:mm}}">
@@ -141,7 +163,7 @@
                             <ColumnDefinition Width="99*"/>
                         </Grid.ColumnDefinitions>
 
-                        <DataGrid Style="{DynamicResource DataGridStyle2}" CellStyle="{DynamicResource DataGridCellStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,10" ItemsSource="{Binding Path=CheckpointNames,  UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid Style="{DynamicResource DataGridStyle2}" CellStyle="{DynamicResource DataGridCellStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,10" ItemsSource="{Binding Path=CheckpointNames,  UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="1*" Binding="{Binding}">
