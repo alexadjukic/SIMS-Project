@@ -34,7 +34,7 @@
             <Label Grid.Row="1" Content="City:" FontSize="20" Height="38" Width="100" Style="{DynamicResource LabelStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,15,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></Label>
 
             <StackPanel Grid.Column="1">
-                <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Style="{DynamicResource TextBoxStyle}" Height="38" Width="180" HorizontalAlignment="Left" Margin="0,45,0,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></TextBox>
+                <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Height="38" Width="180" HorizontalAlignment="Left" Margin="0,45,0,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></TextBox>
                 <ComboBox IsEditable="True" SelectedValue="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Countries, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ComboBoxCountry_SelectionChanged" Name="ComboBoxCountry" FontSize="20" Height="38" Width="180" HorizontalAlignment="Left" Margin="0,0,0,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></ComboBox>
             </StackPanel>
             <ComboBox Grid.Row="1" Grid.Column="1" IsEditable="True" SelectedValue="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Cities, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="ComboBoxCity" FontSize="20" Height="38" Width="180" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></ComboBox>
@@ -51,8 +51,8 @@
             </StackPanel>
 
             <StackPanel Grid.Column="3">
-                <TextBox Text="{Binding Path=GuestNumber, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Style="{DynamicResource TextBoxStyle}" Height="38" Width="40" HorizontalAlignment="Left" Margin="0,45,0,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></TextBox>
-                <TextBox Text="{Binding Path=LenghtOfStay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Style="{DynamicResource TextBoxStyle}" Height="38" Width="40" HorizontalAlignment="Left" Margin="0,0,0,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></TextBox>
+                <TextBox Text="{Binding Path=GuestNumber, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Height="38" Width="40" HorizontalAlignment="Left" Margin="0,45,0,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></TextBox>
+                <TextBox Text="{Binding Path=LenghtOfStay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Height="38" Width="40" HorizontalAlignment="Left" Margin="0,0,0,5" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></TextBox>
             </StackPanel>
         </Grid>
 

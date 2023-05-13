@@ -86,14 +86,14 @@ namespace InitialProject.WPF.Views.Guest1Views
         private void DarkTheme_Checked(object sender, RoutedEventArgs e)
         {
             var app = (App)System.Windows.Application.Current;
-            app.ChangeTheme(new Uri("Resources/Themes/DarkTheme.xaml", UriKind.Relative));
+            app.ChangeTheme(new Uri("WPF/Styles/DarkTheme.xaml", UriKind.Relative));
             ThemeButton = "ON";
         }
 
         private void DarkTheme_Unchecked(object sender, RoutedEventArgs e)
         {
             var app = (App)System.Windows.Application.Current;
-            app.ChangeTheme(new Uri("Resources/Themes/LightTheme.xaml", UriKind.Relative));
+            app.ChangeTheme(new Uri("WPF/Styles/LightTheme.xaml", UriKind.Relative));
             ThemeButton = "OFF";
         }
 
