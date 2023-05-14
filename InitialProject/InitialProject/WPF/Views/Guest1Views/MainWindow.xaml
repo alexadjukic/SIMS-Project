@@ -16,8 +16,8 @@
             </ComboBox>
             <Label Content="Dark theme" Height="40" Width="110" FontSize="18" Margin="10,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource LabelStyle}"></Label>
             <ToggleButton x:Name="DarkTheme" Content="{Binding ThemeButton}" Width="60" Height="40" FontSize="18" Checked="DarkTheme_Checked" Unchecked="DarkTheme_Unchecked" Style="{DynamicResource ToggleButtonStyle}"/>
-            <Image Height="40" Width="40" Margin="20,0,20,0"></Image>
-            <Image Height="40" Width="40" Margin="0,0,20,0"></Image>
+            <Image Source="../../../Resources/Images/bluebell.png" Height="40" Width="40" Margin="20,0,20,0"></Image>
+            <Image Source="../../../Resources/Images/blueuser.png" Height="40" Width="40" Margin="0,0,20,0"></Image>
             <Button Content="Sign out" FontSize="18" Height="40" Width="120" Click="SignOutButton_Click" Style="{DynamicResource ButtonStyle}"></Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0,80,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Width="800" Style="{DynamicResource StackPanelStyle}">

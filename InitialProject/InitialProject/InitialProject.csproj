@@ -10,6 +10,8 @@
   <ItemGroup>
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\bell.png" />
+    <None Remove="Resources\Images\bluebell.png" />
+    <None Remove="Resources\Images\blueuser.png" />
     <None Remove="Resources\Images\building.png" />
     <None Remove="Resources\Images\comment.png" />
     <None Remove="Resources\Images\delete.png" />
@@ -30,6 +32,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\bell.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\bluebell.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\blueuser.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\building.png">
