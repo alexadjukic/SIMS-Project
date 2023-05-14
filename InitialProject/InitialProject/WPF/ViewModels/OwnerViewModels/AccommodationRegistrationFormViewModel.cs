@@ -388,7 +388,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public bool RemoveImageCommand_CanExecute(object? parameter)
         {
-            return CurrentImage != null;
+            return CurrentImage != null && CurrentImage != "";
         }
 
         public void RemoveImageCommand_Execute(object? parameter)

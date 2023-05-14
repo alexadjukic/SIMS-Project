@@ -13,8 +13,16 @@
         <KeyBinding Command="{Binding PreviousImageCommand}" Gesture="Left" />
         <KeyBinding Command="{Binding PreviousImageCommand}" Gesture="CTRL+P" />
     </Window.InputBindings>
-    
-    <Grid>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/OwnerDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource BackgroundWindow}">
         <Grid.RowDefinitions>
             <RowDefinition Height="124"/>
             <RowDefinition Height="30*"/>
@@ -27,66 +35,66 @@
             <ColumnDefinition Width="10*" MinWidth="250"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="{StaticResource Background}">
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Guest.Username}" TextAlignment="Left" Margin="40,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Guest.Username}" TextAlignment="Left" Margin="40,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Name}" TextAlignment="Left" Margin="11,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Name}" TextAlignment="Left" Margin="14,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="63,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="61,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.City}" TextAlignment="Left" Margin="88,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.City}" TextAlignment="Left" Margin="85,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Start date:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="52,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="Start date:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="51,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="End date:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="59,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="End date:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="57,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
         </StackPanel>
 
         <Separator Grid.ColumnSpan="4" Grid.Row="1" VerticalAlignment="Top" Background="Black"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <TextBlock TextWrapping="Wrap" Text="You reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12" FontWeight="Bold" TextDecorations="Underline" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="You reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" Style="{StaticResource UnderlinedBoldTextBlock}" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.Cleanliness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.Cleanliness}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Following the rules:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.FollowingTheRules}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="Following the rules:" TextAlignment="Left" Margin="5,0,0,0" Height="35" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.FollowingTheRules}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <TextBlock TextWrapping="Wrap" Text="Comment:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.Comment}" TextAlignment="Left" Margin="15,0,0,0" Height="138" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="Comment:" TextAlignment="Left" Margin="5,0,0,0" Height="35" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding OwnerRated.Comment}" TextAlignment="Left" Margin="15,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
         </StackPanel>
 
         <Separator Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Background="Black"/>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock TextWrapping="Wrap" Text="Guest reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12" FontWeight="Bold" TextDecorations="Underline" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="Guest reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="35" Style="{StaticResource UnderlinedBoldTextBlock}" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Cleanliness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Cleanliness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Correctness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Correctness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="Correctness:" TextAlignment="Left" Margin="5,0,0,0" Height="35" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Correctness}" TextAlignment="Left" Margin="5,0,0,0" Height="35" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <TextBlock TextWrapping="Wrap" Text="Comment:" TextAlignment="Left" Margin="5,0,0,0" Height="35" FontSize="12"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Comment}" TextAlignment="Left" Margin="15,0,0,0" Height="136" FontSize="12"/>
+                <TextBlock TextWrapping="Wrap" Text="Comment:" TextAlignment="Left" Margin="5,0,0,0" Height="35" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding GuestRated.Comment}" TextAlignment="Left" Margin="15,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
         </StackPanel>
 
@@ -94,7 +102,7 @@
             <Image Source="{Binding ReserveImage, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="250" Margin="0,10,0,0" Height="170"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2">
-            <Image Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Width="250" HorizontalAlignment="Center" Margin="0,0,0,0" Height="170"/>
+            <Image Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Width="250" HorizontalAlignment="Center" Margin="0,0,0,0" Height="190"/>
 
             <StackPanel Orientation="Horizontal" Width="250">
                 <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Left" Margin="20,0,50,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
@@ -110,7 +118,7 @@
 
         <Separator Grid.ColumnSpan="4" Grid.Row="2" VerticalAlignment="Top" Background="Black"/>
 
-        <Grid  Grid.Row="2" Grid.ColumnSpan="4" Background="#FF0262E6">
+        <Grid  Grid.Row="2" Grid.ColumnSpan="4" Background="{StaticResource Background}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
