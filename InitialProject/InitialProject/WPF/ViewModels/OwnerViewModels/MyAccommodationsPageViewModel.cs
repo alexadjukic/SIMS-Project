@@ -83,7 +83,71 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _accommodationName;
+        public string AccommodationName
+        {
+            get => _accommodationName;
+            set
+            {
+
+                if (value != _accommodationName)
+                {
+                    _accommodationName = value;
+                    OnPropertyChanged("AccommodationName");
+                }
+            }
+        }
+
+        private string _city;
+        public string City
+        {
+            get => _city;
+            set
+            {
+                if (value != _city)
+                {
+                    _city = value;
+                    OnPropertyChanged("City");
+                }
+            }
+        }
+
+        private string _country;
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    OnPropertyChanged("Country");
+                }
+            }
+        }
+
+        private string _type;
+
+        public string Type
+        {
+            get => _type;
+            set
+            {
+                if (value != _type)
+                {
+                    _type = value;
+                    OnPropertyChanged("Type");
+                }
+            }
+        }
+
         public static ObservableCollection<Accommodation> MyAccommodations { get; set; }
+
+        public List<String> Countries { get; set; }
+        public ObservableCollection<String> Cities { get; set; }
+        public ObservableCollection<String> Types { get; set; }
+
+        private readonly LocationService _locationService;
 
         #endregion
 
@@ -95,6 +159,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _userRepository = new UserRepository();
             _accommodationImageRepository = new AccommodationImageRepository();
 
+            _locationService = new LocationService();
+
             _accommodationService = new AccommodationService();
             _accommodationImageService = new AccommodationImageService();
 
@@ -102,16 +168,54 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             _user = user;
 
+            Countries = new List<String>();
+            Cities = new ObservableCollection<String>();
+            Types = new ObservableCollection<String>();
             Images = new ObservableCollection<String>();
             MyAccommodations = new ObservableCollection<Accommodation>();
+
+            AccommodationRegistrationLoaded();
+            LoadAccommodations();
+            FillInTypes();
 
             CreateNewAccommodationCommand = new RelayCommand(CreateNewAccommodationCommand_Execute);
             NextImageCommand = new RelayCommand(NextImageCommand_Execute, NextImageCommand_CanExecute);
             PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute, PreviousImageCommand_CanExecute);
             OpenAccommodationInfoCommand = new RelayCommand(OpenAccommodationInfoCommand_Execute, OpenAccommodationInfoCommand_CanExecute);
+            FilterAccommodationsCommand = new RelayCommand(FilterAccommodationsCommand_Execute);
+            LoadCitiesCommand = new RelayCommand(LoadCitiesCommand_Execute);
 
-            LoadAccommodations();
             UploadImages();
+        }
+
+        private void FilterAccommodations()
+        {
+            MyAccommodations.Clear();
+
+            foreach (var accommodation in _accommodationService.GetByOwnerId(_user.Id))
+            {
+                if ((AccommodationName == null || accommodation.Name.ToUpper().Contains(AccommodationName.ToUpper())) &&
+                    (Type == null || accommodation.Type.ToString().ToUpper().Contains(Type.ToUpper())) &&
+                    (City == null || accommodation.Location.City.ToString().ToUpper().Contains(City.ToUpper())) &&
+                    (Country == null || accommodation.Location.Country.ToString().ToUpper().Contains(Country.ToUpper())))
+                {
+                    MyAccommodations.Add(accommodation);
+                }
+
+            }
+        }
+
+        public void FillInTypes()
+        {
+            Types.Clear();
+            Types.Add("apartment");
+            Types.Add("house");
+            Types.Add("cottage");
+        }
+
+        private void AccommodationRegistrationLoaded()
+        {
+            Countries = _locationService.GetAllCountries().ToList();
         }
 
         public void LoadAccommodations()
@@ -148,6 +252,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand NextImageCommand { get; }
         public RelayCommand PreviousImageCommand { get; }
         public RelayCommand? OpenAccommodationInfoCommand { get; }
+        public RelayCommand FilterAccommodationsCommand { get; }
+        public RelayCommand LoadCitiesCommand { get; }
 
         public void CreateNewAccommodationCommand_Execute(object? parameter)
         {
@@ -198,6 +304,26 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             AccommodationInfoOverview accommodationInfoOverview = new AccommodationInfoOverview(SelectedAccommodation);
             accommodationInfoOverview.Show();
+        }
+
+        public void FilterAccommodationsCommand_Execute(object? parameter)
+        {
+            FilterAccommodations();
+        }
+
+        public void LoadCitiesCommand_Execute(object? parameter)
+        {
+            Cities.Clear();
+            foreach (var location in _locationService.GetAll())
+            {
+                if (location.Country != Country) continue;
+                Cities.Add(location.City);
+            }
+
+            MyAccommodations.Clear();
+
+            FilterAccommodations();
+            return;
         }
         #endregion
     }

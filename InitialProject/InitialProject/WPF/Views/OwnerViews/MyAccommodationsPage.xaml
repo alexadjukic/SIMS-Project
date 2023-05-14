@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="700"
       Title="MyAccommodationsPage" KeyDown="Page_KeyDown">
@@ -27,7 +28,7 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="50*"/>
+            <RowDefinition Height="45*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -56,14 +57,73 @@
             <Label Grid.Column="0" Name="LabeNegativeProposal" Style="{StaticResource BasicLabel}" Content="You could delete accommodation on location nesto nesto:" Margin="0,10,0,10"/>
             <Button Grid.Column="1" Name="ButtonProosedDelete" Content="Delete" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0,0,25,0"/>
         </Grid>
-        
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
-            <Label Style="{StaticResource BasicLabel}" Name="LabelSearch" Content="Search:"/>
-            <StackPanel Orientation="Horizontal">
-                <TextBox Name="SearchTextBox" TextWrapping="Wrap" Text="" Height="25" Width="270" Grid.Row="1" Margin="5"/>
-                
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Margin="20,0,0,0">
+                <Label Name="AccommodationName" Content="Accommodation name: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
+                <TextBox Name="AccommodationNameSearch" TextWrapping="Wrap" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="100" HorizontalAlignment="Left">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding FilterAccommodationsCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
             </StackPanel>
-        </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" Margin="20,0,0,0">
+                <Label Name="CountryLabel" Content="Country: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
+                <ComboBox  Name="ComboBoxCountry" IsEditable="True" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Countries}" HorizontalAlignment="Left">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding LoadCitiesCommand}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="TextInput">
+                            <i:InvokeCommandAction Command="{Binding LoadCitiesCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical" Margin="20,0,0,0">
+                <Label Name="CityLabel" Content="City: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
+                <ComboBox  Name="ComboBoxCity" IsEditable="True" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Cities}" HorizontalAlignment="Left">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding FilterAccommodationsCommand}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="TextInput">
+                            <i:InvokeCommandAction Command="{Binding FilterAccommodationsCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical" Margin="20,0,0,0" >
+                <Label Name="TypeLabel" Content="Type: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
+                <ComboBox  Name="ComboBoxType" IsEditable="True" SelectedItem="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Types}" HorizontalAlignment="Left">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding FilterAccommodationsCommand}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="TextInput">
+                            <i:InvokeCommandAction Command="{Binding FilterAccommodationsCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
 
         <Separator Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top" Background="Black"/>
 

@@ -8,15 +8,15 @@
         Title="OwnerMain" Height="700" Width="900"  WindowStartupLocation="CenterScreen">
 
     <Window.InputBindings>
-        <KeyBinding Command="{Binding SeeMyAccommodationsCommand}" Key="D1" />
-        <KeyBinding Command="{Binding SeeForumsCommand}" Key="D2" />
-        <KeyBinding Command="{Binding SeeMyRenovationsCommand}" Key="D3" />
-        <KeyBinding Command="{Binding SeeMyReservationsCommand}" Key="D4" />
-        <KeyBinding Command="{Binding SeeMyReviewsCommand}" Key="D5" />
-        <KeyBinding Command="{Binding SeeMyRequestsCommand}" Key="D6" />
-        <KeyBinding Command="{Binding SeeMyProfileCommand}" Key="D7" />
-        <KeyBinding Command="{Binding SeeNotificationsCommand}" Key="N" />
-        <KeyBinding Command="{Binding CloseWindowCommand}" Key="D0" />
+        <KeyBinding Command="{Binding SeeMyAccommodationsCommand}" Gesture="ALT+1" />
+        <KeyBinding Command="{Binding SeeForumsCommand}" Gesture="ALT+2" />
+        <KeyBinding Command="{Binding SeeMyRenovationsCommand}" Gesture="ALT+3" />
+        <KeyBinding Command="{Binding SeeMyReservationsCommand}" Gesture="ALT+4" />
+        <KeyBinding Command="{Binding SeeMyReviewsCommand}" Gesture="ALT+5" />
+        <KeyBinding Command="{Binding SeeMyRequestsCommand}" Gesture="ALT+6" />
+        <KeyBinding Command="{Binding SeeMyProfileCommand}" Gesture="ALT+7" />
+        <KeyBinding Command="{Binding SeeNotificationsCommand}" Gesture="ALT+8" />
+        <KeyBinding Command="{Binding CloseWindowCommand}" Gesture="ALT+0" />
     </Window.InputBindings>
 
     <Window.Resources>
