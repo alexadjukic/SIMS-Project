@@ -14,9 +14,97 @@ using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels
 {
-    public class CreateNewTourViewModel : ViewModelBase, INotifyDataErrorInfo
+    public class CreateMostWantedTourViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         #region PROPERTIES
+		private bool _isCountryCBEnabled;
+		public bool IsCountryCBEnabled
+		{
+			get
+			{
+				return _isCountryCBEnabled;
+			}
+			set
+			{
+				if (_isCountryCBEnabled != value)
+				{
+					_isCountryCBEnabled = value;
+					OnPropertyChanged(nameof(IsCountryCBEnabled));
+				}
+			}
+		}
+
+		private bool _isCityCBEnabled;
+		public bool IsCityCBEnabled
+		{
+			get
+			{
+				return _isCityCBEnabled;
+			}
+			set
+			{
+				if (_isCityCBEnabled != value)
+				{
+					_isCityCBEnabled = value;
+					OnPropertyChanged(nameof(IsCityCBEnabled));
+				}
+			}
+		}
+
+		private bool _isLanguageCBEnabled;
+		public bool IsLanguageCBEnabled
+		{
+			get
+			{
+				return _isLanguageCBEnabled;
+			}
+			set
+			{
+				if (_isLanguageCBEnabled != value)
+				{
+					_isLanguageCBEnabled = value;
+					OnPropertyChanged(nameof(IsLanguageCBEnabled));
+				}
+			}
+		}
+
+        private bool _isMostWantedLocationChecked;
+        public bool IsMostWantedLocationChecked
+        {
+            get
+            {
+                return _isMostWantedLocationChecked;
+            }
+            set
+            {
+                if (_isMostWantedLocationChecked != value)
+                {
+                    _isMostWantedLocationChecked = value;
+                    IsCountryCBEnabled = !value;
+                    IsCityCBEnabled = !value;
+                    OnPropertyChanged(nameof(IsMostWantedLocationChecked));
+                }
+            }
+        }
+
+        private bool _isMostWantedLanguageChecked;
+        public bool IsMostWantedLanguageChecked
+        {
+            get
+            {
+                return _isMostWantedLanguageChecked;
+            }
+            set
+            {
+                if (_isMostWantedLanguageChecked != value)
+                {
+                    _isMostWantedLanguageChecked = value;
+                    IsLanguageCBEnabled = !value;
+                    OnPropertyChanged(nameof(IsMostWantedLanguageChecked));
+                }
+            }
+        }
+
         private string _tourName;
         public string TourName
         {
@@ -187,7 +275,7 @@ namespace InitialProject.WPF.ViewModels
                 }
             }
         }
-        
+
         private string _enteredCheckpointName;
         public string EnteredCheckpointName
         {
@@ -459,7 +547,7 @@ namespace InitialProject.WPF.ViewModels
         }
         #endregion
 
-        public CreateNewTourViewModel(User guide)
+        public CreateMostWantedTourViewModel(User guide)
         {
             _guide = guide;
 
@@ -477,6 +565,10 @@ namespace InitialProject.WPF.ViewModels
             Languages = new ObservableCollection<string>() { "Afrikaans", "Albanian", "Amharic", "Arabic", "Armenian", "Assamese", "Azerbaijani", "Basque", "Belarusian", "Bengali", "Bosnian", "Bulgarian", "Burmese", "Catalan", "Cebuano", "Chichewa", "Chinese (Mandarin)", "Corsican", "Croatian", "Czech", "Danish", "Dutch", "English", "Esperanto", "Estonian", "Finnish", "French", "Frisian", "Galician", "Georgian", "German", "Greek", "Gujarati", "Haitian Creole", "Hausa", "Hawaiian", "Hebrew", "Hindi", "Hmong", "Hungarian", "Icelandic", "Igbo", "Indonesian", "Irish", "Italian", "Japanese", "Javanese", "Kannada", "Kazakh", "Khmer", "Kinyarwanda", "Korean", "Kurdish (Kurmanji)", "Kyrgyz", "Lao", "Latin", "Latvian", "Lithuanian", "Luxembourgish", "Macedonian", "Malagasy", "Malay", "Malayalam", "Maltese", "Maori", "Marathi", "Mongolian", "Myanmar (Burmese)", "Nepali", "Norwegian", "Odia (Oriya)", "Pashto", "Persian", "Polish", "Portuguese", "Punjabi", "Romanian", "Russian", "Samoan", "Scots Gaelic", "Serbian", "Sesotho", "Shona", "Sindhi", "Sinhala", "Slovak", "Slovenian", "Somali", "Spanish", "Sundanese", "Swahili", "Swedish", "Tagalog (Filipino)", "Tajik", "Tamil", "Tatar", "Telugu", "Thai", "Turkish", "Turkmen", "Ukrainian", "Urdu", "Uyghur", "Uzbek", "Vietnamese", "Welsh", "Xhosa", "Yiddish", "Yoruba", "Zulu" };
             CheckpointNames = new ObservableCollection<string>();
             Images = new List<BitmapImage>();
+
+            IsCountryCBEnabled = true;
+            IsCityCBEnabled = true;
+            IsLanguageCBEnabled = true;
 
             DatePickerSelectedDate = DateTime.Now;
             IsGeneralTabSelected = true;
@@ -551,6 +643,8 @@ namespace InitialProject.WPF.ViewModels
             Images.Clear();
             SelectedImage = null;
             CoverImage = null;
+            IsMostWantedLocationChecked = false;
+            IsMostWantedLanguageChecked = false;
         }
 
         #region COMMANDS

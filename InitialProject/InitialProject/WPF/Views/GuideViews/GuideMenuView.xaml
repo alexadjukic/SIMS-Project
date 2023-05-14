@@ -151,11 +151,14 @@
 
             <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentViewModel}">
                 <ContentControl.Resources>
-                    <DataTemplate DataType="{x:Type viewModel:YourToursViewModel}">
-                        <local:YourToursView/>
-                    </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModel:CreateNewTourViewModel}">
                         <local:CreateNewTourView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:CreateMostWantedTourViewModel}">
+                        <local:CreateMostWantedTourView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:YourToursViewModel}">
+                        <local:YourToursView/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModel:TodaysToursViewModel}">
                         <local:TodaysToursView/>
