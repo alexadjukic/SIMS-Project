@@ -61,6 +61,12 @@
     </Style>
     <!--#endregion-->
     
+    <!--#region GridStyle-->
+    <Style x:Key="GridWindowBackground" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource BackgroundWindow}" />
+    </Style>
+    <!--#endregion-->
+    
     <!--#region LabelStyle-->
     <Style x:Key="BasicLabel" TargetType="Label">
         <Setter Property="Label.Foreground" Value="#e1ebec" />
@@ -183,6 +189,15 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    <!--#endregion-->
+    
+    <!--#region Button-->
+    <Style x:Key="CloseButton" TargetType="Button">
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Width" Value="80" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
     </Style>
     <!--#endregion-->
     

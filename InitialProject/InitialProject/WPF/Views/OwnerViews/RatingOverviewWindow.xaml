@@ -105,11 +105,11 @@
             <Image Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Width="250" HorizontalAlignment="Center" Margin="0,0,0,0" Height="190"/>
 
             <StackPanel Orientation="Horizontal" Width="250">
-                <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Left" Margin="20,0,50,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
+                <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" Margin="162,0,0,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
                 <Image Source="../../../Resources/Images/left_arrow.png"/>
             </Button>
 
-            <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Right" Margin="100,0,0,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
+            <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" Margin="0,0,0,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
                 <Image Source="../../../Resources/Images/right_arrow.png"></Image>
             </Button>
             </StackPanel>

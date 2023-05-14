@@ -126,7 +126,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             
         }
 
-#region VALIDATION
+        #region VALIDATION
         public string Error => null;
 
         public string this[string columnName]

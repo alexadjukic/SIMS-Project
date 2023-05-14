@@ -9,11 +9,13 @@
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding SeeMyAccommodationsCommand}" Key="D1" />
-        <!--<KeyBinding Command="{Binding SeeMyForumsCommand}" Key="2" />-->
-        <!--<KeyBinding Command="{Binding SeeMyRenovations}" Key="3" />-->
+        <KeyBinding Command="{Binding SeeForumsCommand}" Key="D2" />
+        <KeyBinding Command="{Binding SeeMyRenovationsCommand}" Key="D3" />
         <KeyBinding Command="{Binding SeeMyReservationsCommand}" Key="D4" />
         <KeyBinding Command="{Binding SeeMyReviewsCommand}" Key="D5" />
         <KeyBinding Command="{Binding SeeMyRequestsCommand}" Key="D6" />
+        <KeyBinding Command="{Binding SeeMyProfileCommand}" Key="D7" />
+        <KeyBinding Command="{Binding SeeNotificationsCommand}" Key="N" />
         <KeyBinding Command="{Binding CloseWindowCommand}" Key="D0" />
     </Window.InputBindings>
 
@@ -67,14 +69,14 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="1" Style="{StaticResource MenuButton}" Grid.ColumnSpan="2">
+                <Button Name="ButtonForums" Grid.Row="1" Style="{StaticResource MenuButton}" Grid.ColumnSpan="2" Command="{Binding SeeForumsCommand}">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/comment.png" Width="25" Height="30" HorizontalAlignment="Left"/>
                         <TextBlock Text="Forums" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="2" Style="{StaticResource MenuButton}" Grid.ColumnSpan="2">
+                <Button Name="ButtonRenovations" Grid.Row="2" Style="{StaticResource MenuButton}" Command="{Binding SeeMyRenovationsCommand}" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/tools.png" Width="25" Height="30" HorizontalAlignment="Left"/>
                         <TextBlock Text="Renovations" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
@@ -102,7 +104,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button Grid.Row="6" Style="{StaticResource MenuButton}" Grid.ColumnSpan="2">
+                <Button Name="ButtonProfile"  Grid.Row="6" Style="{StaticResource MenuButton}" Command="{Binding SeeMyProfileCommand}" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/user.png" Width="25" Height="30" HorizontalAlignment="Left"/>
                         <TextBlock Text="Profile" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
@@ -125,7 +127,7 @@
 
                 <Grid Grid.Row="0">
                     <Border Style="{StaticResource MenuBackground}">
-                        <Button Height="50" Grid.Row="0" Grid.Column="1" Style="{StaticResource MenuNotificationButton}"  HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <Button Name="Button_Notifications" Height="50" Grid.Row="0" Grid.Column="1" Style="{StaticResource MenuNotificationButton}" Command="{Binding SeeNotificationsCommand}" HorizontalAlignment="Right" VerticalAlignment="Top">
                             <Image Source="../../../Resources/Images/bell.png" Width="44" Height="40" HorizontalAlignment="Right"/>
                         </Button>
                     </Border>
