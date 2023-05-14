@@ -12,7 +12,12 @@ namespace InitialProject.WPF.Views
         public ToursUserReviewsView(Tour tour)
         {
             InitializeComponent();
-            this.DataContext = new ToursUserReviewsViewModel(this, tour);
+            this.DataContext = new ToursUserReviewsViewModel(tour);
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

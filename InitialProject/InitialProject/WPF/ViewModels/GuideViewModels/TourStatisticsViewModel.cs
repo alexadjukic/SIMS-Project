@@ -98,27 +98,15 @@ namespace InitialProject.WPF.ViewModels
             }
         }
 
-        private readonly Window _tourStatisticsView;
         private readonly TourStatisticsService _tourStatisticsService;
 
-        public TourStatisticsViewModel(Window tourStatisticsView, Tour tour)
+        public TourStatisticsViewModel(Tour tour)
         {
-            _tourStatisticsView = tourStatisticsView;
-
             _tourStatisticsService = new TourStatisticsService();
 
             YoungerThanEighteen = _tourStatisticsService.GetNumberOfGusetsInAgeRange(tour, 0, 18);
             EighteenToFifty = _tourStatisticsService.GetNumberOfGusetsInAgeRange(tour, 18, 50);
             OlderThanFifty = _tourStatisticsService.GetNumberOfGusetsInAgeRange(tour, 18, 200);
-
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
-        }
-
-        public RelayCommand CloseWindowCommand { get; }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _tourStatisticsView.Close();
         }
     }
 }

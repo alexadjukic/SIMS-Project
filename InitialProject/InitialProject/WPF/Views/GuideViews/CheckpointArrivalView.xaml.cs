@@ -28,7 +28,12 @@ namespace InitialProject.WPF.Views
         public CheckpointArrivalView(Checkpoint currentCheckpoint, Tour currentTour)
         {
             InitializeComponent();
-            this.DataContext = new CheckpointArrivalViewModel(currentCheckpoint, currentTour, this);
+            this.DataContext = new CheckpointArrivalViewModel(currentCheckpoint, currentTour);
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

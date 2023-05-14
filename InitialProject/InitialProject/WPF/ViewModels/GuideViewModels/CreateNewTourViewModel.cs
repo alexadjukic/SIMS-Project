@@ -56,6 +56,7 @@ namespace InitialProject.WPF.ViewModels
                     }
 
                     OnPropertyChanged(nameof(SelectedCountry));
+                    LoadCities();
                 }
             }
         }
@@ -115,7 +116,7 @@ namespace InitialProject.WPF.ViewModels
                     _errorsViewModel.ClearErrors(nameof(Description));
                     if (string.IsNullOrEmpty(_description))
                     {
-                        _errorsViewModel.AddError(nameof(Description), "Language is required");
+                        _errorsViewModel.AddError(nameof(Description), "Description is required");
                     }
 
                     OnPropertyChanged(nameof(Description));
@@ -526,6 +527,16 @@ namespace InitialProject.WPF.ViewModels
             IsCoverImageSelected = false;
         }
 
+        private void LoadCities()
+        {
+            Cities.Clear();
+            foreach (var location in _locationService.GetAll())
+            {
+                if (location.Country != SelectedCountry) continue;
+                Cities.Add(location.City);
+            }
+        }
+
         #region COMMANDS
         public RelayCommand AddDateCommand { get; }
         public RelayCommand RemoveDateCommand { get; }
@@ -672,8 +683,6 @@ namespace InitialProject.WPF.ViewModels
 
         public void ConfirmCommand_Execute(object? parameter)
         {
-            if (!Validate()) return;
-
             CoverImage ??= Images.First();
             foreach (var startTime in Dates)
             {

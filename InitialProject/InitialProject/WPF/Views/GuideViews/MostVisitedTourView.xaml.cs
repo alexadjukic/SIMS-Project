@@ -23,7 +23,12 @@ namespace InitialProject.WPF.Views
         public MostVisitedTourView()
         {
             InitializeComponent();
-            this.DataContext = new MostVisitedTourViewModel(this);
+            this.DataContext = new MostVisitedTourViewModel();
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

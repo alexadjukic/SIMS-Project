@@ -24,16 +24,17 @@ namespace InitialProject.WPF.Views
     /// <summary>
     /// Interaction logic for CreateNewTourView.xaml
     /// </summary>
-    public partial class CreateNewTourView : Window
+    public partial class CreateNewTourView : UserControl
     {
-        public CreateNewTourView(User guide)
+        public CreateNewTourView()
         {
             InitializeComponent();
-            this.DataContext = new CreateNewTourViewModel(guide);
         }
-        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.Close();
+            e.Handled = true;
+            return;
         }
     }
 }

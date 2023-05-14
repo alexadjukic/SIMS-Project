@@ -14,34 +14,46 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
     public class GuideMenuViewModel : ViewModelBase
     {
 		#region PROPERTIES
-		private Page? _currentPage;
-		public Page? CurrentPage
-		{
-			get
-			{
-				return _currentPage;
-			}
-			set
-			{
-				if (_currentPage != value)
-				{
-					_currentPage = value;
-					OnPropertyChanged(nameof(CurrentPage));
-				}
-			}
-		}
+        private ViewModelBase _currentViewModel;
+        public ViewModelBase CurrentViewModel
+        {
+            get
+            {
+                return _currentViewModel;
+            }
+            set
+            {
+                if (_currentViewModel != value)
+                {
+                    _currentViewModel = value;
+                    OnPropertyChanged(nameof(CurrentViewModel));
+                }
+            }
+        }
+
+        private readonly CreateNewTourViewModel _createNewTourViewModel;
+        private readonly YourToursViewModel _yourToursViewModel;
+        private readonly TodaysToursViewModel _todaysToursViewModel;
+        private readonly YourTourStatisticsViewModel _yourTourStatisticsViewModel;
+        private readonly TourReviewsViewModel _tourReviewsViewModel;
 
         public User Guide { get; set; }
         public string Username { get; set; }
 
-        private readonly Window _guideMenuView;
         #endregion
 
-        public GuideMenuViewModel(Window guideMenuView, User guide)
+        public GuideMenuViewModel(User guide)
 		{
-            _guideMenuView = guideMenuView;
             Username = guide.Username;
             Guide = guide;
+
+            _createNewTourViewModel = new CreateNewTourViewModel(Guide);
+            _yourToursViewModel = new YourToursViewModel();
+            _todaysToursViewModel = new TodaysToursViewModel(Guide);
+            _yourTourStatisticsViewModel = new YourTourStatisticsViewModel();
+            _tourReviewsViewModel = new TourReviewsViewModel();
+
+            CurrentViewModel = _yourToursViewModel;
 
             CreateNewTourCommand = new RelayCommand(CreateNewTourCommand_Execute, CreateNewTourCommand_CanExecute);
             CreateMostWantedTourCommand = new RelayCommand(CreateMostWantedTourCommand_Execute, CreateMostWantedTourCommand_CanExecute);
@@ -52,8 +64,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             YourTourStatisticsCommand = new RelayCommand(YourTourStatisticsCommand_Execute, YourTourStatisticsCommand_CanExecute);
             ReviewsCommand = new RelayCommand(ReviewsCommand_Execute, ReviewsCommand_CanExecute);
             SettingsCommand = new RelayCommand(SettingsCommand_Execute, SettingsCommand_CanExecute);
-            LogOutCommand = new RelayCommand(LogOutCommand_Execute, LogOutCommand_CanExecute);
-            CloseCommand = new RelayCommand(CloseCommand_Execute);
         }
 
         #region COMMANDS
@@ -72,13 +82,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
 		public void CreateNewTourCommand_Execute(object? parameter)
 		{
-            CreateNewTourView createNewTourView = new CreateNewTourView(Guide);
-            createNewTourView.Show();
+            CurrentViewModel = _createNewTourViewModel;
 		}
 
 		public bool CreateNewTourCommand_CanExecute(object? parameter)
 		{
-			return true;
+            return CurrentViewModel != _createNewTourViewModel;
 		}
 
         public void CreateMostWantedTourCommand_Execute(object? parameter)
@@ -93,22 +102,22 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void YourToursCommand_Execute(object? parameter)
         {
-            CurrentPage = new YourToursView();
+            CurrentViewModel = _yourToursViewModel;
         }
 
         public bool YourToursCommand_CanExecute(object? parameter)
         {
-            return CurrentPage is null || !CurrentPage.Title.Equals("Your Tours");
+            return CurrentViewModel != _yourToursViewModel;
         }
 
         public void TodaysToursCommand_Execute(object? parameter)
         {
-            CurrentPage = new TodaysToursView(Guide);
+            CurrentViewModel = _todaysToursViewModel;
         }
 
         public bool TodaysToursCommand_CanExecute(object? parameter)
         {
-            return CurrentPage is null || !CurrentPage.Title.Equals("Todays Tours");
+            return CurrentViewModel != _todaysToursViewModel;
         }
 
         public void TourRequestsCommand_Execute(object? parameter)
@@ -133,12 +142,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void YourTourStatisticsCommand_Execute(object? parameter)
         {
-            CurrentPage = new YourTourStatisticsView();
+            CurrentViewModel = _yourTourStatisticsViewModel;
         }
 
         public bool YourTourStatisticsCommand_CanExecute(object? parameter)
         {
-            return CurrentPage is null || !CurrentPage.Title.Equals("Your Tour Statistics");
+            return CurrentViewModel != _yourTourStatisticsViewModel;
         }
 
         public void TourRequestStatisticsCommand_Execute(object? parameter)
@@ -153,12 +162,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void ReviewsCommand_Execute(object? parameter)
         {
-            CurrentPage = new TourReviewsView();
+            CurrentViewModel = _tourReviewsViewModel;
         }
 
         public bool ReviewsCommand_CanExecute(object? parameter)
         {
-            return CurrentPage is null || !CurrentPage.Title.Equals("Reviews");
+            return CurrentViewModel != _tourReviewsViewModel;
         }
 
         public void SettingsCommand_Execute(object? parameter)
@@ -169,23 +178,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public bool SettingsCommand_CanExecute(object? parameter)
         {
             return true;
-        }
-
-        public void LogOutCommand_Execute(object? parameter)
-        {
-            Window signInForm = new SignInForm();
-            signInForm.Show();
-            _guideMenuView.Close();
-        }
-
-        public bool LogOutCommand_CanExecute(object? parameter)
-        {
-            return true;
-        }
-
-        public void CloseCommand_Execute(object? parameter)
-        {
-            _guideMenuView.Close();
         }
         #endregion
     }

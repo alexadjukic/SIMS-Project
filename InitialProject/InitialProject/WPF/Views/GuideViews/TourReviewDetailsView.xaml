@@ -78,8 +78,8 @@
 
             <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{DynamicResource MenuBorder}">
                 <Grid>
-                    <Button Content="Close" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Left" Margin="10,0,0,0" Command="{Binding CloseWindowCommand}"></Button>
-                    <Button Content="Report" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Right" Margin="0,0,10,0"></Button>
+                    <Button Content="Close" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Left" Margin="10,0,0,0" Click="ButtonClose_Click"/>
+                    <Button Content="Report" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Right" Margin="0,0,10,0"/>
                 </Grid>
             </Border>
         </Grid>
