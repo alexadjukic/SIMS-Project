@@ -21,30 +21,6 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <!--<Window.Resources>
-        <ControlTemplate x:Key="ValidationTemplate">
-            <StackPanel>
-                <AdornedElementPlaceholder/>
-                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" />
-            </StackPanel>
-
-        </ControlTemplate>
-        <ControlTemplate x:Key="ValidationErrorTemplate">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
-            </Grid>
-        </ControlTemplate>
-    </Window.Resources>-->
     <Grid  Background="{StaticResource BackgroundWindow}">
         <Grid.RowDefinitions>
             <RowDefinition Height="118"/>
@@ -93,28 +69,101 @@
 
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical"  >
             <Label Content="Cleanliness:" HorizontalAlignment="Center" Margin="0,10,0,0" Height="25" Style="{StaticResource BasicLabel}" Width="150"/>
-            <ComboBox x:Name="ComboBoxCleanliness" SelectedValuePath="Content" Text="{Binding Path=Cleanliness, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Height="26" Width="150" Margin="0,0,0,15">
+            <ComboBox IsEditable="True" x:Name="ComboBoxCleanliness" SelectedValuePath="Content" HorizontalAlignment="Center" Height="26" Width="150" Margin="0,0,0,15">
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="3"/>
                 <ComboBoxItem Content="2"/>
                 <ComboBoxItem Content="1"/>
+                <ComboBox.Text>
+                    <Binding  Path="Cleanliness" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <val:ComboBoxNumberValidation ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="#800000"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
             </ComboBox>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
             <Label Content="Following the rules:" HorizontalAlignment="Center" Margin="0,10,0,0" Height="25" Style="{StaticResource BasicLabel}" Width="150"/>
-            <ComboBox x:Name="ComboBoxFollowingTheRules" SelectedValuePath="Content" Text="{Binding Path=FollowingTheRules, UpdateSourceTrigger=PropertyChanged}" Height="26" HorizontalAlignment="Center" Width="150" Margin="0,0,0,15">
+            <ComboBox IsEditable="True" x:Name="ComboBoxFollowingTheRules" SelectedValuePath="Content" Height="26" HorizontalAlignment="Center" Width="150" Margin="0,0,0,15">
                 <ComboBoxItem Content="5"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="3"/>
                 <ComboBoxItem Content="2"/>
                 <ComboBoxItem Content="1"/>
+                <ComboBox.Text>
+                    <Binding  Path="FollowingTheRules" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <val:ComboBoxNumberValidation ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </ComboBox.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="#800000"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
             </ComboBox>
         </StackPanel>
 
         <Label Name="TextBlockComment" Grid.Row="2" Grid.ColumnSpan="2" Content="Your comment:" HorizontalAlignment="Left" Margin="20,0,0,0" Style="{StaticResource BasicLabel}"/>
-        <TextBox Name="TextBoxComment" Grid.ColumnSpan="2" Width="340" Grid.Row="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,5,20"/>            
+        <TextBox Name="TextBoxComment" Grid.ColumnSpan="2" Width="340" Grid.Row="3" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="5,5,5,20">
+            <TextBox.Text>
+                <Binding Path="Comment" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyStringValidation ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <ControlTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="#800000"/>
+                    </Grid>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
 
         <Separator Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Top" Background="Black"/>
 

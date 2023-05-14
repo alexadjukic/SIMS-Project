@@ -112,7 +112,7 @@
 
             <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical" Margin="20,0,0,0" >
                 <Label Name="TypeLabel" Content="Type: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
-                <ComboBox  Name="ComboBoxType" IsEditable="True" SelectedItem="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Types}" HorizontalAlignment="Left">
+                <ComboBox  Name="ComboBoxType" IsEditable="True" Text="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Types}" HorizontalAlignment="Left">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding FilterAccommodationsCommand}"/>
