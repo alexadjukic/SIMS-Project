@@ -8,7 +8,7 @@
         Title="Request declined comment" Height="480" Width="450" WindowStartupLocation="CenterScreen">
 
     <Window.InputBindings>
-        <KeyBinding Command="{Binding CloseWindowCommand}" Gesture="CTRL+X"/>
+        <KeyBinding Command="{Binding CloseWindowCommand}" Gesture="CTRL+O"/>
         <KeyBinding Command="{Binding ConfirmDeclineCommand}" Gesture="CTRL+D" />
     </Window.InputBindings>
 

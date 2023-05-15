@@ -10,7 +10,7 @@
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding RateGuestCommand}" Gesture="CTRL+S" />
-        <KeyBinding Command="{Binding CloseWindowCommand}" Gesture="CTRL+X" />
+        <KeyBinding Command="{Binding CloseWindowCommand}" Gesture="CTRL+O" />
     </Window.InputBindings>
 
     <Window.Resources>

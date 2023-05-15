@@ -136,7 +136,14 @@
 
                 <DataGrid Name="DataGridAccommodations" DataGrid.ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"  DataGrid.RowStyle="{StaticResource DataGridRowStyle}" DataGrid.CellStyle="{StaticResource DataGridCellStyle}" HorizontalAlignment="Center" RowHeaderWidth="0" ItemsSource="{Binding MyAccommodations, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding Path=SelectedAccommodation, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="10,10,0,25" IsReadOnly="True" SelectionChanged="DataGridAccommodations_SelectionChanged" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                        <DataGridTextColumn Header="Name" Width="*">
+                            <DataGridTextColumn.Binding>
+                                <MultiBinding StringFormat="{} {0}{1}">
+                                    <Binding Path="SuperOwnerMark"/>
+                                    <Binding Path="Name"/>
+                                </MultiBinding>
+                            </DataGridTextColumn.Binding>
+                        </DataGridTextColumn>
                         <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="*"/>
                         <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
                         <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>

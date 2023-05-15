@@ -200,6 +200,17 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public bool SeeReviewCommand_CanExecute(object? parameter)
         {
+            return SelectedReservation is not null && _ratingService.FindRatingByReservationId(SelectedReservation.Id) != null;
+        }
+
+        public void SeeReviewCommand_Execute(object? parameter)
+        {
+            RatingOverviewWindow ratingOverviewWindow = new RatingOverviewWindow(SelectedReservation);
+            ratingOverviewWindow.Show();
+        }
+
+        /*public bool SeeReviewCommand_CanExecute(object? parameter)
+        {
             AccommodationReservation reservation = parameter as AccommodationReservation;
             return reservation is not null && _ratingService.FindRatingByReservationId(reservation.Id) != null;
         }
@@ -209,7 +220,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             AccommodationReservation reservation = parameter as AccommodationReservation;
             RatingOverviewWindow ratingOverviewWindow = new RatingOverviewWindow(reservation);
             ratingOverviewWindow.Show();
-        }
+        }*/
 
         public bool ReviewCommand_CanExecute(object? parameter)
         {

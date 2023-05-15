@@ -11,7 +11,7 @@
     <Window.InputBindings>
         <KeyBinding Command="{Binding AddImageCommand}" Gesture="CTRL+I" />
         <KeyBinding Command="{Binding RemoveImageCommand}" Gesture="CTRL+R" />
-        <KeyBinding Command="{Binding CancelCommand}" Gesture="CTRL+X" />
+        <KeyBinding Command="{Binding CancelCommand}" Gesture="CTRL+O" />
         <KeyBinding Command="{Binding RegisterCommand}" Gesture="CTRL+S" />
         <KeyBinding Command="{Binding NextImageCommand}" Gesture="Right" />
         <KeyBinding Command="{Binding NextImageCommand}" Gesture="CTRL+N" />
@@ -103,13 +103,13 @@
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Label Content="Country:" Style="{StaticResource BasicLabel}" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <ComboBox Name="ComboBoxCountry" IsEditable="True" Width="247" HorizontalAlignment="Center" Margin="0,10,0,15" Height="23.94" ItemsSource="{Binding Path=Countries}">
-                <ComboBox.Text>
+                <ComboBox.SelectedItem>
                     <Binding  Path="Country" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:ComboBoxSelectionValidation ValidationStep="RawProposedValue"/>
                         </Binding.ValidationRules>
                     </Binding>
-                </ComboBox.Text>
+                </ComboBox.SelectedItem>
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <Grid>
@@ -138,13 +138,13 @@
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Label Content="City:" Style="{StaticResource BasicLabel}" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <ComboBox x:Name="ComboBoxCity" IsEditable="True" HorizontalAlignment="Center" Width="247" Margin="0,10,0,15" Height="23.94" ItemsSource="{Binding Path=Cities}">
-                <ComboBox.Text>
+                <ComboBox.SelectedItem>
                     <Binding  Path="City" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <val:ComboBoxSelectionValidation ValidationStep="RawProposedValue"/>
                         </Binding.ValidationRules>
                     </Binding>
-                </ComboBox.Text>
+                </ComboBox.SelectedItem>
                 <Validation.ErrorTemplate>
                     <ControlTemplate>
                         <Grid>

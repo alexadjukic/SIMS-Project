@@ -25,7 +25,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="50*"/>
+            <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -35,7 +35,6 @@
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
                 <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
 
@@ -71,7 +70,7 @@
 
             <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical" Margin="15,0,0,0">
                 <Label Name="CountryLabel" Content="Country: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
-                <ComboBox  Name="ComboBoxCountry" IsEditable="True" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Countries}" HorizontalAlignment="Left">
+                <ComboBox  Name="ComboBoxCountry" IsEditable="True" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Countries}" HorizontalAlignment="Left">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding LoadCitiesCommand}"/>
@@ -85,7 +84,7 @@
 
             <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical" Margin="15,0,0,0">
                 <Label Name="CityLabel" Content="City: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
-                <ComboBox  Name="ComboBoxCity" IsEditable="True" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Cities}" HorizontalAlignment="Left">
+                <ComboBox  Name="ComboBoxCity" IsEditable="True" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Cities}" HorizontalAlignment="Left">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding FilterReservationsCommand}"/>
@@ -99,7 +98,7 @@
 
             <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Vertical" Margin="15,0,0,0" >
                 <Label Name="TypeLabel" Content="Type: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
-                <ComboBox  Name="ComboBoxType" IsEditable="True" Text="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Types}" HorizontalAlignment="Left">
+                <ComboBox  Name="ComboBoxType" IsEditable="True" SelectedItem="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Types}" HorizontalAlignment="Left">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding FilterReservationsCommand}"/>
@@ -156,10 +155,6 @@
                                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                                         <TextBlock TextWrapping="Wrap" Text="End date:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
                                         <TextBlock TextWrapping="Wrap" Text="{Binding EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
-                                    </StackPanel>
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                        <TextBlock TextWrapping="Wrap" Text="Is this reservation reviewed:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                                        <TextBlock TextWrapping="Wrap" Text="{Binding IsReviewed}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
                                     </StackPanel>
                                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                                         <Button Grid.Column="1" Margin="70,5,0,0" Content="See review" Width="80" Height="25" FontSize="12" FontWeight="Bold" Command="{Binding DataContext.SeeReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}"></Button>
