@@ -184,6 +184,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             OpenAccommodationInfoCommand = new RelayCommand(OpenAccommodationInfoCommand_Execute, OpenAccommodationInfoCommand_CanExecute);
             FilterAccommodationsCommand = new RelayCommand(FilterAccommodationsCommand_Execute);
             LoadCitiesCommand = new RelayCommand(LoadCitiesCommand_Execute);
+            RenovateAccommodationCommand = new RelayCommand(RenovateAccommodationCommand_Execute);
 
             UploadImages();
         }
@@ -254,6 +255,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand? OpenAccommodationInfoCommand { get; }
         public RelayCommand FilterAccommodationsCommand { get; }
         public RelayCommand LoadCitiesCommand { get; }
+        public RelayCommand RenovateAccommodationCommand { get; }
 
         public void CreateNewAccommodationCommand_Execute(object? parameter)
         {
@@ -324,6 +326,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             FilterAccommodations();
             return;
+        }
+
+        public void RenovateAccommodationCommand_Execute(object? parameter)
+        {
+            RenovateAccommodationForm renovateAccommodationForm = new RenovateAccommodationForm(SelectedAccommodation);
+            renovateAccommodationForm.Show();
         }
         #endregion
     }

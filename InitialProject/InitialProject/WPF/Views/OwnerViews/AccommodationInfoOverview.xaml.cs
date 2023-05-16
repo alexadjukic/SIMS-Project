@@ -39,23 +39,11 @@ namespace InitialProject.WPF.Views.OwnerViews
                 this.Close();
             }
 
-            if (e.Key == Key.R && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-            {
-                RenovateAccommodationForm renovateAccommodationForm = new RenovateAccommodationForm();
-                renovateAccommodationForm.Show();
-            }
-
             if (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
                 AccommodationStatisticsOverviewWindow accommodationStatisticsOverviewWindow = new AccommodationStatisticsOverviewWindow();
                 accommodationStatisticsOverviewWindow.Show();
             }
-        }
-
-        private void ButtonRenovate_Click(object sender, RoutedEventArgs e)
-        {
-            RenovateAccommodationForm renovateAccommodationForm = new RenovateAccommodationForm();
-            renovateAccommodationForm.Show();
         }
 
         private void ButtonStatistics1_Click(object sender, RoutedEventArgs e)

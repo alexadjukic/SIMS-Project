@@ -13,6 +13,7 @@
         <KeyBinding Command="{Binding CreateNewAccommodationCommand}" Gesture="CTRL+N" />
         <KeyBinding Command="{Binding OpenAccommodationInfoCommand}" Gesture="CTRL+I" />
         <KeyBinding Command="{Binding CreateNewAccommodationCommand}" Gesture="CTRL+M" />
+        <KeyBinding Command="{Binding RenovateAccommodationCommand}" Gesture="CTRL+R" />
     </Page.InputBindings>
 
     <Page.Resources>
@@ -162,7 +163,7 @@
 
                     <Button Grid.Row="0" Name="ButtonInfo" Content="Info" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0" Command="{Binding OpenAccommodationInfoCommand}"/>
                     <Button Grid.Row="1" Name="ButtonCreateNew" Content="Create new" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0" Command="{Binding CreateNewAccommodationCommand}"/>
-                    <Button Grid.Row="2" Name="ButtonRenovate" Content="Renovate" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0" Click="ButtonRenovate_Click" IsEnabled="False"/>
+                    <Button Grid.Row="2" Name="ButtonRenovate" Content="Renovate" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0" Command="{Binding RenovateAccommodationCommand}" IsEnabled="False"/>
                     <Button Grid.Row="3" Name="ButtonStatistics" Content="Statistics" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0" Click="ButtonStatistics_Click" IsEnabled="False"/>
                     <Button Grid.Row="4" Name="ButtonDelete" Content="Delete" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0" IsEnabled="False"/>
                 </Grid>

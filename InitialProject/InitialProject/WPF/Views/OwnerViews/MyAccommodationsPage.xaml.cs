@@ -28,23 +28,8 @@ namespace InitialProject.WPF.Views.OwnerViews
             this.DataContext = new MyAccommodationsPageViewModel(this, user);
         }
 
-        private void ButtonRenovate_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataGridAccommodations.SelectedValue != null)
-            {
-                RenovateAccommodationForm renovateAccommodationForm = new RenovateAccommodationForm();
-                renovateAccommodationForm.Show();
-            }        
-        }
-
         private void Page_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.R && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && DataGridAccommodations.SelectedValue != null)
-            {
-                RenovateAccommodationForm renovateAccommodationForm = new RenovateAccommodationForm();
-                renovateAccommodationForm.Show();
-            }
-
             if (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && DataGridAccommodations.SelectedValue != null)
             {
                 AccommodationStatisticsOverviewWindow accommodationStatisticsOverviewWindow = new AccommodationStatisticsOverviewWindow();
