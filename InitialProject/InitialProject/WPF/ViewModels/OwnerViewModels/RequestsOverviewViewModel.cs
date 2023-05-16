@@ -33,12 +33,91 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _guestName;
+        public string GuestName
+        {
+            get => _guestName;
+            set
+            {
+
+                if (value != _guestName)
+                {
+                    _guestName = value;
+                    OnPropertyChanged("GuestName");
+                }
+            }
+        }
+
+        private string _accommodationName;
+        public string AccommodationName
+        {
+            get => _accommodationName;
+            set
+            {
+
+                if (value != _accommodationName)
+                {
+                    _accommodationName = value;
+                    OnPropertyChanged("AccommodationName");
+                }
+            }
+        }
+
+        private string _city;
+        public string City
+        {
+            get => _city;
+            set
+            {
+                if (value != _city)
+                {
+                    _city = value;
+                    OnPropertyChanged("City");
+                }
+            }
+        }
+
+        private string _country;
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    OnPropertyChanged("Country");
+                }
+            }
+        }
+
+        private string _type;
+
+        public string Type
+        {
+            get => _type;
+            set
+            {
+                if (value != _type)
+                {
+                    _type = value;
+                    OnPropertyChanged("Type");
+                }
+            }
+        }
+
         public static ObservableCollection<Request> Requests { get; set; }
 
         private readonly RequestService _requestService;
         private readonly ManageRequestService _manageRequestService;
         private readonly AccommodationNotificationService _accommodationNotificationService;
+        private readonly LocationService _locationService;
+
         private readonly int _ownerId;
+
+        public List<String> Countries { get; set; }
+        public ObservableCollection<String> Cities { get; set; }
+        public ObservableCollection<String> Types { get; set; }
         #endregion
 
         public RequestsOverviewViewModel(int ownerId)
@@ -46,14 +125,37 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _requestService = new RequestService();
             _manageRequestService = new ManageRequestService();
             _accommodationNotificationService = new AccommodationNotificationService();
+            _locationService = new LocationService();
+
             _ownerId = ownerId;
 
             Requests = new ObservableCollection<Request>();
+            Countries = new List<String>();
+            Cities = new ObservableCollection<String>();
+            Types = new ObservableCollection<String>();
+
+            FillInTypes();
+            AccommodationRegistrationLoaded();
             LoadOnHoldRequests();
+            
 
             DeclineRequestCommand = new RelayCommand(DeclineRequestCommand_Execute, DeclineRequestCommand_CanExecute);
             AcceptedRequestCommand = new RelayCommand(AcceptedRequestCommand_Execute, AcceptedRequestCommand_CanExecute);
-            
+            FilterReservationsCommand = new RelayCommand(FilterReservationsCommand_Execute);
+            LoadCitiesCommand = new RelayCommand(LoadCitiesCommand_Execute);
+        }
+
+        public void FillInTypes()
+        {
+            Types.Clear();
+            Types.Add("apartment");
+            Types.Add("house");
+            Types.Add("cottage");
+        }
+
+        private void AccommodationRegistrationLoaded()
+        {
+            Countries = _locationService.GetAllCountries().ToList();
         }
 
         public void LoadOnHoldRequests()
@@ -69,9 +171,29 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private void FilterRequests()
+        {
+            Requests.Clear();
+
+            foreach (var request in _requestService.GetRequestsByOwnerId(_ownerId))
+            {
+                if ((GuestName == null || request.Reservation.Guest.Username.ToUpper().Contains(GuestName.ToUpper())) &&
+                    (AccommodationName == null || request.Reservation.Accommodation.Name.ToUpper().Contains(AccommodationName.ToUpper())) &&
+                    (Type == null || request.Reservation.Accommodation.Type.ToString().ToUpper().Contains(Type.ToUpper())) &&
+                    (City == null || request.Reservation.Accommodation.Location.City.ToString().ToUpper().Contains(City.ToUpper())) &&
+                    (Country == null || request.Reservation.Accommodation.Location.Country.ToString().ToUpper().Contains(Country.ToUpper())))
+                {
+                    Requests.Add(request);
+                }
+
+            }
+        }
+
         #region COMMANDS
         public RelayCommand DeclineRequestCommand { get; }
         public RelayCommand AcceptedRequestCommand { get; }
+        public RelayCommand FilterReservationsCommand { get; }
+        public RelayCommand LoadCitiesCommand { get; }
 
         public bool DeclineRequestCommand_CanExecute(object? parameter)
         {
@@ -100,6 +222,26 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             RequestDeclinedForm requestDeclinedForm = new RequestDeclinedForm(SelectedRequest, _ownerId);
             requestDeclinedForm.Show();
+        }
+
+        public void FilterReservationsCommand_Execute(object? parameter)
+        {
+            FilterRequests();
+        }
+
+        public void LoadCitiesCommand_Execute(object? parameter)
+        {
+            Cities.Clear();
+            foreach (var location in _locationService.GetAll())
+            {
+                if (location.Country != Country) continue;
+                Cities.Add(location.City);
+            }
+
+            Requests.Clear();
+
+            FilterRequests();
+            return;
         }
         #endregion
     }

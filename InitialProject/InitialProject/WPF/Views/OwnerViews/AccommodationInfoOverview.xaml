@@ -5,50 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
         mc:Ignorable="d"
-        Title="AccommodationInfoOverview" Height="450" Width="400" WindowStartupLocation="CenterScreen">
+        Title="AccommodationInfoOverview" Height="450" Width="400" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding NextImageCommand}" Gesture="Right" />
+        <KeyBinding Command="{Binding NextImageCommand}" Gesture="CTRL+N" />
+        <KeyBinding Command="{Binding PreviousImageCommand}" Gesture="Left" />
+        <KeyBinding Command="{Binding PreviousImageCommand}" Gesture="CTRL+P" />
+    </Window.InputBindings>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/OwnerDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="19*"/>
             <RowDefinition Height="30*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="{StaticResource Background}">
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Accommodation name:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Name}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="Accommodation name:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Name}" TextAlignment="Left" Margin="30,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.Country}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.Country}" TextAlignment="Left" Margin="112,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.City}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.City}" TextAlignment="Left" Margin="136,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Type:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Type}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="Type:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Type}" TextAlignment="Left" Margin="131,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Min days for reservation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.MinDaysForStay}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="Min days for reservation:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.MinDaysForStay}" TextAlignment="Left" Margin="19,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Min days before cancel:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.MinDaysBeforeCancel}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="Min days before cancel:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.MinDaysBeforeCancel}" TextAlignment="Left" Margin="28,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock TextWrapping="Wrap" Text="Max number of guests:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Capacity}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
+                <TextBlock TextWrapping="Wrap" Text="Max number of guests:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Capacity}" TextAlignment="Left" Margin="31,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
         </StackPanel>
 
         <Separator Grid.ColumnSpan="3" Grid.Row="1" VerticalAlignment="Top" Background="Black"/>
-
-        <StackPanel Grid.Row="1" Grid.Column="0">
-            
-        </StackPanel>
 
         <Separator Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Background="Black"/>
 
@@ -56,7 +68,7 @@
             
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="0">
+        <StackPanel Grid.Row="1" Grid.Column="0" Background="{StaticResource BackgroundWindow}">
             <Image Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Margin="27,27,27,20" Height="130"/>
 
             <StackPanel Orientation="Horizontal">
@@ -73,18 +85,18 @@
 
         <Separator Grid.ColumnSpan="3" Grid.Row="2" VerticalAlignment="Top" Background="Black"/>
 
-        <Grid  Grid.Row="2" Grid.ColumnSpan="3" Background="#FF0262E6">
+        <Grid  Grid.Row="2" Grid.ColumnSpan="3" Background="{StaticResource Background}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            
-            <Button Name="ButtonClose" Grid.Column="0" Margin="10,20,10,20" Content="Close" FontSize="17" FontWeight="Bold" Click="ButtonClose_Click"/>
-            <Button Grid.Column="1" Name="ButtonRenovate1" Content="Renovate" FontSize="17" FontWeight="Bold" Width="80" Margin="10,20,10,20"/>
-            <Button Grid.Column="2" Name="ButtonStatistics1" Content="Statistics" FontSize="17" FontWeight="Bold" Width="80" Margin="10,20,10,20"/>
-            <Button Grid.Column="3" Name="ButtonDelete1" Content="Delete" FontSize="17" FontWeight="Bold" Width="80" Margin="10,20,10,20"/>
+
+            <Button Name="ButtonClose" Grid.Column="0" Height="25" Width="80" Content="Close" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Click="ButtonClose_Click"/>
+            <Button Grid.Column="1" Name="ButtonRenovate" Content="Renovate" Height="25" Width="80" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Click="ButtonRenovate_Click"/>
+            <Button Grid.Column="2" Name="ButtonStatistics1" Content="Statistics" FontSize="12" FontWeight="Bold" Height="25" Width="80" HorizontalAlignment="Center" Click="ButtonStatistics1_Click" />
+            <Button Grid.Column="3" Name="ButtonDelete1" Content="Delete" FontSize="12" FontWeight="Bold" Height="25" Width="80" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>

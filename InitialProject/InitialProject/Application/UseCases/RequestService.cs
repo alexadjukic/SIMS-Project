@@ -114,5 +114,22 @@ namespace InitialProject.Application.UseCases
 
             return requests;
         }
+
+        internal IEnumerable<Request> GetRequestsByOwnerId(int ownerId)
+        {
+            var requests = GetOnHoldRequests();
+
+            List<Request> requestsByOwnerId = new List<Request>();
+
+            foreach (var request in requests)
+            {
+                if (request.Reservation.Accommodation.OwnerId == ownerId)
+                {
+                    requestsByOwnerId.Add(request);
+                }
+            }
+
+            return requestsByOwnerId;
+        }
     }
 }

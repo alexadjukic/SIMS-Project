@@ -1,6 +1,4 @@
-﻿using InitialProject.Domain.Models;
-using InitialProject.WPF.ViewModels.OwnerViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,17 +15,16 @@ using System.Windows.Shapes;
 namespace InitialProject.WPF.Views.OwnerViews
 {
     /// <summary>
-    /// Interaction logic for RatingOverviewWindow.xaml
+    /// Interaction logic for AccommodationStatisticsOverviewWindow.xaml
     /// </summary>
-    public partial class RatingOverviewWindow : Window
+    public partial class AccommodationStatisticsOverviewWindow : Window
     {
-        public RatingOverviewWindow(AccommodationReservation selectedAccommodationReservation)
+        public AccommodationStatisticsOverviewWindow()
         {
             InitializeComponent();
-            this.DataContext = new RatingOverviewWindowViewModel(selectedAccommodationReservation);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

@@ -9,10 +9,23 @@
       d:DesignHeight="550" d:DesignWidth="700"
       Title="MyReservationsOverviewPage">
 
+    <Page.InputBindings>
+        <KeyBinding Command="{Binding SeeReviewCommand}" Gesture="CTRL+S"/>
+        <KeyBinding Command="{Binding ReviewCommand}" Gesture="CTRL+R" />
+    </Page.InputBindings>
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/OwnerDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="50*"/>
+            <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -23,20 +36,18 @@
         <Grid Grid.Row="0" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
-                <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="140"/>
-                <ColumnDefinition Width="140"/>
-                <ColumnDefinition Width="140"/>
-                <ColumnDefinition Width="140"/>
-                <ColumnDefinition Width="140"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-                <Label Name="GuestName" Content="Guest name:" HorizontalAlignment="Left"></Label>
+                <Label Name="GuestName" Content="Guest name:" HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
                 <TextBox Name="GuestNameSearch" TextWrapping="Wrap" Text="{Binding Path=GuestName, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="100" HorizontalAlignment="Left">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
@@ -47,7 +58,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                <Label Name="AccommodationName" Content="Accommodation name: " HorizontalAlignment="Left"></Label>
+                <Label Name="AccommodationName" Content="Accommodation name: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
                 <TextBox Name="AccommodationNameSearch" TextWrapping="Wrap" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}" Height="25" Width="100" HorizontalAlignment="Left">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
@@ -58,7 +69,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical" Margin="15,0,0,0">
-                <Label Name="CountryLabel" Content="Country: " HorizontalAlignment="Left"></Label>
+                <Label Name="CountryLabel" Content="Country: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
                 <ComboBox  Name="ComboBoxCountry" IsEditable="True" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Countries}" HorizontalAlignment="Left">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -72,7 +83,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical" Margin="15,0,0,0">
-                <Label Name="CityLabel" Content="City: " HorizontalAlignment="Left"></Label>
+                <Label Name="CityLabel" Content="City: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
                 <ComboBox  Name="ComboBoxCity" IsEditable="True" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Cities}" HorizontalAlignment="Left">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -85,8 +96,8 @@
                 </ComboBox>
             </StackPanel>
 
-            <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Vertical" Margin="15,0,0,0">
-                <Label Name="TypeLabel" Content="Type: " HorizontalAlignment="Left"></Label>
+            <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Vertical" Margin="15,0,0,0" >
+                <Label Name="TypeLabel" Content="Type: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
                 <ComboBox  Name="ComboBoxType" IsEditable="True" SelectedItem="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Types}" HorizontalAlignment="Left">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -100,62 +111,64 @@
             </StackPanel>
         </Grid>
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding Path=AccommodationReservations, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Margin="5">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="110">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="350"/>
-                            <ColumnDefinition Width="350"/>
-                            <ColumnDefinition Width="600"/>
-                        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource GroupBox}" Header="My reservations">
+            <ListBox Grid.Row="1" ItemContainerStyle="{StaticResource ListBoxItem}" ItemsSource="{Binding Path=AccommodationReservations, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" SelectedItem="{Binding SelectedReservation, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" Margin="5">
 
-                        <StackPanel Grid.Column="0">
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding Guest.Username}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding Accommodation.Name}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding Accommodation.Location.Country}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding Accommodation.Location.City}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="Type:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding Accommodation.Type}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                            </StackPanel>
-                        </StackPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border>
+                            <Grid Height="110">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10*" MinWidth="250"/>
+                                    <ColumnDefinition Width="10*" MinWidth="250"/>
+                                    <ColumnDefinition Width="800"/>
+                                </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="1">
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="Start date:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="End date:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="Is this reservation reviewed:" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13" FontWeight="Bold"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding IsReviewed}" TextAlignment="Left" Margin="5,0,0,0" Height="19" FontSize="13"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <Button Grid.Column="1" Margin="70,5,0,0" Content="See review" Width="105" Height="30" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.SeeReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}"></Button>
-                                <Button Grid.Column="1" Margin="20,5,0,0" Content="Review" Width="105" FontSize="20" FontWeight="Bold" Command="{Binding DataContext.ReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
-                            </StackPanel>
-                        </StackPanel>
+                                <StackPanel Grid.Column="0">
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,10,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Guest.Username}" TextAlignment="Left" Margin="5,10,0,0" Style="{StaticResource BasicTextBlock}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Accommodation.Name}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Accommodation.Location.Country}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Accommodation.Location.City}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock TextWrapping="Wrap" Text="Type:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Accommodation.Type}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                                    </StackPanel>
+                                </StackPanel>
 
-                        <Separator Grid.ColumnSpan="3" VerticalAlignment="Top" Background="Black"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                <StackPanel Grid.Column="1">
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock TextWrapping="Wrap" Text="Start date:" TextAlignment="Left" Margin="5,10,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,10,0,0" Style="{StaticResource BasicTextBlock}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock TextWrapping="Wrap" Text="End date:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <Button Grid.Column="1" Margin="70,5,0,0" Content="See review" Width="80" Height="25" FontSize="12" FontWeight="Bold" Command="{Binding DataContext.SeeReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}"></Button>
+                                        <Button Grid.Column="1" Margin="20,5,0,0" Content="Review" Width="80" Height="25" FontSize="12" FontWeight="Bold" Command="{Binding DataContext.ReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <Separator Grid.ColumnSpan="3" VerticalAlignment="Top" Background="Black"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+        
     </Grid>
 </Page>
