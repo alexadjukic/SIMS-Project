@@ -127,6 +127,13 @@
     <!--#endregion-->
     
     <!--#region DataGridStyle-->
+    <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
+        <Setter Property="IsReadOnly" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Width" Value="430" />
+        <Setter Property="Height" Value="100" />
+    </Style>
+    
     <Style x:Key="DataGridRowStyle" TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="{StaticResource Background}" />
         <Setter Property="Foreground" Value="{StaticResource Foreground}" />
@@ -226,6 +233,16 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="MultilineTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="AcceptsReturn" Value="True" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+        <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
     <!--#endregion-->
 </ResourceDictionary>
