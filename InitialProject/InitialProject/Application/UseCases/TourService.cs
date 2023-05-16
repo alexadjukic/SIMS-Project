@@ -123,5 +123,41 @@ namespace InitialProject.Application.UseCases
             tour.Status = TourStatus.FINISHED;
             _tourRepository.Update(tour);
         }
+
+        public IEnumerable<string> GetCountries()
+        {
+            List<string> countries = new List<string>();
+            foreach (var location in _locationRepository.GetAll())
+            {
+                if (!countries.Contains(location.Country))
+                {
+                    countries.Add(location.Country);
+                }
+            }
+            return countries;
+        }
+
+        public IEnumerable<string> GetCities(string selectedCountry)
+        {
+            List<string> cities = new List<string>();
+            foreach (var location in _locationRepository.GetAll())
+            {
+                if (selectedCountry == location.Country)
+                {
+                    cities.Add(location.City);
+                }
+            }
+            return cities;
+        }
+
+        public IEnumerable<Tour> GetTours()
+        {
+            return _tourRepository.GetAll();
+        }
+
+        public void UpdateTour(Tour tour)
+        {
+            _tourRepository.Update(tour);
+        }
     }
 }

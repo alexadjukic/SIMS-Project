@@ -8,8 +8,8 @@
         Title="Guest2Menu" Height="400" Width="400" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button Command="{Binding LogOutCommand}" Content="Log out" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="71"/>
-        <Button Content="Tours" HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top" Width="170" Click="OpenTours_Click"/>
-        <Button Content="Reserved Tours" HorizontalAlignment="Center" Margin="0,125,0,0" VerticalAlignment="Top" Width="170" Click="OpenReservedTours_Click"/>
+        <Button Command="{Binding ShowToursViewCommand}" Content="Tours" HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top" Width="170"/>
+        <Button Content="Reserved Tours" HorizontalAlignment="Center" Margin="0,125,0,0" VerticalAlignment="Top" Width="170" Command="{Binding ShowReservedToursCommand}"/>
         <Button Content="New Tour Request" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Width="170"/>
         <Button Content="Requested Complexed Tours" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Width="170"/>
         <Button Content="Requested Tours" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Width="170"/>

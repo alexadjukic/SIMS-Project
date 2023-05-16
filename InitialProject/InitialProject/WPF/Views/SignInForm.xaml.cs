@@ -123,10 +123,10 @@ namespace InitialProject.WPF.Views
             }
             else if (user.Role == UserRole.GUEST2)
             {
-                /*Guest2TourOverview guest2TourOverview = new Guest2TourOverview(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, user);
-                guest2TourOverview.Show();*/
-                Guest2Menu guest2Menu = new Guest2Menu(_tourRepository, _locationRepository, _tourImageRepository, _tourReservationRepository, user);
-                guest2Menu.Show();
+                //Guest2Menu guest2Menu = new Guest2Menu(user);
+                //guest2Menu.Show();
+                Guest2TourView guest2TourView = new Guest2TourView(user);
+                guest2TourView.Show();
                 Close();
             }
             else if (user.Role == UserRole.GUIDE)

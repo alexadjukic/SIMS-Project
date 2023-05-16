@@ -5,50 +5,106 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="RateTourAndGuideForm" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        WindowStyle="None"
+        Title="RateTourAndGuideForm" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="Guide's knowledge:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="127" FontWeight="Bold"/>
-        <Label Content="Guide's language:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="127" FontWeight="Bold"/>
-        <Label Content="Interesting:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="127" FontWeight="Bold"/>
-        <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=GuidesKnowledgeGrade, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="142,14,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="1"/>
-            <ComboBoxItem Content="2"/>
-            <ComboBoxItem Content="3"/>
-            <ComboBoxItem Content="4"/>
-            <ComboBoxItem Content="5"/>
-        </ComboBox>
-        <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=InterestingGrade, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="142,78,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="1"/>
-            <ComboBoxItem Content="2"/>
-            <ComboBoxItem Content="3"/>
-            <ComboBoxItem Content="4"/>
-            <ComboBoxItem Content="5"/>
-        </ComboBox>
-        <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=GuidesLanguageGrade, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="142,45,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="1"/>
-            <ComboBoxItem Content="2"/>
-            <ComboBoxItem Content="3"/>
-            <ComboBoxItem Content="4"/>
-            <ComboBoxItem Content="5"/>
-        </ComboBox>
-        <Label Content="Additional comment:" HorizontalAlignment="Left" Margin="359,10,0,0" VerticalAlignment="Top" Width="141" FontWeight="Bold"/>
-        <TextBox Text="{Binding Path=AdditionalComment,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="359,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="391" Height="70"/>
-        <Rectangle HorizontalAlignment="Left" Height="71" Margin="359,35,0,0" Stroke="Black" VerticalAlignment="Top" Width="391"/>
-        <Separator HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" Height="71" Width="640"/>
-        <Image Source="{Binding Path=SelectedImage, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="180" Margin="74,217,0,0" VerticalAlignment="Top" Width="228"/>
-        <Button Command="{Binding PreviousImageCommand}" Name="ButtonPreviousImage" Grid.Column="0" Width="32" Height="32" HorizontalAlignment="Left" Margin="37,269,0,133" BorderBrush="Black" Background="White" IsEnabled="{Binding PreviousButtonIsEnabled}">
-            <Image Source="../../../Resources/Images/left_arrow.png"/>
-        </Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Background="Azure" Grid.Row="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowToursViewCommand}">
+                <TextBlock Text="Tours" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="1" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowReservedToursCommand}">
+                <TextBlock Text="Reserved Tours" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="2" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Regular Tour Requests" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="3" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Complex Tour Requests" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="4" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Statistics" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="5" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowVouchersCommand}">
+                <TextBlock Text="Vouchers" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="6" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding OpenNotificationsCommand}">
+                <TextBlock Text="Notifications" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="7" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Demo" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Background="Azure">
+            <Label Content="Guide's knowledge:" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="240" Height="44.5" FontSize="26" FontWeight="Bold"/>
+            <Label Content="Guide's language:" HorizontalAlignment="Left" Margin="30,71,0,0" VerticalAlignment="Top" Width="240" Height="44.5" FontSize="26" FontWeight="Bold"/>
+            <Label Content="Interesting:" HorizontalAlignment="Left" Margin="30,131,0,0" VerticalAlignment="Top" Width="240" Height="44.5" FontSize="26" FontWeight="Bold"/>
+            <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=GuidesKnowledgeGrade, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="300,10,0,0" VerticalAlignment="Top" Width="100" Height="44.5">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+            <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=InterestingGrade, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="300,71,0,0" VerticalAlignment="Top" Width="100" Height="44.5">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+            <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=GuidesLanguageGrade, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="300,132,0,0" VerticalAlignment="Top" Width="100" Height="44.5">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="4"/>
+                <ComboBoxItem Content="5"/>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Background="Azure">
+            <Label Content="Additional comment:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"  Width="270" Height="44.5" FontSize="26" FontWeight="Bold"/>
+            <TextBox Text="{Binding Path=AdditionalComment,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="450" Height="120"/>
+            <Rectangle HorizontalAlignment="Left" Height="120" Margin="10,55,0,0" Stroke="Black" VerticalAlignment="Top" Width="450"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="Azure">
+            <Separator  HorizontalAlignment="Left" Margin="71,5,0,0" VerticalAlignment="Top" Height="70" Width="876"/>
+            <Image Source="{Binding Path=SelectedImage, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="200" Margin="80,100,0,0" VerticalAlignment="Top" Width="250"/>
+            <Button Command="{Binding PreviousImageCommand}" Name="ButtonPreviousImage" Width="32" Height="32" HorizontalAlignment="Left" Margin="40,170,0,133" BorderBrush="Black" Background="White" IsEnabled="{Binding PreviousButtonIsEnabled}">
+                <Image Source="../../../Resources/Images/left_arrow.png"/>
+            </Button>
+            <Button Command="{Binding NextImageCommand}" Name="ButtonNextImage" Width="32" Height="32" HorizontalAlignment="Right" Margin="0,170,635,133" BorderBrush="Black" Background="White" IsEnabled="{Binding NextButtonIsEnabled}">
+                <Image Source="../../../Resources/Images/right_arrow.png"></Image>
+            </Button>
 
-        <Button Command="{Binding NextImageCommand}" Name="ButtonNextImage" Width="32" Height="32" HorizontalAlignment="Right" Margin="0,269,461,133" BorderBrush="Black" Background="White" IsEnabled="{Binding NextButtonIsEnabled}">
-            <Image Source="../../../Resources/Images/right_arrow.png"></Image>
-        </Button>
-        <Label Content="Image URL:" HorizontalAlignment="Left" Margin="359,226,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold"/>
-        <TextBlock Text="{Binding Path=ImageUrl, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="359,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="391"/>
-        <Rectangle HorizontalAlignment="Left" Height="24" Margin="359,252,0,0" Stroke="Black" VerticalAlignment="Top" Width="391"/>
-        <Button Command ="{Binding CancelRatingCommand}" Content="Cancel" HorizontalAlignment="Left" Margin="386,351,0,0" VerticalAlignment="Top" Width="88" FontWeight="Bold"/>
-        <Button Command="{Binding AddImageCommand}" Content="Add image" HorizontalAlignment="Left" Margin="662,281,0,0" VerticalAlignment="Top" Width="88" FontWeight="Bold"/>
-        <Button Command="{Binding RateTourAndGuideCommand}" Content="Rate" HorizontalAlignment="Left" Margin="530,351,0,0" VerticalAlignment="Top" Width="88" FontWeight="Bold"/>
-        <Button Command="{Binding RemoveImageCommand}" Content="Remove image" HorizontalAlignment="Left" Margin="541,281,0,0" VerticalAlignment="Top" Width="101" FontWeight="Bold" IsEnabled="{Binding RemoveImageIsEnabled}"/>
+            <Label Content="Image URL:" HorizontalAlignment="Left" Margin="440,150,0,0" VerticalAlignment="Top" Width="270" Height="44.5" FontSize="26" FontWeight="Bold"/>
+            <TextBlock Background="White" Text="{Binding Path=ImageUrl, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="440,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="450"/>
+            <Rectangle HorizontalAlignment="Left" Height="40" Margin="440,190,0,0" Stroke="Black" VerticalAlignment="Top" Width="450"/>
+            <Button Command="{Binding AddImageCommand}" Content="Add image" HorizontalAlignment="Left" Margin="740,240,0,0" VerticalAlignment="Top" Width="150" FontSize="20" FontWeight="Bold"/>
+            <Button Command="{Binding RemoveImageCommand}" Content="Remove image" HorizontalAlignment="Left" Margin="570,240,0,0" VerticalAlignment="Top" Width="150" FontSize="20" FontWeight="Bold" IsEnabled="{Binding RemoveImageIsEnabled}"/>
+            <Separator  HorizontalAlignment="Left" Margin="56,314,0,0" VerticalAlignment="Top" Height="70" Width="876"/>
+        </Grid>
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Background="Azure">
+            <Button Command="{Binding RateTourAndGuideCommand}" Content="Rate" HorizontalAlignment="Right" Margin="0,30,95,0" VerticalAlignment="Top" FontSize="20" Width="150" FontWeight="Bold"/>
+            <Button Command ="{Binding CancelRatingCommand}" Content="Cancel" HorizontalAlignment="Left" Margin="95,30,0,0" VerticalAlignment="Top" FontSize="20" Width="150" FontWeight="Bold"/>
+        </Grid>
     </Grid>
 </Window>

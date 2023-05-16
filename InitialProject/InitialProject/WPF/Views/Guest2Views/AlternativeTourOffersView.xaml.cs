@@ -3,7 +3,10 @@ using InitialProject.Repositories;
 using InitialProject.WPF.ViewModels.Guest2ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,17 +18,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace InitialProject.WPF.Views.Guest2Views
+namespace InitialProject.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for Guest2Menu.xaml
+    /// Interaction logic for AlternativeTourOffers.xaml
     /// </summary>
-    public partial class Guest2Menu : Window
+    public partial class AlternativeTourOffersView : Window
     {
-        public Guest2Menu(User user)
+        public AlternativeTourOffersView(User loggedUser, Tour previouslySelectedTour)
         {
             InitializeComponent();
-            this.DataContext = new MenuViewModel(this, user);
+            this.DataContext = new AlternativeTourOffersViewModel(this, loggedUser, previouslySelectedTour);
         }
     }
 }
