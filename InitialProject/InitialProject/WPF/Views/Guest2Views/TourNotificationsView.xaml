@@ -5,14 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="TourNotifications" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        WindowStyle="None"
+        Title="TourNotifications" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="DataGridTours" ItemsSource="{Binding TourNotifications, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedNotification, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="190,33,223,56">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="200" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Status" Width="200" Binding="{Binding Status}" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Command="{Binding ViewNotificationCommand}" Content="View" HorizontalAlignment="Left" Margin="336,383,0,0" VerticalAlignment="Top" Width="96" FontWeight="Bold"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="Azure">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowToursViewCommand}">
+                <TextBlock Text="Tours" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="1" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowReservedToursCommand}">
+                <TextBlock Text="Reserved Tours" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="2" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Regular Tour Requests" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="3" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Complex Tour Requests" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="4" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Statistics" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="5" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowVouchersCommand}">
+                <TextBlock Text="Vouchers" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="6" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding OpenNotificationsCommand}">
+                <TextBlock Text="Notifications" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="7" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Demo" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Background="Azure">
+            <DataGrid x:Name="DataGridTours" ItemsSource="{Binding TourNotifications, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedNotification, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="50,30,50,50">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="2" Background="Azure">
+            <Button Command="{Binding ViewNotificationCommand}" Content="View" Margin="0,22.5,0,0" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Width="120" Height="25" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Window>

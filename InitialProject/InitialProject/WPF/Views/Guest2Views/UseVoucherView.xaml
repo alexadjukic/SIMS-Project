@@ -5,18 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
-        Title="UseVoucher" Height="450" Width="800">
+        WindowStyle="None"
+        Title="UseVoucher" Height="768" Width="1024">
     <Grid>
-        <Grid>
-            <DataGrid x:Name="DataGridTours" ItemsSource="{Binding Vouchers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedVoucher, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="114,46,114,129">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3.5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="Azure">
+            <DataGrid x:Name="DataGridTours" ItemsSource="{Binding Vouchers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedVoucher, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" IsReadOnly="True" Margin="50,50,50,10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="280" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Expiry Date" Width="300" Binding="{Binding ExpiryDate}" />
+                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Expiry Date" Width="*" Binding="{Binding ExpiryDate}" />
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Command="{Binding UseVoucherCommand}" Content="Use" HorizontalAlignment="Left" Margin="514,326,0,0" VerticalAlignment="Top" Height="35" Width="95" FontWeight="Bold"/>
-            <Button Command="{Binding CancelCommand}" Content="Cancel" HorizontalAlignment="Left" Margin="184,326,0,0" VerticalAlignment="Top" Height="35" Width="95" FontWeight="Bold"/>
         </Grid>
-
+        <Grid Grid.Row="1" Background="Azure">
+            <Button Command="{Binding UseVoucherCommand}" Content="Use" HorizontalAlignment="Right" Margin="0,45,90,0" VerticalAlignment="Top" Height="41" Width="120" FontSize="16" FontWeight="Bold"/>
+            <Button Command="{Binding CancelCommand}" Content="Cancel" HorizontalAlignment="Left" Margin="90,45,0,0" VerticalAlignment="Top" Height="41" Width="120" FontSize="16" FontWeight="Bold"/>
+        </Grid>
     </Grid>
 </Window>

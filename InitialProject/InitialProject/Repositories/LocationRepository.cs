@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InitialProject.Repositories
 {
@@ -73,6 +74,7 @@ namespace InitialProject.Repositories
                     return location;
                 }
             }
+            MessageBox.Show("Bukvalno nema tog ida XD");
             return null;
         }
 

@@ -67,5 +67,10 @@ namespace InitialProject.Application.UseCases
                 _tourReservationRepository.Delete(reservation);
             }
         }
+
+        public void SaveReservation(int selectedTourId, int userId, int numberOfGuests, int age)
+        {
+            _tourReservationRepository.Save(selectedTourId, userId, numberOfGuests, age);
+        }
     }
 }

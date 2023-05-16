@@ -1,5 +1,8 @@
 ﻿using InitialProject.Application.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using InitialProject.WPF.Views.Guest2Views;
+using InitialProject.WPF.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,6 +32,11 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             Vouchers = new ObservableCollection<Voucher>();
             _voucherService = new VoucherService();
             LoadVouchers();
+
+            ShowReservedToursCommand = new RelayCommand(ShowReservedToursCommand_Execute);
+            OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
+            ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
+            ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
         }
 
         public void LoadVouchers()
@@ -40,6 +48,40 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
 
         #region COMMANDS
+
+        public RelayCommand ShowToursViewCommand { get; }
+        public RelayCommand ShowReservedToursCommand { get; }
+        public RelayCommand OpenNotificationsCommand { get; }
+        public RelayCommand ShowVouchersCommand { get; }
+
+        public void OpenNotificationsCommand_Execute(object? parameter)
+        {
+            TourNotificationsView tourNotificationsView = new TourNotificationsView(LoggedUser);
+            tourNotificationsView.Show();
+            _vouchersView.Close();
+        }
+
+        public void ShowVouchersCommand_Execute(object? parameter)
+        {
+            VouchersView vouchersView = new VouchersView(LoggedUser);
+            vouchersView.Show();
+            _vouchersView.Close();
+        }
+
+        public void ShowReservedToursCommand_Execute(object? parameter)
+        {
+            ReservedToursView reservedToursView = new ReservedToursView(LoggedUser);
+            reservedToursView.Show();
+            _vouchersView.Close();
+        }
+
+        public void ShowToursViewCommand_Execute(object? parameter)
+        {
+            Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
+            guest2TourView.Show();
+            _vouchersView.Close();
+        }
+
         #endregion
     }
 }

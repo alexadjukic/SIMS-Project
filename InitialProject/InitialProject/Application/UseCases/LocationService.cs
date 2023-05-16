@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,18 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Application.UseCases
 {
-    class LocationService
+    public class LocationService
     {
         private readonly ILocationRepository _locationRepository;
 
         public LocationService()
         {
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
+        }
+
+        public IEnumerable<Location> GetLocations()
+        {
+            return _locationRepository.GetAll();
         }
 
         public IEnumerable<Location> GetAll()
@@ -30,6 +36,11 @@ namespace InitialProject.Application.UseCases
         public IEnumerable<string> GetAllCountries()
         {
             return _locationRepository.GetAll().Select(l => l.Country).ToHashSet();
+        }
+
+        public Location GetLocationById(int id)
+        {
+            return _locationRepository.GetById(id);
         }
     }
 }

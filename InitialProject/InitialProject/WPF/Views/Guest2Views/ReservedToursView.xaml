@@ -6,19 +6,65 @@
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         xmlns:cnv="clr-namespace:InitialProject.Converters"
         mc:Ignorable="d"
-        Title="ReservedToursView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        WindowStyle="None"
+        Title="ReservedToursView" Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <cnv:TourStatusConverter x:Key="TourStatusConverter"/>
     </Window.Resources>
     <Grid>
-        <DataGrid x:Name="DataGridTours" ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="10,31,10,59" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="250" Binding="{Binding TourName}"/>
-                <DataGridTextColumn Header="Current Checkpoint" Width="300" Binding="{Binding CheckpointName}" />
-                <DataGridTextColumn Header="Status" Width="250" Binding="{Binding Status, Converter={StaticResource ResourceKey=TourStatusConverter}}" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="46,374,0,0" VerticalAlignment="Top" Width="90" Command="{Binding CloseWindowCommand}"/>
-        <Button Name="ChooseButton" Content="Rate" HorizontalAlignment="Left" Margin="650,374,0,0" VerticalAlignment="Top" Width="90"  Command="{Binding OpenRateTourAndGuideWindowCommand}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5.3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="Azure" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowToursViewCommand}">
+                <TextBlock Text="Tours" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="1" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowReservedToursCommand}">
+                <TextBlock Text="Reserved Tours" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="2" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Regular Tour Requests" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="3" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Complex Tour Requests" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="4" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Statistics" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="5" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowVouchersCommand}">
+                <TextBlock Text="Vouchers" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="6" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding OpenNotificationsCommand}">
+                <TextBlock Text="Notifications" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Button Grid.Column="7" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
+                <TextBlock Text="Demo" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Background="Azure">
+            <DataGrid x:Name="DataGridTours" ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="10,30,10,20" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding TourName}"/>
+                    <DataGridTextColumn Header="Current Checkpoint" Width="*" Binding="{Binding CheckpointName}" />
+                    <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status, Converter={StaticResource ResourceKey=TourStatusConverter}}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="2" Background="Azure">
+            <Button Content="Close" HorizontalAlignment="Left" Margin="90,30,0,0" VerticalAlignment="Top" Width="120" Command="{Binding CloseWindowCommand}" FontSize="16" FontWeight="Bold"/>
+            <Button Name="ChooseButton" Content="Rate" HorizontalAlignment="Right" Margin="0,30,90,0" VerticalAlignment="Top" Width="120" FontSize="16" FontWeight="Bold" Command="{Binding OpenRateTourAndGuideWindowCommand}"/>
+        </Grid>
     </Grid>
 </Window>

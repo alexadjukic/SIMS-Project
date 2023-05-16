@@ -17,26 +17,20 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
     public class MenuViewModel : ViewModelBase
     {
         public User LoggedUser { get; set; }
-        public readonly TourRepository _tourRepository;
-        public readonly LocationRepository _locationRepository;
-        public readonly TourImageRepository _tourImageRepository;
-        public readonly TourReservationRepository _tourReservationRepository;
 
         private readonly Window _guest2MenuView;
         
-        public MenuViewModel(Window guest2MenuView, TourRepository tourRepository, LocationRepository locationRepository, TourImageRepository tourImageRepository, TourReservationRepository tourReservationRepository, User user)
+        public MenuViewModel(Window guest2MenuView, User user)
         {
             _guest2MenuView = guest2MenuView;
-            _tourRepository = tourRepository;
-            _locationRepository = locationRepository;
-            _tourImageRepository = tourImageRepository;
-            _tourReservationRepository = tourReservationRepository;
             LoggedUser = user;
 
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             LogOutCommand = new RelayCommand(LogOutCommand_Execute);
             OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
             ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
+            ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
+            ShowReservedToursCommand = new RelayCommand(ShowReservedToursCommand_Execute);
         }
 
         #region COMMANDS
@@ -44,6 +38,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand LogOutCommand {  get; }
         public RelayCommand OpenNotificationsCommand { get; }
         public RelayCommand ShowVouchersCommand { get; }
+        public RelayCommand ShowToursViewCommand { get; }
+        public RelayCommand ShowReservedToursCommand { get; }
+        
+        public void ShowReservedToursCommand_Execute(object? parameter)
+        {
+            ReservedToursView reservedToursView = new ReservedToursView(LoggedUser);
+            reservedToursView.Show();
+        }
+        public void ShowToursViewCommand_Execute(object? parameter)
+        {
+            Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
+            guest2TourView.Show();
+        }
 
         public void ShowVouchersCommand_Execute(object? parameter)
         {
