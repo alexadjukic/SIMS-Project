@@ -11,7 +11,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface IAccommodationRenovationRepository
     {
         public List<AccommodationRenovation> GetAll();
-        public AccommodationRenovation Save(Accommodation accommodation, DateTime startDate, DateTime endDate, string comment, RenovationStatus status);
+        public AccommodationRenovation Save(Accommodation accommodation, DateTime startDate, DateTime endDate, int renovationLenght, string comment, RenovationStatus status);
         public void SaveAllRenovations();
         public int NextId();
     }

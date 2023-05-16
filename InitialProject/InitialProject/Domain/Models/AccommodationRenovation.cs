@@ -22,18 +22,20 @@ namespace InitialProject.Domain.Models
         int AccommodationId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public int RenovationLength { get; set; }
         public string Comment { get; set; }
         public RenovationStatus Status { get; set; }
 
         public AccommodationRenovation() { }
 
-        public AccommodationRenovation(int id, Accommodation accommodation, DateTime startDate, DateTime endDate, string comment, RenovationStatus status)
+        public AccommodationRenovation(int id, Accommodation accommodation, DateTime startDate, DateTime endDate, int renovationLenght, string comment, RenovationStatus status)
         {
             Id = id;
             Accommodation = accommodation;
             AccommodationId = accommodation.Id;
             StartDate = startDate;
             EndDate = endDate;
+            RenovationLength = renovationLenght;
             Comment = comment;
             Status = status;
         }
@@ -46,6 +48,7 @@ namespace InitialProject.Domain.Models
                 AccommodationId.ToString(),
                 StartDate.ToString(),
                 EndDate.ToString(),
+                RenovationLength.ToString(),
                 Comment,
                 Status.ToString()
             };
@@ -59,8 +62,9 @@ namespace InitialProject.Domain.Models
             AccommodationId = Convert.ToInt32(values[1]);
             StartDate = DateTime.Parse(values[2]);
             EndDate = DateTime.Parse(values[3]);
-            Comment = values[4];
-            switch(values[5])
+            RenovationLength = Convert.ToInt32(values[4]);
+            Comment = values[5];
+            switch(values[6])
             {
                 case "NOT_STARTED":
                     Status = RenovationStatus.NOT_STARTED;

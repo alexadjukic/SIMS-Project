@@ -131,5 +131,10 @@ namespace InitialProject.Application.UseCases
             ownerReservations = LoadAccommodations(ownerReservations);
             return ownerReservations;
         }
+
+        internal IEnumerable<AccommodationReservation> GetByAccommodationId(int accommodationId)
+        {
+            return _accommodationReservationRepository.GetAll().FindAll(ar => ar.AccommodationId == accommodationId);
+        }
     }
 }

@@ -57,35 +57,41 @@
             <Grid Grid.Row="0" Grid.Column="0" Margin="20,10,20,0">
                 <StackPanel HorizontalAlignment="Left">
                     <Label Name="Label_From" Content="From:" Style="{StaticResource BasicLabel}"/>
-                    <Calendar Name="Calendar_FromDate" HorizontalAlignment="Right"/>
+                    <Calendar Name="Calendar_FromDate" HorizontalAlignment="Right"  SelectedDate="{Binding Path=SelectedStartDate}"/>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="1" Margin="20,10,20,0">
                 <StackPanel HorizontalAlignment="Left">
                     <Label Name="Label_To" Content="To:" Style="{StaticResource BasicLabel}"/>
-                    <Calendar Name="Calendar_ToDate"/>
+                    <Calendar Name="Calendar_ToDate" SelectedDate="{Binding Path=SelectedEndDate}"/>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Row="1" Grid.Column="0" Margin="20,10,20,0">
                 <StackPanel HorizontalAlignment="Left">
                     <Label Name="Label_DurationOfRenovation" Content="Duration of renovation:" Style="{StaticResource BasicLabel}"/>
-                    <TextBox x:Name="TextBox_DurationOfRenovation" Text="" Style="{StaticResource ValidationTemplateTextBox}" Width="179"/>
+                    <TextBox x:Name="TextBox_DurationOfRenovation" Text="{Binding Path=LenghtOfRenovation}" Style="{StaticResource ValidationTemplateTextBox}" Width="179"/>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Row="1" Grid.Column="1" Margin="20,10,20,0">
-                <Button Name="Button_CheckAvailableDates" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Check available dates" Style="{StaticResource CloseButton}" Width="179" Height="44"/>
+                <Button Name="Button_CheckAvailableDates" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Check available dates" Style="{StaticResource CloseButton}" Width="179" Height="44" Command="{Binding SearchDatesCommand}"/>
             </Grid>
 
             <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="20,10,20,0">
                 <StackPanel>
                     <Label Name="Label_AvailableDates" Content="Available dates:" Style="{StaticResource BasicLabel}"/>
-                    <DataGrid x:Name="DataGrid_AvailableDates" Style="{StaticResource DataGridStyle}" DataGrid.ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" DataGrid.RowStyle="{StaticResource DataGridRowStyle}" DataGrid.CellStyle="{StaticResource DataGridCellStyle}">
+                    <!--<DataGrid x:Name="DataGrid_AvailableDates" ItemsSource="{Binding AvailableDates, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource DataGridStyle}"  DataGrid.ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" DataGrid.RowStyle="{StaticResource DataGridRowStyle}" DataGrid.CellStyle="{StaticResource DataGridCellStyle}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="From" Width="*"/>
-                            <DataGridTextColumn Header="To" Width="*"/>
+                            <DataGridTextColumn Binding="{Binding StartDate, Mode=OneWay, StringFormat={}{0:dd.MM.yyyy}}" Header="From" Width="*"/>
+                            <DataGridTextColumn Binding="{Binding EndDate, Mode=OneWay, StringFormat={}{0:dd.MM.yyyy}}" Header="To" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>-->
+                    <DataGrid Name="DateDataGrid" ItemsSource="{Binding AvailableDates, UpdateSourceTrigger=PropertyChanged}" Width="430" HorizontalAlignment="Left" DataGrid.ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" DataGrid.RowStyle="{StaticResource DataGridRowStyle}" DataGrid.CellStyle="{StaticResource DataGridCellStyle}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAvailableDate}" CanUserAddRows="False" Validation.ErrorTemplate="{x:Null}" Height="210">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding StartDate, Mode=OneWay, StringFormat={}{0:dd.MM.yyyy}}" Header="From" Width="*"/>
+                            <DataGridTextColumn Binding="{Binding EndDate, Mode=OneWay, StringFormat={}{0:dd.MM.yyyy}}" Header="To" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -94,7 +100,7 @@
             <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,10,20,0">
                 <StackPanel>
                     <Label Name="Label_DescriptionOfRenovation" Content="Description of renovation:" Style="{StaticResource BasicLabel}"/>
-                    <TextBox x:Name="TextBox_DescriptionOfRenovation" Style="{StaticResource MultilineTextBox}" Height="70" Width="430"/>
+                    <TextBox x:Name="TextBox_DescriptionOfRenovation" Style="{StaticResource MultilineTextBox}" Text="{Binding Path=Description}" Height="70" Width="430"/>
                 </StackPanel>
             </Grid>
             
@@ -110,7 +116,7 @@
             
             
             <Button Name="Button_Close" Grid.Column="1" Style="{StaticResource CloseButton}" HorizontalAlignment="Center" Content="Close" Click="Button_Close_Click"/>
-            <Button Name="Button_Schedule_Renovation" Style="{StaticResource CloseButton}" Grid.Column="2" HorizontalAlignment="Center" Content="Schedule" />
+            <Button Name="Button_Schedule_Renovation" Style="{StaticResource CloseButton}" Grid.Column="2" HorizontalAlignment="Center" Content="Schedule" Command="{Binding ScheduleRenovationCommand}" />
             <Button Name="Button_See_All" Style="{StaticResource CloseButton}" Grid.Column="3" HorizontalAlignment="Center" Content="See all" />
         </Grid>
     </Grid>
