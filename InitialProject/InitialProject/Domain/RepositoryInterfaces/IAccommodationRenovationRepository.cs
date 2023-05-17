@@ -14,5 +14,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public AccommodationRenovation Save(Accommodation accommodation, DateTime startDate, DateTime endDate, int renovationLenght, string comment, RenovationStatus status);
         public void SaveAllRenovations();
         public int NextId();
+        public AccommodationRenovation Update(AccommodationRenovation accommodationRenovation);
     }
 }

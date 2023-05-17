@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.Models;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
 using System;
@@ -33,6 +34,8 @@ namespace InitialProject.WPF.Views.Guest1Views
         public readonly LocationRepository _locationRepository;
         public readonly AccommodationReservationRepository _accommodationReservationRepository;
         public readonly UserRepository _userRepository;
+
+        private readonly AccommodationRenovationService _accommodationRenovationService;
 
         public User LoggedUser { get; set; }
 
@@ -165,6 +168,9 @@ namespace InitialProject.WPF.Views.Guest1Views
             _accommodationImageRepository = accommodationImageRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
             _userRepository = userRepository;
+
+            _accommodationRenovationService = new AccommodationRenovationService();
+
             LoggedUser = user;
             SelectedAccommodation = selectedAccommodation;
             AvailableDates = new ObservableCollection<AvailableDate>();
@@ -229,6 +235,14 @@ namespace InitialProject.WPF.Views.Guest1Views
             foreach (var accommodationReservation in _accommodationReservationRepository.GetAll())
             {
                 if (FindDatesBetween(accommodationReservation.StartDate, accommodationReservation.EndDate).Contains(date) && accommodationReservation.AccommodationId == SelectedAccommodation.Id)
+                {
+                    dates.Remove(date);
+                }
+            }
+
+            foreach (var accommodationRenovation in _accommodationRenovationService.GetByAccommodationId(SelectedAccommodation.Id))
+            {
+                if (FindDatesBetween(accommodationRenovation.StartDate, accommodationRenovation.EndDate).Contains(date))
                 {
                     dates.Remove(date);
                 }

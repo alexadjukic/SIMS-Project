@@ -103,7 +103,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void SeeMyRenovationsCommand_Execute(object? parameter)
         {
-            SelectedPage = new MyRenovationsOverviewPage();
+            SelectedPage = new MyRenovationsOverviewPage(_user.Id);
         }
 
         public void SeeMyProfileCommand_Execute(object? parameter)

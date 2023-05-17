@@ -55,5 +55,16 @@ namespace InitialProject.Repositories
 
             return _accommodationRenovations.Max(c => c.Id) + 1;
         }
+
+        public AccommodationRenovation Update(AccommodationRenovation accommodationRenovation)
+        {
+            _accommodationRenovations = _serializer.FromCSV(FilePath);
+            AccommodationRenovation current = _accommodationRenovations.Find(ar => ar.Id == accommodationRenovation.Id);
+            int index = _accommodationRenovations.IndexOf(current);
+            _accommodationRenovations.Remove(current);
+            _accommodationRenovations.Insert(index, accommodationRenovation);
+            _serializer.ToCSV(FilePath, _accommodationRenovations);
+            return accommodationRenovation;
+        }
     }
 }

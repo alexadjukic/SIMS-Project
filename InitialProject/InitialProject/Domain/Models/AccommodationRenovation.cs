@@ -18,8 +18,8 @@ namespace InitialProject.Domain.Models
         }
 
         public int Id { get; set; }
-        Accommodation Accommodation { get; set; }
-        int AccommodationId { get; set; }
+        public Accommodation Accommodation { get; set; }
+        public int AccommodationId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int RenovationLength { get; set; }

@@ -225,7 +225,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 }
             }
 
-            //trebace jos proci i kroz listu renoviranja, da se provere slobodni datumi
+            foreach (var accommodationRenovation in _accommodationRenovationService.GetByAccommodationId(SelectedAccommodation.Id))
+            {
+                if (FindDatesBetween(accommodationRenovation.StartDate, accommodationRenovation.EndDate).Contains(date))
+                {
+                    dates.Remove(date);
+                }
+            }
         }
 
         private List<AvailableDate> FindConnectedDates(List<DateTime> singleDates, DateTime finishEndDate)
@@ -285,6 +291,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         #region COMMANDS
         public RelayCommand SearchDatesCommand { get; }
         public RelayCommand ScheduleRenovationCommand { get; }
+        public RelayCommand SeeAllCommand { get; }
 
         public bool SearchDateCommand_CanExecute(object? parameter)
         {
