@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Domain.Models;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,10 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class AccommodationStatisticsOverviewWindow : Window
     {
-        public AccommodationStatisticsOverviewWindow()
+        public AccommodationStatisticsOverviewWindow(Accommodation selectedAccommodation)
         {
             InitializeComponent();
+            this.DataContext = new AccommodationStatisticsOverviewWindowViewModel(selectedAccommodation);
         }
 
         private void Button_Close_Click(object sender, RoutedEventArgs e)

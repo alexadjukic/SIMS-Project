@@ -49,15 +49,20 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
 
         private readonly Window _reservationChangeView;
+
         private readonly ReservationRequestService _requestService;
         private readonly AccommodationReservationService _accommodationReservationService;
+        private readonly AccommodationYearStatisticsService _accommodationYearStatisticsService;
         #endregion
 
         public ReservationChangeViewModel(Window reservationChangeView, AccommodationReservation selectedReservation)
         {
             _reservationChangeView = reservationChangeView;
+
             _requestService = new ReservationRequestService();
             _accommodationReservationService = new AccommodationReservationService();
+            _accommodationYearStatisticsService = new AccommodationYearStatisticsService();
+
             SelectedReservation = selectedReservation;
 
             RequestDateChangeCommand = new RelayCommand(RequestDateChangeCommand_Execute, RequestDateChangeCommand_CanExecute);
@@ -69,6 +74,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public void RequestDateChangeCommand_Execute(object? parameter)
         {
             _requestService.CreateRequest(SelectedStartDate, SelectedEndDate, SelectedReservation);
+
+            AccommodationYearStatistic yearStatistic = _accommodationYearStatisticsService.FindStatisticForYearAndAccommodation(SelectedReservation.Accommodation.Id, DateTime.Now.Year);
+
+            if (yearStatistic == null)
+            {
+                _accommodationYearStatisticsService.Save(DateTime.Now.Year, SelectedReservation.Accommodation, SelectedReservation.Accommodation.Id, 0, 0, 1, 0);
+            }
+            else
+            {
+                yearStatistic.NumberOfReservations++;
+                _accommodationYearStatisticsService.Update(yearStatistic);
+            }
+
             MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(_reservationChangeView, SelectedReservation.GuestId));
         }
 

@@ -36,6 +36,7 @@ namespace InitialProject.WPF.Views.Guest1Views
         public readonly UserRepository _userRepository;
 
         private readonly AccommodationRenovationService _accommodationRenovationService;
+        private readonly AccommodationYearStatisticsService _accommodationYearStatisticsService;
 
         public User LoggedUser { get; set; }
 
@@ -170,6 +171,7 @@ namespace InitialProject.WPF.Views.Guest1Views
             _userRepository = userRepository;
 
             _accommodationRenovationService = new AccommodationRenovationService();
+            _accommodationYearStatisticsService = new AccommodationYearStatisticsService();
 
             LoggedUser = user;
             SelectedAccommodation = selectedAccommodation;
@@ -344,6 +346,19 @@ namespace InitialProject.WPF.Views.Guest1Views
             if (!IsMakeReservationInputValid()) return;
 
             _accommodationReservationRepository.Save(SelectedAvailableDate.StartDate, SelectedAvailableDate.EndDate, Convert.ToInt32(LenghtOfStay), SelectedAccommodation, SelectedAccommodation.Id, LoggedUser, LoggedUser.Id);
+
+            AccommodationYearStatistic yearStatistic = _accommodationYearStatisticsService.FindStatisticForYearAndAccommodation(SelectedAccommodation.Id, DateTime.Now.Year);
+
+            if (yearStatistic == null)
+            {
+                _accommodationYearStatisticsService.Save(DateTime.Now.Year, SelectedAccommodation, SelectedAccommodation.Id, 1, 0, 0, 0);
+            }
+            else
+            {
+                yearStatistic.NumberOfReservations++;
+                _accommodationYearStatisticsService.Update(yearStatistic);
+            }
+
             MainWindow.mainWindow.MainPreview.Content = new AccommodationsPage(LoggedUser, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, _userRepository);
             MessageBox.Show("Reservation for " + SelectedAccommodation.Name + " (" + LenghtOfStay + " days) is successfully made!");
         }

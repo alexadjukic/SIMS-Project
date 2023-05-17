@@ -12,6 +12,7 @@
         <KeyBinding Command="{Binding PreviousImageCommand}" Gesture="Left" />
         <KeyBinding Command="{Binding PreviousImageCommand}" Gesture="CTRL+P" />
         <KeyBinding Command="{Binding RenovateAccommodationCommand}" Gesture="CTRL+R" />
+        <KeyBinding Command="{Binding AccommodationStatisticsCommand}" Gesture="CTRL+S" />
     </Window.InputBindings>
 
     <Window.Resources>
@@ -96,7 +97,7 @@
 
             <Button Name="ButtonClose" Grid.Column="0" Height="25" Width="80" Content="Close" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Click="ButtonClose_Click"/>
             <Button Grid.Column="1" Name="ButtonRenovate" Content="Renovate" Height="25" Width="80" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Command="{Binding RenovateAccommodationCommand}"/>
-            <Button Grid.Column="2" Name="ButtonStatistics1" Content="Statistics" FontSize="12" FontWeight="Bold" Height="25" Width="80" HorizontalAlignment="Center" Click="ButtonStatistics1_Click" />
+            <Button Grid.Column="2" Name="ButtonStatistics1" Content="Statistics" FontSize="12" FontWeight="Bold" Height="25" Width="80" HorizontalAlignment="Center" Command="{Binding AccommodationStatisticsCommand}"/>
             <Button Grid.Column="3" Name="ButtonDelete1" Content="Delete" FontSize="12" FontWeight="Bold" Height="25" Width="80" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>

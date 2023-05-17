@@ -141,10 +141,6 @@
                                     <TextBlock TextWrapping="Wrap" Text="Old date:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
                                     <TextBlock TextWrapping="Wrap" Text="{Binding EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
                                 </StackPanel>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock TextWrapping="Wrap" Text="Status:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                                    <TextBlock TextWrapping="Wrap" Text="{Binding Status}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
-                                </StackPanel>
                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                                     <Button Grid.Column="1" Margin="10,5,10,0" Content="Decline" Height="25" Width="80" FontSize="12" FontWeight="Bold" Command="{Binding DataContext.DeclineRenovationCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
                                     <StackPanel>

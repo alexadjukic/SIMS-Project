@@ -132,9 +132,63 @@ namespace InitialProject.Application.UseCases
             return ownerReservations;
         }
 
-        internal IEnumerable<AccommodationReservation> GetByAccommodationId(int accommodationId)
+        public IEnumerable<AccommodationReservation> GetByAccommodationId(int accommodationId)
         {
             return _accommodationReservationRepository.GetAll().FindAll(ar => ar.AccommodationId == accommodationId);
+        }
+
+        public int GetNumberOfTakenDaysInYearByAccommodationId(int year, int accommodationId)
+        {
+            List<AccommodationReservation> accommodationReservations = _accommodationReservationRepository.GetAll().FindAll(ar => ar.AccommodationId == accommodationId && (ar.StartDate.Year == year || ar.EndDate.Year == year));
+
+            int numberOfTakenDays = 0;
+
+            foreach(var reservation in accommodationReservations)
+            {
+                if (reservation.StartDate.Year == year && reservation.EndDate.Year == year)
+                {
+                    numberOfTakenDays += reservation.LenghtOfStay;
+                }
+                else if (reservation.StartDate.Year != year && reservation.EndDate.Year == year)
+                {
+                    numberOfTakenDays += SumDates(reservation, year);
+                }
+                else if (reservation.StartDate.Year == year && reservation.EndDate.Year != year)
+                {
+                    numberOfTakenDays += SumDates(reservation, year);
+                }
+            }
+
+            return numberOfTakenDays;
+        }
+
+        private int SumDates(AccommodationReservation reservation, int year)
+        {
+            int numberOfDaysAfter = 0;
+
+            List<DateTime> allSingleDates = FindDatesBetween(reservation.StartDate, reservation.EndDate);
+
+            foreach (var date in allSingleDates)
+            {
+                if (date.Year == year)
+                {
+                    numberOfDaysAfter++;
+                }
+            }
+
+            return numberOfDaysAfter;
+        }
+
+        private List<DateTime> FindDatesBetween(DateTime startDate, DateTime endDate)
+        {
+            List<DateTime> resultingDates = new List<DateTime>();
+
+            for (var date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                resultingDates.Add(date);
+            }
+
+            return resultingDates;
         }
     }
 }

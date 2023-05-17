@@ -206,6 +206,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly UserRepository _userRepository;
 
         private readonly LocationService _locationService;
+        private readonly AccommodationYearStatisticsService _accommodationYearStatisticsService;
+        private readonly AccommodationMonthStatisticsService _accommodationMonthStatisticsService;
 
         private int _ownerId;
         private int _imageNumber;
@@ -230,6 +232,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _userRepository = userRepository;
 
             _locationService = new LocationService();
+            _accommodationYearStatisticsService = new AccommodationYearStatisticsService();
+            _accommodationMonthStatisticsService = new AccommodationMonthStatisticsService();
 
             _ownerId = ownerId;
             _imageNumber = 0;
@@ -482,6 +486,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
 
             MyAccommodationsPageViewModel.MyAccommodations.Add(newAccommodation);
+            AccommodationYearStatistic yearStatistic =  _accommodationYearStatisticsService.Save(DateTime.Now.Year, newAccommodation, newAccommodation.Id, 0, 0, 0, 0);
+            _accommodationMonthStatisticsService.Save(DateTime.Now.Month, yearStatistic, yearStatistic.Id, 0, 0, 0, 0);
+
             _accommodationRegistrationForm.Close();
         }
 

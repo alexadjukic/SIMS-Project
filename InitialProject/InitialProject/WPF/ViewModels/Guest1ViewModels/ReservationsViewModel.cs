@@ -38,17 +38,22 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private readonly int _guestId;
         private readonly Window _reservationsView;
+
         private readonly AccommodationReservationService _reservationService;
         private readonly AccommodationRatingService _ratingService;
         private readonly AccommodationNotificationService _accommodationNotificationService;
+        private readonly AccommodationYearStatisticsService _accommodationYearStatisticsService;
         #endregion
 
         public ReservationsViewModel(Window reservationsView, int guestId)
         {
             _reservationsView = reservationsView;
+
             _reservationService = new AccommodationReservationService();
             _ratingService = new AccommodationRatingService();
             _accommodationNotificationService = new AccommodationNotificationService();
+            _accommodationYearStatisticsService = new AccommodationYearStatisticsService();
+
             _guestId = guestId;
 
             Reservations = new ObservableCollection<AccommodationReservation>();
@@ -88,6 +93,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             {
                 _reservationService.CancelReservation(SelectedReservation);
                 _accommodationNotificationService.NotifyUser($"{SelectedReservation.Guest.Username} has cancelled the reservation for {SelectedReservation.Accommodation.Name}.", _guestId, SelectedReservation.Accommodation.OwnerId);
+
+                AccommodationYearStatistic yearStatistic = _accommodationYearStatisticsService.FindStatisticForYearAndAccommodation(SelectedReservation.Accommodation.Id, DateTime.Now.Year);
+
+                if (yearStatistic == null)
+                {
+                    _accommodationYearStatisticsService.Save(DateTime.Now.Year, SelectedReservation.Accommodation, SelectedReservation.Accommodation.Id, 0, 1, 0, 0);
+                }
+                else
+                {
+                    yearStatistic.NumberOfDeclinedReservations++;
+                    _accommodationYearStatisticsService.Update(yearStatistic);
+                }
                 LoadReservations();
             }
         }
