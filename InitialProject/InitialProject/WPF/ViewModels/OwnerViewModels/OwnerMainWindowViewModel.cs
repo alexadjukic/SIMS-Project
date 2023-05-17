@@ -10,6 +10,8 @@ using System.Windows;
 using InitialProject.WPF.Views;
 using System.Windows.Controls;
 using InitialProject.Repositories;
+using InitialProject.Application.UseCases;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -37,10 +39,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 }
             }
         }
+
+        private readonly AccommodationRenovationService _accommodationRenovationService;
+        private readonly AccommodationService _accommodationService;
         #endregion
 
         public OwnerMainWindowViewModel(Window ownerMainWindow, User user) 
         {
+            _accommodationRenovationService = new AccommodationRenovationService();
+            _accommodationService = new AccommodationService();
+
             _ownerMainWindow = ownerMainWindow;
             _user = user;
             SelectedPage = new MyAccommodationsPage(_user);
@@ -56,6 +64,51 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SeeMyRenovationsCommand = new RelayCommand(SeeMyRenovationsCommand_Execute);
             SeeMyProfileCommand = new RelayCommand(SeeMyProfileCommand_Execute);
             SeeNotificationsCommand = new RelayCommand(SeeNotificationsCommand_Execute);
+
+            UpdateRenovationInformations();
+        }
+
+        private async void UpdateRenovationInformations()
+        {
+            if (_accommodationRenovationService.GetAllFinishedTodayAndNotMarked().Count() != 0)
+            {
+                SetAccommodationStatusRenovated(_accommodationRenovationService.GetAllFinishedTodayAndNotMarked());
+            }
+
+            if (_accommodationRenovationService.GetAllFinishedInLastYearAndNotMarked().Count() != 0)
+            {
+                SetAccommodationStatusRenovated(_accommodationRenovationService.GetAllFinishedInLastYearAndNotMarked());
+            }
+
+            if (_accommodationRenovationService.GetAllRenovatedBeforeMoreThanAYear().Count() != 0)
+            {
+                RemoveAccommodationStatusRenovated(_accommodationRenovationService.GetAllRenovatedBeforeMoreThanAYear());
+            }
+
+            await Task.Delay(TimeSpan.FromDays(1));
+            UpdateRenovationInformations();
+        }
+
+        public void RemoveAccommodationStatusRenovated(List<AccommodationRenovation> renovations)
+        {
+            List<AccommodationRenovation> accommodationRenovations = renovations;
+
+            foreach (var renovation in accommodationRenovations)
+            {
+                renovation.Accommodation.RenovationStatus = "";
+                _accommodationService.Update(renovation.Accommodation);
+            }
+        }
+
+        public void SetAccommodationStatusRenovated(List<AccommodationRenovation> finishedAndNotMarkedRenovations)
+        {
+            List<AccommodationRenovation> finishedRenovations = finishedAndNotMarkedRenovations;
+
+            foreach (var renovation in finishedRenovations)
+            {
+                renovation.Accommodation.RenovationStatus = " RENOVATED";
+                _accommodationService.Update(renovation.Accommodation);
+            }
         }
 
         #region COMMANDS

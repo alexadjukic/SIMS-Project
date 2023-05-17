@@ -2,6 +2,7 @@
 using InitialProject.Commands;
 using InitialProject.Domain.Models;
 using InitialProject.WPF.Views.Guest1Views;
+using InitialProject.WPF.Views.OwnerViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -310,7 +311,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void ScheduleRenovationCommand_Execute(object? parameter)
         {
-            AccommodationRenovation accommodationRenovation = _accommodationRenovationService.Save(SelectedAccommodation, SelectedAvailableDate.StartDate, SelectedAvailableDate.EndDate, Convert.ToInt32(LenghtOfRenovation), Description, AccommodationRenovation.RenovationStatus.NOT_STARTED);
+            AccommodationRenovation accommodationRenovation = _accommodationRenovationService.Save(SelectedAccommodation, SelectedAvailableDate.StartDate, SelectedAvailableDate.EndDate, Convert.ToInt32(LenghtOfRenovation), Description);
+        }
+
+        public void SeeAllCommand_Execute(object? parameter)
+        {
         }
         #endregion
     }

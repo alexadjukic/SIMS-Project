@@ -24,11 +24,10 @@ namespace InitialProject.Domain.Models
         public DateTime EndDate { get; set; }
         public int RenovationLength { get; set; }
         public string Comment { get; set; }
-        public RenovationStatus Status { get; set; }
 
         public AccommodationRenovation() { }
 
-        public AccommodationRenovation(int id, Accommodation accommodation, DateTime startDate, DateTime endDate, int renovationLenght, string comment, RenovationStatus status)
+        public AccommodationRenovation(int id, Accommodation accommodation, DateTime startDate, DateTime endDate, int renovationLenght, string comment)
         {
             Id = id;
             Accommodation = accommodation;
@@ -37,7 +36,6 @@ namespace InitialProject.Domain.Models
             EndDate = endDate;
             RenovationLength = renovationLenght;
             Comment = comment;
-            Status = status;
         }
 
         public string[] ToCSV()
@@ -49,8 +47,7 @@ namespace InitialProject.Domain.Models
                 StartDate.ToString(),
                 EndDate.ToString(),
                 RenovationLength.ToString(),
-                Comment,
-                Status.ToString()
+                Comment
             };
 
             return csvValues;
@@ -64,21 +61,6 @@ namespace InitialProject.Domain.Models
             EndDate = DateTime.Parse(values[3]);
             RenovationLength = Convert.ToInt32(values[4]);
             Comment = values[5];
-            switch(values[6])
-            {
-                case "NOT_STARTED":
-                    Status = RenovationStatus.NOT_STARTED;
-                    break;
-                case "STARTED":
-                    Status = RenovationStatus.STARTED;
-                    break;
-                case "FINISHED":
-                    Status = RenovationStatus.FINISHED;
-                    break;
-                case "DECLINED":
-                    Status = RenovationStatus.DECLINED;
-                    break;
-            }
         }
     }
 }

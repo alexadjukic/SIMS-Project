@@ -39,5 +39,10 @@ namespace InitialProject.Application.UseCases
         {
             return _locationRepository.GetById(locationId);
         }
+
+        public void Update(Accommodation accommodation)
+        {
+            _accommodationRepository.Update(accommodation);
+        }
     }
 }

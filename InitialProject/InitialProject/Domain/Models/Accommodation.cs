@@ -20,6 +20,7 @@ namespace InitialProject.Domain.Models
         public int MinDaysBeforeCancel { get; set; }
         public int OwnerId { get; set; }
         public string SuperOwnerMark { get; set; }
+        public string RenovationStatus { get; set; }
 
         public Accommodation()
         {
@@ -38,6 +39,7 @@ namespace InitialProject.Domain.Models
             MinDaysBeforeCancel = minDaysBeforeCancel;
             OwnerId = ownerId;
             SuperOwnerMark = superOwnerMark;
+            RenovationStatus = "";
         }
 
         public string[] ToCSV()
@@ -53,7 +55,8 @@ namespace InitialProject.Domain.Models
                 MinDaysForStay.ToString(),
                 MinDaysBeforeCancel.ToString(),
                 OwnerId.ToString(),
-                SuperOwnerMark
+                SuperOwnerMark,
+                RenovationStatus
             };
 
             return csvValues;
@@ -81,6 +84,7 @@ namespace InitialProject.Domain.Models
             MinDaysBeforeCancel = Convert.ToInt32(values[6]);
             OwnerId = Convert.ToInt32(values[7]);
             SuperOwnerMark = values[8];
+            RenovationStatus = values[9];
         }
     }
 

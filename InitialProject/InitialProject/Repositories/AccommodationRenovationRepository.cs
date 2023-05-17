@@ -29,11 +29,11 @@ namespace InitialProject.Repositories
             return _serializer.FromCSV(FilePath);
         }
 
-        public AccommodationRenovation Save(Accommodation accommodation, DateTime startDate, DateTime endDate, int renovationLenght, string comment, RenovationStatus status)
+        public AccommodationRenovation Save(Accommodation accommodation, DateTime startDate, DateTime endDate, int renovationLenght, string comment)
         {
             int id = NextId();
 
-            AccommodationRenovation accommodationRenovation = new AccommodationRenovation(id, accommodation, startDate, endDate, renovationLenght, comment, status);
+            AccommodationRenovation accommodationRenovation = new AccommodationRenovation(id, accommodation, startDate, endDate, renovationLenght, comment);
             _accommodationRenovations.Add(accommodationRenovation);
             SaveAllRenovations();
             return accommodationRenovation;

@@ -21,9 +21,9 @@ namespace InitialProject.Application.UseCases
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
         }
 
-        public AccommodationRenovation Save(Accommodation accommodation, DateTime startDate, DateTime endDate, int renovationLenght, string comment, AccommodationRenovation.RenovationStatus status)
+        public AccommodationRenovation Save(Accommodation accommodation, DateTime startDate, DateTime endDate, int renovationLenght, string comment)
         {
-            return _accommodationRenovationRepository.Save(accommodation, startDate, endDate, renovationLenght, comment, status);
+            return _accommodationRenovationRepository.Save(accommodation, startDate, endDate, renovationLenght, comment);
         }
 
         public List<AccommodationRenovation> GetAll()
@@ -62,6 +62,43 @@ namespace InitialProject.Application.UseCases
         public void Update(AccommodationRenovation updatedRenovation)
         {
             _accommodationRenovationRepository.Update(updatedRenovation);
+        }
+
+        public List<AccommodationRenovation> GetAllFinishedToday()
+        {
+            return _accommodationRenovationRepository.GetAll().FindAll(ar => ar.EndDate.Date == DateTime.Now.Date);
+        }
+
+        internal List<AccommodationRenovation> GetAllFinishedTodayAndNotMarked()
+        {
+            List<AccommodationRenovation> finishedRenovationsToday = GetAllFinishedToday();
+
+            finishedRenovationsToday = LoadAccommodations(finishedRenovationsToday);
+
+            return finishedRenovationsToday.FindAll(ft => ft.Accommodation.RenovationStatus == "");
+        }
+
+        public List<AccommodationRenovation> GetAllFinishedInLastYear()
+        {
+            return _accommodationRenovationRepository.GetAll().FindAll(ar => (DateTime.Now.Date - ar.EndDate.Date).Days < 365 && (DateTime.Now.Date - ar.EndDate.Date).Days > 0);
+        }
+
+        public List<AccommodationRenovation> GetAllFinishedInLastYearAndNotMarked()
+        {
+            List<AccommodationRenovation> finishedInLastYear = GetAllFinishedInLastYear();
+
+            finishedInLastYear = LoadAccommodations(finishedInLastYear);
+
+            return finishedInLastYear.FindAll(fl => fl.Accommodation.RenovationStatus == "");
+        }
+
+        internal List<AccommodationRenovation> GetAllRenovatedBeforeMoreThanAYear()
+        {
+            List<AccommodationRenovation> finishedBeforeMoreThanAYear = _accommodationRenovationRepository.GetAll().FindAll(fb => (DateTime.Now.Date - fb.EndDate.Date).Days >= 365);
+
+            finishedBeforeMoreThanAYear = LoadAccommodations(finishedBeforeMoreThanAYear);
+
+            return finishedBeforeMoreThanAYear;
         }
     }
 }

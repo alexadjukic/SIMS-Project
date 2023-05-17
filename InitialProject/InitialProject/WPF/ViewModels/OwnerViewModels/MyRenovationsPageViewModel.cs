@@ -69,22 +69,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
                 return false;
             }
 
-            if (SelectedRenovation.StartDate.Day - DateTime.Now.Day < 5)
-            {
-                return false;
-            }
-
-            if (SelectedRenovation.Status == AccommodationRenovation.RenovationStatus.DECLINED)
-            {
-                return false;
-            }
-
-            if (SelectedRenovation.Status == AccommodationRenovation.RenovationStatus.FINISHED)
-            {
-                return false;
-            }
-
-            if (SelectedRenovation.Status == AccommodationRenovation.RenovationStatus.STARTED)
+            if ((SelectedRenovation.StartDate - DateTime.Now).Days < 5)
             {
                 return false;
             }
@@ -95,7 +80,6 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public void DeclineRenovationCommand_Execute (object? parameter)
         {
             AccommodationRenovation updatedRenovation = SelectedRenovation;
-            updatedRenovation.Status = AccommodationRenovation.RenovationStatus.DECLINED;
             _accommodationRenovationService.Update(updatedRenovation);
             LoadAccommodationRenovations();
         }

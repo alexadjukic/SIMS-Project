@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.Models;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
 using InitialProject.WPF.ViewModels;
@@ -48,6 +49,8 @@ namespace InitialProject.WPF.Views.Guest1Views
         public readonly AccommodationReservationRepository _accommodationReservationRepository;
         public readonly UserRepository _userRepository;
 
+        private readonly AccommodationRenovationService _accommodationRenovationService;
+
         public MainWindow(User user, AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository accommodationImageRepository, AccommodationReservationRepository accommodationReservationRepository, UserRepository userRepository)
         {
             InitializeComponent();
@@ -59,11 +62,57 @@ namespace InitialProject.WPF.Views.Guest1Views
             _accommodationImageRepository = accommodationImageRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
             _userRepository = userRepository;
+            _accommodationRenovationService = new AccommodationRenovationService();
 
             LoggedUser = user;
             ThemeButton = "OFF";
 
             MainPreview.Content = new AccommodationsPage(LoggedUser, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, _userRepository);
+
+            UpdateRenovationInformations();
+        }
+
+        private async void UpdateRenovationInformations()
+        {
+            if (_accommodationRenovationService.GetAllFinishedTodayAndNotMarked().Count() != 0)
+            {
+                SetAccommodationStatusRenovated(_accommodationRenovationService.GetAllFinishedTodayAndNotMarked());
+            }
+
+            if (_accommodationRenovationService.GetAllFinishedInLastYearAndNotMarked().Count() != 0)
+            {
+                SetAccommodationStatusRenovated(_accommodationRenovationService.GetAllFinishedInLastYearAndNotMarked());
+            }
+
+            if (_accommodationRenovationService.GetAllRenovatedBeforeMoreThanAYear().Count() != 0)
+            {
+                RemoveAccommodationStatusRenovated(_accommodationRenovationService.GetAllRenovatedBeforeMoreThanAYear());
+            }
+
+            await Task.Delay(TimeSpan.FromDays(1));
+            UpdateRenovationInformations();
+        }
+
+        public void RemoveAccommodationStatusRenovated(List<AccommodationRenovation> renovations)
+        {
+            List<AccommodationRenovation> accommodationRenovations = renovations;
+
+            foreach (var renovation in accommodationRenovations)
+            {
+                renovation.Accommodation.RenovationStatus = "";
+                _accommodationRepository.Update(renovation.Accommodation);
+            }
+        }
+
+        public void SetAccommodationStatusRenovated(List<AccommodationRenovation> finishedAndNotMarkedRenovations)
+        {
+            List<AccommodationRenovation> finishedRenovations = finishedAndNotMarkedRenovations;
+
+            foreach (var renovation in finishedRenovations)
+            {
+                renovation.Accommodation.RenovationStatus = " RENOVATED";
+                _accommodationRepository.Update(renovation.Accommodation);
+            }
         }
 
         private void AccommodationsButton_Click(object sender, RoutedEventArgs e)
