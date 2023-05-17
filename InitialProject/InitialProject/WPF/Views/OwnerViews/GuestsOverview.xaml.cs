@@ -29,12 +29,12 @@ namespace InitialProject.WPF.Views
         public readonly AccommodationReservationRepository _reservationRepository;
         public readonly AccommodationRepository _accommodationRepository;
         public readonly UserRepository _userRepository;
-        public readonly RatingRepository _ratingRepository;
+        public readonly GuestRatingRepository _ratingRepository;
 
         public AccommodationReservation SelectedReservation { get; set; }
 
 
-        public GuestsOverview(int ownerId, AccommodationReservationRepository accommodationReservationRepository, AccommodationRepository accommodationRepository, UserRepository userRepository, RatingRepository ratingRepository)
+        public GuestsOverview(int ownerId, AccommodationReservationRepository accommodationReservationRepository, AccommodationRepository accommodationRepository, UserRepository userRepository, GuestRatingRepository ratingRepository)
         {
             InitializeComponent();
             this.DataContext = this;

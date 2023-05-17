@@ -13,7 +13,7 @@ namespace InitialProject
             { typeof(ITourRepository), new TourRepository() },
             { typeof(ILocationRepository), new LocationRepository() },
             { typeof(IAccommodationReservationRepository), new AccommodationReservationRepository() },
-            { typeof(IRatingRepository), new RatingRepository() },
+            { typeof(IGuestRatingRepository), new GuestRatingRepository() },
             { typeof(IAccommodationRepository), new AccommodationRepository() },
             { typeof(IAccommodationRatingRepository), new AccommodationRatingRepository() },
             { typeof(ICheckpointArrivalRepository), new CheckpointArrivalRepository() },

@@ -34,8 +34,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        private Rating _ownerRated;
-        public Rating OwnerRated
+        private GuestRating _ownerRated;
+        public GuestRating OwnerRated
         {
             get
             { 
@@ -105,7 +105,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public ObservableCollection<String> Images { get; set; }
 
-        private readonly RatingService _ratingService;
+        private readonly GuestRatingService _ratingService;
         private readonly AccommodationRatingService _accommodationRatingService;
         private readonly AccommodationRatingImageService _accommodationRatingImageService;
         #endregion
@@ -113,7 +113,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RatingOverviewWindowViewModel(AccommodationReservation selectedAccommodationReservation)
         {
             SelectedAccommodationReservation = selectedAccommodationReservation;
-            _ratingService = new RatingService();
+            _ratingService = new GuestRatingService();
             _accommodationRatingService = new AccommodationRatingService();
             _accommodationRatingImageService = new AccommodationRatingImageService();
 
@@ -133,7 +133,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             if (OwnerRated == null)
             {
-                OwnerRated = new Rating();
+                OwnerRated = new GuestRating();
                 OwnerRated.Cleanliness = 0;
                 OwnerRated.FollowingTheRules = 0;
                 OwnerRated.Comment = "nije ocenjen";

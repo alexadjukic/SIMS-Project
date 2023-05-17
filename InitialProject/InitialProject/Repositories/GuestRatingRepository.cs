@@ -9,30 +9,30 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repositories
 {
-    public class RatingRepository : IRatingRepository
+    public class GuestRatingRepository : IGuestRatingRepository
     {
-        private const string FilePath = "../../../Resources/Data/ratings.csv";
+        private const string FilePath = "../../../Resources/Data/guestRatings.csv";
 
-        private readonly Serializer<Rating> _serializer;
+        private readonly Serializer<GuestRating> _serializer;
 
-        private List<Rating> _ratings;
+        private List<GuestRating> _ratings;
 
-        public RatingRepository()
+        public GuestRatingRepository()
         {
-            _serializer = new Serializer<Rating>();
+            _serializer = new Serializer<GuestRating>();
             _ratings = _serializer.FromCSV(FilePath);
         }
 
-        public List<Rating> GetAll()
+        public List<GuestRating> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public Rating Save(string cleanliness, string followingTheRules, string comment, int theOneWhoIsRatedId, int raterId, int reservationId)
+        public GuestRating Save(string cleanliness, string followingTheRules, string comment, int theOneWhoIsRatedId, int raterId, int reservationId)
         {
             int id = NextId();
 
-            Rating rating = new Rating(id, Convert.ToInt32(cleanliness), Convert.ToInt32(followingTheRules), comment, theOneWhoIsRatedId, raterId, reservationId);
+            GuestRating rating = new GuestRating(id, Convert.ToInt32(cleanliness), Convert.ToInt32(followingTheRules), comment, theOneWhoIsRatedId, raterId, reservationId);
 
             _ratings = _serializer.FromCSV(FilePath);
             _ratings.Add(rating);
@@ -52,11 +52,11 @@ namespace InitialProject.Repositories
             return _ratings.Max(t => t.Id) + 1;
         }
 
-        public Rating GetByReservationId(int reservationId)
+        public GuestRating GetByReservationId(int reservationId)
         {
             _ratings = _serializer.FromCSV(FilePath);
 
-            Rating rating = _ratings.Find(r => r.ReservationId == reservationId);
+            GuestRating rating = _ratings.Find(r => r.ReservationId == reservationId);
 
             return rating;
         }

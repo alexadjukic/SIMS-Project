@@ -30,13 +30,13 @@ namespace InitialProject.WPF.Views
         private readonly AccommodationImageRepository _imageRepository;
         private readonly AccommodationReservationRepository _reservationRepository;
         private readonly UserRepository _userRepository;
-        private readonly RatingRepository _ratingRepository;
+        private readonly GuestRatingRepository _ratingRepository;
         private readonly AccommodationNotificationService _accommodationNotificationService;
 
         public int _numberOfUnratedGuests;
 
         private int _ownerId;
-        public OwnerForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, User user, AccommodationReservationRepository reservationRepository, UserRepository userRepository, RatingRepository ratingRepository)
+        public OwnerForm(AccommodationRepository accommodationRepository, LocationRepository locationRepository, AccommodationImageRepository imageRepository, User user, AccommodationReservationRepository reservationRepository, UserRepository userRepository, GuestRatingRepository ratingRepository)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -71,7 +71,7 @@ namespace InitialProject.WPF.Views
 
                 if (foundAccommodation != null)
                 {
-                    Rating foundRating = FindRating(reservation);
+                    GuestRating foundRating = FindRating(reservation);
 
                     if (foundAccommodation.OwnerId == _ownerId && foundRating.Id == 0)
                     {
@@ -100,10 +100,10 @@ namespace InitialProject.WPF.Views
             }
         }
 
-        public Rating FindRating(AccommodationReservation reservation)
+        public GuestRating FindRating(AccommodationReservation reservation)
         {
-            List<Rating> ratings = _ratingRepository.GetAll();
-            Rating foundRating = new Rating();
+            List<GuestRating> ratings = _ratingRepository.GetAll();
+            GuestRating foundRating = new GuestRating();
 
             foreach (var rating in ratings)
             {

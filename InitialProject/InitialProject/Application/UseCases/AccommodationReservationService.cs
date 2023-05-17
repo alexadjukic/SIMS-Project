@@ -13,7 +13,7 @@ namespace InitialProject.Application.UseCases
     public class AccommodationReservationService
     {
         private readonly IAccommodationReservationRepository _accommodationReservationRepository;
-        private readonly IRatingRepository _ratingRepository;
+        private readonly IGuestRatingRepository _ratingRepository;
         private readonly IUserRepository _userRepository;
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly ILocationRepository _locationRepository;
@@ -23,7 +23,7 @@ namespace InitialProject.Application.UseCases
         public AccommodationReservationService()
         {
             _accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
-            _ratingRepository = Injector.CreateInstance<IRatingRepository>();
+            _ratingRepository = Injector.CreateInstance<IGuestRatingRepository>();
             _userRepository = Injector.CreateInstance<IUserRepository>();
             _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
             _locationRepository = Injector.CreateInstance<ILocationRepository>();

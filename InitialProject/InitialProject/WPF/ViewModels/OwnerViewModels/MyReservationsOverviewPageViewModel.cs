@@ -109,10 +109,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         private readonly AccommodationReservationService _accommodationReservationService;
-        private readonly RatingService _ratingService;
+        private readonly GuestRatingService _ratingService;
         private readonly LocationService _locationService;
 
-        private readonly RatingRepository _ratingRepository;
+        private readonly GuestRatingRepository _ratingRepository;
 
         private readonly User _owner;
 
@@ -126,9 +126,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public MyReservationsOverviewPageViewModel(User user)
         {
             _accommodationReservationService = new AccommodationReservationService();
-            _ratingService = new RatingService();
+            _ratingService = new GuestRatingService();
 
-            _ratingRepository = new RatingRepository();
+            _ratingRepository = new GuestRatingRepository();
             _locationService = new LocationService();
 
             _owner = user;

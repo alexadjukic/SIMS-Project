@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Domain.Models
 {
-    public class Rating : ISerializable
+    public class GuestRating : ISerializable
     {
         public int Id { get; set; }
         public int Cleanliness { get; set; }
@@ -17,9 +17,9 @@ namespace InitialProject.Domain.Models
         public int RaterId { get; set; }
         public int ReservationId { get; set; }
 
-        public Rating() { }
+        public GuestRating() { }
 
-        public Rating(int id, int cleanliness, int followingTheRules, string comment, int theOneWhoIsRatedId, int raterId, int reservationId)
+        public GuestRating(int id, int cleanliness, int followingTheRules, string comment, int theOneWhoIsRatedId, int raterId, int reservationId)
         {
             Id = id;
             Cleanliness = cleanliness;

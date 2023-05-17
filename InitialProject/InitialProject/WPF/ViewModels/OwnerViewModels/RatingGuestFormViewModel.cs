@@ -72,12 +72,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         };
 
         private readonly RequestService _requestService;
-        private readonly RatingRepository _ratingRepository;
+        private readonly GuestRatingRepository _ratingRepository;
 
         private readonly Window _ratingGuestForm;
         #endregion
 
-        public RatingGuestFormViewModel(Window ratingGuestForm, RatingRepository ratingRepository, AccommodationReservation selectedReservation, int ownerId) 
+        public RatingGuestFormViewModel(Window ratingGuestForm, GuestRatingRepository ratingRepository, AccommodationReservation selectedReservation, int ownerId) 
         { 
             SelectedReservation = selectedReservation;
             _theOneWhoIsRatedId = SelectedReservation.GuestId;

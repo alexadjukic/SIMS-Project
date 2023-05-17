@@ -26,7 +26,7 @@ namespace InitialProject.WPF.Views
     /// </summary>
     public partial class RatingGuestForm : Window
     {
-        public RatingGuestForm(RatingRepository ratingRepository, AccommodationReservation selectedReservation, int ownerId)
+        public RatingGuestForm(GuestRatingRepository ratingRepository, AccommodationReservation selectedReservation, int ownerId)
         {
             InitializeComponent();
             this.DataContext = new RatingGuestFormViewModel(this, ratingRepository, selectedReservation, ownerId);

@@ -29,7 +29,7 @@ namespace InitialProject.WPF.Views
         private readonly TourImageRepository _tourImageRepository;
         private readonly CheckpointRepository _checkpointRepository;
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
-        private readonly RatingRepository _ratingRepository;
+        private readonly GuestRatingRepository _ratingRepository;
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly CheckpointArrivalRepository _checkpointArrivalRepository;
         private readonly AccommodationRatingRepository _accommodationRatingRepository;
@@ -71,7 +71,7 @@ namespace InitialProject.WPF.Views
             _tourImageRepository = new TourImageRepository();
             _checkpointRepository = new CheckpointRepository();
             _accommodationReservationRepository = new AccommodationReservationRepository();
-            _ratingRepository = new RatingRepository();
+            _ratingRepository = new GuestRatingRepository();
             _tourReservationRepository = new TourReservationRepository();
             _checkpointArrivalRepository = new CheckpointArrivalRepository();
             _accommodationRatingRepository = new AccommodationRatingRepository();
