@@ -9,30 +9,30 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Repositories
 {
-    public class RequestRepository : IRequestRepository
+    public class ReservationRequestRepository : IReservationRequestRepository
     {
-        private const string FilePath = "../../../Resources/Data/requests.csv";
+        private const string FilePath = "../../../Resources/Data/reservationRequests.csv";
 
-        private readonly Serializer<Request> _serializer;
+        private readonly Serializer<ReservationRequest> _serializer;
 
-        private List<Request> _requests;
+        private List<ReservationRequest> _requests;
 
-        public RequestRepository()
+        public ReservationRequestRepository()
         {
-            _serializer = new Serializer<Request>();
+            _serializer = new Serializer<ReservationRequest>();
             _requests = _serializer.FromCSV(FilePath);
         }
 
-        public List<Request> GetAll()
+        public List<ReservationRequest> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public Request Save(DateTime newStartDate, DateTime newEndDate, RequestStatus status, AccommodationReservation reservation)
+        public ReservationRequest Save(DateTime newStartDate, DateTime newEndDate, RequestStatus status, AccommodationReservation reservation)
         {
             int id = NextId();
 
-            Request request = new Request(id, newStartDate, newEndDate, status, reservation);
+            ReservationRequest request = new ReservationRequest(id, newStartDate, newEndDate, status, reservation);
             _requests.Add(request);
             SaveAllRequests();
             return request;
@@ -55,7 +55,7 @@ namespace InitialProject.Repositories
             return _requests.Max(c => c.Id) + 1;
         }
 
-        public void DeclineRequest(Request selectedRequest)
+        public void DeclineRequest(ReservationRequest selectedRequest)
         {
             _requests = _serializer.FromCSV(FilePath);
 
@@ -65,7 +65,7 @@ namespace InitialProject.Repositories
             _serializer.ToCSV(FilePath, _requests);
         }
 
-        public void AcceptRequest(Request selectedRequest)
+        public void AcceptRequest(ReservationRequest selectedRequest)
         {
             _requests = _serializer.FromCSV(FilePath);
 

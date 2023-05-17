@@ -11,21 +11,21 @@ namespace InitialProject.Application.UseCases
 {
     public class ManageRequestService
     {
-        private readonly IRequestRepository _requestRepository;
+        private readonly IReservationRequestRepository _requestRepository;
         private readonly IAccommodationReservationRepository _accommodationReservationRepository;
 
         public ManageRequestService() 
         {
-            _requestRepository = Injector.CreateInstance<IRequestRepository>();
+            _requestRepository = Injector.CreateInstance<IReservationRequestRepository>();
             _accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
         }
 
-        public void DeclineRequest(Request selectedRequest)
+        public void DeclineRequest(ReservationRequest selectedRequest)
         {
             _requestRepository.DeclineRequest(selectedRequest);
         }
 
-        internal void AcceptRequest(Request selectedRequest)
+        internal void AcceptRequest(ReservationRequest selectedRequest)
         {
             _requestRepository.AcceptRequest(selectedRequest);
             _accommodationReservationRepository.AcceptRequest(selectedRequest);

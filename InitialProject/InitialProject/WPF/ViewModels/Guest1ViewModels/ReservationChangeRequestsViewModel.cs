@@ -14,19 +14,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     public class ReservationChangeRequestsViewModel : ViewModelBase
     {
         #region PROPERTIES
-        public ObservableCollection<Request> Requests { get; set; }
+        public ObservableCollection<ReservationRequest> Requests { get; set; }
 
         private readonly int _guestId;
         private readonly Window _reservationChangeRequestView;
-        private readonly RequestService _requestService;
+        private readonly ReservationRequestService _requestService;
         #endregion
 
         public ReservationChangeRequestsViewModel(Window reservationChangeRequestsView, int guestId)
         {
             _reservationChangeRequestView = reservationChangeRequestsView;
-            _requestService = new RequestService();
+            _requestService = new ReservationRequestService();
             _guestId = guestId;
-            Requests = new ObservableCollection<Request>();
+            Requests = new ObservableCollection<ReservationRequest>();
 
             CloseCommand = new RelayCommand(CloseCommand_Execute);
 

@@ -71,7 +71,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             "Comment"
         };
 
-        private readonly RequestService _requestService;
+        private readonly ReservationRequestService _requestService;
         private readonly GuestRatingRepository _ratingRepository;
 
         private readonly Window _ratingGuestForm;
@@ -84,7 +84,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _reservationId = SelectedReservation.Id;
             _raterId = ownerId;
 
-            _requestService = new RequestService();
+            _requestService = new ReservationRequestService();
             _ratingRepository = ratingRepository;
 
             _ratingGuestForm = ratingGuestForm;

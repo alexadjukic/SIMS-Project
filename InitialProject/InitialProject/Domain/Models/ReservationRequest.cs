@@ -14,7 +14,7 @@ namespace InitialProject.Domain.Models
         DECLINED
     }
     
-    public class Request : ISerializable
+    public class ReservationRequest : ISerializable
     {
         public int Id { get; set; }
         public DateTime NewStartDate { get; set; }
@@ -25,9 +25,9 @@ namespace InitialProject.Domain.Models
         public string IsAvailable { get; set; }
         public string Comment { get; set; }
 
-        public Request() { }
+        public ReservationRequest() { }
 
-        public Request(int id, DateTime newStartDate, DateTime newEndDate, RequestStatus status, AccommodationReservation reservation)
+        public ReservationRequest(int id, DateTime newStartDate, DateTime newEndDate, RequestStatus status, AccommodationReservation reservation)
         {
             Id = id;
             NewStartDate = newStartDate;

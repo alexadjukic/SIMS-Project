@@ -98,7 +98,7 @@ namespace InitialProject.Repositories
             return _accommodationReservations.FirstOrDefault(r => r.Id == reservationId);
         }
 
-        public void AcceptRequest(Request selectedRequest)
+        public void AcceptRequest(ReservationRequest selectedRequest)
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
 

@@ -49,14 +49,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
 
         private readonly Window _reservationChangeView;
-        private readonly RequestService _requestService;
+        private readonly ReservationRequestService _requestService;
         private readonly AccommodationReservationService _accommodationReservationService;
         #endregion
 
         public ReservationChangeViewModel(Window reservationChangeView, AccommodationReservation selectedReservation)
         {
             _reservationChangeView = reservationChangeView;
-            _requestService = new RequestService();
+            _requestService = new ReservationRequestService();
             _accommodationReservationService = new AccommodationReservationService();
             SelectedReservation = selectedReservation;
 

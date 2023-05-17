@@ -23,7 +23,7 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class RequestDeclinedForm : Window
     {
-        public RequestDeclinedForm(Request selectedRequest, int ownerId)
+        public RequestDeclinedForm(ReservationRequest selectedRequest, int ownerId)
         {
             InitializeComponent();
             this.DataContext = new RequestDeclinedFormViewModel(this, selectedRequest, ownerId);

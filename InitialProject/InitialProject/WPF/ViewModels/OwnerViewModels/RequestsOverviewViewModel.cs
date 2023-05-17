@@ -16,8 +16,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
     public class RequestsOverviewViewModel : ViewModelBase
     {
         #region PROPERTIES
-        private Request _selectedRequest;
-        public Request SelectedRequest
+        private ReservationRequest _selectedRequest;
+        public ReservationRequest SelectedRequest
         {
             get
             { 
@@ -106,9 +106,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
-        public static ObservableCollection<Request> Requests { get; set; }
+        public static ObservableCollection<ReservationRequest> Requests { get; set; }
 
-        private readonly RequestService _requestService;
+        private readonly ReservationRequestService _requestService;
         private readonly ManageRequestService _manageRequestService;
         private readonly AccommodationNotificationService _accommodationNotificationService;
         private readonly LocationService _locationService;
@@ -122,14 +122,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public RequestsOverviewViewModel(int ownerId)
         {
-            _requestService = new RequestService();
+            _requestService = new ReservationRequestService();
             _manageRequestService = new ManageRequestService();
             _accommodationNotificationService = new AccommodationNotificationService();
             _locationService = new LocationService();
 
             _ownerId = ownerId;
 
-            Requests = new ObservableCollection<Request>();
+            Requests = new ObservableCollection<ReservationRequest>();
             Countries = new List<String>();
             Cities = new ObservableCollection<String>();
             Types = new ObservableCollection<String>();

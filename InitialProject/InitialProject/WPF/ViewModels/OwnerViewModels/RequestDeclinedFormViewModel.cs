@@ -14,8 +14,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
     public class RequestDeclinedFormViewModel : ViewModelBase
     {
         #region PROPERTIES
-        private Request _selectedRequest;
-        public Request SelectedRequest
+        private ReservationRequest _selectedRequest;
+        public ReservationRequest SelectedRequest
         {
             get
             {
@@ -38,7 +38,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private int _ownerId;
         #endregion
 
-        public RequestDeclinedFormViewModel(Window requestDeclinedForm, Request selectedRequest, int ownerId)
+        public RequestDeclinedFormViewModel(Window requestDeclinedForm, ReservationRequest selectedRequest, int ownerId)
         {
             _requestDeclinedForm = requestDeclinedForm;
 

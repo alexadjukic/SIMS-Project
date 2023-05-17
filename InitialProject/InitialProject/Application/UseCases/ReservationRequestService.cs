@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace InitialProject.Application.UseCases
 {
-    public class RequestService
+    public class ReservationRequestService
     {
-        private readonly IRequestRepository _requestRepository;
+        private readonly IReservationRequestRepository _requestRepository;
         private readonly IAccommodationReservationRepository _accommodationReservationRepository;
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly ILocationRepository _locationRepository;
@@ -20,9 +20,9 @@ namespace InitialProject.Application.UseCases
 
         private readonly AccommodationAvailabilityService _accommodationAvailabilityService;
 
-        public RequestService()
+        public ReservationRequestService()
         {
-            _requestRepository = Injector.CreateInstance<IRequestRepository>();
+            _requestRepository = Injector.CreateInstance<IReservationRequestRepository>();
             _accommodationReservationRepository = Injector.CreateInstance<IAccommodationReservationRepository>();
             _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
@@ -31,7 +31,7 @@ namespace InitialProject.Application.UseCases
             _accommodationAvailabilityService = new AccommodationAvailabilityService();
         }
 
-        public IEnumerable<Request> GetOnHoldRequests()
+        public IEnumerable<ReservationRequest> GetOnHoldRequests()
         {
             var onHoldRequests = _requestRepository.GetAll();
 
@@ -41,9 +41,9 @@ namespace InitialProject.Application.UseCases
             return onHoldRequests;
         }
 
-        private List<Request> LoadOnHoldRequests(List<Request> onHoldRequests)
+        private List<ReservationRequest> LoadOnHoldRequests(List<ReservationRequest> onHoldRequests)
         {
-            var updatedOnHoldRequests = new List<Request>();
+            var updatedOnHoldRequests = new List<ReservationRequest>();
 
             foreach (var request in onHoldRequests)
             {
@@ -56,9 +56,9 @@ namespace InitialProject.Application.UseCases
             return updatedOnHoldRequests;
         }
 
-        private List<Request> LoadReservations(IEnumerable<Request> onHoldRequests)
+        private List<ReservationRequest> LoadReservations(IEnumerable<ReservationRequest> onHoldRequests)
         {
-            var updatedOnHoldRequests = new List<Request>();
+            var updatedOnHoldRequests = new List<ReservationRequest>();
 
             foreach (var request in onHoldRequests)
             {
@@ -99,9 +99,9 @@ namespace InitialProject.Application.UseCases
             _requestRepository.Save(newStartDate, newEndDate, RequestStatus.ON_HOLD, reservation);
         }
 
-        public IEnumerable<Request> GetRequestsByGuestId(int guestId)
+        public IEnumerable<ReservationRequest> GetRequestsByGuestId(int guestId)
         {
-            List<Request> requests = new List<Request>();
+            List<ReservationRequest> requests = new List<ReservationRequest>();
             var _requests = _requestRepository.GetAll();
             _requests = LoadReservations(_requests);
             foreach (var request in _requests)
@@ -115,11 +115,11 @@ namespace InitialProject.Application.UseCases
             return requests;
         }
 
-        internal IEnumerable<Request> GetRequestsByOwnerId(int ownerId)
+        internal IEnumerable<ReservationRequest> GetRequestsByOwnerId(int ownerId)
         {
             var requests = GetOnHoldRequests();
 
-            List<Request> requestsByOwnerId = new List<Request>();
+            List<ReservationRequest> requestsByOwnerId = new List<ReservationRequest>();
 
             foreach (var request in requests)
             {
