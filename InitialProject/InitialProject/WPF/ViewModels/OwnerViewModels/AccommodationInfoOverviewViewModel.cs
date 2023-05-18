@@ -82,6 +82,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute, PreviousImageCommand_CanExecute);
             NextImageCommand = new RelayCommand(NextImageCommand_Execute, NextImageCommand_CanExecute);
             RenovateAccommodationCommand = new RelayCommand(RenovateAccommodationCommand_Execute);
+            AccommodationStatisticsCommand = new RelayCommand(AccommodationStatisticsCommand_Execute);
 
             UploadImages();
         }
@@ -109,6 +110,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public RelayCommand NextImageCommand { get; }
         public RelayCommand PreviousImageCommand { get; }
         public RelayCommand RenovateAccommodationCommand { get; }
+        public RelayCommand AccommodationStatisticsCommand { get; }
 
         public void PreviousImageCommand_Execute(object? prameter)
         {
@@ -148,6 +150,12 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             RenovateAccommodationForm renovateAccommodationForm = new RenovateAccommodationForm(SelectedAccommodation);
             renovateAccommodationForm.Show();
+        }
+
+        public void AccommodationStatisticsCommand_Execute(object? parameter)
+        {
+            AccommodationStatisticsOverviewWindow accommodationStatisticsOverviewWindow = new AccommodationStatisticsOverviewWindow(SelectedAccommodation);
+            accommodationStatisticsOverviewWindow.Show();
         }
         #endregion
     }

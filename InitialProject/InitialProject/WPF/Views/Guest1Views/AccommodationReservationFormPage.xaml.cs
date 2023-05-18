@@ -36,6 +36,8 @@ namespace InitialProject.WPF.Views.Guest1Views
         public readonly UserRepository _userRepository;
 
         private readonly AccommodationRenovationService _accommodationRenovationService;
+        private readonly AccommodationYearStatisticsService _accommodationYearStatisticsService;
+        private readonly AccommodationMonthStatisticsService _accommodationMonthStatisticsService;
 
         public User LoggedUser { get; set; }
 
@@ -170,6 +172,8 @@ namespace InitialProject.WPF.Views.Guest1Views
             _userRepository = userRepository;
 
             _accommodationRenovationService = new AccommodationRenovationService();
+            _accommodationYearStatisticsService = new AccommodationYearStatisticsService();
+            _accommodationMonthStatisticsService = new AccommodationMonthStatisticsService();
 
             LoggedUser = user;
             SelectedAccommodation = selectedAccommodation;
@@ -344,8 +348,46 @@ namespace InitialProject.WPF.Views.Guest1Views
             if (!IsMakeReservationInputValid()) return;
 
             _accommodationReservationRepository.Save(SelectedAvailableDate.StartDate, SelectedAvailableDate.EndDate, Convert.ToInt32(LenghtOfStay), SelectedAccommodation, SelectedAccommodation.Id, LoggedUser, LoggedUser.Id);
+
+            AccommodationYearStatistic yearStatistic = _accommodationYearStatisticsService.FindStatisticForYearAndAccommodation(SelectedAccommodation.Id, DateTime.Now.Year);
+
+            if (yearStatistic == null)
+            {
+                yearStatistic = _accommodationYearStatisticsService.Save(DateTime.Now.Year, SelectedAccommodation, SelectedAccommodation.Id, 1, 0, 0, 0);
+            }
+            else
+            {
+                yearStatistic.NumberOfReservations++;
+                _accommodationYearStatisticsService.Update(yearStatistic);
+            }
+
+            AccommodationMonthStatistics monthStatistics = _accommodationMonthStatisticsService.FindStatisticForMonthByYearStatistic(yearStatistic, DateTime.Now.Month);
+
+            if (monthStatistics == null)
+            {
+                SaveMonthStatistics(yearStatistic);
+            }
+            else
+            {
+                monthStatistics.NumberOfReservations++;
+                _accommodationMonthStatisticsService.Update(monthStatistics);
+            }
+
             MainWindow.mainWindow.MainPreview.Content = new AccommodationsPage(LoggedUser, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, _userRepository);
             MessageBox.Show("Reservation for " + SelectedAccommodation.Name + " (" + LenghtOfStay + " days) is successfully made!");
+        }
+
+        private void SaveMonthStatistics(AccommodationYearStatistic yearStatistic)
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                if (i == DateTime.Now.Month)
+                {
+                    _accommodationMonthStatisticsService.Save(i, yearStatistic, yearStatistic.Id, 1, 0, 0, 0);
+                }
+
+                _accommodationMonthStatisticsService.Save(i, yearStatistic, yearStatistic.Id, 0, 0, 0, 0);
+            }
         }
 
         private bool IsMakeReservationInputValid()

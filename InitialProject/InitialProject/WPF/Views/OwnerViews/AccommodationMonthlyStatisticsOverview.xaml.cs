@@ -12,27 +12,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace InitialProject.WPF.Views.OwnerViews
 {
     /// <summary>
-    /// Interaction logic for MyAccommodationsPage.xaml
+    /// Interaction logic for AccommodationMonthlyStatisticsOverview.xaml
     /// </summary>
-    public partial class MyAccommodationsPage : Page
+    public partial class AccommodationMonthlyStatisticsOverview : Window
     {
-        public MyAccommodationsPage(User user)
+        public AccommodationMonthlyStatisticsOverview(Accommodation selectedAccommodation, AccommodationYearStatistic selectedYearStatistic)
         {
             InitializeComponent();
-            this.DataContext = new MyAccommodationsPageViewModel(this, user);
+            this.DataContext = new AccommodationMonthlyStatisticsOverviewViewModel(selectedAccommodation, selectedYearStatistic);
         }
 
-        private void DataGridAccommodations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Close_Click(object sender, RoutedEventArgs e)
         {
-            ButtonRenovate.IsEnabled = true;
-            ButtonStatistics.IsEnabled = true;
-            ButtonDelete.IsEnabled = true;
+            this.Close();
         }
     }
 }

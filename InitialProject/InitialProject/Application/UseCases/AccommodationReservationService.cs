@@ -132,9 +132,105 @@ namespace InitialProject.Application.UseCases
             return ownerReservations;
         }
 
-        internal IEnumerable<AccommodationReservation> GetByAccommodationId(int accommodationId)
+        public IEnumerable<AccommodationReservation> GetByAccommodationId(int accommodationId)
         {
             return _accommodationReservationRepository.GetAll().FindAll(ar => ar.AccommodationId == accommodationId);
+        }
+
+        public int GetNumberOfTakenDaysInYearByAccommodationId(int year, int accommodationId)
+        {
+            List<AccommodationReservation> accommodationReservations = _accommodationReservationRepository.GetAll().FindAll(ar => ar.AccommodationId == accommodationId && (ar.StartDate.Year == year || ar.EndDate.Year == year));
+
+            int numberOfTakenDays = 0;
+
+            foreach(var reservation in accommodationReservations)
+            {
+                if (reservation.StartDate.Year == year && reservation.EndDate.Year == year)
+                {
+                    numberOfTakenDays += reservation.LenghtOfStay;
+                }
+                else if (reservation.StartDate.Year != year && reservation.EndDate.Year == year)
+                {
+                    numberOfTakenDays += SumDates(reservation, year);
+                }
+                else if (reservation.StartDate.Year == year && reservation.EndDate.Year != year)
+                {
+                    numberOfTakenDays += SumDates(reservation, year);
+                }
+            }
+
+            return numberOfTakenDays;
+        }
+
+        private int SumDates(AccommodationReservation reservation, int year)
+        {
+            int numberOfDaysAfter = 0;
+
+            List<DateTime> allSingleDates = FindDatesBetween(reservation.StartDate, reservation.EndDate);
+
+            foreach (var date in allSingleDates)
+            {
+                if (date.Year == year)
+                {
+                    numberOfDaysAfter++;
+                }
+            }
+
+            return numberOfDaysAfter;
+        }
+
+        private List<DateTime> FindDatesBetween(DateTime startDate, DateTime endDate)
+        {
+            List<DateTime> resultingDates = new List<DateTime>();
+
+            for (var date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                resultingDates.Add(date);
+            }
+
+            return resultingDates;
+        }
+
+        public int GetNumberOfTakenDaysInMonthByAccommodationId(int month, AccommodationYearStatistic yearStatistics)
+        {
+            List<AccommodationReservation> accommodationReservations = _accommodationReservationRepository.GetAll().FindAll(ar => ar.AccommodationId == yearStatistics.AccommodationId && (ar.StartDate.Month == month || ar.EndDate.Month == month));
+            
+            int numberOfTakenDays = 0;
+
+            foreach (var reservation in accommodationReservations)
+            {
+                if (reservation.StartDate.Month == month && reservation.EndDate.Month == month)
+                {
+                    numberOfTakenDays += reservation.LenghtOfStay;
+                }
+                else if (reservation.StartDate.Month != month && reservation.EndDate.Month == month)
+                {
+                    numberOfTakenDays += SumDatesInMonth(reservation, month);
+                }
+                else if (reservation.StartDate.Month == month && reservation.EndDate.Month != month)
+                {
+                    numberOfTakenDays += SumDatesInMonth(reservation, month);
+                }
+            }
+
+            return numberOfTakenDays;
+        }
+
+        private int SumDatesInMonth(AccommodationReservation reservation, int month)
+        {
+            int numberOfDaysAfter = 0;
+
+            List<DateTime> allSingleDates = FindDatesBetween(reservation.StartDate, reservation.EndDate);
+
+            foreach (var date in allSingleDates)
+            {
+                if (date.Month == month)
+                {
+                    numberOfDaysAfter++;
+                }
+            }
+
+            return numberOfDaysAfter;
         }
     }
 }

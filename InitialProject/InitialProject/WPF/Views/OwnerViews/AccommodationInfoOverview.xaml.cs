@@ -38,18 +38,6 @@ namespace InitialProject.WPF.Views.OwnerViews
             {
                 this.Close();
             }
-
-            if (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-            {
-                AccommodationStatisticsOverviewWindow accommodationStatisticsOverviewWindow = new AccommodationStatisticsOverviewWindow();
-                accommodationStatisticsOverviewWindow.Show();
-            }
-        }
-
-        private void ButtonStatistics1_Click(object sender, RoutedEventArgs e)
-        {
-            AccommodationStatisticsOverviewWindow accommodationStatisticsOverviewWindow = new AccommodationStatisticsOverviewWindow();
-            accommodationStatisticsOverviewWindow.Show();
         }
     }
 }

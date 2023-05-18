@@ -1,44 +1,29 @@
-﻿<Window x:Class="InitialProject.WPF.Views.OwnerViews.AccommodationStatisticsOverviewWindow"
+﻿<Window x:Class="InitialProject.WPF.Views.OwnerViews.AccommodationMonthlyStatisticsOverview"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+        xmlns:cnv="clr-namespace:InitialProject.Converters"
         mc:Ignorable="d"
-        Title="Statistics" Height="550" Width="800" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+        Title="AccommodationMonthlyStatisticsOverview"  Height="550" Width="800" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Styles/OwnerDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <cnv:MonthConverter x:Key="MonthConverter"/>
         </ResourceDictionary>
     </Window.Resources>
 
     <Grid Style="{StaticResource GridWindowBackground}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
-            <RowDefinition Height="5*" />
+            <RowDefinition Height="100" />
             <RowDefinition Height="20*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*" />
-                <ColumnDefinition Width="10*" />
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                <TextBlock x:Name="TextBlockMonthly" Text="Year for detailed statistics:" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBox x:Name="TextBoxYear" Text="" Style="{StaticResource TextBoxStyle}"/>
-            </StackPanel>
-
-            <Grid Grid.Column="1">
-                <Button x:Name="MonthlyStatistics" Content="Show monthly statistics" Style="{StaticResource CloseButton}" Command="{Binding ShowMonthlyStatisticsCommand}" Width="160"/>
-            </Grid>
-        </Grid>
 
         <StackPanel Grid.Row="0" Background="{StaticResource Background}">
             <StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -57,16 +42,20 @@
                 <TextBlock TextWrapping="Wrap" Text="Type:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
                 <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Type}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock TextWrapping="Wrap" Text="Year:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedYearStatistics.Year}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+            </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <TextBlock TextWrapping="Wrap" Text="Accommodationhas most taken in year:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding MostTakenYear}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock TextWrapping="Wrap" Text="Accommodationhas most taken in month:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding MostTakenMonth, Converter={StaticResource MonthConverter}}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
         </StackPanel>
 
-        <DataGrid Name="DateDataGrid" Grid.Row="2" ItemsSource="{Binding AccommodationYearStatistics, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource DataGridStyle}" DataGrid.ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" DataGrid.RowStyle="{StaticResource DataGridRowStyle}" DataGrid.CellStyle="{StaticResource DataGridCellStyle}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedYearStatistics}" CanUserAddRows="False" Validation.ErrorTemplate="{x:Null}" Height="210">
+        <DataGrid Name="DateDataGrid" Grid.Row="1" ItemsSource="{Binding AccommodationMonthStatistics, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource DataGridStyle}" DataGrid.ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" DataGrid.RowStyle="{StaticResource DataGridRowStyle}" DataGrid.CellStyle="{StaticResource DataGridCellStyle}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedYearStatistics}" CanUserAddRows="False" Validation.ErrorTemplate="{x:Null}" Height="210">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="*"/>
+                <DataGridTextColumn Header="Year" Binding="{Binding Month, Converter={StaticResource MonthConverter}}" Width="*"/>
                 <DataGridTextColumn Header="Number of reservations" Binding="{Binding NumberOfReservations}" Width="*"/>
                 <DataGridTextColumn Header="Declined reservations" Binding="{Binding NumberOfDeclinedReservations}" Width="*"/>
                 <DataGridTextColumn Header="Changed reservations" Binding="{Binding NumberOfChangedReservations}" Width="*"/>
