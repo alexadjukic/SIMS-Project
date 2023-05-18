@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+        xmlns:cnv="clr-namespace:InitialProject.Converters"
         mc:Ignorable="d"
         Title="AccommodationMonthlyStatisticsOverview"  Height="550" Width="800" WindowStartupLocation="CenterScreen">
 
@@ -12,6 +13,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Styles/OwnerDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <cnv:MonthConverter x:Key="MonthConverter"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -48,12 +50,12 @@
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBlock TextWrapping="Wrap" Text="Accommodationhas most taken in month:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-            <TextBlock TextWrapping="Wrap" Text="{Binding MostTakenYear}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding MostTakenMonth, Converter={StaticResource MonthConverter}}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
         </StackPanel>
 
-        <DataGrid Name="DateDataGrid" Grid.Row="1" ItemsSource="{Binding AccommodationYearStatistics, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource DataGridStyle}" DataGrid.ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" DataGrid.RowStyle="{StaticResource DataGridRowStyle}" DataGrid.CellStyle="{StaticResource DataGridCellStyle}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedYearStatistics}" CanUserAddRows="False" Validation.ErrorTemplate="{x:Null}" Height="210">
+        <DataGrid Name="DateDataGrid" Grid.Row="1" ItemsSource="{Binding AccommodationMonthStatistics, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource DataGridStyle}" DataGrid.ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" DataGrid.RowStyle="{StaticResource DataGridRowStyle}" DataGrid.CellStyle="{StaticResource DataGridCellStyle}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedYearStatistics}" CanUserAddRows="False" Validation.ErrorTemplate="{x:Null}" Height="210">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="*"/>
+                <DataGridTextColumn Header="Year" Binding="{Binding Month, Converter={StaticResource MonthConverter}}" Width="*"/>
                 <DataGridTextColumn Header="Number of reservations" Binding="{Binding NumberOfReservations}" Width="*"/>
                 <DataGridTextColumn Header="Declined reservations" Binding="{Binding NumberOfDeclinedReservations}" Width="*"/>
                 <DataGridTextColumn Header="Changed reservations" Binding="{Binding NumberOfChangedReservations}" Width="*"/>

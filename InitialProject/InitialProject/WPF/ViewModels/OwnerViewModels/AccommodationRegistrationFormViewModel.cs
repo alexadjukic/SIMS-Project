@@ -358,6 +358,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private void SaveMonthStatistics(AccommodationYearStatistic yearStatistic)
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                _accommodationMonthStatisticsService.Save(i, yearStatistic, yearStatistic.Id, 0, 0, 0, 0);
+            }
+        }
+
         #region COMMANDS
         public RelayCommand AddImageCommand { get; }
         public RelayCommand RemoveImageCommand { get; }
@@ -487,7 +495,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             MyAccommodationsPageViewModel.MyAccommodations.Add(newAccommodation);
             AccommodationYearStatistic yearStatistic =  _accommodationYearStatisticsService.Save(DateTime.Now.Year, newAccommodation, newAccommodation.Id, 0, 0, 0, 0);
-            _accommodationMonthStatisticsService.Save(DateTime.Now.Month, yearStatistic, yearStatistic.Id, 0, 0, 0, 0);
+            //_accommodationMonthStatisticsService.Save(DateTime.Now.Month, yearStatistic, yearStatistic.Id, 0, 0, 0, 0);
+
+            SaveMonthStatistics(yearStatistic);
+
 
             _accommodationRegistrationForm.Close();
         }

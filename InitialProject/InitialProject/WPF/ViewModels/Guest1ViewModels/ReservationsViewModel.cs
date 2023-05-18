@@ -43,6 +43,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private readonly AccommodationRatingService _ratingService;
         private readonly AccommodationNotificationService _accommodationNotificationService;
         private readonly AccommodationYearStatisticsService _accommodationYearStatisticsService;
+        private readonly AccommodationMonthStatisticsService _accommodationMonthStatisticsService;
         #endregion
 
         public ReservationsViewModel(Window reservationsView, int guestId)
@@ -53,6 +54,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             _ratingService = new AccommodationRatingService();
             _accommodationNotificationService = new AccommodationNotificationService();
             _accommodationYearStatisticsService = new AccommodationYearStatisticsService();
+            _accommodationMonthStatisticsService = new AccommodationMonthStatisticsService();
 
             _guestId = guestId;
 
@@ -98,14 +100,40 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
                 if (yearStatistic == null)
                 {
-                    _accommodationYearStatisticsService.Save(DateTime.Now.Year, SelectedReservation.Accommodation, SelectedReservation.Accommodation.Id, 0, 1, 0, 0);
+                    yearStatistic = _accommodationYearStatisticsService.Save(DateTime.Now.Year, SelectedReservation.Accommodation, SelectedReservation.Accommodation.Id, 0, 1, 0, 0);
                 }
                 else
                 {
                     yearStatistic.NumberOfDeclinedReservations++;
                     _accommodationYearStatisticsService.Update(yearStatistic);
                 }
+
+                AccommodationMonthStatistics monthStatistics = _accommodationMonthStatisticsService.FindStatisticForMonthByYearStatistic(yearStatistic, DateTime.Now.Month);
+
+                if (monthStatistics == null)
+                {
+                    SaveMonthStatistics(yearStatistic);
+                }
+                else
+                {
+                    monthStatistics.NumberOfDeclinedReservations++;
+                    _accommodationMonthStatisticsService.Update(monthStatistics);
+                }
+
                 LoadReservations();
+            }
+        }
+
+        private void SaveMonthStatistics(AccommodationYearStatistic yearStatistic)
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                if (i == DateTime.Now.Month)
+                {
+                    _accommodationMonthStatisticsService.Save(i, yearStatistic, yearStatistic.Id, 0, 1, 0, 0);
+                }
+
+                _accommodationMonthStatisticsService.Save(i, yearStatistic, yearStatistic.Id, 0, 0, 0, 0);
             }
         }
 

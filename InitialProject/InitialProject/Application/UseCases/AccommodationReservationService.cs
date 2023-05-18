@@ -190,5 +190,47 @@ namespace InitialProject.Application.UseCases
 
             return resultingDates;
         }
+
+        public int GetNumberOfTakenDaysInMonthByAccommodationId(int month, AccommodationYearStatistic yearStatistics)
+        {
+            List<AccommodationReservation> accommodationReservations = _accommodationReservationRepository.GetAll().FindAll(ar => ar.AccommodationId == yearStatistics.AccommodationId && (ar.StartDate.Month == month || ar.EndDate.Month == month));
+            
+            int numberOfTakenDays = 0;
+
+            foreach (var reservation in accommodationReservations)
+            {
+                if (reservation.StartDate.Month == month && reservation.EndDate.Month == month)
+                {
+                    numberOfTakenDays += reservation.LenghtOfStay;
+                }
+                else if (reservation.StartDate.Month != month && reservation.EndDate.Month == month)
+                {
+                    numberOfTakenDays += SumDatesInMonth(reservation, month);
+                }
+                else if (reservation.StartDate.Month == month && reservation.EndDate.Month != month)
+                {
+                    numberOfTakenDays += SumDatesInMonth(reservation, month);
+                }
+            }
+
+            return numberOfTakenDays;
+        }
+
+        private int SumDatesInMonth(AccommodationReservation reservation, int month)
+        {
+            int numberOfDaysAfter = 0;
+
+            List<DateTime> allSingleDates = FindDatesBetween(reservation.StartDate, reservation.EndDate);
+
+            foreach (var date in allSingleDates)
+            {
+                if (date.Month == month)
+                {
+                    numberOfDaysAfter++;
+                }
+            }
+
+            return numberOfDaysAfter;
+        }
     }
 }

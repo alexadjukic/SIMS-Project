@@ -22,5 +22,25 @@ namespace InitialProject.Application.UseCases
         {
             return _accommodationMonthStatisticsRepository.Save(month, yearStatistic, yearStatisticId, numberOfReservations, numberOfDeclinedReservations, numberOfChangedReservations, numberOfRenovationSuggestions);
         }
+
+        public AccommodationMonthStatistics FindStatisticForMonthByYearStatistic(AccommodationYearStatistic? yearStatistic, int month)
+        {
+            return _accommodationMonthStatisticsRepository.GetAll().Find(ms => ms.YearStatisticsId == yearStatistic.Id &&  ms.Month == month);
+        }
+
+        public void Update(AccommodationMonthStatistics monthStatistics)
+        {
+            _accommodationMonthStatisticsRepository.Update(monthStatistics);
+        }
+
+        public IEnumerable<AccommodationMonthStatistics> GetAllByYearStatistic(int yearStatisticId)
+        {
+            return GetAll().FindAll(ms => ms.YearStatisticsId == yearStatisticId);
+        }
+
+        public List<AccommodationMonthStatistics> GetAll()
+        {
+            return _accommodationMonthStatisticsRepository.GetAll();
+        }
     }
 }

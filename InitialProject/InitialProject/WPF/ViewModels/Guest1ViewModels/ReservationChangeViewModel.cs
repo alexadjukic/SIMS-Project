@@ -53,6 +53,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private readonly ReservationRequestService _requestService;
         private readonly AccommodationReservationService _accommodationReservationService;
         private readonly AccommodationYearStatisticsService _accommodationYearStatisticsService;
+        private readonly AccommodationMonthStatisticsService _accommodationMonthStatisticsService;
         #endregion
 
         public ReservationChangeViewModel(Window reservationChangeView, AccommodationReservation selectedReservation)
@@ -62,10 +63,25 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             _requestService = new ReservationRequestService();
             _accommodationReservationService = new AccommodationReservationService();
             _accommodationYearStatisticsService = new AccommodationYearStatisticsService();
+            _accommodationMonthStatisticsService = new AccommodationMonthStatisticsService();
+
 
             SelectedReservation = selectedReservation;
 
             RequestDateChangeCommand = new RelayCommand(RequestDateChangeCommand_Execute, RequestDateChangeCommand_CanExecute);
+        }
+
+        private void SaveMonthStatistics(AccommodationYearStatistic yearStatistic)
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                if (i == DateTime.Now.Month)
+                {
+                    _accommodationMonthStatisticsService.Save(i, yearStatistic, yearStatistic.Id, 0, 0, 1, 0);
+                }
+
+                _accommodationMonthStatisticsService.Save(i, yearStatistic, yearStatistic.Id, 0, 0, 0, 0);
+            }
         }
 
         #region COMMANDS
@@ -79,12 +95,24 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
             if (yearStatistic == null)
             {
-                _accommodationYearStatisticsService.Save(DateTime.Now.Year, SelectedReservation.Accommodation, SelectedReservation.Accommodation.Id, 0, 0, 1, 0);
+                yearStatistic = _accommodationYearStatisticsService.Save(DateTime.Now.Year, SelectedReservation.Accommodation, SelectedReservation.Accommodation.Id, 0, 0, 1, 0);
             }
             else
             {
                 yearStatistic.NumberOfReservations++;
                 _accommodationYearStatisticsService.Update(yearStatistic);
+            }
+
+            AccommodationMonthStatistics monthStatistics = _accommodationMonthStatisticsService.FindStatisticForMonthByYearStatistic(yearStatistic, DateTime.Now.Month);
+
+            if (monthStatistics == null)
+            {
+                SaveMonthStatistics(yearStatistic);
+            }
+            else
+            {
+                monthStatistics.NumberOfChangedReservations++;
+                _accommodationMonthStatisticsService.Update(monthStatistics);
             }
 
             MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(_reservationChangeView, SelectedReservation.GuestId));
