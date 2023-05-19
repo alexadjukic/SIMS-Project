@@ -19,6 +19,11 @@ namespace InitialProject.Application.UseCases
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
         }
 
+        public IEnumerable<TourRequest> GetAll()
+        {
+            return _tourRequestRepository.GetAll();
+        }
+
         public Location FillLocation(string country, string city)
         {
             return _locationRepository.GetByCountryAndCity(country, city);
@@ -27,6 +32,11 @@ namespace InitialProject.Application.UseCases
         public void Save(TourRequest tourRequest)
         {
             _tourRequestRepository.Save(tourRequest);
+        }
+
+        public void Update(TourRequest tourRequest)
+        {
+            _tourRequestRepository.Update(tourRequest);
         }
     }
 }
