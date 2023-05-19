@@ -15,5 +15,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public int NextId();
         public void DeclineRequest(ReservationRequest selectedRequest);
         public void AcceptRequest(ReservationRequest selectedRequest);
+        public void Delete(ReservationRequest request);
     }
 }
