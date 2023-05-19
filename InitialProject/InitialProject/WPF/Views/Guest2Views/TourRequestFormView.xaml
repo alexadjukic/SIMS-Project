@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest2Views"
         mc:Ignorable="d"
+        WindowStyle="None"
         Title="TourRequestFormView" WindowStartupLocation="CenterScreen" Height="768" Width="1024">
     <Grid>
         <Grid.RowDefinitions>
@@ -69,7 +70,7 @@
             </TextBox>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" Background="Azure">
-            <Button Content="View Requests" FontWeight="Bold" FontSize="24" Height="50" Width="250" VerticalAlignment="Top" HorizontalAlignment="Left" Background="LightBlue"/>
+            <Button Content="View Requests" FontWeight="Bold" FontSize="24" Height="50" Width="250" VerticalAlignment="Top" HorizontalAlignment="Left" Background="LightBlue" Command="{Binding ShowTourRequestsCommand}" />
             <Label Content="Description:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"  Width="165" Height="44.5" FontSize="26" FontWeight="Bold"/>
             <TextBox Text="{Binding Path=Description,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="450" Height="120" FontSize="16"/>
             <Rectangle HorizontalAlignment="Left" Height="120" Margin="10,125,0,0" Stroke="Black" VerticalAlignment="Top" Width="450"/>
