@@ -28,10 +28,11 @@ namespace InitialProject.Domain.Models
         public TourRequestStatus Status { get; set; }
         public int GuideId { get; set; }
         public User Guide { get; set; }
+        public int UserId { get; set; }
 
         public TourRequest() { }
 
-        public TourRequest(DateTime requestArrivalDate, Location location, int locationId, string description, string language, int guestsNumber, DateTime startDate, DateTime endDate, TourRequestStatus status, int guideId, User guide)
+        public TourRequest(DateTime requestArrivalDate, Location location, int locationId, string description, string language, int guestsNumber, DateTime startDate, DateTime endDate, TourRequestStatus status, int guideId, User guide, int userId)
         {
             RequestArrivalDate = requestArrivalDate;
             Location = location;
@@ -44,11 +45,13 @@ namespace InitialProject.Domain.Models
             Status = status;
             GuideId = guideId;
             Guide = guide;
+            UserId = userId;
+
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), RequestArrivalDate.ToString(), LocationId.ToString(), Description, Language, GuestsNumber.ToString(), StartDate.ToString(), EndDate.ToString(), Status.ToString(), GuideId.ToString() };
+            string[] csvValues = { Id.ToString(), RequestArrivalDate.ToString(), LocationId.ToString(), Description, Language, GuestsNumber.ToString(), StartDate.ToString(), EndDate.ToString(), Status.ToString(), GuideId.ToString(), UserId.ToString() };
             return csvValues;
         }
 
@@ -64,6 +67,7 @@ namespace InitialProject.Domain.Models
             EndDate = DateTime.Parse(values[7]);
             Status = Enum.Parse<TourRequestStatus>(values[8]);
             GuideId = int.Parse(values[9]);
+            UserId = int.Parse(values[10]);
         }
     }
 }
