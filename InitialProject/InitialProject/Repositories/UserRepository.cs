@@ -52,5 +52,33 @@ namespace InitialProject.Repositories
 
             _serializer.ToCSV(FilePath, _users);
         }
+
+        public IEnumerable<string> GetGuidesNames()
+        {
+            _users = _serializer.FromCSV(FilePath);
+            List<string> names = new List<string>();
+            foreach(var user in _users)
+            {
+                if(user.Role == UserRole.GUIDE)
+                {
+                    names.Add(user.Username);
+                }
+            }
+            
+            return names;
+        }
+
+        public User GetUserByName(string name)
+        {
+            _users = _serializer.FromCSV(FilePath);
+            foreach(var user in _users)
+            {
+                if(user.Username == name)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
     }
 }
