@@ -131,5 +131,15 @@ namespace InitialProject.Application.UseCases
 
             return requestsByOwnerId;
         }
+
+        public void CancelRequest(int reservationId)
+        {
+            ReservationRequest request = _requestRepository.GetAll().Find(r => r.ReservationId == reservationId);
+
+            if (request != null && request.Status == RequestStatus.ON_HOLD)
+            {
+                _requestRepository.Delete(request);
+            }
+        }
     }
 }

@@ -55,6 +55,14 @@ namespace InitialProject.Repositories
             return _requests.Max(c => c.Id) + 1;
         }
 
+        public void Delete(ReservationRequest request)
+        {
+            _requests = _serializer.FromCSV(FilePath);
+            ReservationRequest found = _requests.Find(t => t.Id == request.Id);
+            _requests.Remove(found);
+            _serializer.ToCSV(FilePath, _requests);
+        }
+
         public void DeclineRequest(ReservationRequest selectedRequest)
         {
             _requests = _serializer.FromCSV(FilePath);
