@@ -28,7 +28,7 @@ namespace InitialProject
             { typeof(IAccommodationNotificationRepository), new AccommodationNotificationRepository() },
             { typeof(IVoucherRepository), new VoucherRepository() },
             { typeof(IAccommodationImageRepository), new AccommodationImageRepository() },
-            { typeof(ITourRequestRepository), new TourRequestRepository() }
+            { typeof(ITourRequestRepository), new TourRequestRepository() },
             { typeof(IAccommodationRenovationRepository), new AccommodationRenovationRepository() },
             { typeof(IAccommodationYearStatisticsRepository), new AccommodationYearStatisticsRepository() },
             { typeof(IAccommodationMonthStatisticsRepository), new AccommodationMonthStatisticsRepository() }
