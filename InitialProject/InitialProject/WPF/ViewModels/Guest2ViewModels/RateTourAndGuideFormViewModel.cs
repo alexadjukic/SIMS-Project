@@ -215,7 +215,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
             ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
             ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
-
+            ShowTourRequestsCommand = new RelayCommand(ShowTourRequestsCommand_Execute);
         }
 
         public bool IsEligibleForRating()
@@ -290,6 +290,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand ShowReservedToursCommand { get; }
         public RelayCommand OpenNotificationsCommand { get; }
         public RelayCommand ShowVouchersCommand { get; }
+        public RelayCommand ShowTourRequestsCommand { get; }
+
+
+        public void ShowTourRequestsCommand_Execute(object? parameter)
+        {
+            TourRequestFormView tourRequestFormView = new TourRequestFormView(LoggedUser);
+            tourRequestFormView.Show();
+            _rateTourAndGuideForm.Close();
+        }
 
         public void OpenNotificationsCommand_Execute(object? parameter)
         {
