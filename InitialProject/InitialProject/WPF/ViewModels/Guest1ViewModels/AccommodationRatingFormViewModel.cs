@@ -103,12 +103,14 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             AddImageCommand = new RelayCommand(AddImageCommand_Execute, AddImageCommand_CanExecute);
             RemoveImageCommand = new RelayCommand(RemoveImageCommand_Execute, RemoveImageCommand_CanExecute);
             RateCommand = new RelayCommand(RateCommand_Execute);
+            SuggestRenovationCommand = new RelayCommand(SuggestRenovationCommand_Execute);
         }
 
         #region COMMANDS
         public RelayCommand AddImageCommand { get; }
         public RelayCommand RemoveImageCommand { get; }
         public RelayCommand RateCommand { get; }
+        public RelayCommand SuggestRenovationCommand { get; }
 
         public void AddImageCommand_Execute(object? parameter)
         {
@@ -143,7 +145,19 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
 
             _setOwnerRoleService.SetOwnerRole(accommodationRating.OwnerId);
-            MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(_accommodationRatingForm, SelectedReservation.GuestId));
+            MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(SelectedReservation.GuestId));
+        }
+
+        public void SuggestRenovationCommand_Execute(object? parameter)
+        {
+            AccommodationRating accommodationRating = _accommodationRatingService.SaveAccommodationRating(CleanlinessSelectedMode + 1, CorrectnessSelectedMode + 1, Comment, SelectedReservation.Id, SelectedReservation.Accommodation.OwnerId, SelectedReservation.GuestId);
+            foreach (var url in ImageUrls)
+            {
+                _accommodationRatingImageService.SaveImage(url, accommodationRating.Id);
+            }
+
+            _setOwnerRoleService.SetOwnerRole(accommodationRating.OwnerId);
+            MainWindow.mainWindow.MainPreview.Content = new RenovationSuggestionPage(SelectedReservation);
         }
         #endregion
     }

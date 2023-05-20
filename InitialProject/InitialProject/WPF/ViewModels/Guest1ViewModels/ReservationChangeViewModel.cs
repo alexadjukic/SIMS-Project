@@ -115,7 +115,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 _accommodationMonthStatisticsService.Update(monthStatistics);
             }
 
-            MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(_reservationChangeView, SelectedReservation.GuestId));
+            MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(SelectedReservation.GuestId));
         }
 
         public bool RequestDateChangeCommand_CanExecute(object? parameter)

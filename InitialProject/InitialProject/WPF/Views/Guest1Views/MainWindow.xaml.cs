@@ -129,7 +129,7 @@ namespace InitialProject.WPF.Views.Guest1Views
 
         private void ReservationsButton_Click(object sender, RoutedEventArgs e)
         {
-            MainPreview.Content = new ReservationsPage(new ReservationsViewModel(this, LoggedUser.Id));
+            MainPreview.Content = new ReservationsPage(new ReservationsViewModel(LoggedUser.Id));
         }
 
         private void DarkTheme_Checked(object sender, RoutedEventArgs e)

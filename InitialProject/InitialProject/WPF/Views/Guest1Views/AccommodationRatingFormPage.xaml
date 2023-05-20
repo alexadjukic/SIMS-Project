@@ -90,7 +90,7 @@
         <Image Grid.Row="5" Grid.Column="2" Source="{Binding CurrentImageUrl, UpdateSourceTrigger=PropertyChanged}" Margin="20,5,20,20"/>
 
         <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal">
-            <Button Content="Suggest a renovation" FontSize="15" Height="35" Style="{DynamicResource ButtonStyle}" Width="150" Margin="20,0,0,30"/>
+            <Button Content="Suggest a renovation" Command="{Binding SuggestRenovationCommand}" FontSize="15" Height="35" Style="{DynamicResource ButtonStyle}" Width="150" Margin="20,0,0,30"/>
             <Button Content="Submit your review" Command="{Binding RateCommand}" FontSize="15" Style="{DynamicResource ButtonStyle}" Height="35" Width="150" Margin="60,0,0,30"/>
         </StackPanel>
     </Grid>

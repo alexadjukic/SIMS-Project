@@ -47,10 +47,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private readonly ReservationRequestService _reservationRequestService;
         #endregion
 
-        public ReservationsViewModel(Window reservationsView, int guestId)
-        {
-            _reservationsView = reservationsView;
-
+        public ReservationsViewModel(int guestId)
+        { 
             _reservationService = new AccommodationReservationService();
             _ratingService = new AccommodationRatingService();
             _accommodationNotificationService = new AccommodationNotificationService();
