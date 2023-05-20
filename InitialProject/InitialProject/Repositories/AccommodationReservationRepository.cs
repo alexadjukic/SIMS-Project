@@ -108,16 +108,5 @@ namespace InitialProject.Repositories
             _serializer.ToCSV(FilePath, _accommodationReservations);
             return accommodationReservation;
         }
-
-        /*public void AcceptRequest(ReservationRequest selectedRequest)
-        {
-            _accommodationReservations = _serializer.FromCSV(FilePath);
-
-            _accommodationReservations.Find(r => r.Id == selectedRequest.ReservationId).StartDate = selectedRequest.NewStartDate;
-            _accommodationReservations.Find(r => r.Id == selectedRequest.ReservationId).EndDate = selectedRequest.NewEndDate;
-
-            _serializer.ToCSV(FilePath, _accommodationReservations);
-        }*/
-
     }
 }

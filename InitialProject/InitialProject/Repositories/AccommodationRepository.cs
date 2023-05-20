@@ -83,45 +83,5 @@ namespace InitialProject.Repositories
             Accommodation accommodation = _accommodations.Find(a => a.Id == accommodationId);
             return accommodation;
         }
-
-        /*public void SetSuperOwnerMark(int ownerId, int numberOfRatings, double totalRating)
-        {
-            _accommodations = _serializer.FromCSV(FilePath);
-
-            if (numberOfRatings > 50 && totalRating >= 4.5)
-            {
-                ChangeSuperOwnerMarkPositive(ownerId);
-            }
-            else
-            {
-                ChangeSuperOwnerMarkNegative(ownerId);
-            }
-        }
-
-        private void ChangeSuperOwnerMarkNegative(int ownerId)
-        {
-            foreach (var accommodation in _accommodations)
-            {
-                if (accommodation.OwnerId == ownerId)
-                {
-                    accommodation.SuperOwnerMark = " ";
-                }
-            }
-
-            _serializer.ToCSV(FilePath, _accommodations);
-        }
-
-        public void ChangeSuperOwnerMarkPositive(int ownerId)
-        {
-            foreach (var accommodation in _accommodations)
-            {
-                if (accommodation.OwnerId == ownerId) 
-                {
-                    accommodation.SuperOwnerMark = "*";
-                }
-            }
-
-            _serializer.ToCSV(FilePath, _accommodations);
-        }*/
     }
 }

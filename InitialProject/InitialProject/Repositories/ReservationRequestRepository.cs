@@ -73,24 +73,5 @@ namespace InitialProject.Repositories
             _serializer.ToCSV(FilePath, _requests);
             return request;
         }
-
-        /*public void DeclineRequest(ReservationRequest selectedRequest)
-        {
-            _requests = _serializer.FromCSV(FilePath);
-
-            _requests.Find(r => r.Id == selectedRequest.Id).Status = RequestStatus.DECLINED;
-            _requests.Find(r => r.Id == selectedRequest.Id).Comment = selectedRequest.Comment;
-
-            _serializer.ToCSV(FilePath, _requests);
-        }*/
-
-        /*public void AcceptRequest(ReservationRequest selectedRequest)
-        {
-            _requests = _serializer.FromCSV(FilePath);
-
-            _requests.Find(r => r.Id == selectedRequest.Id).Status = RequestStatus.ACCEPTED;
-
-            _serializer.ToCSV(FilePath, _requests);
-        } */     
     }
 }

@@ -59,11 +59,8 @@ namespace InitialProject.Application.UseCases
             }
 
             _userRepository.Update(owner);
-            //_userRepository.SetOwnerRole(ownerId, numberOfRatings, totalRating);
 
             SetSuperOwnerMark(ownerId, numberOfRatings, totalRating);
-
-            //_accommodationRepository.SetSuperOwnerMark(ownerId, numberOfRatings, totalRating);
         }
 
         public void SetSuperOwnerMark(int ownerId, int numberOfRatings, double totalRating)
