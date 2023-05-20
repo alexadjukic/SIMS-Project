@@ -12,11 +12,13 @@ namespace InitialProject.Application.UseCases
     {
         private readonly ITourRequestRepository _tourRequestRepository;
         private readonly ILocationRepository _locationRepository;
+        private readonly LocationService _locationService;
 
         public TourRequestService()
         {
             _tourRequestRepository = Injector.CreateInstance<ITourRequestRepository>();
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
+            _locationService = new LocationService();
         }
 
         public IEnumerable<TourRequest> GetAll()
@@ -37,6 +39,17 @@ namespace InitialProject.Application.UseCases
         public void Update(TourRequest tourRequest)
         {
             _tourRequestRepository.Update(tourRequest);
+        }
+
+        public Location GetMostWantedLocation()
+        {
+            var locationId = _tourRequestRepository.GetAll().GroupBy(r => r.LocationId).OrderByDescending(r => r.Count()).Select(r => r.Key).FirstOrDefault();
+            return _locationService.GetLocationById(locationId);
+        }
+
+        public string GetMostWantedLanguage()
+        {
+            return _tourRequestRepository.GetAll().GroupBy(r => r.Language).OrderByDescending(r => r.Count()).Select(r => r.Key).FirstOrDefault();
         }
     }
 }

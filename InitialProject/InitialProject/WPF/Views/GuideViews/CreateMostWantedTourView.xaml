@@ -65,9 +65,9 @@
                         <Label Grid.Row="6" Content="Duration (h): " VerticalAlignment="Center" Style="{DynamicResource ReviewLabel}"/>
 
                         <TextBox Text="{Binding Path=TourName,UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource TextBoxStyle1}" Grid.Row="0" Grid.Column="1" Height="25"/>
-                        <ComboBox SelectedValue="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Countries}"  Grid.Row="1" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" IsEnabled="{Binding Path=IsCountryCBEnabled, UpdateSourceTrigger=PropertyChanged}"/>
-                        <ComboBox SelectedValue="{Binding Path=SelectedCity,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Cities, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" IsEnabled="{Binding Path=IsCityCBEnabled,UpdateSourceTrigger=PropertyChanged}"/>
-                        <ComboBox SelectedValue="{Binding Path=SelectedLanguage,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Languages}" Grid.Row="3" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" IsEnabled="{Binding Path=IsLanguageCBEnabled,UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox SelectedValue="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Countries}"  Grid.Row="1" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" IsEnabled="{Binding Path=IsCountryCBEnabled, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ComboBox_SelectionChanged"/>
+                        <ComboBox SelectedValue="{Binding Path=SelectedCity,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=Cities, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" IsEnabled="{Binding Path=IsCityCBEnabled,UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ComboBox_SelectionChanged"/>
+                        <ComboBox SelectedValue="{Binding Path=SelectedLanguage,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Languages}" Grid.Row="3" Grid.Column="1" Height="25" Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" IsEnabled="{Binding Path=IsLanguageCBEnabled,UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ComboBox_SelectionChanged"/>
                         <TextBox Text="{Binding Path=Description,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0,5" Style="{DynamicResource TextBoxStyle1}" TextWrapping="Wrap"/>
                         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
                             <TextBox Text="{Binding Path=MaxGuests,UpdateSourceTrigger=PropertyChanged}" Height="25" Width="40" Style="{DynamicResource TextBoxStyle1}">
@@ -216,8 +216,26 @@
                     <Button Content="Confirm" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Right" Margin="0,0,10,0" Visibility="{Binding Path=IsConfirmButtonVisible, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding ConfirmCommand}"/>
                     <Button Content="Previous" Style="{DynamicResource BottomMenuButton}" HorizontalAlignment="Right" Margin="0,0,90,0" Command="{Binding PreviousCommand}"/>
                     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
-                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" Content="Most wanted location" IsChecked="{Binding Path=IsMostWantedLocationChecked, UpdateSourceTrigger=PropertyChanged}"/>
-                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" Content="Most wanted language" IsChecked="{Binding Path=IsMostWantedLanguageChecked, UpdateSourceTrigger=PropertyChanged}"/>
+                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" Content="Most wanted location" IsChecked="{Binding Path=IsMostWantedLocationChecked, UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding MostWantedLocationCheckedCommand}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding MostWantedLocationUncheckedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                        <CheckBox Style="{DynamicResource CheckBoxStyle1}" Content="Most wanted language" IsChecked="{Binding Path=IsMostWantedLanguageChecked, UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding MostWantedLanguageCheckedCommand}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding MostWantedLanguageUncheckedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
                     </StackPanel>
                 </Grid>
             </Border>
