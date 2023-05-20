@@ -312,6 +312,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             CancelRequestCommand = new RelayCommand(CancelRequestCommand_Execute);
             RequestTourCommand = new RelayCommand(RequestTourCommand_Execute);
             ShowTourRequestsCommand = new RelayCommand(ShowTourRequestsCommand_Execute);
+            ShowStatisticsCommand = new RelayCommand(ShowStatisticsCommand_Execute);
         }
         public void FillTourRequestFields()
         {
@@ -408,6 +409,14 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand CancelRequestCommand { get; }
         public RelayCommand RequestTourCommand { get; }
         public RelayCommand ShowTourRequestsCommand { get; }
+        public RelayCommand ShowStatisticsCommand { get; }
+
+        public void ShowStatisticsCommand_Execute(object? parameter)
+        {
+            RequestedTourStatisticsView requestedTourStatisticsView = new RequestedTourStatisticsView(LoggedUser);
+            requestedTourStatisticsView.Show();
+            _tourRequestFormView.Close();
+        }
 
         public void ShowTourRequestsCommand_Execute(object? parameter)
         {

@@ -46,104 +46,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
-        /*private Location _location;
-        public Location Location
-        {
-            get => _location;
-            set
-            {
-                if (_location != value)
-                {
-                    _location = value;
-                    OnPropertyChanged(nameof(Location));
-                }
-            }
-        }
-
-        private string _language;
-        public string Language
-        {
-            get => _language;
-            set
-            {
-                if (_language != value)
-                {
-                    _language = value;
-                    OnPropertyChanged(nameof(Language));
-                }
-            }
-        }
-
-        private int _guestsNumber;
-        public int GuestsNumber
-        {
-            get => _guestsNumber;
-            set
-            {
-                if (_guestsNumber != value)
-                {
-                    _guestsNumber = value;
-                    OnPropertyChanged(nameof(GuestsNumber));
-                }
-            }
-        }
-
-        private DateTime _startDate;
-        public DateTime StartDate
-        {
-            get => _startDate;
-            set
-            {
-                if (_startDate != value)
-                {
-                    _startDate = value;
-                    OnPropertyChanged(nameof(StartDate));
-                }
-            }
-        }
-
-        private DateTime _endDate;
-        public DateTime EndDate
-        {
-            get => _endDate;
-            set
-            {
-                if (_endDate != value)
-                {
-                    _endDate = value;
-                    OnPropertyChanged(nameof(EndDate));
-                }
-            }
-        }
-
-        private User _guide;
-        public User Guide
-        {
-            get => _guide;
-            set
-            {
-                if (_guide != value)
-                {
-                    _guide = value;
-                    OnPropertyChanged(nameof(Guide));
-                }
-            }
-        }
-
-        private TourRequestStatus _status;
-        public TourRequestStatus Status
-        {
-            get => _status;
-            set
-            {
-                if (_status != value)
-                {
-                    _status = value;
-                    OnPropertyChanged(nameof(Status));
-                }
-            }
-        }*/
-
         private readonly Window _tourRequestView;
         private readonly TourRequestService _tourRequestService;
         private readonly LocationService _locationService;
@@ -163,6 +65,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
             ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
             ShowTourRequestFormCommand = new RelayCommand(ShowTourRequestFormCommand_Execute);
+            ShowStatisticsCommand = new RelayCommand(ShowStatisticsCommand_Execute);
+
             LoadRequests();
         }
 
@@ -192,7 +96,14 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand OpenNotificationsCommand { get; }
         public RelayCommand ShowVouchersCommand { get; }
         public RelayCommand ShowTourRequestFormCommand { get; }
+        public RelayCommand ShowStatisticsCommand { get; }
 
+        public void ShowStatisticsCommand_Execute(object? parameter)
+        {
+            RequestedTourStatisticsView requestedTourStatisticsView = new RequestedTourStatisticsView(LoggedUser);
+            requestedTourStatisticsView.Show();
+            _tourRequestView.Close();
+        }
 
         public void ShowTourRequestFormCommand_Execute(object? parameter)
         {

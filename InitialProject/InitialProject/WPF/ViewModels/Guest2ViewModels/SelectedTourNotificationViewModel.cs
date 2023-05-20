@@ -56,6 +56,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
             ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
             ShowTourRequestsCommand = new RelayCommand(ShowTourRequestsCommand_Execute);
+            ShowStatisticsCommand = new RelayCommand(ShowStatisticsCommand_Execute);
         }
 
         #region  COMMANDS
@@ -67,7 +68,14 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand OpenNotificationsCommand { get; }
         public RelayCommand ShowVouchersCommand { get; }
         public RelayCommand ShowTourRequestsCommand { get; }
+        public RelayCommand ShowStatisticsCommand { get; }
 
+        public void ShowStatisticsCommand_Execute(object? parameter)
+        {
+            RequestedTourStatisticsView requestedTourStatisticsView = new RequestedTourStatisticsView(LoggedUser);
+            requestedTourStatisticsView.Show();
+            _selectedTourNotificationView.Close();
+        }
 
         public void ShowTourRequestsCommand_Execute(object? parameter)
         {
