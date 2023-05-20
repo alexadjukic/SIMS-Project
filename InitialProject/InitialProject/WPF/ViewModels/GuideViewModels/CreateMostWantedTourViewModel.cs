@@ -452,6 +452,7 @@ namespace InitialProject.WPF.ViewModels
         private readonly LocationService _locationService;
         private readonly CheckpointService _checkpointService;
         private readonly TourImageService _tourImageService;
+        private readonly TourRequestService _tourRequestService;
 
         private readonly User _guide;
         #endregion
@@ -555,6 +556,7 @@ namespace InitialProject.WPF.ViewModels
             _locationService = new LocationService();
             _checkpointService = new CheckpointService();
             _tourImageService = new TourImageService();
+            _tourRequestService = new TourRequestService();
 
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
@@ -594,6 +596,10 @@ namespace InitialProject.WPF.ViewModels
             PreviousCommand = new RelayCommand(PreviousCommand_Execute, PreviousCommand_CanExecute);
             LoadCitiesCommand = new RelayCommand(LoadCitiesCommand_Execute);
             TabControlSelectionChangedCommand = new RelayCommand(TabControlSelectionChangedCommand_Execute);
+            MostWantedLocationCheckedCommand = new RelayCommand(MostWantedLocationCheckedCommand_Execute);
+            MostWantedLanguageCheckedCommand = new RelayCommand(MostWantedLanguageCheckedCommand_Execute);
+            MostWantedLocationUncheckedCommand = new RelayCommand(MostWantedLocationUncheckedCommand_Execute);
+            MostWantedLanguageUncheckedCommand = new RelayCommand(MostWantedLanguageUncheckedCommand_Execute);
         }
 
         private void LoadCountries()
@@ -662,6 +668,10 @@ namespace InitialProject.WPF.ViewModels
         public RelayCommand PreviousCommand { get; }
         public RelayCommand LoadCitiesCommand { get; }
         public RelayCommand TabControlSelectionChangedCommand { get; }
+        public RelayCommand MostWantedLocationCheckedCommand { get; }
+        public RelayCommand MostWantedLanguageCheckedCommand { get; }
+        public RelayCommand MostWantedLocationUncheckedCommand { get; }
+        public RelayCommand MostWantedLanguageUncheckedCommand { get; }
 
         public void AddDateCommand_Execute(object? parameter)
         {
@@ -891,6 +901,29 @@ namespace InitialProject.WPF.ViewModels
                 IsConfirmButtonVisible = false;
             }
             Validate();
+        }
+
+        public void MostWantedLocationCheckedCommand_Execute(object? parameter)
+        {
+            var location = _tourRequestService.GetMostWantedLocation();
+            SelectedCountry = location.Country;
+            SelectedCity = location.City;
+        }
+
+        public void MostWantedLanguageCheckedCommand_Execute(object? parameter)
+        {
+            SelectedLanguage = _tourRequestService.GetMostWantedLanguage();
+        }
+
+        public void MostWantedLocationUncheckedCommand_Execute(object? parameter)
+        {
+            SelectedCountry = null;
+            SelectedCity = null;
+        }
+
+        public void MostWantedLanguageUncheckedCommand_Execute(object? parameter)
+        {
+            SelectedLanguage = null;
         }
         #endregion
     }
