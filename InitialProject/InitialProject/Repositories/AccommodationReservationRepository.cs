@@ -98,15 +98,15 @@ namespace InitialProject.Repositories
             return _accommodationReservations.FirstOrDefault(r => r.Id == reservationId);
         }
 
-        public void AcceptRequest(ReservationRequest selectedRequest)
+        public AccommodationReservation Update(AccommodationReservation accommodationReservation)
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
-
-            _accommodationReservations.Find(r => r.Id == selectedRequest.ReservationId).StartDate = selectedRequest.NewStartDate;
-            _accommodationReservations.Find(r => r.Id == selectedRequest.ReservationId).EndDate = selectedRequest.NewEndDate;
-
+            AccommodationReservation current = _accommodationReservations.Find(t => t.Id == accommodationReservation.Id);
+            int index = _accommodationReservations.IndexOf(current);
+            _accommodationReservations.Remove(current);
+            _accommodationReservations.Insert(index, accommodationReservation);
             _serializer.ToCSV(FilePath, _accommodationReservations);
+            return accommodationReservation;
         }
-
     }
 }

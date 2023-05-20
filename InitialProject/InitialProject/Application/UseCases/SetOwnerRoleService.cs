@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repositories;
+using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,8 +47,61 @@ namespace InitialProject.Application.UseCases
             int numberOfRatings = CalculateNumberOfRatings(ownerId);
             double totalRating = CalculateTotalRating(ownerId);
 
-            _userRepository.SetOwnerRole(ownerId, numberOfRatings, totalRating);
-            _accommodationRepository.SetSuperOwnerMark(ownerId, numberOfRatings, totalRating);
+            User owner = _userRepository.GetById(ownerId);
+
+            if (numberOfRatings > 50 && totalRating >= 4.5)
+            {
+                owner.Role = UserRole.SUPER_OWNER;
+            }
+            else
+            {
+                owner.Role = UserRole.OWNER;
+            }
+
+            _userRepository.Update(owner);
+
+            SetSuperOwnerMark(ownerId, numberOfRatings, totalRating);
+        }
+
+        public void SetSuperOwnerMark(int ownerId, int numberOfRatings, double totalRating)
+        {
+
+            if (numberOfRatings > 50 && totalRating >= 4.5)
+            {
+                ChangeSuperOwnerMarkPositive(ownerId);
+            }
+            else
+            {
+                ChangeSuperOwnerMarkNegative(ownerId);
+            }
+        }
+
+        private void ChangeSuperOwnerMarkNegative(int ownerId)
+        {
+            List<Accommodation> _accommodations = _accommodationRepository.GetAll();
+
+            foreach (var accommodation in _accommodations)
+            {
+                if (accommodation.OwnerId == ownerId)
+                {
+                    accommodation.SuperOwnerMark = " ";
+                    _accommodationRepository.Update(accommodation);
+                }
+            }
+        }
+
+        public void ChangeSuperOwnerMarkPositive(int ownerId)
+        {
+            List<Accommodation> _accommodations = _accommodationRepository.GetAll();
+
+            foreach (var accommodation in _accommodations)
+            {
+                if (accommodation.OwnerId == ownerId)
+                {
+                    accommodation.SuperOwnerMark = "*";
+                    _accommodationRepository.Update(accommodation);
+                }
+            }
         }
 
         private int FindSumOfAllRatings(int ownerId)
