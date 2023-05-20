@@ -32,7 +32,7 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <Label Content="{Binding Selectedreservation.Accommodation.Type}" Style="{DynamicResource LabelStyle}" FontSize="20" Padding="0"/>
+            <Label Content="{Binding SelectedReservation.Accommodation.Type}" Style="{DynamicResource LabelStyle}" FontSize="20" Padding="0"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,50,0,0">

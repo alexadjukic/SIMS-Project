@@ -36,7 +36,7 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <Label Content="{Binding Selectedreservation.Accommodation.Type}" Style="{DynamicResource LabelStyle}" FontSize="20" Padding="0"/>
+            <Label Content="{Binding SelectedReservation.Accommodation.Type}" Style="{DynamicResource LabelStyle}" FontSize="20" Padding="0"/>
             <Label Content="Date" FontSize="25" Padding="0" Style="{DynamicResource LabelStyle}" Margin="0,40,0,0"/>
             <TextBlock FontSize="20" Padding="0" Style="{DynamicResource TextBlockStyle}">
                 <TextBlock.Text>
