@@ -16,7 +16,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public int NextId();
         public List<int> AccommodationIdsByOwnerId(int ownerId);
         Accommodation GetById(int accommodationId);
-        public void SetSuperOwnerMark(int ownerId, int numberOfRatings, double totalRating);
+        //public void SetSuperOwnerMark(int ownerId, int numberOfRatings, double totalRating);
         public Accommodation Update(Accommodation accommodation);
     }
 }

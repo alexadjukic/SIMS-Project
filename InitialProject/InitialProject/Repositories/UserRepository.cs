@@ -37,7 +37,7 @@ namespace InitialProject.Repositories
             return _users.FirstOrDefault(u => u.Id == id);
         }
 
-        public void SetOwnerRole(int ownerId, int numberOfRatings, double totalRating)
+        /*public void SetOwnerRole(int ownerId, int numberOfRatings, double totalRating)
         {
             _users = _serializer.FromCSV(FilePath);
 
@@ -51,6 +51,17 @@ namespace InitialProject.Repositories
             }
 
             _serializer.ToCSV(FilePath, _users);
+        }*/
+
+        public User Update(User user)
+        {
+            _users = _serializer.FromCSV(FilePath);
+            User current = _users.Find(t => t.Id == user.Id);
+            int index = _users.IndexOf(current);
+            _users.Remove(current);
+            _users.Insert(index, user);
+            _serializer.ToCSV(FilePath, _users);
+            return user;
         }
 
         public IEnumerable<string> GetGuidesNames()

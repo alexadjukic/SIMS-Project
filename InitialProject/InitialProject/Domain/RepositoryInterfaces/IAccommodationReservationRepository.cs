@@ -18,6 +18,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public List<AccommodationReservation> GetAllByGuestId(int guestId);
         public void Remove(AccommodationReservation reservation);
         public AccommodationReservation GetById(int reservationId);
-        public void AcceptRequest(ReservationRequest selectedRequest);
+        //public void AcceptRequest(ReservationRequest selectedRequest);
+        public AccommodationReservation Update(AccommodationReservation accommodationReservation);
     }
 }

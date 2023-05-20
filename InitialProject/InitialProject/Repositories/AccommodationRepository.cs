@@ -84,7 +84,7 @@ namespace InitialProject.Repositories
             return accommodation;
         }
 
-        public void SetSuperOwnerMark(int ownerId, int numberOfRatings, double totalRating)
+        /*public void SetSuperOwnerMark(int ownerId, int numberOfRatings, double totalRating)
         {
             _accommodations = _serializer.FromCSV(FilePath);
 
@@ -122,6 +122,6 @@ namespace InitialProject.Repositories
             }
 
             _serializer.ToCSV(FilePath, _accommodations);
-        }
+        }*/
     }
 }

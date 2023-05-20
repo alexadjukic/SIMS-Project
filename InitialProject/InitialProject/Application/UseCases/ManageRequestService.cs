@@ -22,13 +22,27 @@ namespace InitialProject.Application.UseCases
 
         public void DeclineRequest(ReservationRequest selectedRequest)
         {
-            _requestRepository.DeclineRequest(selectedRequest);
+            //_requestRepository.DeclineRequest(selectedRequest);
+            ReservationRequest request = selectedRequest;
+
+            request.Status = RequestStatus.DECLINED;
+            request.Comment = selectedRequest.Comment;
+
+            _requestRepository.Update(request);
         }
 
         internal void AcceptRequest(ReservationRequest selectedRequest)
         {
-            _requestRepository.AcceptRequest(selectedRequest);
-            _accommodationReservationRepository.AcceptRequest(selectedRequest);
+            //_requestRepository.AcceptRequest(selectedRequest);
+            ReservationRequest request = selectedRequest;
+            request.Status = RequestStatus.ACCEPTED;
+            _requestRepository.Update(request);
+
+            //_accommodationReservationRepository.AcceptRequest(selectedRequest);
+            AccommodationReservation accommodationReservation = _accommodationReservationRepository.GetAll().Find(r => r.Id == selectedRequest.ReservationId);
+            accommodationReservation.StartDate = selectedRequest.NewStartDate;
+            accommodationReservation.EndDate = selectedRequest.NewEndDate;
+            _accommodationReservationRepository.Update(accommodationReservation);
         }
     }
 }
