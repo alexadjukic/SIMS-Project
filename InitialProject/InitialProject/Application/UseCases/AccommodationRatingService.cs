@@ -27,5 +27,11 @@ namespace InitialProject.Application.UseCases
         {
             return _accommodationRatingRepository.Save(cleanliness, correctness, comment, reservationId, ownerId, raterId);
         }
+
+        public bool IsAccommodationRated(int guestId, int reservationId)
+        {
+            var accommodationRatings = _accommodationRatingRepository.GetAll();
+            return accommodationRatings.Exists(x => x.ReservationId == reservationId && x.RaterId == guestId);
+        }
     }
 }

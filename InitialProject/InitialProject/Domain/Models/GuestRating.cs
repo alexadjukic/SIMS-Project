@@ -16,6 +16,7 @@ namespace InitialProject.Domain.Models
         public int TheOneWhoIsRatedId { get; set; }
         public int RaterId { get; set; }
         public int ReservationId { get; set; }
+        public AccommodationReservation Reservation { get; set; }
 
         public GuestRating() { }
 

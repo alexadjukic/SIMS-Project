@@ -23,7 +23,7 @@
         <StackPanel Orientation="Horizontal" Margin="0,80,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Width="800" Style="{DynamicResource StackPanelStyle}">
             <Button Content="Accommodations" MinWidth="200" FontSize="18" Click="AccommodationsButton_Click" Style="{DynamicResource ButtonStyle}"/>
             <Button Content="Reservations" MinWidth="200" FontSize="18" Click="ReservationsButton_Click" Style="{DynamicResource ButtonStyle}"/>
-            <Button Content="Reviews" MinWidth="200" FontSize="18" Style="{DynamicResource ButtonStyle}" />
+            <Button Content="Reviews" MinWidth="200" FontSize="18" Style="{DynamicResource ButtonStyle}" Click="ReviewsButton_Click" />
             <Button Content="Forum" MinWidth="200" FontSize="18" Style="{DynamicResource ButtonStyle}"/>
         </StackPanel>
         <Frame x:Name="MainPreview" Margin="0,120,0,0"></Frame>

@@ -1,25 +1,22 @@
-﻿<Page x:Class="InitialProject.WPF.Views.Guest1Views.ReservationChangeRequestsPage"
+﻿<Page x:Class="InitialProject.WPF.Views.Guest1Views.ReviewsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
-      xmlns:cnv="clr-namespace:InitialProject.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="1400"
-      Title="Reservation change requests">
-    <Page.Resources>
-        <cnv:ReservationDateChangeStatusConverter x:Key="ReservationDateChangeStatusConverter"/>
-    </Page.Resources>
+      Title="Reviews">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Date change requests" FontSize="30" Margin="70,30,0,0" Style="{DynamicResource LabelStyle}"/>
+        <Label Grid.Row="0" Content="Reviews" FontSize="30" Margin="70,30,0,0" Style="{DynamicResource LabelStyle}"/>
 
-        <ListBox Grid.Row="1" Margin="70,0,70,40" ItemsSource="{Binding Path=Requests, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Style="{DynamicResource ListBoxStyle}">
+        <ListBox Grid.Row="1" Margin="70,0,70,40" ItemsSource="{Binding Path=Ratings, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Style="{DynamicResource ListBoxStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="190" Width="1200">
@@ -51,21 +48,19 @@
 
                         <StackPanel Grid.Column="1" Margin="0,10,0,0">
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="Current dates:" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="5,0,0,20" Height="25" FontSize="18"/>
+                                <TextBlock TextWrapping="Wrap" Text="Date:" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="5,0,0,20" Height="25" FontSize="18"/>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="40,0,0,20" Height="25" FontSize="18"/>
                                 <Label Content=" -" Style="{DynamicResource LabelStyle}"/>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="5,0,0,20" Height="25" FontSize="18"/>
                             </StackPanel>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="Requested dates:" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="5,0,0,20" Height="25" FontSize="18"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding NewStartDate, StringFormat={}{0:dd.MM.yyyy}}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="15,0,0,20" Height="25" FontSize="18"/>
-                                <Label Content=" -" Style="{DynamicResource LabelStyle}"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding NewEndDate, StringFormat={}{0:dd.MM.yyyy}}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="5,0,0,20" Height="25" FontSize="18"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="Status:" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding Status, Converter={StaticResource ReservationDateChangeStatusConverter}}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="15,0,0,20" Height="25" FontSize="18"/>
-                            </StackPanel>
+                            <Grid Grid.Row="0">
+                                <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Cleanliness}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="180,0,0,20" Height="25" FontSize="18"/>
+                            </Grid>
+                            <Grid Grid.Row="0">
+                                <TextBlock TextWrapping="Wrap" Text="Following the rules:" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding FollowingTheRules}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="180,0,0,20" Height="25" FontSize="18"/>
+                            </Grid>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,10,0,0">
                             <Label Content="Comment:" FontSize="15" Style="{DynamicResource LabelStyle}"></Label>

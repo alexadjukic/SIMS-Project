@@ -81,6 +81,12 @@ namespace InitialProject.Application.UseCases
             return updatedRatedReservations;
         }
 
+        public void LoadAccommodation(AccommodationReservation reservation)
+        {
+            reservation.Accommodation = _accommodationRepository.GetById(reservation.AccommodationId);
+            reservation.Accommodation.Location = _locationRepository.GetById(reservation.Accommodation.LocationId);
+        }
+
         private List<AccommodationReservation> LoadGuests(IEnumerable<AccommodationReservation> oldReservations)
         {
             var updatedReservations = new List<AccommodationReservation>();
@@ -231,6 +237,11 @@ namespace InitialProject.Application.UseCases
             }
 
             return numberOfDaysAfter;
+        }
+
+        public AccommodationReservation GetById(int reservationId)
+        {
+            return _accommodationReservationRepository.GetById(reservationId);
         }
     }
 }

@@ -151,5 +151,10 @@ namespace InitialProject.WPF.Views.Guest1Views
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void ReviewsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPreview.Content = new ReviewsPage(LoggedUser);
+        }
     }
 }
