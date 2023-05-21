@@ -64,7 +64,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             foreach(var notification in _requestedTourNotificationService.GetAllByLocationOrLanguage(LoggedUser))
             {
-                TourNotifications.Add(notification);
+                RequestedTourNotifications.Add(notification);
             }
         }
 
