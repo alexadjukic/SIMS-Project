@@ -35,6 +35,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private readonly CreateMostWantedTourViewModel _createMostWantedTourViewModel;
         private readonly YourToursViewModel _yourToursViewModel;
         private readonly TodaysToursViewModel _todaysToursViewModel;
+        private readonly GuideTourRequestsViewModel _guideTourRequestsViewModel;
         private readonly YourTourStatisticsViewModel _yourTourStatisticsViewModel;
         private readonly TourReviewsViewModel _tourReviewsViewModel;
 
@@ -52,6 +53,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             _createMostWantedTourViewModel = new CreateMostWantedTourViewModel(Guide);
             _yourToursViewModel = new YourToursViewModel();
             _todaysToursViewModel = new TodaysToursViewModel(Guide);
+            _guideTourRequestsViewModel = new GuideTourRequestsViewModel(Guide);
             _yourTourStatisticsViewModel = new YourTourStatisticsViewModel();
             _tourReviewsViewModel = new TourReviewsViewModel();
 
@@ -124,12 +126,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void TourRequestsCommand_Execute(object? parameter)
         {
-
+            CurrentViewModel = _guideTourRequestsViewModel;
         }
 
         public bool TourRequestsCommand_CanExecute(object? parameter)
         {
-            return true;
+            return CurrentViewModel != _guideTourRequestsViewModel;
         }
 
         public void ComplexTourRequestsCommand_Execute(object? parameter)

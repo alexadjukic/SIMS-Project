@@ -13,17 +13,25 @@ namespace InitialProject.Application.UseCases
         private readonly ITourRequestRepository _tourRequestRepository;
         private readonly ILocationRepository _locationRepository;
         private readonly LocationService _locationService;
+        private readonly UserService _userService;
 
         public TourRequestService()
         {
             _tourRequestRepository = Injector.CreateInstance<ITourRequestRepository>();
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
             _locationService = new LocationService();
+            _userService = new UserService();
         }
 
         public IEnumerable<TourRequest> GetAll()
         {
-            return _tourRequestRepository.GetAll();
+            var requests = _tourRequestRepository.GetAll();
+            foreach (var request in requests)
+            {
+                request.Location = _locationService.GetLocationById(request.LocationId);
+                request.Guide = _userService.GetById(request.GuideId);
+            }
+            return requests;
         }
 
         public Location FillLocation(string country, string city)
@@ -50,6 +58,23 @@ namespace InitialProject.Application.UseCases
         public string GetMostWantedLanguage()
         {
             return _tourRequestRepository.GetAll().GroupBy(r => r.Language).OrderByDescending(r => r.Count()).Select(r => r.Key).FirstOrDefault();
+        }
+
+        public IEnumerable<TourRequest> GetAllByGuide(User guide)
+        {
+            var requests = _tourRequestRepository.GetAll().Where(r => r.GuideId == guide.Id);
+            foreach (var request in requests)
+            {
+                request.Location = _locationService.GetLocationById(request.LocationId);
+                request.Guide = _userService.GetById(request.GuideId);
+            }
+            return requests;
+        }
+
+        public void AcceptRequest(TourRequest request)
+        {
+            request.Status = TourRequestStatus.ACCEPTED;
+            _tourRequestRepository.Update(request);
         }
     }
 }
