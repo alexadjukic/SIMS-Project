@@ -35,7 +35,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
-        public ObservableCollection<RequestedTourNotification> TourNotifications { get; set; }
+        public ObservableCollection<RequestedTourNotification> RequestedTourNotifications { get; set; }
         private readonly Window _requestedTourNotificationsView;
         private readonly TourService _tourService;
         private readonly RequestedTourNotificationService _requestedTourNotificationService;
@@ -46,7 +46,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             LoggedUser = loggedUser;
             _requestedTourNotificationsView = requestedTourNotificationView;
-            TourNotifications = new ObservableCollection<RequestedTourNotification>();
+            RequestedTourNotifications = new ObservableCollection<RequestedTourNotification>();
             _tourService = new TourService();
             _requestedTourNotificationService = new RequestedTourNotificationService();
 
