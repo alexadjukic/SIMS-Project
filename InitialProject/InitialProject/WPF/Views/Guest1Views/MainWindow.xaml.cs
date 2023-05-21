@@ -156,5 +156,10 @@ namespace InitialProject.WPF.Views.Guest1Views
         {
             MainPreview.Content = new ReviewsPage(LoggedUser);
         }
+
+        private void YourProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPreview.Content = new YourProfilePage(LoggedUser);
+        }
     }
 }

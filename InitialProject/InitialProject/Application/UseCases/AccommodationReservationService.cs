@@ -243,5 +243,18 @@ namespace InitialProject.Application.UseCases
         {
             return _accommodationReservationRepository.GetById(reservationId);
         }
+
+        public IEnumerable<AccommodationReservation> GetLastYearReservations(User user)
+        {
+            var guestsReservations = GetGuestsReservations(user.Id);
+            var lastYearReservations = new List<AccommodationReservation>();
+            foreach (var reservation in guestsReservations)
+            {
+                if ((DateTime.Now.Date - reservation.EndDate.Date).Days < 365)
+                    lastYearReservations.Add(reservation);
+            }
+
+            return lastYearReservations;
+        }
     }
 }

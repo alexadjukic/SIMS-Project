@@ -153,6 +153,7 @@ namespace InitialProject.WPF.Views.Guest1Views
             }
         }
         public List<AccommodationImage> AccommodationImages { get; set; }
+        private readonly SuperGuestService _superGuestService;
 
         private Regex _NaturalNumberRegex = new Regex("^[1-9][0-9]*$");
         public event PropertyChangedEventHandler PropertyChanged;
@@ -170,6 +171,8 @@ namespace InitialProject.WPF.Views.Guest1Views
             _accommodationImageRepository = accommodationImageRepository;
             _accommodationReservationRepository = accommodationReservationRepository;
             _userRepository = userRepository;
+
+            _superGuestService = new SuperGuestService();
 
             _accommodationRenovationService = new AccommodationRenovationService();
             _accommodationYearStatisticsService = new AccommodationYearStatisticsService();
@@ -373,6 +376,7 @@ namespace InitialProject.WPF.Views.Guest1Views
                 _accommodationMonthStatisticsService.Update(monthStatistics);
             }
 
+            _superGuestService.RemoveBonusPoint(LoggedUser.Id);
             MainWindow.mainWindow.MainPreview.Content = new AccommodationsPage(LoggedUser, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, _userRepository);
             MessageBox.Show("Reservation for " + SelectedAccommodation.Name + " (" + LenghtOfStay + " days) is successfully made!");
         }
