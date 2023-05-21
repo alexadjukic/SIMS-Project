@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using InitialProject.Repositories;
 using InitialProject.Application.UseCases;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.WPF.Views.Guest1Views;
 
 namespace InitialProject.WPF.ViewModels.OwnerViewModels
 {
@@ -44,6 +45,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly AccommodationService _accommodationService;
         private readonly AccommodationReservationService _accommodationReservationService;
         private readonly GuestRatingService _guestRatingService;
+        private readonly AccommodationNotificationService _accommodationNotificationService;
         #endregion
 
         public OwnerMainWindowViewModel(Window ownerMainWindow, User user) 
@@ -52,6 +54,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _accommodationService = new AccommodationService();
             _accommodationReservationService = new AccommodationReservationService();
             _guestRatingService = new GuestRatingService();
+            _accommodationNotificationService = new AccommodationNotificationService();
 
             _ownerMainWindow = ownerMainWindow;
             _user = user;
@@ -71,6 +74,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             UpdateRenovationInformations();
             OpenReminderWindow();
+            OpenNotificationWindow();
         }
 
         public void OpenReminderWindow()
@@ -136,6 +140,23 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             await Task.Delay(TimeSpan.FromDays(1));
             UpdateRenovationInformations();
+        }
+
+        public void OpenNotificationWindow()
+        {
+            var notifications = _accommodationNotificationService.GetAllByReceiverId(_user.Id);
+            notifications = _accommodationNotificationService.GetUnseenNotifications(notifications);
+
+            if (notifications.Count > 0)
+            {
+                foreach (var notification in notifications)
+                {
+                    NotificationWindow notificationWindow = new NotificationWindow(notification);
+                    notificationWindow.ShowDialog();
+
+                    _accommodationNotificationService.SetAsSeen(notification);
+                }
+            }
         }
 
         public void RemoveAccommodationStatusRenovated(List<AccommodationRenovation> renovations)
