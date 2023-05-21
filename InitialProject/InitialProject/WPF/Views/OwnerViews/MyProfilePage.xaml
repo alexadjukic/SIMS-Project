@@ -18,7 +18,32 @@
 
     <Grid>
         <GroupBox Header="My profile" Style="{StaticResource GroupBox}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
 
+                <StackPanel Grid.Row="0">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock TextWrapping="Wrap" Text="Username:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Owner.Username}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock TextWrapping="Wrap" Text="Number of times you were rated:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding NumberOfRagings}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock TextWrapping="Wrap" Text="Your total rate:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding TotalRating}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock TextWrapping="Wrap" Text="Your role:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Owner.Role}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
         </GroupBox>
     </Grid>
 </Page>
