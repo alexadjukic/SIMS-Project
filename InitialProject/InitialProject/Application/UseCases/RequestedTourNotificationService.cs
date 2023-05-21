@@ -36,7 +36,7 @@ namespace InitialProject.Application.UseCases
             {
                 foreach(var req in _tourRequestService.GetAll())
                 {
-                    if((req.Language == _tourService.GetById(notification.TourId).Language || req.LocationId == _tourService.GetById(notification.TourId).LocationId) && req.UserId == loggedUser.Id)
+                    if((req.Language == _tourService.GetById(notification.TourId).Language || req.LocationId == _tourService.GetById(notification.TourId).LocationId) && req.UserId == loggedUser.Id && req.Status == TourRequestStatus.ON_HOLD)
                     {
                         notifications.Add(notification);
                         break;
