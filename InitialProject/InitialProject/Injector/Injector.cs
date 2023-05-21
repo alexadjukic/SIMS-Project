@@ -32,7 +32,8 @@ namespace InitialProject
             { typeof(IAccommodationRenovationRepository), new AccommodationRenovationRepository() },
             { typeof(IAccommodationYearStatisticsRepository), new AccommodationYearStatisticsRepository() },
             { typeof(IAccommodationMonthStatisticsRepository), new AccommodationMonthStatisticsRepository() },
-            { typeof(IAccommodationRenovationSuggestionRepository), new AccommodationRenovationSuggestionRepository() }
+            { typeof(IAccommodationRenovationSuggestionRepository), new AccommodationRenovationSuggestionRepository() },
+            { typeof(IRequestedTourNotificationRepository), new RequestedTourNotificationRepository() }
         };
 
         public static T CreateInstance<T>()

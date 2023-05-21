@@ -10,7 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5.9*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="Azure">
@@ -50,7 +50,9 @@
             </Button>
         </Grid>
         <Grid Grid.Row="1" Background="Azure">
-            <DataGrid x:Name="DataGridTours" ItemsSource="{Binding TourNotifications, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedNotification, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="50,30,50,50">
+            <Button Width="215" Height="45" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Tour Notifications" Margin="297,0,0,0" FontWeight="Bold" FontSize="16"/>
+            <Button Width="215" Height="45" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Requested Tour Notifications" Margin="0,0,297,0" FontWeight="Bold" FontSize="16" Command="{Binding ShowRequestedTourNotificationsCommand}"/>
+            <DataGrid x:Name="DataGridTours" ItemsSource="{Binding TourNotifications, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedNotification, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="50,70,50,50">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}" />
