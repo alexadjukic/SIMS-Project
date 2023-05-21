@@ -253,7 +253,6 @@ namespace InitialProject.Application.UseCases
                 if ((DateTime.Now.Date - reservation.EndDate.Date).Days < 365)
                     lastYearReservations.Add(reservation);
             }
-
             return lastYearReservations;
         }
     }

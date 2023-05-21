@@ -11,13 +11,11 @@ namespace InitialProject.Application.UseCases
 {
     public class SuperGuestService
     {
-        private readonly IUserRepository _userRepository;
         private readonly ISuperGuestRepository _superGuestRepository;
         private readonly AccommodationReservationService _reservationService;
 
         public SuperGuestService()
         {
-            _userRepository = Injector.CreateInstance<IUserRepository>();
             _superGuestRepository = Injector.CreateInstance<ISuperGuestRepository>();
 
             _reservationService = new AccommodationReservationService();
