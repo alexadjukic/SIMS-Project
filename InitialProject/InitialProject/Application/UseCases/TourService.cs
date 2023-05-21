@@ -168,5 +168,21 @@ namespace InitialProject.Application.UseCases
         {
             _tourRepository.Update(tour);
         }
+
+        public bool IsGuideFree(User guide, DateTime date)
+        {
+            foreach (var tour in GetAllByGuide(guide))
+            {
+                if (tour.StartTime.Date == date.Date) return false;
+            }
+            return true;
+        }
+
+        public IEnumerable<Tour> GetAllByGuide(User guide)
+        {
+            var tours = _tourRepository.GetAll().Where(t => t.GuideId == guide.Id);
+            LoadLocations(tours);
+            return tours;
+        }
     }
 }
