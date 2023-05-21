@@ -37,6 +37,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         private readonly TodaysToursViewModel _todaysToursViewModel;
         private readonly GuideTourRequestsViewModel _guideTourRequestsViewModel;
         private readonly YourTourStatisticsViewModel _yourTourStatisticsViewModel;
+        private readonly TourRequestStatisticsViewModel _tourRequestStatisticsViewModel;
         private readonly TourReviewsViewModel _tourReviewsViewModel;
 
         public User Guide { get; set; }
@@ -55,6 +56,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             _todaysToursViewModel = new TodaysToursViewModel(Guide);
             _guideTourRequestsViewModel = new GuideTourRequestsViewModel(Guide);
             _yourTourStatisticsViewModel = new YourTourStatisticsViewModel();
+            _tourRequestStatisticsViewModel = new TourRequestStatisticsViewModel();
             _tourReviewsViewModel = new TourReviewsViewModel();
 
             CurrentViewModel = _yourToursViewModel;
@@ -66,6 +68,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TourRequestsCommand = new RelayCommand(TourRequestsCommand_Execute, TourRequestsCommand_CanExecute);
             ComplexTourRequestsCommand = new RelayCommand(ComplexTourRequestsCommand_Execute, ComplexTourRequestsCommand_CanExecute);
             YourTourStatisticsCommand = new RelayCommand(YourTourStatisticsCommand_Execute, YourTourStatisticsCommand_CanExecute);
+            TourRequestStatisticsCommand = new RelayCommand(TourRequestStatisticsCommand_Execute, TourRequestStatisticsCommand_CanExecute);
             ReviewsCommand = new RelayCommand(ReviewsCommand_Execute, ReviewsCommand_CanExecute);
             SettingsCommand = new RelayCommand(SettingsCommand_Execute, SettingsCommand_CanExecute);
         }
@@ -156,12 +159,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void TourRequestStatisticsCommand_Execute(object? parameter)
         {
-
+            CurrentViewModel = _tourRequestStatisticsViewModel;
         }
 
         public bool TourRequestStatisticsCommand_CanExecute(object? parameter)
         {
-            return true;
+            return CurrentViewModel != _tourRequestStatisticsViewModel;
         }
 
         public void ReviewsCommand_Execute(object? parameter)
