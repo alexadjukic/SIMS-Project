@@ -43,7 +43,7 @@ namespace InitialProject.Application.UseCases
                     }
                 }
             }
-            return null;
+            return notifications;
         }
 
         public RequestedTourNotification Create(Tour tour)

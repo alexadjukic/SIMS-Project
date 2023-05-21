@@ -58,6 +58,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             ShowTourRequestsCommand = new RelayCommand(ShowTourRequestsCommand_Execute);
             ShowStatisticsCommand = new RelayCommand(ShowStatisticsCommand_Execute);
             ShowTourNotificationsCommand = new RelayCommand(ShowTourNotificationsCommand_Execute);
+
+            LoadNotifications();
         }
 
         public void LoadNotifications()
@@ -133,6 +135,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             if (SelectedNotification != null)
             {
+                SelectedNotification.Status = NotificationStatus.READ;
+                _requestedTourNotificationService.Update(SelectedNotification);
                 Tour tour = _tourService.GetById(SelectedNotification.TourId);
                 SelectedTourView selectedTourView = new SelectedTourView(tour, LoggedUser);
                 selectedTourView.Show();
