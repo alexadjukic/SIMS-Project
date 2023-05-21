@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,13 @@ namespace InitialProject.Application.UseCases
     {
         private readonly IAccommodationRenovationRepository _accommodationRenovationRepository;
         private readonly IAccommodationRepository _accommodationRepository;
-        private readonly ILocationRepository _locationRepository;
+        private readonly LocationService _locationService;
 
         public AccommodationRenovationService()
         {
             _accommodationRenovationRepository = Injector.CreateInstance<IAccommodationRenovationRepository>();
             _accommodationRepository = Injector.CreateInstance<IAccommodationRepository>();
-            _locationRepository = Injector.CreateInstance<ILocationRepository>();
+            _locationService = new LocationService();
         }
 
         public AccommodationRenovation Save(Accommodation accommodation, DateTime startDate, DateTime endDate, int renovationLenght, string comment)
@@ -52,7 +53,7 @@ namespace InitialProject.Application.UseCases
             foreach (var ownerRenovation in ownersRenovations)
             {
                 ownerRenovation.Accommodation = _accommodationRepository.GetById(ownerRenovation.AccommodationId);
-                ownerRenovation.Accommodation.Location = _locationRepository.GetById(ownerRenovation.Accommodation.LocationId);
+                ownerRenovation.Accommodation.Location = _locationService.GetLocationById(ownerRenovation.Accommodation.LocationId);
                 updatedOwnerRenovations.Add(ownerRenovation);
             }
 
