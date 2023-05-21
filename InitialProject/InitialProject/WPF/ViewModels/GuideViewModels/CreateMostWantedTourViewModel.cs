@@ -453,6 +453,7 @@ namespace InitialProject.WPF.ViewModels
         private readonly CheckpointService _checkpointService;
         private readonly TourImageService _tourImageService;
         private readonly TourRequestService _tourRequestService;
+        private readonly RequestedTourNotificationService _requestedTourNotificationService;
 
         private readonly User _guide;
         #endregion
@@ -557,6 +558,7 @@ namespace InitialProject.WPF.ViewModels
             _checkpointService = new CheckpointService();
             _tourImageService = new TourImageService();
             _tourRequestService = new TourRequestService();
+            _requestedTourNotificationService = new RequestedTourNotificationService();
 
             _errorsViewModel = new ErrorsViewModel();
             _errorsViewModel.ErrorsChanged += ErrorsViewModel_ErrorsChanged;
@@ -816,6 +818,7 @@ namespace InitialProject.WPF.ViewModels
                 {
                     _tourImageService.Create(image.ToString(), tour);
                 }
+            _requestedTourNotificationService.Create(tour);
             }
 
             ResetValues();

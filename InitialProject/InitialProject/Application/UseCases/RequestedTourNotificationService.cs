@@ -46,5 +46,11 @@ namespace InitialProject.Application.UseCases
             return null;
         }
 
+        public RequestedTourNotification Create(Tour tour)
+        {
+            var notification = new RequestedTourNotification($"Notification {tour.Id}", NotificationStatus.UNREAD, tour.Id, $"Tour {tour.Name} created!!!");
+            return _requestedTourNotificationRepository.Save(notification);
+        }
+
     }
 }
