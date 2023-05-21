@@ -66,5 +66,13 @@ namespace InitialProject.Repositories
             _serializer.ToCSV(FilePath, _accommodationRenovations);
             return accommodationRenovation;
         }
+
+        public void Delete(AccommodationRenovation accommodationRenovation)
+        {
+            _accommodationRenovations = _serializer.FromCSV(FilePath);
+            AccommodationRenovation found = _accommodationRenovations.Find(t => t.Id == accommodationRenovation.Id);
+            _accommodationRenovations.Remove(found);
+            _serializer.ToCSV(FilePath, _accommodationRenovations);
+        }
     }
 }

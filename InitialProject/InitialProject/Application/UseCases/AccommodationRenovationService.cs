@@ -101,5 +101,10 @@ namespace InitialProject.Application.UseCases
 
             return finishedBeforeMoreThanAYear;
         }
+
+        public void Delete(AccommodationRenovation accommodationRenovation)
+        {
+            _accommodationRenovationRepository.Delete(accommodationRenovation);
+        }
     }
 }

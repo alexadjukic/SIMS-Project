@@ -79,8 +79,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void DeclineRenovationCommand_Execute (object? parameter)
         {
-            AccommodationRenovation updatedRenovation = SelectedRenovation;
-            _accommodationRenovationService.Update(updatedRenovation);
+            _accommodationRenovationService.Delete(SelectedRenovation);
             LoadAccommodationRenovations();
         }
         #endregion
