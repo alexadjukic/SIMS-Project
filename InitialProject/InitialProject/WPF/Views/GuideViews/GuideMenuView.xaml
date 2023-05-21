@@ -169,6 +169,9 @@
                     <DataTemplate DataType="{x:Type viewModel:YourTourStatisticsViewModel}">
                         <local:YourTourStatisticsView/>
                     </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:TourRequestStatisticsViewModel}">
+                        <local:TourRequestStatisticsView/>
+                    </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModel:TourReviewsViewModel}">
                         <local:TourReviewsView/>
                     </DataTemplate>
