@@ -60,5 +60,10 @@ namespace InitialProject.Application.UseCases
                 _accommodationReservationService.LoadAccommodation(rating.Reservation);
             }
         }
+
+        public List<GuestRating> GetAll()
+        {
+            return _ratingRepository.GetAll();
+        }
     }
 }

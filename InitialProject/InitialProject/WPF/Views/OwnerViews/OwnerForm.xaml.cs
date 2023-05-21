@@ -74,9 +74,9 @@ namespace InitialProject.WPF.Views
                     GuestRating foundRating = FindRating(reservation);
 
                     if (foundAccommodation.OwnerId == _ownerId && foundRating.Id == 0)
-                    {
+                    {/*
                         RatingGuestReminderForm ratingGuestReminderForm = new RatingGuestReminderForm(_ownerId, _reservationRepository, _accommodationRepository, _userRepository, _ratingRepository);
-                        ratingGuestReminderForm.ShowDialog();
+                        ratingGuestReminderForm.ShowDialog();*/
                         break;
                     }
                 }

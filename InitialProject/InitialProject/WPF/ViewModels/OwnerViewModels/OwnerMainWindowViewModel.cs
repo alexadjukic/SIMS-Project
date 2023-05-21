@@ -42,12 +42,16 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private readonly AccommodationRenovationService _accommodationRenovationService;
         private readonly AccommodationService _accommodationService;
+        private readonly AccommodationReservationService _accommodationReservationService;
+        private readonly GuestRatingService _guestRatingService;
         #endregion
 
         public OwnerMainWindowViewModel(Window ownerMainWindow, User user) 
         {
             _accommodationRenovationService = new AccommodationRenovationService();
             _accommodationService = new AccommodationService();
+            _accommodationReservationService = new AccommodationReservationService();
+            _guestRatingService = new GuestRatingService();
 
             _ownerMainWindow = ownerMainWindow;
             _user = user;
@@ -66,6 +70,51 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SeeNotificationsCommand = new RelayCommand(SeeNotificationsCommand_Execute);
 
             UpdateRenovationInformations();
+            OpenReminderWindow();
+        }
+
+        public void OpenReminderWindow()
+        {
+            foreach (var reservation in _accommodationReservationService.GetAllByOwnerId(_user.Id))
+            {
+                TimeSpan time = DateTime.Now - reservation.EndDate;
+
+                if (time.Days > 5 || DateTime.Now < reservation.EndDate)
+                {
+                    continue;
+                }
+
+                int reservationId = reservation.Id;
+                Accommodation foundAccommodation = _accommodationService.GetByOwnerId(_user.Id).Where(a => a.Id == reservationId).First();
+
+                if (foundAccommodation != null)
+                {
+                    GuestRating foundRating = FindRating(reservation);
+
+                    if (foundAccommodation.OwnerId == _user.Id && foundRating.Id == 0)
+                    {
+                        RatingGuestReminderForm ratingGuestReminderForm = new RatingGuestReminderForm();
+                        ratingGuestReminderForm.ShowDialog();
+                        break;
+                    }
+                }
+            }
+        }
+
+        public GuestRating FindRating(AccommodationReservation reservation)
+        {
+            List<GuestRating> ratings = _guestRatingService.GetAll();
+            GuestRating foundRating = new GuestRating();
+
+            foreach (var rating in ratings)
+            {
+                if (rating.ReservationId == reservation.Id)
+                {
+                    foundRating = rating;
+                }
+            }
+
+            return foundRating;
         }
 
         private async void UpdateRenovationInformations()
@@ -161,7 +210,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void SeeMyProfileCommand_Execute(object? parameter)
         {
-            SelectedPage = new MyProfilePage();
+            SelectedPage = new MyProfilePage(_user.Id);
         }
 
         public void SeeNotificationsCommand_Execute(object? parameter)
