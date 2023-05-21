@@ -40,6 +40,8 @@ namespace InitialProject.Application.UseCases
         public void RemoveBonusPoint(int guestId)
         {
             var superGuest = GetGuestByUserId(guestId);
+            if (superGuest == null)
+                return;
             if (superGuest.BonusPoints > 0)
                 _superGuestRepository.Update(superGuest.GuestId, superGuest.BonusPoints - 1, superGuest.ExpirationDate);
         }
