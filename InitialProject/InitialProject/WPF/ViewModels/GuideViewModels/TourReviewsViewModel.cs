@@ -30,10 +30,14 @@ namespace InitialProject.WPF.ViewModels
         public ObservableCollection<Tour> PastTours { get; set; }
 
         private readonly TourService _tourService;
+
+        private readonly User _guide;
         #endregion
 
-        public TourReviewsViewModel()
+        public TourReviewsViewModel(User guide)
         {
+            _guide = guide;
+
             _tourService = new TourService();
 
             PastTours = new();
@@ -45,7 +49,7 @@ namespace InitialProject.WPF.ViewModels
 
         public void LoadPastTours()
         {
-            foreach (var tour in _tourService.GetPastTours())
+            foreach (var tour in _tourService.GetPastToursByGuide(_guide))
             {
                 PastTours.Add(tour);
             }

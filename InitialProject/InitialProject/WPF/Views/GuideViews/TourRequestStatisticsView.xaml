@@ -37,17 +37,17 @@
                     <StackPanel Grid.Column="0" VerticalAlignment="Center">
                         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,30">
                             <Label Content="Country" Style="{DynamicResource ReviewLabel}"/>
-                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="150" ItemsSource="{Binding Path=Countries,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCountryYearly, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Width="150" ItemsSource="{Binding Path=Countries,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCountryYearly, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
 
                         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,30">
                             <Label Content="City" Style="{DynamicResource ReviewLabel}"/>
-                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="150" ItemsSource="{Binding Path=CitiesYearly, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCityYearly, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Width="150" ItemsSource="{Binding Path=CitiesYearly, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCityYearly, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
 
                         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,30">
                             <Label Content="Language" Style="{DynamicResource ReviewLabel}"/>
-                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="150" ItemsSource="{Binding Path=Languages, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedLanguageYearly, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Width="150" ItemsSource="{Binding Path=Languages, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedLanguageYearly, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -70,22 +70,22 @@
                     <StackPanel Grid.Column="0" VerticalAlignment="Center">
                         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,30">
                             <Label Content="Country" Style="{DynamicResource ReviewLabel}"/>
-                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="150" ItemsSource="{Binding Path=Countries,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCountryMonthly, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Width="150" ItemsSource="{Binding Path=Countries,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCountryMonthly, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
 
                         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,30">
                             <Label Content="City" Style="{DynamicResource ReviewLabel}"/>
-                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="150" ItemsSource="{Binding Path=CitiesYearly, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCityMonthly, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Width="150" ItemsSource="{Binding Path=CitiesYearly, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedCityMonthly, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
 
                         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,30">
                             <Label Content="Language" Style="{DynamicResource ReviewLabel}"/>
-                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="150" ItemsSource="{Binding Path=Languages, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedLanguageMonthly, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Width="150" ItemsSource="{Binding Path=Languages, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedLanguageMonthly, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
 
                         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,30">
                             <Label Content="Year" Style="{DynamicResource ReviewLabel}"/>
-                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" Width="150" ItemsSource="{Binding Path=Years, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedYear, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox Style="{DynamicResource ComboBoxStyle1}" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}" Width="150" ItemsSource="{Binding Path=Years, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedYear, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

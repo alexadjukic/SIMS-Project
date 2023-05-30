@@ -56,7 +56,7 @@
                 <DataGridTemplateColumn Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Review" Style="{DynamicResource DataGridButton}" Command="{Binding DataContext.OpenReviewListCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"></Button>
+                            <Button Content="Reviews" Style="{DynamicResource DataGridButton}" Command="{Binding DataContext.OpenReviewListCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
