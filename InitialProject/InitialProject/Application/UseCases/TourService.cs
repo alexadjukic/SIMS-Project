@@ -29,16 +29,23 @@ namespace InitialProject.Application.UseCases
             _locationService = new LocationService();
         }
 
-        public IEnumerable<Tour> GetFutureTours()
+        public IEnumerable<Tour> GetPastTours()
         {
-            var futureTours = _tourRepository.GetAll().Where(t => t.StartTime.Subtract(DateTime.Now).TotalHours > 0);
+            var pastTours = _tourRepository.GetAll().Where(t => t.StartTime.Subtract(DateTime.Now) < TimeSpan.Zero);
+            LoadLocations(pastTours);
+            return pastTours;
+        }
+
+        public IEnumerable<Tour> GetFutureToursByGuide(User guide)
+        {
+            var futureTours = _tourRepository.GetAll().Where(t => t.StartTime.Subtract(DateTime.Now) > TimeSpan.Zero && t.GuideId == guide.Id);
             LoadLocations(futureTours);
             return futureTours;
         }
 
-        public IEnumerable<Tour> GetPastTours()
+        public IEnumerable<Tour> GetPastToursByGuide(User guide)
         {
-            var pastTours = _tourRepository.GetAll().Where(t => t.StartTime.Subtract(DateTime.Now).TotalHours < 0);
+            var pastTours = _tourRepository.GetAll().Where(t => t.StartTime.Subtract(DateTime.Now) < TimeSpan.Zero && t.GuideId == guide.Id);
             LoadLocations(pastTours);
             return pastTours;
         }

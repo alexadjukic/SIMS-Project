@@ -36,13 +36,16 @@ namespace InitialProject.WPF.ViewModels
         public ObservableCollection<Tour> PastTours { get; set; }
 
         private readonly TourService _tourService;
+
+        private readonly User _guide;
         #endregion
-        public YourTourStatisticsViewModel()
+        public YourTourStatisticsViewModel(User guide)
         {
+            _guide = guide;
 
             _tourService = new TourService();
 
-            PastTours = new ObservableCollection<Tour>(_tourService.GetPastTours());
+            PastTours = new ObservableCollection<Tour>(_tourService.GetPastToursByGuide(_guide));
 
             OpenStatsCommand = new RelayCommand(OpenStatsCommand_Execute, OpenStatsCommand_CanExecute);
             MostVisitedTourCommand = new RelayCommand(MostVisitedTourCommand_Execute);

@@ -31,15 +31,6 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
         }
 
-        private readonly CreateNewTourViewModel _createNewTourViewModel;
-        private readonly CreateMostWantedTourViewModel _createMostWantedTourViewModel;
-        private readonly YourToursViewModel _yourToursViewModel;
-        private readonly TodaysToursViewModel _todaysToursViewModel;
-        private readonly GuideTourRequestsViewModel _guideTourRequestsViewModel;
-        private readonly YourTourStatisticsViewModel _yourTourStatisticsViewModel;
-        private readonly TourRequestStatisticsViewModel _tourRequestStatisticsViewModel;
-        private readonly TourReviewsViewModel _tourReviewsViewModel;
-
         public User Guide { get; set; }
         public string Username { get; set; }
 
@@ -50,16 +41,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             Username = guide.Username;
             Guide = guide;
 
-            _createNewTourViewModel = new CreateNewTourViewModel(Guide);
-            _createMostWantedTourViewModel = new CreateMostWantedTourViewModel(Guide);
-            _yourToursViewModel = new YourToursViewModel();
-            _todaysToursViewModel = new TodaysToursViewModel(Guide);
-            _guideTourRequestsViewModel = new GuideTourRequestsViewModel(Guide);
-            _yourTourStatisticsViewModel = new YourTourStatisticsViewModel();
-            _tourRequestStatisticsViewModel = new TourRequestStatisticsViewModel();
-            _tourReviewsViewModel = new TourReviewsViewModel();
-
-            CurrentViewModel = _yourToursViewModel;
+            CurrentViewModel = new YourToursViewModel(Guide);
 
             CreateNewTourCommand = new RelayCommand(CreateNewTourCommand_Execute, CreateNewTourCommand_CanExecute);
             CreateMostWantedTourCommand = new RelayCommand(CreateMostWantedTourCommand_Execute, CreateMostWantedTourCommand_CanExecute);
@@ -89,52 +71,52 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
 		public void CreateNewTourCommand_Execute(object? parameter)
 		{
-            CurrentViewModel = _createNewTourViewModel;
+            CurrentViewModel = new CreateNewTourViewModel(Guide);
 		}
 
 		public bool CreateNewTourCommand_CanExecute(object? parameter)
 		{
-            return CurrentViewModel != _createNewTourViewModel;
+            return CurrentViewModel.GetType() != typeof(CreateNewTourViewModel);
 		}
 
         public void CreateMostWantedTourCommand_Execute(object? parameter)
         {
-            CurrentViewModel = _createMostWantedTourViewModel;
+            CurrentViewModel = new CreateMostWantedTourViewModel(Guide);
         }
 
         public bool CreateMostWantedTourCommand_CanExecute(object? parameter)
         {
-            return CurrentViewModel != _createMostWantedTourViewModel;
+            return CurrentViewModel.GetType() != typeof(CreateMostWantedTourViewModel);
         }
 
         public void YourToursCommand_Execute(object? parameter)
         {
-            CurrentViewModel = _yourToursViewModel;
+            CurrentViewModel = new YourToursViewModel(Guide);
         }
 
         public bool YourToursCommand_CanExecute(object? parameter)
         {
-            return CurrentViewModel != _yourToursViewModel;
+            return CurrentViewModel.GetType() != typeof(YourToursViewModel);
         }
 
         public void TodaysToursCommand_Execute(object? parameter)
         {
-            CurrentViewModel = _todaysToursViewModel;
+            CurrentViewModel = new TodaysToursViewModel(Guide);
         }
 
         public bool TodaysToursCommand_CanExecute(object? parameter)
         {
-            return CurrentViewModel != _todaysToursViewModel;
+            return CurrentViewModel.GetType() != typeof(TodaysToursViewModel);
         }
 
         public void TourRequestsCommand_Execute(object? parameter)
         {
-            CurrentViewModel = _guideTourRequestsViewModel;
+            CurrentViewModel = new GuideTourRequestsViewModel(Guide);
         }
 
         public bool TourRequestsCommand_CanExecute(object? parameter)
         {
-            return CurrentViewModel != _guideTourRequestsViewModel;
+            return CurrentViewModel.GetType() != typeof(GuideTourRequestsViewModel);
         }
 
         public void ComplexTourRequestsCommand_Execute(object? parameter)
@@ -149,32 +131,32 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void YourTourStatisticsCommand_Execute(object? parameter)
         {
-            CurrentViewModel = _yourTourStatisticsViewModel;
+            CurrentViewModel = new YourTourStatisticsViewModel(Guide);
         }
 
         public bool YourTourStatisticsCommand_CanExecute(object? parameter)
         {
-            return CurrentViewModel != _yourTourStatisticsViewModel;
+            return CurrentViewModel.GetType() != typeof(YourTourStatisticsViewModel);
         }
 
         public void TourRequestStatisticsCommand_Execute(object? parameter)
         {
-            CurrentViewModel = _tourRequestStatisticsViewModel;
+            CurrentViewModel = new TourRequestStatisticsViewModel();
         }
 
         public bool TourRequestStatisticsCommand_CanExecute(object? parameter)
         {
-            return CurrentViewModel != _tourRequestStatisticsViewModel;
+            return CurrentViewModel.GetType() != typeof(TourRequestStatisticsViewModel);
         }
 
         public void ReviewsCommand_Execute(object? parameter)
         {
-            CurrentViewModel = _tourReviewsViewModel;
+            CurrentViewModel = new TourReviewsViewModel(Guide);
         }
 
         public bool ReviewsCommand_CanExecute(object? parameter)
         {
-            return CurrentViewModel != _tourReviewsViewModel;
+            return CurrentViewModel.GetType() != typeof(TourReviewsViewModel);
         }
 
         public void SettingsCommand_Execute(object? parameter)

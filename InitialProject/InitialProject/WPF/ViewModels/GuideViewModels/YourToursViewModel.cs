@@ -59,10 +59,14 @@ namespace InitialProject.WPF.ViewModels
 
 		private readonly TourService _tourService;
 		private readonly TourReservationService _tourReservationService;
+
+		private readonly User _guide;
         #endregion
 
-        public YourToursViewModel()
+        public YourToursViewModel(User guide)
         {
+			_guide = guide;
+
 			_tourService = new TourService();
 			_tourReservationService = new TourReservationService();
 
@@ -77,7 +81,7 @@ namespace InitialProject.WPF.ViewModels
 		public void LoadFutureTours()
 		{
 			FutureTours.Clear();
-			foreach (var tour in _tourService.GetFutureTours())
+			foreach (var tour in _tourService.GetFutureToursByGuide(_guide))
 			{
                 FutureTours.Add(tour);
 			}
@@ -86,7 +90,7 @@ namespace InitialProject.WPF.ViewModels
         public void LoadPastTours()
         {
             PastTours.Clear();
-            foreach (var tour in _tourService.GetPastTours())
+            foreach (var tour in _tourService.GetPastToursByGuide(_guide))
             {
                 PastTours.Add(tour);
             }
