@@ -389,8 +389,12 @@ namespace InitialProject.WPF.Views.Guest1Views
                 {
                     _accommodationMonthStatisticsService.Save(i, yearStatistic, yearStatistic.Id, 1, 0, 0, 0);
                 }
+                else
+                {
+                    _accommodationMonthStatisticsService.Save(i, yearStatistic, yearStatistic.Id, 0, 0, 0, 0);
+                }
 
-                _accommodationMonthStatisticsService.Save(i, yearStatistic, yearStatistic.Id, 0, 0, 0, 0);
+                
             }
         }
 

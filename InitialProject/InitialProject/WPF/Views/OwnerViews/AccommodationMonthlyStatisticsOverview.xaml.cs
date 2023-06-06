@@ -25,6 +25,7 @@ namespace InitialProject.WPF.Views.OwnerViews
         {
             InitializeComponent();
             this.DataContext = new AccommodationMonthlyStatisticsOverviewViewModel(selectedAccommodation, selectedYearStatistic);
+
         }
 
         private void Button_Close_Click(object sender, RoutedEventArgs e)

@@ -1,8 +1,11 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Domain.Models;
+using LiveCharts;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +72,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private readonly AccommodationMonthStatisticsService _accommodationMonthStatisticsService;
         private readonly AccommodationReservationService _accommodationReservationService;
+
+        public string[] Labels { get; set; }
+        public SeriesCollection SeriesCollection { get; set; }
+        public Func<int, string> Formatter { get; set; }
+
+        private HashSet<int> formattedValues = new HashSet<int>();
+
+        private double? previousFormattedValue = null;
         #endregion
 
         public AccommodationMonthlyStatisticsOverviewViewModel(Accommodation selectedAccommodation, AccommodationYearStatistic selectedYearStatistic)
@@ -81,8 +92,45 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _accommodationMonthStatisticsService = new AccommodationMonthStatisticsService();
             _accommodationReservationService = new AccommodationReservationService();
 
+            LoadLabels();
+            LoadColumns();
             LoadMonthStatistics();
             FindMostTakenMonth();
+        }
+
+        private void LoadLabels()
+        {
+            Labels = new[] { "Janyary", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+        }
+
+        private void LoadColumns()
+        {
+            SeriesCollection = new SeriesCollection() {
+                new ColumnSeries
+                {
+                    Title = "Reservations",
+                    Values = new ChartValues<int>(),
+                    ColumnPadding = -10
+                },
+                new ColumnSeries
+                {
+                    Title = "Canceled Reservations",
+                    Values = new ChartValues<int>(),
+                    ColumnPadding = -10
+                },
+                new ColumnSeries
+                {
+                    Title = "Requests",
+                    Values = new ChartValues<int>(),
+                    ColumnPadding = -10
+                },
+                new ColumnSeries
+                {
+                    Title = "Suggestions",
+                    Values = new ChartValues<int>(),
+                    ColumnPadding = -10
+                }
+            };
         }
 
         private void LoadMonthStatistics()
@@ -90,7 +138,25 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             foreach (var monthStatistic in _accommodationMonthStatisticsService.GetAllByYearStatistic(SelectedYearStatistics.Id))
             {
                 AccommodationMonthStatistics.Add(monthStatistic);
+
+                SeriesCollection[0].Values.Add(monthStatistic.NumberOfReservations);
+                SeriesCollection[1].Values.Add(monthStatistic.NumberOfDeclinedReservations);
+                SeriesCollection[2].Values.Add(monthStatistic.NumberOfChangedReservations);
+                SeriesCollection[3].Values.Add(monthStatistic.NumberOfRenovationSuggestions);
             }
+
+            Formatter = value =>
+            {
+                if (!formattedValues.Contains(value))
+                {
+                    formattedValues.Add(value);
+                    return value.ToString("N0");
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            };
         }
 
         private void FindMostTakenMonth()

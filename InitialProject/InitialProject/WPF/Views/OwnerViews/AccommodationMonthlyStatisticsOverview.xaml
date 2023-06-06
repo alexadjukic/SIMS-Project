@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:cnv="clr-namespace:InitialProject.Converters"
         mc:Ignorable="d"
-        Title="AccommodationMonthlyStatisticsOverview"  Height="550" Width="800" WindowStartupLocation="CenterScreen">
+        Title="AccommodationMonthlyStatisticsOverview"  Height="550" Width="1200" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -53,15 +54,22 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding MostTakenMonth, Converter={StaticResource MonthConverter}}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
         </StackPanel>
 
-        <DataGrid Name="DateDataGrid" Grid.Row="1" ItemsSource="{Binding AccommodationMonthStatistics, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource DataGridStyle}" DataGrid.ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" DataGrid.RowStyle="{StaticResource DataGridRowStyle}" DataGrid.CellStyle="{StaticResource DataGridCellStyle}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedYearStatistics}" CanUserAddRows="False" Validation.ErrorTemplate="{x:Null}" Height="210">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Year" Binding="{Binding Month, Converter={StaticResource MonthConverter}}" Width="*"/>
-                <DataGridTextColumn Header="Number of reservations" Binding="{Binding NumberOfReservations}" Width="*"/>
-                <DataGridTextColumn Header="Declined reservations" Binding="{Binding NumberOfDeclinedReservations}" Width="*"/>
-                <DataGridTextColumn Header="Changed reservations" Binding="{Binding NumberOfChangedReservations}" Width="*"/>
-                <DataGridTextColumn Header="Renovation suggestions" Binding="{Binding NumberOfRenovationSuggestions}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <lvc:CartesianChart Series="{Binding SeriesCollection}"  Grid.Row="1" LegendLocation="Left">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Month" Labels="{Binding Labels}" LabelsRotation="-45">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Step="1" />
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="" LabelFormatter="{Binding Formatter}">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Step="1" />
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
 
         <Grid Grid.Row="4" Style="{StaticResource MenuGridBackground}">
             <Button Name="Button_Close" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0,0,25,0" Content="Close" Click="Button_Close_Click"/>

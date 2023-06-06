@@ -99,7 +99,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
             else
             {
-                yearStatistic.NumberOfReservations++;
+                yearStatistic.NumberOfChangedReservations++;
                 _accommodationYearStatisticsService.Update(yearStatistic);
             }
 

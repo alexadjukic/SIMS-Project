@@ -41,5 +41,12 @@ namespace InitialProject.Application.UseCases
         {
             return GetAll().FindAll(ys => ys.AccommodationId == accommodationId);
         }
+
+        public AccommodationYearStatistic FindYearStatisticsByYearAndAccommodationId(string selectedYear, int accommodationId)
+        {
+            List<AccommodationYearStatistic> allStatistics = _accommodationYearStatisticsRepository.GetAll();
+
+            return allStatistics.Find(ys => ys.Year.ToString().Equals(selectedYear) && ys.AccommodationId == accommodationId);
+        }
     }
 }
