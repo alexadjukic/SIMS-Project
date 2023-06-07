@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InitialProject.WPF.ViewModels
 {
@@ -58,11 +59,15 @@ namespace InitialProject.WPF.ViewModels
 
 		public void ConfirmCommand_Execute(object? parameter)
 		{
-			var tour = _tourService.Create($"Tour for user \"{(_userService.GetById(TourRequest.UserId)).Username}\"", TourRequest.Location.Country, TourRequest.Location.City, TourRequest.Description, TourRequest.Language, TourRequest.GuestsNumber, SelectedDate, 1, null, _guide.Id);
+            if (MessageBox.Show("Are you sure you want to accept this tour request?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.Yes) == MessageBoxResult.No) return;
+
+            var tour = _tourService.Create($"Tour for user \"{(_userService.GetById(TourRequest.UserId)).Username}\"", TourRequest.Location.Country, TourRequest.Location.City, TourRequest.Description, TourRequest.Language, TourRequest.GuestsNumber, SelectedDate, 1, null, _guide.Id);
 			_checkpointService.Create($"Start checkpoint for tour {tour.Name}", tour);
 			_checkpointService.Create($"End checkpoint for tour {tour.Name}", tour);
 			_tourRequestService.AcceptRequest(TourRequest);
-		}
+
+            MessageBox.Show("Tour request accepted", "Success", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.Yes);
+        }
 
 		public bool ConfirmCommand_CanExecute(object? parameter)
 		{

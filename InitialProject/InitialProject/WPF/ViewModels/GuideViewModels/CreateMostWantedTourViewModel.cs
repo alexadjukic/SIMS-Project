@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace InitialProject.WPF.ViewModels
@@ -456,6 +457,7 @@ namespace InitialProject.WPF.ViewModels
         private readonly RequestedTourNotificationService _requestedTourNotificationService;
 
         private readonly User _guide;
+        private readonly Stack<Tuple<ReversibleCommand, object?>> _commandStack;
         #endregion
 
         #region VALIDATION
@@ -549,9 +551,10 @@ namespace InitialProject.WPF.ViewModels
         }
         #endregion
 
-        public CreateMostWantedTourViewModel(User guide)
+        public CreateMostWantedTourViewModel(User guide, Stack<Tuple<ReversibleCommand, object?>> commandStack)
         {
             _guide = guide;
+            _commandStack = commandStack;
 
             _tourService = new TourService();
             _locationService = new LocationService();
@@ -584,10 +587,10 @@ namespace InitialProject.WPF.ViewModels
 
             LoadCountries();
 
-            AddDateCommand = new RelayCommand(AddDateCommand_Execute, AddDateCommand_CanExecute);
-            RemoveDateCommand = new RelayCommand(RemoveDateCommand_Execute, RemoveDateCommand_CanExecute);
-            AddCheckpointCommand = new RelayCommand(AddCheckpointCommand_Execute, AddCheckpointCommand_CanExecute);
-            RemoveCheckpointCommand = new RelayCommand(RemoveCheckpointCommand_Execute, RemoveCheckpointCommand_CanExecute);
+            AddDateCommand = new ReversibleCommand(AddDateCommand_Execute, AddDateCommand_CanExecute, AddDateCommand_Reverse);
+            RemoveDateCommand = new ReversibleCommand(RemoveDateCommand_Execute, RemoveDateCommand_CanExecute, RemoveDateCommand_Reverse);
+            AddCheckpointCommand = new ReversibleCommand(AddCheckpointCommand_Execute, AddCheckpointCommand_CanExecute, AddCheckpointCommand_Reverse);
+            RemoveCheckpointCommand = new ReversibleCommand(RemoveCheckpointCommand_Execute, RemoveCheckpointCommand_CanExecute, RemoveCheckpointCommand_Reverse);
             AddImageCommand = new RelayCommand(AddImageCommand_Execute);
             RemoveImageCommand = new RelayCommand(RemoveImageCommand_Execute, RemoveImageCommand_CanExecute);
             SetAsCoverCommand = new RelayCommand(SetAsCoverCommand_Execute, SetAsCoverCommand_CanExecute);
@@ -656,10 +659,10 @@ namespace InitialProject.WPF.ViewModels
         }
 
         #region COMMANDS
-        public RelayCommand AddDateCommand { get; }
-        public RelayCommand RemoveDateCommand { get; }
-        public RelayCommand AddCheckpointCommand { get; }
-        public RelayCommand RemoveCheckpointCommand { get; }
+        public ReversibleCommand AddDateCommand { get; }
+        public ReversibleCommand RemoveDateCommand { get; }
+        public ReversibleCommand AddCheckpointCommand { get; }
+        public ReversibleCommand RemoveCheckpointCommand { get; }
         public RelayCommand AddImageCommand { get; }
         public RelayCommand RemoveImageCommand { get; }
         public RelayCommand SetAsCoverCommand { get; }
@@ -679,6 +682,7 @@ namespace InitialProject.WPF.ViewModels
         {
             Dates.Add(DatePickerSelectedDate);
             Validate();
+            _commandStack.Push(new Tuple<ReversibleCommand, object?>(AddDateCommand, parameter));
         }
 
         public bool AddDateCommand_CanExecute(object? parameter)
@@ -686,11 +690,18 @@ namespace InitialProject.WPF.ViewModels
             return !Dates.Contains(DatePickerSelectedDate) && DatePickerSelectedDate.CompareTo(DateTime.Now) > 0;
         }
 
+        public void AddDateCommand_Reverse(object? parameter)
+        {
+            Dates.RemoveAt(Dates.Count - 1);
+            Validate();
+        }
+
         public void RemoveDateCommand_Execute(object? parameter)
         {
             DateTime date = (DateTime)parameter;
             Dates.Remove(date);
             Validate();
+            _commandStack.Push(new Tuple<ReversibleCommand, object?>(RemoveDateCommand, parameter));
         }
 
         public bool RemoveDateCommand_CanExecute(object? parameter)
@@ -698,11 +709,19 @@ namespace InitialProject.WPF.ViewModels
             return parameter is not null;
         }
 
+        public void RemoveDateCommand_Reverse(object? parameter)
+        {
+            DateTime date = (DateTime)parameter;
+            Dates.Add(date);
+            Validate();
+        }
+
         public void AddCheckpointCommand_Execute(object? parameter)
         {
             CheckpointNames.Add(EnteredCheckpointName);
             EnteredCheckpointName = "";
             Validate();
+            _commandStack.Push(new Tuple<ReversibleCommand, object?>(AddCheckpointCommand, parameter));
         }
 
         public bool AddCheckpointCommand_CanExecute(object? parameter)
@@ -710,16 +729,30 @@ namespace InitialProject.WPF.ViewModels
             return !string.IsNullOrEmpty(EnteredCheckpointName) && !CheckpointNames.Contains(EnteredCheckpointName);
         }
 
+        public void AddCheckpointCommand_Reverse(object? parameter)
+        {
+            CheckpointNames.RemoveAt(CheckpointNames.Count - 1);
+            Validate();
+        }
+
         public void RemoveCheckpointCommand_Execute(object? parameter)
         {
             string checkpointName = parameter as string;
             CheckpointNames.Remove(checkpointName);
             Validate();
+            _commandStack.Push(new Tuple<ReversibleCommand, object?>(RemoveCheckpointCommand, parameter));
         }
 
         public bool RemoveCheckpointCommand_CanExecute(object? parameter)
         {
             return parameter is not null;
+        }
+
+        public void RemoveCheckpointCommand_Reverse(object? parameter)
+        {
+            string checkpointName = parameter as string;
+            CheckpointNames.Add(checkpointName);
+            Validate();
         }
 
         public void AddImageCommand_Execute(object? parameter)
@@ -805,6 +838,8 @@ namespace InitialProject.WPF.ViewModels
 
         public void ConfirmCommand_Execute(object? parameter)
         {
+            if (MessageBox.Show("Are you sure you want to create this tour?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.Yes) == MessageBoxResult.No) return;
+
             CoverImage ??= Images.First();
             foreach (var startTime in Dates)
             {
@@ -822,6 +857,10 @@ namespace InitialProject.WPF.ViewModels
             }
 
             ResetValues();
+
+            MessageBox.Show("Tour successfully created", "Success", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.Yes);
+
+            _commandStack.Clear();
         }
 
         public bool ConfirmCommand_CanExecute(object? parameter)
