@@ -83,7 +83,14 @@
         </lvc:CartesianChart>
 
         <Grid Grid.Row="4" Style="{StaticResource MenuGridBackground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+            
+            
             <Button Name="Button_Close" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0,0,25,0" Content="Close" Click="Button_Close_Click"/>
+            <Button Name="Button_PDF" Grid.Column="1" Style="{StaticResource CloseButton}" Content="Create PDF" HorizontalAlignment="Right" Margin="0,0,25,0" Command="{Binding CreatePDFWithYearsCommand}" />
         </Grid>
     </Grid>
 </Window>

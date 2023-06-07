@@ -1,5 +1,7 @@
 ﻿using InitialProject.Application.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using InitialProject.PDF;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System;
@@ -96,6 +98,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             LoadColumns();
             LoadMonthStatistics();
             FindMostTakenMonth();
+
+            CreatePDFForMonthsCommand = new RelayCommand(CreatePDFForMonthsCommand_Execute);
         }
 
         private void LoadLabels()
@@ -178,6 +182,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         }
 
         #region COMMANDS
+        public RelayCommand CreatePDFForMonthsCommand { get; }
+
+        public void CreatePDFForMonthsCommand_Execute(object? parameter)
+        {
+            AccommodationMonthStatisticsPDFCreator pdfCreator = new AccommodationMonthStatisticsPDFCreator(_accommodationMonthStatisticsService, SelectedYearStatistics, SelectedAccommodation);
+            pdfCreator.CreatePDF();
+            System.Diagnostics.Process.Start("explorer", "monthStatistics.pdf");
+        }
         #endregion
     }
 }

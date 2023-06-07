@@ -1,6 +1,7 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using InitialProject.PDF;
 using InitialProject.WPF.Views.OwnerViews;
 using LiveCharts;
 using LiveCharts.Wpf;
@@ -112,7 +113,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Years = new ObservableCollection<string>();
 
             ShowMonthlyStatisticsCommand = new RelayCommand(ShowMonthlyStatisticsCommand_Execute, ShowMonthlyStatisticsCommand_CanExecute);
-            
+            CreatePDFWithYearsCommand = new RelayCommand(CreatePDFWithYears_Execute);
+
             Labels = new string[0];
 
             LoadColumns();
@@ -198,6 +200,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         #region COMMANDS
         public RelayCommand ShowMonthlyStatisticsCommand { get; }
+        public RelayCommand CreatePDFWithYearsCommand { get; }
+
+        public void CreatePDFWithYears_Execute(object? parameter)
+        {
+            AccommodationYearStatisticsPDFCreator pdfCreator = new AccommodationYearStatisticsPDFCreator(_accommodationYearStatisticsService, SelectedAccommodation);
+            pdfCreator.CreatePDF();
+            System.Diagnostics.Process.Start("explorer", "yearStatistics.pdf");
+        }
 
         public bool ShowMonthlyStatisticsCommand_CanExecute(object? parameter)
         {
