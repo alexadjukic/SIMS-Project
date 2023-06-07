@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="Statistics" Height="550" Width="800" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
 
@@ -32,7 +33,7 @@
 
             <StackPanel Grid.Column="0" VerticalAlignment="Center">
                 <TextBlock x:Name="TextBlockMonthly" Text="Year for detailed statistics:" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBox x:Name="TextBoxYear" Text="" Style="{StaticResource TextBoxStyle}"/>
+                <ComboBox x:Name="TextBoxYear" Text="" ItemsSource="{Binding Path=Years}" SelectedItem="{Binding SelectedYear}"/>
             </StackPanel>
 
             <Grid Grid.Column="1">
@@ -64,18 +65,32 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding MostTakenYear}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
         </StackPanel>
 
-        <DataGrid Name="DateDataGrid" Grid.Row="2" ItemsSource="{Binding AccommodationYearStatistics, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource DataGridStyle}" DataGrid.ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" DataGrid.RowStyle="{StaticResource DataGridRowStyle}" DataGrid.CellStyle="{StaticResource DataGridCellStyle}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedYearStatistics}" CanUserAddRows="False" Validation.ErrorTemplate="{x:Null}" Height="210">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="*"/>
-                <DataGridTextColumn Header="Number of reservations" Binding="{Binding NumberOfReservations}" Width="*"/>
-                <DataGridTextColumn Header="Declined reservations" Binding="{Binding NumberOfDeclinedReservations}" Width="*"/>
-                <DataGridTextColumn Header="Changed reservations" Binding="{Binding NumberOfChangedReservations}" Width="*"/>
-                <DataGridTextColumn Header="Renovation suggestions" Binding="{Binding NumberOfRenovationSuggestions}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <lvc:CartesianChart Series="{Binding SeriesCollection}"  Grid.Row="2" LegendLocation="Left">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Year" Labels="{Binding Labels}">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Step="1" />
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="" LabelFormatter="{Binding Formatter}">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Step="1" />
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
 
         <Grid Grid.Row="4" Style="{StaticResource MenuGridBackground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+            
+            
             <Button Name="Button_Close" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0,0,25,0" Content="Close" Click="Button_Close_Click"/>
+            <Button Name="Button_PDF" Grid.Column="1" Style="{StaticResource CloseButton}" Content="Create PDF" HorizontalAlignment="Right" Margin="0,0,25,0" Command="{Binding CreatePDFWithYearsCommand}" />
         </Grid>
     </Grid>
 </Window>
