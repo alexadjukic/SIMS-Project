@@ -42,7 +42,6 @@ namespace InitialProject.PDF
             {
                 Console.WriteLine(ex.StackTrace);
             }
-
         }
 
         private void CloseStreams(FileStream stream, PdfDocument document)
@@ -67,18 +66,12 @@ namespace InitialProject.PDF
                 return;
             }
 
-            /*PdfLayoutResult result = CreateFirstGrid(page, monthStatistics);
-
-            result.Page.Graphics.DrawString("Accommodation statistics", new PdfStandardFont(PdfFontFamily.Helvetica, 10), PdfBrushes.Black, new PointF(210, 0));*/
-
             PdfGraphics graphics = page.Graphics;
 
-            // Set page border color and style
             graphics.DrawRectangle(new PdfPen(PdfBrushes.DeepSkyBlue, 10), new RectangleF(0, 0, page.Size.Width, page.Size.Height));
 
-            PdfLayoutResult result = CreateFirstGrid(page, monthStatistics);
+            PdfLayoutResult result = CreateGrid(page, monthStatistics);
 
-            // Set title font and size
             PdfFont titleFont = new PdfStandardFont(PdfFontFamily.Helvetica, 16);
             PdfFont contentFont = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
 
@@ -103,24 +96,22 @@ namespace InitialProject.PDF
             PdfFont titleFont2 = new PdfStandardFont(PdfFontFamily.Helvetica, 18, PdfFontStyle.Bold);
             graphics.DrawString("Accommodation statistics", titleFont2, PdfBrushes.Black, new PointF(xPosition, yPosition));
 
-            // Draw title
-
             result.Page.Graphics.DrawString("Accommodation statistics", new PdfStandardFont(PdfFontFamily.Helvetica, 10), PdfBrushes.Black, new PointF(210, 0));
         }
 
-        private PdfLayoutResult CreateFirstGrid(PdfPage page, IEnumerable<AccommodationMonthStatistics> monthStatistics)
+        private PdfLayoutResult CreateGrid(PdfPage page, IEnumerable<AccommodationMonthStatistics> monthStatistics)
         {
             PdfGridLayoutFormat layoutFormat = new PdfGridLayoutFormat();
             layoutFormat.Layout = PdfLayoutType.Paginate;
-            PdfGrid firstGrid = CreateGridFromSurvey(monthStatistics);
+            PdfGrid firstGrid = CreateGridFromStatistics(monthStatistics);
             PdfLayoutResult result = firstGrid.Draw(page, new PointF(10, 130), layoutFormat);
             return result;
         }
 
-        private PdfGrid CreateGridFromSurvey(IEnumerable<AccommodationMonthStatistics> monthStatistics)
+        private PdfGrid CreateGridFromStatistics(IEnumerable<AccommodationMonthStatistics> monthStatistics)
         {
             PdfGrid pdfGrid = new PdfGrid();
-            DataTable table = CreateDataTableForSurveys(monthStatistics);
+            DataTable table = CreateDataTableForStatistics(monthStatistics);
 
             pdfGrid.Style.CellPadding.All = 5;
             pdfGrid.Style.Font = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
@@ -132,8 +123,7 @@ namespace InitialProject.PDF
             return pdfGrid;
         }
 
-
-        private DataTable CreateDataTableForSurveys(IEnumerable<AccommodationMonthStatistics> monthStatistics)
+        private DataTable CreateDataTableForStatistics(IEnumerable<AccommodationMonthStatistics> monthStatistics)
         {
             DataTable dataTable = new DataTable();
 
