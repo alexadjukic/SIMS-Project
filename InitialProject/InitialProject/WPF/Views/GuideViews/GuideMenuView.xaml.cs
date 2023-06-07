@@ -39,5 +39,17 @@ namespace InitialProject.WPF.Views
         {
             this.Close();
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F11)
+            {
+                this.ButtonLogOut_Click(sender, e);
+            }
+            else if (e.Key == Key.F12)
+            {
+                this.ButtonClose_Click(sender, e);
+            }
+        }
     }
 }

@@ -1,19 +1,11 @@
 ﻿using InitialProject.Commands;
 using InitialProject.Domain.Models;
-using InitialProject.WPF.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
 {
     public class GuideMenuViewModel : ViewModelBase
     {
-		#region PROPERTIES
+        #region PROPERTIES
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
         {
@@ -31,15 +23,34 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
         }
 
+        private string _menuSide;
+        public string MenuSide
+        {
+            get
+            {
+                return _menuSide;
+            }
+            set
+            {
+                if (_menuSide != value)
+                {
+                    _menuSide = value;
+                    OnPropertyChanged(nameof(MenuSide));
+                }
+            }
+        }
+
         public User Guide { get; set; }
         public string Username { get; set; }
 
         #endregion
 
         public GuideMenuViewModel(User guide)
-		{
+        {
             Username = guide.Username;
             Guide = guide;
+
+            MenuSide = "Left";
 
             CurrentViewModel = new YourToursViewModel(Guide);
 
@@ -53,31 +64,34 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             TourRequestStatisticsCommand = new RelayCommand(TourRequestStatisticsCommand_Execute, TourRequestStatisticsCommand_CanExecute);
             ReviewsCommand = new RelayCommand(ReviewsCommand_Execute, ReviewsCommand_CanExecute);
             SettingsCommand = new RelayCommand(SettingsCommand_Execute, SettingsCommand_CanExecute);
+            SwitchMenuSideCommand = new RelayCommand(SwitchMenuSideCommand_Execute);
         }
 
         #region COMMANDS
-		public RelayCommand CreateNewTourCommand { get; }
-		public RelayCommand CreateMostWantedTourCommand { get; }
-		public RelayCommand YourToursCommand { get; }
-		public RelayCommand TodaysToursCommand { get; }
-		public RelayCommand TourRequestsCommand { get; }
-		public RelayCommand ComplexTourRequestsCommand { get; }
-		public RelayCommand YourTourStatisticsCommand { get; }
-		public RelayCommand TourRequestStatisticsCommand { get; }
-		public RelayCommand ReviewsCommand { get; }
-		public RelayCommand SettingsCommand { get; }
-		public RelayCommand LogOutCommand { get; }
+        public RelayCommand CreateNewTourCommand { get; }
+        public RelayCommand CreateMostWantedTourCommand { get; }
+        public RelayCommand YourToursCommand { get; }
+        public RelayCommand TodaysToursCommand { get; }
+        public RelayCommand TourRequestsCommand { get; }
+        public RelayCommand ComplexTourRequestsCommand { get; }
+        public RelayCommand YourTourStatisticsCommand { get; }
+        public RelayCommand TourRequestStatisticsCommand { get; }
+        public RelayCommand ReviewsCommand { get; }
+        public RelayCommand SettingsCommand { get; }
+        public RelayCommand LogOutCommand { get; }
         public RelayCommand CloseCommand { get; }
+        public RelayCommand SwitchMenuSideCommand { get; }
 
-		public void CreateNewTourCommand_Execute(object? parameter)
-		{
+
+        public void CreateNewTourCommand_Execute(object? parameter)
+        {
             CurrentViewModel = new CreateNewTourViewModel(Guide);
-		}
+        }
 
-		public bool CreateNewTourCommand_CanExecute(object? parameter)
-		{
+        public bool CreateNewTourCommand_CanExecute(object? parameter)
+        {
             return CurrentViewModel.GetType() != typeof(CreateNewTourViewModel);
-		}
+        }
 
         public void CreateMostWantedTourCommand_Execute(object? parameter)
         {
@@ -167,6 +181,18 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public bool SettingsCommand_CanExecute(object? parameter)
         {
             return true;
+        }
+
+        public void SwitchMenuSideCommand_Execute(object? parameter)
+        {
+            if (MenuSide.Equals("Left"))
+            {
+                MenuSide = "Right";
+            }
+            else
+            {
+                MenuSide = "Left";
+            }
         }
         #endregion
     }
