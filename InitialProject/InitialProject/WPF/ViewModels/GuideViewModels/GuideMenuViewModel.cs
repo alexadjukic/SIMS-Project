@@ -1,5 +1,7 @@
 ﻿using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using System;
+using System.Collections.Generic;
 
 namespace InitialProject.WPF.ViewModels.GuideViewModels
 {
@@ -40,6 +42,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             }
         }
 
+        public Stack<Tuple<ReversibleCommand, object?>> CommandStack { get; set; }
+
         public User Guide { get; set; }
         public string Username { get; set; }
 
@@ -52,7 +56,9 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
             MenuSide = "Left";
 
-            CurrentViewModel = new YourToursViewModel(Guide);
+            CommandStack = new Stack<Tuple<ReversibleCommand, object?>>();
+
+            CurrentViewModel = new YourToursViewModel(Guide, CommandStack);
 
             CreateNewTourCommand = new RelayCommand(CreateNewTourCommand_Execute, CreateNewTourCommand_CanExecute);
             CreateMostWantedTourCommand = new RelayCommand(CreateMostWantedTourCommand_Execute, CreateMostWantedTourCommand_CanExecute);
@@ -65,6 +71,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             ReviewsCommand = new RelayCommand(ReviewsCommand_Execute, ReviewsCommand_CanExecute);
             SettingsCommand = new RelayCommand(SettingsCommand_Execute, SettingsCommand_CanExecute);
             SwitchMenuSideCommand = new RelayCommand(SwitchMenuSideCommand_Execute);
+            UndoCommand = new RelayCommand(UndoCommand_Execute, UndoCommand_CanExecute);
         }
 
         #region COMMANDS
@@ -81,11 +88,13 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand LogOutCommand { get; }
         public RelayCommand CloseCommand { get; }
         public RelayCommand SwitchMenuSideCommand { get; }
+        public RelayCommand UndoCommand { get; }
 
 
         public void CreateNewTourCommand_Execute(object? parameter)
         {
-            CurrentViewModel = new CreateNewTourViewModel(Guide);
+            CommandStack.Clear();
+            CurrentViewModel = new CreateNewTourViewModel(Guide, CommandStack);
         }
 
         public bool CreateNewTourCommand_CanExecute(object? parameter)
@@ -95,7 +104,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void CreateMostWantedTourCommand_Execute(object? parameter)
         {
-            CurrentViewModel = new CreateMostWantedTourViewModel(Guide);
+            CommandStack.Clear();
+            CurrentViewModel = new CreateMostWantedTourViewModel(Guide, CommandStack);
         }
 
         public bool CreateMostWantedTourCommand_CanExecute(object? parameter)
@@ -105,7 +115,8 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void YourToursCommand_Execute(object? parameter)
         {
-            CurrentViewModel = new YourToursViewModel(Guide);
+            CommandStack.Clear();
+            CurrentViewModel = new YourToursViewModel(Guide, CommandStack);
         }
 
         public bool YourToursCommand_CanExecute(object? parameter)
@@ -115,6 +126,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void TodaysToursCommand_Execute(object? parameter)
         {
+            CommandStack.Clear();
             CurrentViewModel = new TodaysToursViewModel(Guide);
         }
 
@@ -125,6 +137,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void TourRequestsCommand_Execute(object? parameter)
         {
+            CommandStack.Clear();
             CurrentViewModel = new GuideTourRequestsViewModel(Guide);
         }
 
@@ -145,6 +158,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void YourTourStatisticsCommand_Execute(object? parameter)
         {
+            CommandStack.Clear();
             CurrentViewModel = new YourTourStatisticsViewModel(Guide);
         }
 
@@ -155,6 +169,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void TourRequestStatisticsCommand_Execute(object? parameter)
         {
+            CommandStack.Clear();
             CurrentViewModel = new TourRequestStatisticsViewModel();
         }
 
@@ -165,6 +180,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void ReviewsCommand_Execute(object? parameter)
         {
+            CommandStack.Clear();
             CurrentViewModel = new TourReviewsViewModel(Guide);
         }
 
@@ -193,6 +209,17 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             {
                 MenuSide = "Left";
             }
+        }
+
+        public void UndoCommand_Execute(object? parameter)
+        {
+            var command = CommandStack.Pop();
+            command.Item1.Reverse(command.Item2);
+        }
+
+        public bool UndoCommand_CanExecute(object? parameter)
+        {
+            return CommandStack.Count != 0;
         }
         #endregion
     }

@@ -27,6 +27,7 @@
         <KeyBinding Key="F8" Command="{Binding TourRequestStatisticsCommand}"/>
         <KeyBinding Key="F9" Command="{Binding ReviewsCommand}"/>
         <KeyBinding Key="F10" Command="{Binding SettingsCommand}"/>
+        <KeyBinding Modifiers="Ctrl" Key="Z" Command="{Binding UndoCommand}"/>
     </Window.InputBindings>
 
     <Border Background="{DynamicResource BackgroundColor}">
@@ -168,7 +169,7 @@
 
             <Menu Style="{DynamicResource MenuStyle1}" DockPanel.Dock="Top">
                 <MenuItem Header="_Edit">
-                    <MenuItem Header="_Undo" InputGestureText="Ctrl+Z">
+                    <MenuItem Header="_Undo" InputGestureText="Ctrl+Z" Command="{Binding UndoCommand}">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Undo"/>
                         </MenuItem.Icon>
