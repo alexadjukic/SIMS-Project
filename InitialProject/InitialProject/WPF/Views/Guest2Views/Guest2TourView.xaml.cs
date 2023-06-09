@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Repositories;
 using InitialProject.WPF.ViewModels.Guest2ViewModels;
+using InitialProject.WPF.Views.Guest2Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,12 +24,13 @@ namespace InitialProject.WPF.Views
     /// <summary>
     /// Interaction logic for Guest2TourOverview.xaml
     /// </summary>
-    public partial class Guest2TourView : Window
+    public partial class Guest2TourView : Page
     {
         public Guest2TourView(User user)
         {
             InitializeComponent();
-            this.DataContext = new Guest2TourViewModel(this, user);
+            this.DataContext = new Guest2TourViewModel(user);
+            Guest2MainWindow.mainWindow.Guest2MainPreview.Content = this;
         }
     }
 }

@@ -19,12 +19,13 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for UseVoucher.xaml
     /// </summary>
-    public partial class UseVoucherView : Window
+    public partial class UseVoucherView : Page
     {
         public UseVoucherView(User user)
         {
             InitializeComponent();
-            this.DataContext = new UseVoucherViewModel(this, user);
+            this.DataContext = new UseVoucherViewModel(user);
+            Guest2MainWindow.mainWindow.Guest2MainPreview.Content = this;
         }
     }
 }

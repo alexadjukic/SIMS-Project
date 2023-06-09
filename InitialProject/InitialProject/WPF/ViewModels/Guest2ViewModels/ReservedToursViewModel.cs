@@ -54,27 +54,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
 
         public ObservableCollection<TourCheckpoint> ReservedTours { get; set; }
-        private readonly Window _reservedToursView;
         private readonly TourService _tourService;
         private readonly TourReviewService _tourReviewService;
         #endregion
 
-        public ReservedToursViewModel(Window reservedToursView, User user)
+        public ReservedToursViewModel(User user)
         {
-            _reservedToursView = reservedToursView;
             _tourService = new TourService();
             LoggedUser = user;
             ReservedTours = new ObservableCollection<TourCheckpoint>();
             _tourReviewService = new TourReviewService();
 
-            CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
+            HomeCommand = new RelayCommand(HomeCommand_Execute);
             OpenRateTourAndGuideWindowCommand = new RelayCommand(OpenRateTourAndGuideWindowCommand_Execute);
-            ShowReservedToursCommand = new RelayCommand(ShowReservedToursCommand_Execute);
-            OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
-            ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
-            ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
-            ShowTourRequestsCommand = new RelayCommand(ShowTourRequestsCommand_Execute);
-            ShowStatisticsCommand = new RelayCommand(ShowStatisticsCommand_Execute);
             //IsEnabled = false;
             LoadReservedTours();
         }
@@ -103,62 +95,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         #region COMMANDS
 
-        public RelayCommand CloseWindowCommand { get; }
+        public RelayCommand HomeCommand { get; }
         public RelayCommand OpenRateTourAndGuideWindowCommand { get; }
-        public RelayCommand SelectionChangedCommand { get; }
-        public RelayCommand ShowToursViewCommand { get; }
-        public RelayCommand ShowReservedToursCommand { get; }
-        public RelayCommand OpenNotificationsCommand { get; }
-        public RelayCommand ShowVouchersCommand { get; }
-        public RelayCommand ShowTourRequestsCommand { get; }
-        public RelayCommand ShowStatisticsCommand { get; }
 
-        public void ShowStatisticsCommand_Execute(object? parameter)
-        {
-            RequestedTourStatisticsView requestedTourStatisticsView = new RequestedTourStatisticsView(LoggedUser);
-            requestedTourStatisticsView.Show();
-            _reservedToursView.Close();
-        }
+        
 
-
-        public void ShowTourRequestsCommand_Execute(object? parameter)
-        {
-            TourRequestFormView tourRequestFormView = new TourRequestFormView(LoggedUser);
-            tourRequestFormView.Show();
-            _reservedToursView.Close();
-        }
-
-        public void OpenNotificationsCommand_Execute(object? parameter)
-        {
-            TourNotificationsView tourNotificationsView = new TourNotificationsView(LoggedUser);
-            tourNotificationsView.Show();
-            _reservedToursView.Close();
-        }
-
-        public void ShowVouchersCommand_Execute(object? parameter)
-        {
-            VouchersView vouchersView = new VouchersView(LoggedUser);
-            vouchersView.Show();
-            _reservedToursView.Close();
-        }
-
-        public void ShowReservedToursCommand_Execute(object? parameter)
-        {
-            ReservedToursView reservedToursView = new ReservedToursView(LoggedUser);
-            reservedToursView.Show();
-            _reservedToursView.Close();
-        }
-
-        public void ShowToursViewCommand_Execute(object? parameter)
+        public void HomeCommand_Execute(object? parameter)
         {
             Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
-            guest2TourView.Show();
-            _reservedToursView.Close();
-        }
-
-        public void CloseWindowCommand_Execute(object? parameter)
-        {
-            _reservedToursView.Close();
+            //_reservedToursView.Close();
         }
         public void OpenRateTourAndGuideWindowCommand_Execute(object? parameter)
         {
@@ -173,8 +118,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             else
             {
                 RateTourAndGuideForm rateTourAndGuideForm = new RateTourAndGuideForm(SelectedReservedTour.TourId, LoggedUser);
-                rateTourAndGuideForm.Show();
-                _reservedToursView.Close();
+                //rateTourAndGuideForm.Show();
+                //_reservedToursView.Close();
             }
         }
         #endregion

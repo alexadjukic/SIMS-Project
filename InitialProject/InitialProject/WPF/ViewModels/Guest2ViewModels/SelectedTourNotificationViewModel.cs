@@ -36,14 +36,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
-        private readonly Window _selectedTourNotificationView;
         private readonly TourNotificationService _tourNotificationService;
         private readonly CheckpointArrivalService _checkpointArrivalService;
 
         #endregion
-        public SelectedTourNotificationViewModel(Window selectedTourNotificationView, User user, TourNotification selectedNotification)
+        public SelectedTourNotificationViewModel(User user, TourNotification selectedNotification)
         {
-            _selectedTourNotificationView = selectedTourNotificationView;
             _tourNotificationService = new TourNotificationService();
             _checkpointArrivalService = new CheckpointArrivalService();
             LoggedUser = user;
@@ -51,66 +49,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
             ConfirmNotificationCommand = new RelayCommand(ConfirmNotification_Execute);
             CancelNotificationCommand = new RelayCommand(CancelNotificationCommand_Execute);
-            ShowReservedToursCommand = new RelayCommand(ShowReservedToursCommand_Execute);
-            OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
-            ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
-            ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
-            ShowTourRequestsCommand = new RelayCommand(ShowTourRequestsCommand_Execute);
-            ShowStatisticsCommand = new RelayCommand(ShowStatisticsCommand_Execute);
         }
 
         #region  COMMANDS
 
         public RelayCommand ConfirmNotificationCommand { get; }
         public RelayCommand CancelNotificationCommand { get; }
-        public RelayCommand ShowToursViewCommand { get; }
-        public RelayCommand ShowReservedToursCommand { get; }
-        public RelayCommand OpenNotificationsCommand { get; }
-        public RelayCommand ShowVouchersCommand { get; }
-        public RelayCommand ShowTourRequestsCommand { get; }
-        public RelayCommand ShowStatisticsCommand { get; }
-
-        public void ShowStatisticsCommand_Execute(object? parameter)
-        {
-            RequestedTourStatisticsView requestedTourStatisticsView = new RequestedTourStatisticsView(LoggedUser);
-            requestedTourStatisticsView.Show();
-            _selectedTourNotificationView.Close();
-        }
-
-        public void ShowTourRequestsCommand_Execute(object? parameter)
-        {
-            TourRequestFormView tourRequestFormView = new TourRequestFormView(LoggedUser);
-            tourRequestFormView.Show();
-            _selectedTourNotificationView.Close();
-        }
-
-        public void OpenNotificationsCommand_Execute(object? parameter)
-        {
-            TourNotificationsView tourNotificationsView = new TourNotificationsView(LoggedUser);
-            tourNotificationsView.Show();
-            _selectedTourNotificationView.Close();
-        }
-
-        public void ShowVouchersCommand_Execute(object? parameter)
-        {
-            VouchersView vouchersView = new VouchersView(LoggedUser);
-            vouchersView.Show();
-            _selectedTourNotificationView.Close();
-        }
-
-        public void ShowReservedToursCommand_Execute(object? parameter)
-        {
-            ReservedToursView reservedToursView = new ReservedToursView(LoggedUser);
-            reservedToursView.Show();
-            _selectedTourNotificationView.Close();
-        }
-
-        public void ShowToursViewCommand_Execute(object? parameter)
-        {
-            Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
-            guest2TourView.Show();
-            _selectedTourNotificationView.Close();
-        }
 
         public void CancelNotificationCommand_Execute(object? parameter)
         {
@@ -118,15 +62,16 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             _checkpointArrivalService.Remove(SelectedNotification.CheckpointArrivalId);
             _tourNotificationService.UpdateNotification(SelectedNotification);
             TourNotificationsView tourNotificationsView = new TourNotificationsView(LoggedUser);
-            tourNotificationsView.Show();
-            _selectedTourNotificationView.Close();
+            //tourNotificationsView.Show();
+            //_selectedTourNotificationView.Close();
         }
 
         public void ConfirmNotification_Execute(object? parameter)
         {
             SelectedNotification.Status = NotificationStatus.READ;
             _tourNotificationService.UpdateNotification(SelectedNotification);
-            _selectedTourNotificationView.Close();
+            Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
+            //_selectedTourNotificationView.Close();
         }
 
         #endregion
