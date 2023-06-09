@@ -56,6 +56,12 @@ namespace InitialProject.Application.UseCases
             _tourRepository.Update(tour);
         }
 
+        public void UncancelTour(Tour tour)
+        {
+            tour.Status = TourStatus.NOT_STARTED;
+            _tourRepository.Update(tour);
+        }
+
         public IEnumerable<TourCheckpoint> GetReservedTours(User user)
         {
             var reservedTours = new List<TourCheckpoint>();

@@ -14,7 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Border Background="{DynamicResource BackgroundColor}">
+    <Border Background="{DynamicResource BackgroundColor}" BorderThickness="1" BorderBrush="{DynamicResource HighlightColorSolid}">
 
         <Grid>
             <Grid.RowDefinitions>
@@ -28,7 +28,7 @@
             <xctk:DateTimePicker Grid.Row="1" Height="25" Width="200" Style="{DynamicResource DateTimePickerStyle}" Format="Custom" FormatString="dd.MM.yyyy HH.mm" Value="{Binding SelectedDate}" Minimum="{Binding TourRequest.StartDate}" Maximum="{Binding TourRequest.EndDate}"/>
 
             <Button Grid.Row="2" Style="{DynamicResource BottomMenuButton}" Content="Confirm" HorizontalAlignment="Right" Margin="0,0,20,0" Command="{Binding ConfirmCommand}"/>
-            <Button Grid.Row="2" Style="{DynamicResource BottomMenuButton}" Content="Cancel" HorizontalAlignment="Left" Margin="20,0,0,0" Click="Button_Click"/>
+            <Button Grid.Row="2" Style="{DynamicResource BottomMenuButton}" Content="Close" HorizontalAlignment="Left" Margin="20,0,0,0" Click="Button_Click"/>
 
         </Grid>
     </Border>

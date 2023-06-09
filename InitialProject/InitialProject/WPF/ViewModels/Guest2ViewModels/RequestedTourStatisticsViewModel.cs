@@ -161,6 +161,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         private readonly Window _requestedTourStatisticsView;
         private readonly TourRequestService _tourRequestService;
         private readonly LocationService _locationService;
+        private readonly TourRequestStatisticsService _tourRequestStatisticsService;
 
         #endregion
         public RequestedTourStatisticsViewModel(Window requestedTourStatisticsView, User loggedUser)
@@ -169,6 +170,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             LoggedUser = loggedUser;
             _tourRequestService = new TourRequestService();
             _locationService = new LocationService();
+            _tourRequestStatisticsService = new TourRequestStatisticsService();
             LanguageStats = new ObservableCollection<LanguageStatistics>();
             LocationStats = new ObservableCollection<LocationStatistics>();
             Years = new ObservableCollection<string>();
@@ -226,22 +228,11 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
         public void LoadLocationStats()
         {
-            foreach (var location in _locationService.GetAll())
+            foreach (var locationStat in _tourRequestStatisticsService.GetLocationStats())
             {
-                double counter = 0;
-                foreach (var req in _tourRequestService.GetAll())
-                {
-                    if (location.Id == req.LocationId)
-                    {
-                        counter++;
-                    }
-                }
-                if( counter != 0)
-                {
-                    LocationStatistics locationStatistics = new LocationStatistics(location, counter);
-                    LocationStats.Add(locationStatistics);
-                }
+                LocationStats.Add(locationStat);
             }
+                
         }
 
         public void SelectionChangedYears()
