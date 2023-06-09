@@ -76,5 +76,15 @@ namespace InitialProject.Application.UseCases
             request.Status = TourRequestStatus.ACCEPTED;
             _tourRequestRepository.Update(request);
         }
+
+        public IEnumerable<Location> GetRequestedLocations()
+        {
+            List<Location> locations = new List<Location>();
+            foreach(var req in GetAll())
+            {
+                locations.Add(req.Location);
+            }
+            return locations;
+        }
     }
 }
