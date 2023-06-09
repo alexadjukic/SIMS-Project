@@ -44,7 +44,11 @@
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" Name="LabelPositiveProposal" Style="{StaticResource BasicLabel}" Content="You could create new accommodation on location nesto nesto:" Margin="0,10,0,10"/>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Label Grid.Column="0" Name="LabelPositiveProposal" Style="{StaticResource BasicLabel}" Content="You could create new accommodation on location" Margin="0,10,0,10"/>
+                <Label Name="MostPopularLocation" Style="{StaticResource BasicLabel}" Margin="0,10,0,10" Content="{Binding MostPopularLocation}" />
+            </StackPanel>
+            
             <Button Grid.Column="1" Name="ButtonCreate" Content="Create" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0,0,25,0" Command="{Binding CreateNewAccommodationCommand}"/>
         </Grid>
 
@@ -56,7 +60,11 @@
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" Name="LabeNegativeProposal" Style="{StaticResource BasicLabel}" Content="You could delete accommodation on location nesto nesto:" Margin="0,10,0,10"/>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Label Grid.Column="0" Name="LabeNegativeProposal" Style="{StaticResource BasicLabel}" Content="You could delete accommodation on location nesto nesto:" Margin="0,10,0,10"/>
+                <Label Name="LeastPopularLocation" Style="{StaticResource BasicLabel}" Margin="0,10,0,10" Content="{Binding LeastPopularLocation}" />
+            </StackPanel>
+            
             <Button Grid.Column="1" Name="ButtonProosedDelete" Content="Delete" FontSize="12" FontWeight="Bold" Width="80" Height="25" Margin="0,0,25,0"/>
         </Grid>
 

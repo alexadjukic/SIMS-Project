@@ -44,5 +44,10 @@ namespace InitialProject.Application.UseCases
         {
             _accommodationRepository.Update(accommodation);
         }
+
+        public List<Accommodation> GetAll()
+        {
+            return _accommodationRepository.GetAll();
+        }
     }
 }

@@ -27,6 +27,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private readonly AccommodationService _accommodationService;
         private readonly AccommodationImageService _accommodationImageService;
+        private readonly MostPopularLocationService _mostPopularLocationService;
 
         private readonly User _user;
 
@@ -141,6 +142,36 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _mostPopularLocation;
+
+        public string MostPopularLocation
+        {
+            get => _mostPopularLocation;
+            set
+            {
+                if (value != _mostPopularLocation)
+                {
+                    _mostPopularLocation = value;
+                    OnPropertyChanged("Type");
+                }
+            }
+        }
+
+        private string _leastPopularLocation;
+
+        public string LeastPopularLocation
+        {
+            get => _leastPopularLocation;
+            set
+            {
+                if (value != _leastPopularLocation)
+                {
+                    _leastPopularLocation = value;
+                    OnPropertyChanged("Type");
+                }
+            }
+        }
+
         public static ObservableCollection<Accommodation> MyAccommodations { get; set; }
 
         public List<String> Countries { get; set; }
@@ -163,6 +194,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             _accommodationService = new AccommodationService();
             _accommodationImageService = new AccommodationImageService();
+            _mostPopularLocationService = new MostPopularLocationService();
 
             _myAccommodationsPage = myAccommodationsPage;
 
@@ -174,9 +206,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Images = new ObservableCollection<String>();
             MyAccommodations = new ObservableCollection<Accommodation>();
 
-            AccommodationRegistrationLoaded();
-            LoadAccommodations();
-            FillInTypes();
+            LoadData();
 
             CreateNewAccommodationCommand = new RelayCommand(CreateNewAccommodationCommand_Execute);
             NextImageCommand = new RelayCommand(NextImageCommand_Execute, NextImageCommand_CanExecute);
@@ -188,6 +218,29 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             AccommodationStatisticsCommand = new RelayCommand(AccommodationStatisticsCommand_Execute);
 
             UploadImages();
+        }
+
+        private void LoadData()
+        {
+            LoadMostPopularLocation();
+            LoadLeastPopularLocation();
+            AccommodationRegistrationLoaded();
+            LoadAccommodations();
+            FillInTypes();
+        }
+
+        private void LoadLeastPopularLocation()
+        {
+            Location leastPopularLocation = _mostPopularLocationService.FindLeastPopular(_user.Id);
+
+            LeastPopularLocation = leastPopularLocation.City + ", " + leastPopularLocation.Country;
+        }
+
+        private void LoadMostPopularLocation()
+        {
+            Location mostPopularLocation = _mostPopularLocationService.FindMostPopular();
+
+            MostPopularLocation = mostPopularLocation.City + ", " + mostPopularLocation.Country;
         }
 
         private void FilterAccommodations()
