@@ -61,6 +61,11 @@
             <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical" Margin="15,0,0,0">
                 <Label Name="CountryLabel" Content="Country: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
                 <ComboBox  Name="ComboBoxCountry" IsEditable="True" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Countries}" HorizontalAlignment="Left">
+                    <ComboBox.Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxStyle}" />
+                        </Style>
+                    </ComboBox.Style>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding LoadCitiesCommand}"/>
@@ -75,6 +80,11 @@
             <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Vertical" Margin="15,0,0,0">
                 <Label Name="CityLabel" Content="City: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
                 <ComboBox  Name="ComboBoxCity" IsEditable="True" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Cities}" HorizontalAlignment="Left">
+                    <ComboBox.Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxStyle}" />
+                        </Style>
+                    </ComboBox.Style>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding FilterReservationsCommand}"/>
@@ -89,6 +99,11 @@
             <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Vertical" Margin="15,0,0,0">
                 <Label Name="TypeLabel" Content="Type: " HorizontalAlignment="Left" Style="{StaticResource BasicLabel}"></Label>
                 <ComboBox  Name="ComboBoxType" IsEditable="True" SelectedItem="{Binding Path=Type, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="25" ItemsSource="{Binding Path=Types}" HorizontalAlignment="Left">
+                    <ComboBox.Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxStyle}" />
+                        </Style>
+                    </ComboBox.Style>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding FilterReservationsCommand}"/>
@@ -142,7 +157,7 @@
                                     <TextBlock TextWrapping="Wrap" Text="{Binding EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <Button Grid.Column="1" Margin="10,5,10,0" Content="Decline" Height="25" Width="80" FontSize="12" FontWeight="Bold" Command="{Binding DataContext.DeclineRenovationCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
+                                    <Button Grid.Column="1" Margin="10,15,10,0" Content="Decline" Style="{StaticResource ListBoxButton}" Command="{Binding DataContext.DeclineRenovationCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"></Button>
                                     <StackPanel>
                                         <!--<Label Content="Explanation:"></Label>
                                         <TextBox Width="200" Height="80" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Comment}"></TextBox>-->

@@ -2,13 +2,35 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--#region Colors-->
-    <SolidColorBrush x:Key="BackgroundColor" Color="#0784b5"/>
+    <SolidColorBrush x:Key="BackgroundColor" Color="#7e7892"/>
     <SolidColorBrush x:Key="HighlightBrushKey" Color="#1E3F66"/>
     <SolidColorBrush x:Key="BorderBrush" Color="White"/>
-    <SolidColorBrush x:Key="Background" Color="#91BAD6"/>
+    <SolidColorBrush x:Key="Background" Color="white"/>
     <SolidColorBrush x:Key="Foreground" Color="#e1ebec" />
-    <SolidColorBrush x:Key="HeaderRow" Color="#3b6ba5" />
-    <SolidColorBrush x:Key="BackgroundWindow" Color="#528AAE" />
+    <SolidColorBrush x:Key="HeaderRow" Color="#ff9900" />
+    <SolidColorBrush x:Key="BackgroundWindow" Color="white" />
+    <SolidColorBrush x:Key="DataGridBackground" Color="White" />
+    <SolidColorBrush x:Key="DataGridForeGround" Color="#142b44" />
+    <SolidColorBrush x:Key="DataGridSelectedBackground" Color="#1d82a0" />
+    <SolidColorBrush x:Key="DataGridSelectedForeground" Color="white" />
+    <SolidColorBrush x:Key="DataGridHoveredBackground" Color="#1d82a0" />
+    <SolidColorBrush x:Key="DataGridHoveredForeground" Color="white" />
+    <SolidColorBrush x:Key="ApplicationBackground" Color="white" />
+    <SolidColorBrush x:Key="BasicTextBlockForeground" Color="Black" />
+    <SolidColorBrush x:Key="BoldTextBloxkForeground" Color="Black" />
+    <SolidColorBrush x:Key="UnderlinedBoldTextBlockForeground" Color="Black" />
+    <SolidColorBrush x:Key="BoldLabelForeground" Color="Black" />
+    <SolidColorBrush x:Key="BasicLabelForeground" Color="Black" />
+    <SolidColorBrush x:Key="MenuBackgroundColor" Color="#1d82a0" />
+    <SolidColorBrush x:Key="MenuGridBackgroundColor" Color="#1d82a0" />
+    <SolidColorBrush x:Key="StandardButtonBackground" Color="#1d82a0" />
+    <SolidColorBrush x:Key="StandardButtonForeground" Color="Black"/>
+    <SolidColorBrush x:Key="StaandardSelectedButtonBackground" Color="#ff9900" />
+    <SolidColorBrush x:Key="StandardSelectedButtonForeground" Color="Black" />
+    <SolidColorBrush x:Key="ListBoxSelectedBackground" Color="#1d82a0" />
+    <SolidColorBrush x:Key="ListBoxSelectedForeground" Color="white" />
+    <SolidColorBrush x:Key="ListBoxButtonBackground" Color="#68acbf" />
+    <SolidColorBrush x:Key="ArrowButtonBackground" Color="#ff9900" />
     <!--#endregion-->
     
     <!--#region MenuStyle-->
@@ -51,13 +73,13 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="MenuBackground" TargetType="Border">
-        <Setter Property="Background" Value="#91BAD6"/>
+        <Setter Property="Background" Value="{StaticResource MenuBackgroundColor}"/>
     </Style>
     <Style x:Key="MenuBigBorder" TargetType="Border">
-        <Setter Property="Background" Value="#528AAE"/>
+        <Setter Property="Background" Value="{StaticResource ApplicationBackground}"/>
     </Style>
     <Style x:Key="MenuGridBackground" TargetType="Grid">
-        <Setter Property="Background" Value="#91BAD6"/>
+        <Setter Property="Background" Value="{StaticResource MenuGridBackgroundColor}"/>
     </Style>
     <!--#endregion-->
     
@@ -69,12 +91,12 @@
     
     <!--#region LabelStyle-->
     <Style x:Key="BasicLabel" TargetType="Label">
-        <Setter Property="Label.Foreground" Value="#e1ebec" />
+        <Setter Property="Label.Foreground" Value="{StaticResource BasicLabelForeground}" />
         <Setter Property="Label.FontSize" Value="12" />
     </Style>
 
     <Style x:Key="BoldLabel" TargetType="Label">
-        <Setter Property="Label.Foreground" Value="#e1ebec" />
+        <Setter Property="Label.Foreground" Value="{StaticResource BoldLabelForeground}" />
         <Setter Property="Label.FontSize" Value="12" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
@@ -106,7 +128,8 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="Background"
                                     TargetName="Bd"
-                                    Value="{StaticResource HighlightBrushKey}" />
+                                    Value="{StaticResource ListBoxSelectedBackground}" />
+                            <Setter Property="Foreground" Value="{StaticResource ListBoxSelectedForeground}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -117,7 +140,7 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="Background"
                                     TargetName="Bd"
-                                    Value="{StaticResource HighlightBrushKey}" />
+                                    Value="{StaticResource ListBoxSelectedBackground}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -135,11 +158,16 @@
     </Style>
     
     <Style x:Key="DataGridRowStyle" TargetType="{x:Type DataGridRow}">
-        <Setter Property="Background" Value="{StaticResource Background}" />
-        <Setter Property="Foreground" Value="{StaticResource Foreground}" />
+        <Setter Property="Background" Value="{StaticResource DataGridBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource DataGridForeGround}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource HighlightBrushKey}" />
+                <Setter Property="Background" Value="{StaticResource DataGridHoveredBackground}" />
+                <Setter Property="Foreground" Value="{StaticResource DataGridHoveredForeground}" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource DataGridSelectedBackground}" />
+                <Setter Property="Foreground" Value="{StaticResource DataGridSelectedForeground}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -147,8 +175,9 @@
     <Style x:Key="DataGridCellStyle" TargetType="{x:Type DataGridCell}">
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{StaticResource HighlightBrushKey}" />
+                <Setter Property="Background" Value="{StaticResource DataGridSelectedBackground}" />
                 <Setter Property="BorderBrush" Value="{StaticResource HighlightBrushKey}" />
+                <Setter Property="Foreground" Value="{StaticResource DataGridSelectedForeground}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -156,7 +185,7 @@
     <Style x:Key="DataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Foreground" Value="{StaticResource Foreground}" />
-        <Setter Property="Background" Value="{StaticResource HighlightBrushKey}" />
+        <Setter Property="Background" Value="{StaticResource HeaderRow}" />
         <Setter Property="Height" Value="25"/>
     </Style>
     <!--#endregion-->
@@ -164,20 +193,20 @@
     
     <!--#region TextBlockStyle-->
     <Style x:Key="BasicTextBlock" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#e1ebec" />
+        <Setter Property="Foreground" Value="{StaticResource BasicTextBlockForeground}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Height" Value="19" />
     </Style>
     
     <Style x:Key="BoldTextBloxk" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#e1ebec" />
+        <Setter Property="Foreground" Value="{StaticResource BoldTextBloxkForeground}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Height" Value="19" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
     <Style x:Key="UnderlinedBoldTextBlock" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#e1ebec" />
+        <Setter Property="Foreground" Value="{StaticResource UnderlinedBoldTextBlockForeground}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Height" Value="19" />
         <Setter Property="FontWeight" Value="Bold" />
@@ -205,6 +234,24 @@
         <Setter Property="Width" Value="80" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+    </Style>
+
+    <Style x:Key="ListBoxButton" TargetType="Button">
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Width" Value="80" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Background" Value="{StaticResource ListBoxButtonBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    
+    <Style x:Key="ArrowButton" TargetType="Button">
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Width" Value="25" />
+        <Setter Property="Background" Value="{StaticResource ArrowButtonBackground}" />
     </Style>
     <!--#endregion-->
     
@@ -243,6 +290,86 @@
         <Setter Property="AcceptsReturn" Value="True" />
         <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
         <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <!--#endregion-->
+    
+    <!--#region ButtonStyle-->
+    <Style x:Key="StandardButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+    </Style>
+    <!--#endregion-->
+    
+    <!--#region ComboBoxStyle-->
+    <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <Border x:Name="gd" Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ComboBox}},Path=Background}">
+
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ComboBoxItem.IsMouseOver" Value="True">
+                            <Setter TargetName="gd"  Property="Background" Value="{StaticResource DataGridSelectedBackground}"></Setter>
+                            <Setter TargetName="gd"  Property="TextElement.Foreground" Value="White"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+    
+    <!--#region CalenderStyle-->
+    <Style x:Key="CalenderDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CalendarDayButton">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="HighlightBackground" 
+                                                        Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" 
+                                                        To="DarkBlue" Duration="0" />
+                                        <ColorAnimation Storyboard.TargetName="ContentText" 
+                                                        Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                        To="White" Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="HighlightBackground" 
+                                                        Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" 
+                                                        To="DarkBlue" Duration="0" />
+                                        <ColorAnimation Storyboard.TargetName="ContentText" 
+                                                        Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                        To="White" Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="HighlightBackground" 
+                                Background="DarkBlue" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="1">
+                            <TextBlock x:Name="ContentText" 
+                                       Text="{TemplateBinding Content}" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       Foreground="White" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <!--#endregion-->
 </ResourceDictionary>

@@ -33,7 +33,13 @@
 
             <StackPanel Grid.Column="0" VerticalAlignment="Center">
                 <TextBlock x:Name="TextBlockMonthly" Text="Year for detailed statistics:" Style="{StaticResource BoldTextBloxk}"/>
-                <ComboBox x:Name="TextBoxYear" Text="" ItemsSource="{Binding Path=Years}" SelectedItem="{Binding SelectedYear}"/>
+                <ComboBox x:Name="TextBoxYear" Text="" ItemsSource="{Binding Path=Years}" SelectedItem="{Binding SelectedYear}">
+                    <ComboBox.Style>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxStyle}" />
+                        </Style>
+                    </ComboBox.Style>
+                </ComboBox>
             </StackPanel>
 
             <Grid Grid.Column="1">
@@ -82,7 +88,7 @@
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
 
-        <Grid Grid.Row="4" Style="{StaticResource MenuGridBackground}">
+        <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="120" />

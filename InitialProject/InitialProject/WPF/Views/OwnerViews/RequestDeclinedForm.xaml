@@ -70,8 +70,8 @@
         <Separator Grid.Row="2" VerticalAlignment="Top" Background="Black"/>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" Background="{StaticResource Background}">
-            <Button Grid.Column="1" Margin="230,0,10,0" Content="Close" FontSize="12" FontWeight="Bold" Width="80" Height="25" Command="{Binding CloseWindowCommand}"></Button>
-            <Button Grid.Column="1" Margin="20,0,0,0" Content="Confirm" FontSize="12" FontWeight="Bold" Width="80" Height="25" Command="{Binding ConfirmDeclineCommand}"/>
+            <Button Grid.Column="1" Margin="230,0,10,0" Content="Close" Style="{StaticResource CloseButton}" Command="{Binding CloseWindowCommand}"></Button>
+            <Button Grid.Column="1" Margin="20,0,0,0" Content="Confirm" Style="{StaticResource CloseButton}" Command="{Binding ConfirmDeclineCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

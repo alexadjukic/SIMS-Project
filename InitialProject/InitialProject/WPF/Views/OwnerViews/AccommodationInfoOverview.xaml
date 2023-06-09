@@ -74,11 +74,11 @@
             <Image Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Margin="27,27,27,20" Height="130"/>
 
             <StackPanel Orientation="Horizontal">
-                <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Left" Margin="300,10,0,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
+                <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" Margin="300,10,0,0" BorderBrush="White" Style="{StaticResource ArrowButton}" Command="{Binding PreviousImageCommand}">
                     <Image Source="../../../Resources/Images/left_arrow.png"/>
                 </Button>
 
-                <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" HorizontalAlignment="Right" Margin="10,10,0,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
+                <Button Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Margin="10,10,0,0" BorderBrush="White" Style="{StaticResource ArrowButton}"  Command="{Binding NextImageCommand}">
                     <Image Source="../../../Resources/Images/right_arrow.png"></Image>
                 </Button>
             </StackPanel>
@@ -95,10 +95,10 @@
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Name="ButtonClose" Grid.Column="0" Height="25" Width="80" Content="Close" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Click="ButtonClose_Click"/>
-            <Button Grid.Column="1" Name="ButtonRenovate" Content="Renovate" Height="25" Width="80" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Command="{Binding RenovateAccommodationCommand}"/>
-            <Button Grid.Column="2" Name="ButtonStatistics1" Content="Statistics" FontSize="12" FontWeight="Bold" Height="25" Width="80" HorizontalAlignment="Center" Command="{Binding AccommodationStatisticsCommand}"/>
-            <Button Grid.Column="3" Name="ButtonDelete1" Content="Delete" FontSize="12" FontWeight="Bold" Height="25" Width="80" HorizontalAlignment="Center"/>
+            <Button Name="ButtonClose" Grid.Column="0" Style="{StaticResource StandardButtonStyle}" Content="Close" HorizontalAlignment="Center" Click="ButtonClose_Click"/>
+            <Button Grid.Column="1" Name="ButtonRenovate" Content="Renovate" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center" Command="{Binding RenovateAccommodationCommand}"/>
+            <Button Grid.Column="2" Name="ButtonStatistics1" Content="Statistics" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center" Command="{Binding AccommodationStatisticsCommand}"/>
+            <Button Grid.Column="3" Name="ButtonDelete1" Content="Delete" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>

@@ -105,11 +105,11 @@
             <Image Source="{Binding CurrentImage, UpdateSourceTrigger=PropertyChanged}" Width="250" HorizontalAlignment="Center" Margin="0,0,0,0" Height="190"/>
 
             <StackPanel Orientation="Horizontal" Width="250">
-                <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" Margin="162,0,0,0" BorderBrush="White" Background="White" Command="{Binding PreviousImageCommand}">
+                <Button Grid.Row="2" Grid.Column="2" Margin="162,0,0,0" BorderBrush="White" Style="{StaticResource ArrowButton}" Command="{Binding PreviousImageCommand}">
                 <Image Source="../../../Resources/Images/left_arrow.png"/>
             </Button>
 
-            <Button Grid.Row="2" Grid.Column="2" Width="25" Height="25" Margin="0,0,0,0" BorderBrush="White" Background="White" Command="{Binding NextImageCommand}">
+            <Button Grid.Row="2" Grid.Column="2" Margin="0,0,0,0" BorderBrush="White" Style="{StaticResource ArrowButton}" Command="{Binding NextImageCommand}">
                 <Image Source="../../../Resources/Images/right_arrow.png"></Image>
             </Button>
             </StackPanel>
@@ -125,7 +125,7 @@
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="2" Width="80" Height="25" Grid.Column="3" Content="Close" Margin="0,0,30,0" FontSize="12" FontWeight="Bold" Click="Button_Click" HorizontalAlignment="Right"></Button>
+            <Button Grid.Row="2" Grid.Column="3" Content="Close" Margin="0,0,30,0" Style="{StaticResource CloseButton}" Click="Button_Click" HorizontalAlignment="Right"></Button>
         </Grid>
 
     </Grid>
