@@ -191,14 +191,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
 
         public List<BitmapImage> Images { get; set; }
-        private readonly Window _rateTourAndGuideForm;
         private readonly TourService _tourService;
         private readonly TourReviewService _tourReviewService;
 
         #endregion
-        public RateTourAndGuideFormViewModel(Window rateTourAndGuideForm, int tourId, User user)
+        public RateTourAndGuideFormViewModel(int tourId, User user)
         {
-            _rateTourAndGuideForm = rateTourAndGuideForm;
             _tourService = new TourService();
             _tourReviewService = new TourReviewService();
             LoggedUser = user;
@@ -211,12 +209,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             NextImageCommand = new RelayCommand(NextImageCommand_Execute);
             PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute);
             RemoveImageCommand = new RelayCommand(RemoveImageCommand_Execute);
-            ShowReservedToursCommand = new RelayCommand(ShowReservedToursCommand_Execute);
-            OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
-            ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
-            ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
-            ShowTourRequestsCommand = new RelayCommand(ShowTourRequestsCommand_Execute);
-            ShowStatisticsCommand = new RelayCommand(ShowStatisticsCommand_Execute);
         }
 
         public bool IsEligibleForRating()
@@ -287,54 +279,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand NextImageCommand { get; }
         public RelayCommand PreviousImageCommand { get; }
         public RelayCommand RemoveImageCommand { get; }
-        public RelayCommand ShowToursViewCommand { get; }
-        public RelayCommand ShowReservedToursCommand { get; }
-        public RelayCommand OpenNotificationsCommand { get; }
-        public RelayCommand ShowVouchersCommand { get; }
-        public RelayCommand ShowTourRequestsCommand { get; }
-        public RelayCommand ShowStatisticsCommand { get; }
-
-        public void ShowStatisticsCommand_Execute(object? parameter)
-        {
-            RequestedTourStatisticsView requestedTourStatisticsView = new RequestedTourStatisticsView(LoggedUser);
-            requestedTourStatisticsView.Show();
-            _rateTourAndGuideForm.Close();
-        }
-
-        public void ShowTourRequestsCommand_Execute(object? parameter)
-        {
-            TourRequestFormView tourRequestFormView = new TourRequestFormView(LoggedUser);
-            tourRequestFormView.Show();
-            _rateTourAndGuideForm.Close();
-        }
-
-        public void OpenNotificationsCommand_Execute(object? parameter)
-        {
-            TourNotificationsView tourNotificationsView = new TourNotificationsView(LoggedUser);
-            tourNotificationsView.Show();
-            _rateTourAndGuideForm.Close();
-        }
-
-        public void ShowVouchersCommand_Execute(object? parameter)
-        {
-            VouchersView vouchersView = new VouchersView(LoggedUser);
-            vouchersView.Show();
-            _rateTourAndGuideForm.Close();
-        }
-
-        public void ShowReservedToursCommand_Execute(object? parameter)
-        {
-            ReservedToursView reservedToursView = new ReservedToursView(LoggedUser);
-            reservedToursView.Show();
-            _rateTourAndGuideForm.Close();
-        }
-
-        public void ShowToursViewCommand_Execute(object? parameter)
-        {
-            Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
-            guest2TourView.Show();
-            _rateTourAndGuideForm.Close();
-        }
+        
 
         public void RemoveImageCommand_Execute(object? parameter)
         {
@@ -416,8 +361,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public void CancelRatingCommand_Execute(object? parameter)
         {
             ReservedToursView reservedToursView = new ReservedToursView(LoggedUser);
-            reservedToursView.Show();
-            _rateTourAndGuideForm.Close();
+            //reservedToursView.Show();
+            //_rateTourAndGuideForm.Close();
         }
         public void RateTourAndGuideCommand_Execute(object? parameter)
         {
@@ -429,7 +374,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 SetGuideIdProperty();
                 _tourReviewService.SaveRating(LoggedUser.Id, TourId, GuideId, int.Parse(GuidesKnowledgeGrade), int.Parse(GuidesLanguageGrade), int.Parse(InterestingGrade), AdditionalComment, Images);
-                _rateTourAndGuideForm.Close();
+                Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
+                //_rateTourAndGuideForm.Close();
             }
         }
 

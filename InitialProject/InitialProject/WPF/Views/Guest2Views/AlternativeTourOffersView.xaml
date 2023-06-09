@@ -1,55 +1,18 @@
-﻿<Window x:Class="InitialProject.WPF.Views.AlternativeTourOffersView"
+﻿<Page x:Class="InitialProject.WPF.Views.AlternativeTourOffersView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.WPF.Views"
         mc:Ignorable="d"
-        WindowStyle="None"
-        Title="Alternative Tours" Height="768" Width="1024" WindowStartupLocation="CenterScreen" Background="LightYellow">
+        Title="Alternative Tours" Height="648" Width="1024" Background="LightYellow">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="5.3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        
         <Grid Background="LightYellow" Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowToursViewCommand}">
-                <TextBlock Text="Tours" TextWrapping="Wrap" TextAlignment="Center"/>
-            </Button>
-            <Button Grid.Column="1" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowReservedToursCommand}">
-                <TextBlock Text="Reserved Tours" TextWrapping="Wrap" TextAlignment="Center"/>
-            </Button>
-            <Button Grid.Column="2" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowTourRequestsCommand}">
-                <TextBlock Text="Regular Tour Requests" TextWrapping="Wrap" TextAlignment="Center"/>
-            </Button>
-            <Button Grid.Column="3" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
-                <TextBlock Text="Complex Tour Requests" TextWrapping="Wrap" TextAlignment="Center"/>
-            </Button>
-            <Button Grid.Column="4" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowStatisticsCommand}">
-                <TextBlock Text="Statistics" TextWrapping="Wrap" TextAlignment="Center"/>
-            </Button>
-            <Button Grid.Column="5" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding ShowVouchersCommand}">
-                <TextBlock Text="Vouchers" TextWrapping="Wrap" TextAlignment="Center"/>
-            </Button>
-            <Button Grid.Column="6" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Command="{Binding OpenNotificationsCommand}">
-                <TextBlock Text="Notifications" TextWrapping="Wrap" TextAlignment="Center"/>
-            </Button>
-            <Button Grid.Column="7" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20">
-                <TextBlock Text="Demo" TextWrapping="Wrap" TextAlignment="Center"/>
-            </Button>
-        </Grid>
-        <Grid Background="LightYellow" Grid.Row="1">
             <DataGrid Grid.Row="1" x:Name="DataGridTours" ItemsSource="{Binding AlternativeTours, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding AlternativeSelectedTour, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="10,30,10,0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="143.3" Binding="{Binding Name}"/>
@@ -62,9 +25,9 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Grid Grid.Row="2" Background="LightYellow">
+        <Grid Grid.Row="1" Background="LightYellow">
             <Button Content="Cancel" HorizontalAlignment="Left" Margin="58,50,0,0" VerticalAlignment="Top" Width="120" Command="{Binding CancelCommand}" FontWeight="Bold"/>
             <Button Name="ChooseButton" Content="Choose" HorizontalAlignment="Right" Margin="0,50,58,0" VerticalAlignment="Top" Width="120" Command="{Binding ChooseCommand}" FontWeight="Bold"/>
         </Grid>
     </Grid>
-</Window>
+</Page>

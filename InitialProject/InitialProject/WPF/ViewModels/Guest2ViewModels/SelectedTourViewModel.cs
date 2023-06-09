@@ -81,15 +81,13 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
-        private readonly Window _selectedTourView;
         private readonly VoucherService _voucherService;
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
         #endregion
 
-        public SelectedTourViewModel(Window selectedTourView, User user, Tour selectedTour)
+        public SelectedTourViewModel(User user, Tour selectedTour)
         {
-            _selectedTourView = selectedTourView;
             LoggedUser = user;
             SelectedTour = selectedTour;
 
@@ -97,27 +95,21 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
 
-            CancelCommand = new RelayCommand(CancelCommand_Execute);
+            HomeCommand = new RelayCommand(HomeCommand_Execute);
             ReserveTourCommand = new RelayCommand(ReserveTourCommand_Execute);
-            ShowReservedToursCommand = new RelayCommand(ShowReservedToursCommand_Execute);
-            OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
-            ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
-            ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
-            ShowTourRequestsCommand = new RelayCommand(ShowTourRequestsCommand_Execute);
-            ShowStatisticsCommand = new RelayCommand(ShowStatisticsCommand_Execute);
         }
 
         public void UseVoucher()
         {
             UseVoucherView useVoucherView = new UseVoucherView(LoggedUser);
-            useVoucherView.Show();
+            //useVoucherView.Show();
         }
 
         public void OfferOtherTours()
         {
             AlternativeTourOffersView alternativeTourOffersView = new AlternativeTourOffersView(LoggedUser, SelectedTour);
-            alternativeTourOffersView .Show();
-            _selectedTourView.Close();
+            //alternativeTourOffersView .Show();
+           // _selectedTourView.Close();
         }
 
         private void MakeNewReservation()
@@ -130,56 +122,8 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         #region COMMANDS
 
-        public RelayCommand CancelCommand { get; }
+        public RelayCommand HomeCommand { get; }
         public RelayCommand ReserveTourCommand { get; }
-        public RelayCommand ShowToursViewCommand { get; }
-        public RelayCommand ShowReservedToursCommand { get; }
-        public RelayCommand OpenNotificationsCommand { get; }
-        public RelayCommand ShowVouchersCommand { get; }
-        public RelayCommand ShowTourRequestsCommand { get; }
-        public RelayCommand ShowStatisticsCommand { get; }
-
-        public void ShowStatisticsCommand_Execute(object? parameter)
-        {
-            RequestedTourStatisticsView requestedTourStatisticsView = new RequestedTourStatisticsView(LoggedUser);
-            requestedTourStatisticsView.Show();
-            _selectedTourView.Close();
-        }
-
-        public void ShowTourRequestsCommand_Execute(object? parameter)
-        {
-            TourRequestFormView tourRequestFormView = new TourRequestFormView(LoggedUser);
-            tourRequestFormView.Show();
-            _selectedTourView.Close();
-        }
-
-        public void OpenNotificationsCommand_Execute(object? parameter)
-        {
-            TourNotificationsView tourNotificationsView = new TourNotificationsView(LoggedUser);
-            tourNotificationsView.Show();
-            _selectedTourView.Close();
-        }
-
-        public void ShowVouchersCommand_Execute(object? parameter)
-        {
-            VouchersView vouchersView = new VouchersView(LoggedUser);
-            vouchersView.Show();
-            _selectedTourView.Close();
-        }
-
-        public void ShowReservedToursCommand_Execute(object? parameter)
-        {
-            ReservedToursView reservedToursView = new ReservedToursView(LoggedUser);
-            reservedToursView.Show();
-            _selectedTourView.Close();
-        }
-
-        public void ShowToursViewCommand_Execute(object? parameter)
-        {
-            Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
-            guest2TourView.Show();
-            _selectedTourView.Close();
-        }
 
         public void ReserveTourCommand_Execute(object? parameter)
         {
@@ -188,7 +132,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 MessageBox.Show("There is no enough slots for this reservation!");
                 OfferOtherTours();
             }
-            else if (NumberOfNewGuests == 0 || NumberOfNewGuests == null)
+            else if (NumberOfNewGuests == 0 || NumberOfNewGuests == null || NumberOfNewGuests < 0)
             {
                 MessageBox.Show("This field can't be empty!");
             }
@@ -196,15 +140,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 UseVoucher();
                 MakeNewReservation();
-                _selectedTourView.Close();
+                //_selectedTourView.Close();
             }
         }
 
-        public void CancelCommand_Execute(object? parameter)
+        public void HomeCommand_Execute(object? parameter)
         {
             Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
-            guest2TourView.Show();
-            _selectedTourView.Close();
+            //guest2TourView.Show();
+            //_selectedTourView.Close();
         }
 
         #endregion

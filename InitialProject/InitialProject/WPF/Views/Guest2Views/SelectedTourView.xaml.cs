@@ -26,12 +26,13 @@ namespace InitialProject.WPF.Views
     /// <summary>
     /// Interaction logic for TourReservationForm.xaml
     /// </summary>
-    public partial class SelectedTourView : Window
+    public partial class SelectedTourView : Page
     {
         public SelectedTourView(Tour selectedTour, User loggedUser)
         {
             InitializeComponent();
-            this.DataContext = new SelectedTourViewModel(this, loggedUser, selectedTour);
+            this.DataContext = new SelectedTourViewModel(loggedUser, selectedTour);
+            Guest2MainWindow.mainWindow.Guest2MainPreview.Content = this;
         }
     }
 }

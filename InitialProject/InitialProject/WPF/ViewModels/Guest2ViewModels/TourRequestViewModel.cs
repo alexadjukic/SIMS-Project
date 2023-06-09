@@ -46,26 +46,20 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
-        private readonly Window _tourRequestView;
         private readonly TourRequestService _tourRequestService;
         private readonly LocationService _locationService;
         private readonly UserService _userService;
         #endregion
-        public TourRequestViewModel(Window tourRequestView, User user)
+        public TourRequestViewModel(User user)
         {
-            _tourRequestView = tourRequestView;
             _tourRequestService = new TourRequestService();
             _locationService = new LocationService();
             _userService = new UserService();
             TourRequests = new ObservableCollection<TourRequest>();
             LoggedUser = user;
 
-            ShowReservedToursCommand = new RelayCommand(ShowReservedToursCommand_Execute);
-            OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
-            ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
-            ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
             ShowTourRequestFormCommand = new RelayCommand(ShowTourRequestFormCommand_Execute);
-            ShowStatisticsCommand = new RelayCommand(ShowStatisticsCommand_Execute);
+            HomeCommand = new RelayCommand(HomeCommand_Execute);
 
             LoadRequests();
         }
@@ -91,53 +85,18 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
 
         #region COMMANDS
-        public RelayCommand ShowToursViewCommand { get; }
-        public RelayCommand ShowReservedToursCommand { get; }
-        public RelayCommand OpenNotificationsCommand { get; }
-        public RelayCommand ShowVouchersCommand { get; }
         public RelayCommand ShowTourRequestFormCommand { get; }
-        public RelayCommand ShowStatisticsCommand { get; }
+        public RelayCommand HomeCommand { get; }
 
-        public void ShowStatisticsCommand_Execute(object? parameter)
+        public void HomeCommand_Execute(object? parameter)
         {
-            RequestedTourStatisticsView requestedTourStatisticsView = new RequestedTourStatisticsView(LoggedUser);
-            requestedTourStatisticsView.Show();
-            _tourRequestView.Close();
+            Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
         }
 
         public void ShowTourRequestFormCommand_Execute(object? parameter)
         {
             TourRequestFormView tourRequestFormView = new TourRequestFormView(LoggedUser);
-            tourRequestFormView.Show();
-            _tourRequestView.Close();
-        }
-
-        public void OpenNotificationsCommand_Execute(object? parameter)
-        {
-            TourNotificationsView tourNotificationsView = new TourNotificationsView(LoggedUser);
-            tourNotificationsView.Show();
-            _tourRequestView.Close();
-        }
-
-        public void ShowVouchersCommand_Execute(object? parameter)
-        {
-            VouchersView vouchersView = new VouchersView(LoggedUser);
-            vouchersView.Show();
-            _tourRequestView.Close();
-        }
-
-        public void ShowReservedToursCommand_Execute(object? parameter)
-        {
-            ReservedToursView reservedToursView = new ReservedToursView(LoggedUser);
-            reservedToursView.Show();
-            _tourRequestView.Close();
-        }
-
-        public void ShowToursViewCommand_Execute(object? parameter)
-        {
-            Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
-            guest2TourView.Show();
-            _tourRequestView.Close();
+            //tourRequestFormView.Show();
         }
         #endregion
     }

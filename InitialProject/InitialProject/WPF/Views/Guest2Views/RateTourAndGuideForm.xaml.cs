@@ -20,12 +20,13 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for RateTourAndGuideForm.xaml
     /// </summary>
-    public partial class RateTourAndGuideForm : Window
+    public partial class RateTourAndGuideForm : Page
     {
         public RateTourAndGuideForm(int tourId ,User user)
         {
             InitializeComponent();
-            this.DataContext = new RateTourAndGuideFormViewModel(this, tourId, user);
+            this.DataContext = new RateTourAndGuideFormViewModel(tourId, user);
+            Guest2MainWindow.mainWindow.Guest2MainPreview.Content = this;
         }
     }
 }

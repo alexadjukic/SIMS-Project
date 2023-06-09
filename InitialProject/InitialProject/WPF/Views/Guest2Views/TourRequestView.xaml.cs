@@ -19,12 +19,13 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for TourRequestView.xaml
     /// </summary>
-    public partial class TourRequestView : Window
+    public partial class TourRequestView : Page
     {
         public TourRequestView(User loggedUser)
         {
             InitializeComponent();
-            this.DataContext = new TourRequestViewModel(this, loggedUser);
+            this.DataContext = new TourRequestViewModel(loggedUser);
+            Guest2MainWindow.mainWindow.Guest2MainPreview.Content = this;
         }
     }
 }
