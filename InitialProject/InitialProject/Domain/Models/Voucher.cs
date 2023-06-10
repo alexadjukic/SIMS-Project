@@ -15,15 +15,18 @@ namespace InitialProject.Domain.Models
         public DateTime ExpiryDate { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public int GuideId { get; set; }
+        public User Guide { get; set; }
 
 
         public Voucher() {}
 
-        public Voucher(string name, DateTime expiryDate, int userId)
+        public Voucher(string name, DateTime expiryDate, int userId, int guideId)
         {
             Name = name;
             ExpiryDate = expiryDate;
             UserId = userId;
+            GuideId = guideId;
         }
 
         public string[] ToCSV()
@@ -33,7 +36,8 @@ namespace InitialProject.Domain.Models
                 Id.ToString(),
                 Name,
                 ExpiryDate.ToString(),
-                UserId.ToString()
+                UserId.ToString(),
+                GuideId.ToString()
             };
 
             return csvValues;
@@ -45,6 +49,7 @@ namespace InitialProject.Domain.Models
             Name = values[1];
             ExpiryDate = DateTime.Parse(values[2]);
             UserId = int.Parse(values[3]);
+            GuideId = int.Parse(values[4]);
         }
 
     }

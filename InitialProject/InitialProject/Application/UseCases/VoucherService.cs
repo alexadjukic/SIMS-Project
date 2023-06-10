@@ -47,9 +47,9 @@ namespace InitialProject.Application.UseCases
             return vouchers;
         }
 
-        public Voucher Create(User user)
+        public Voucher Create(User user, User guide)
         {
-            var voucher = new Voucher("Voucher", DateTime.MaxValue, user.Id);
+            var voucher = new Voucher("Voucher", DateTime.MaxValue, user.Id, guide is null ? 0 : guide.Id);
             return _voucherRepository.Save(voucher);
         }
     }

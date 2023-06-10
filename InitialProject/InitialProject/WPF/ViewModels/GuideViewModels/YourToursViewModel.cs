@@ -105,7 +105,7 @@ namespace InitialProject.WPF.ViewModels
 		{
 			if (MessageBox.Show("Are you sure you want to cancel this tour? You can undo this action later but all the reservations will remain deleted and guests will keep their vouchers!", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.No) == MessageBoxResult.No) return;
 			_tourService.CancelTour(SelectedFutureTour);
-			_tourReservationService.DeleteAllReservationsForCancelledTour(SelectedFutureTour);
+			_tourReservationService.DeleteAllReservationsForCancelledTour(SelectedFutureTour, _guide);
 			LoadFutureTours();
 
 			_commandStack.Push(new Tuple<ReversibleCommand, object?>(CancelTourCommand, parameter));

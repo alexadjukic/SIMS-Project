@@ -57,13 +57,13 @@ namespace InitialProject.Application.UseCases
             return reservations;
         }
 
-        public void DeleteAllReservationsForCancelledTour(Tour tour)
+        public void DeleteAllReservationsForCancelledTour(Tour tour, User guide)
         {
             var reservations = _tourReservationRepository.GetAll().Where(r => r.TourId == tour.Id);
             foreach (var reservation in reservations)
             {
                 reservation.User = _userService.GetById(reservation.UserId);
-                _voucherService.Create(reservation.User);
+                _voucherService.Create(reservation.User, guide);
                 _tourReservationRepository.Delete(reservation);
             }
         }
