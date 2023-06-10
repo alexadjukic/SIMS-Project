@@ -197,5 +197,12 @@ namespace InitialProject.Application.UseCases
             LoadLocations(tours);
             return tours;
         }
+
+        public IEnumerable<Tour> GetAllForGuideAndLanguageInLastYear(User guide, string language)
+        {
+            var tours =  this.GetPastToursByGuide(guide).Where(t => t.Language.Equals(language) && DateTime.Compare(t.StartTime, DateTime.Now.Subtract(TimeSpan.FromDays(365))) > 0);
+            LoadLocations(tours);
+            return tours;
+        }
     }
 }

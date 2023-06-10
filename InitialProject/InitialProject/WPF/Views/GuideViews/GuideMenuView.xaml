@@ -45,7 +45,7 @@
 
             <Border Style="{StaticResource MenuBorder}" DockPanel.Dock="{Binding MenuSide}" Width="215">
                 <DockPanel>
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Margin="0,5,0,20">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Margin="0,5,0,20" Command="{Binding ProfileCommand}">
                         <DockPanel LastChildFill="False">
                             <iconPacks:PackIconMaterial DockPanel.Dock="Left" Kind="AccountOutline" Style="{StaticResource MenuButtonIcon}"/>
                             <TextBlock DockPanel.Dock="Left" Text="{Binding Guide.Username}" Style="{StaticResource MenuButtonText}"/>
@@ -222,6 +222,9 @@
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModel:TourReviewsViewModel}">
                         <local:TourReviewsView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:SuperGuideViewModel}">
+                        <local:SuperGuideView/>
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>

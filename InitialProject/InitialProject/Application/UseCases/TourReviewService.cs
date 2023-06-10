@@ -89,5 +89,30 @@ namespace InitialProject.Application.UseCases
             }
             return reviews;
         }
+
+        public double? GetAverageGrade(Tour tour)
+        {
+            var totalGrade = 0.0;
+            foreach (var review in this.GetReviewsByTour(tour))
+            {
+                totalGrade += review.GuideKnowledgeGrade + review.GuideLanguageGrade + review.InterestingnessGrade;
+            }
+            var numberOfReviews = this.GetReviewsByTour(tour).Count();
+            return totalGrade == 0 ? null : totalGrade / numberOfReviews;
+        }
+
+        public double? GetAverageGrade(IEnumerable<Tour> tours)
+        {
+            double? totalGrade = 0.0;
+            var tourCounter = 0;
+            foreach (var tour in tours)
+            {
+                var avgGrade = this.GetAverageGrade(tour);
+                if (avgGrade is null) continue;
+                totalGrade += avgGrade;
+                tourCounter++;
+            }
+            return tourCounter == 0 ? totalGrade : totalGrade / tourCounter;
+        }
     }
 }

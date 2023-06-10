@@ -74,7 +74,6 @@ namespace InitialProject.Repositories
                     return location;
                 }
             }
-            MessageBox.Show("Bukvalno nema tog ida XD");
             return null;
         }
 
