@@ -42,6 +42,7 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Border" Property="Background" Value="White"/>
                             <Setter TargetName="SideBorder" Property="Opacity" Value="1"/>
+                            <Setter Property="Cursor" Value="Hand"/>
                         </Trigger>
 
                         <Trigger Property="IsPressed" Value="True">
@@ -1543,6 +1544,14 @@
                             <Setter Property="Background" Value="White"/>
                             <Setter Property="TextElement.Foreground" Value="Black"/>
                         </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsFocused" Value="True"/>
+                                <Condition Property="IsPressed" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="Transparent"/>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
