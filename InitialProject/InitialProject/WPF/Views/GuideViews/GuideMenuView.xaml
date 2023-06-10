@@ -28,6 +28,7 @@
         <KeyBinding Key="F9" Command="{Binding ReviewsCommand}"/>
         <KeyBinding Key="F10" Command="{Binding SettingsCommand}"/>
         <KeyBinding Modifiers="Ctrl" Key="Z" Command="{Binding UndoCommand}"/>
+        <KeyBinding Modifiers="Ctrl+Shift" Key="S" Command="{Binding SwitchMenuSideCommand}"/>
     </Window.InputBindings>
 
     <Border Background="{DynamicResource BackgroundColor}">
@@ -44,7 +45,7 @@
 
             <Border Style="{StaticResource MenuBorder}" DockPanel.Dock="{Binding MenuSide}" Width="215">
                 <DockPanel>
-                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Margin="0,5,0,20">
+                    <Button DockPanel.Dock="Top" Style="{StaticResource MenuButton}" Margin="0,5,0,20" Command="{Binding ProfileCommand}">
                         <DockPanel LastChildFill="False">
                             <iconPacks:PackIconMaterial DockPanel.Dock="Left" Kind="AccountOutline" Style="{StaticResource MenuButtonIcon}"/>
                             <TextBlock DockPanel.Dock="Left" Text="{Binding Guide.Username}" Style="{StaticResource MenuButtonText}"/>
@@ -181,14 +182,14 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="_View">
-                    <MenuItem Header="_Switch menu side" Command="{Binding SwitchMenuSideCommand}">
+                    <MenuItem Header="_Switch menu side" Command="{Binding SwitchMenuSideCommand}" InputGestureText="Ctrl+Shift+S">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="SwapHorizontal"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Style="{DynamicResource MenuItemStyle1}" Header="_Help">
-                    <MenuItem Header="_Tutorial">
+                    <MenuItem Header="_Tutorial" InputGestureText="Ctrl+Shift+T">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Video"/>
                         </MenuItem.Icon>
@@ -221,6 +222,9 @@
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModel:TourReviewsViewModel}">
                         <local:TourReviewsView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:SuperGuideViewModel}">
+                        <local:SuperGuideView/>
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>

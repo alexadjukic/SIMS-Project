@@ -207,6 +207,7 @@ namespace InitialProject.WPF.ViewModels
 
 		private void LoadMonthlyStatistics()
 		{
+			MonthlyStatistics.Clear();
             for (int i = 1; i < 13; i++)
             {
                 var requestNumber = _tourRequestStatisticsService.GetNumberOfRequestsForMonth(i, SelectedYear);
