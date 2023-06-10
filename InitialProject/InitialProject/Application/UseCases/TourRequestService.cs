@@ -39,9 +39,9 @@ namespace InitialProject.Application.UseCases
             return _locationRepository.GetByCountryAndCity(country, city);
         }
 
-        public void Save(TourRequest tourRequest)
+        public TourRequest Save(TourRequest tourRequest)
         {
-            _tourRequestRepository.Save(tourRequest);
+            return _tourRequestRepository.Save(tourRequest);
         }
 
         public void Update(TourRequest tourRequest)

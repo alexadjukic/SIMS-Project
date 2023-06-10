@@ -52,7 +52,7 @@ namespace InitialProject.WPF.Views.Guest2Views
 
         private void ComplexTours_Click(object sender, RoutedEventArgs e)
         {
-            //TO-DO
+            ComplexTourRequestFormView complexTourRequestFormView = new ComplexTourRequestFormView(LoggedUser);
         }
 
         private void Statistics_Click(object sender, RoutedEventArgs e)
