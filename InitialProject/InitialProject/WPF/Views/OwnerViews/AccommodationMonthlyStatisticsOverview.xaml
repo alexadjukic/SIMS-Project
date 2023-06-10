@@ -80,7 +80,6 @@
             
             <Button Name="Button_Close" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0,0,25,0" Content="Close" Click="Button_Close_Click"/>
             <Button Name="Button_PDF" Grid.Column="1" Style="{StaticResource CloseButton}" Content="Create PDF" HorizontalAlignment="Right" Margin="0,0,25,0" Command="{Binding CreatePDFForMonthsCommand}" />
-
         </Grid>
     </Grid>
 </Window>

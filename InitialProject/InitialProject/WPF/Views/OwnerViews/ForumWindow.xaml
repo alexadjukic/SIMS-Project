@@ -1,0 +1,71 @@
+﻿<Window x:Class="InitialProject.WPF.Views.OwnerViews.ForumWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+        mc:Ignorable="d"
+        Title="Location accommodations" Height="600" Width="600">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/OwnerDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300*" />
+            <RowDefinition Height="240" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <ListBox Margin="10" Grid.Row="0" ItemContainerStyle="{StaticResource ListBoxItem}" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="130">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="460" />
+                            <ColumnDefinition Width="10*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <StackPanel>
+                                <TextBlock TextWrapping="Wrap" Text="Guest:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock TextWrapping="Wrap" Text="Author: " TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}" />
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock TextWrapping="Wrap" Text="Number of reports: " TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Grid Grid.Column="1">
+                            <Button Content="Report" VerticalAlignment="Bottom" Margin="0,0,0,20"  Style="{StaticResource ListBoxButton}" />
+                        </Grid>
+
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="100*" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+
+            <Label Name="ForumComment" Grid.Row="0" Content="Type your comment here:" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{StaticResource BasicLabel}" />
+
+            <TextBox Name="TextBoxForumComment" Grid.Row="1" Width="570" Margin="0,0,0,0"  HorizontalAlignment="Center"/>
+
+            <Button Name="ButtonSend" Grid.Row="2" Content="Send" HorizontalAlignment="Right" Margin="0,0,20,0" Style="{StaticResource CloseButton}" />
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Button Name="Button_Close" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0,0,20,0" Content="Close" Click="Button_Close_Click"/>
+        </Grid>
+    </Grid>
+</Window>
