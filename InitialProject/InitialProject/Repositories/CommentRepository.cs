@@ -67,7 +67,7 @@ namespace InitialProject.Repositories
         public List<Comment> GetByUser(User user)
         {
             _comments = _serializer.FromCSV(FilePath);
-            return _comments.FindAll(c => c.User.Id == user.Id);
+            return _comments.FindAll(c => c.UserId == user.Id);
         }
     }
 }
