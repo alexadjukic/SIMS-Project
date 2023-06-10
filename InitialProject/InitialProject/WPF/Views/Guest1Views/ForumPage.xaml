@@ -22,10 +22,17 @@
                 <DataGridTextColumn Header="Country" Width="*" Binding="{Binding Location.Country}"/>
                 <DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}"/>
                 <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}"/>
-                <DataGridTemplateColumn Width="180">
+                <DataGridTemplateColumn Width="160">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Style="{DynamicResource ButtonStyle}" Content="View" Command="{Binding ViewForumCommand}"></Button>
+                            <Button Style="{DynamicResource ButtonStyle}" Content="View" Command="{Binding DataContext.ViewForumCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="160">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{DynamicResource ButtonStyle}" Content="Close" Command="{Binding DataContext.CloseForumCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

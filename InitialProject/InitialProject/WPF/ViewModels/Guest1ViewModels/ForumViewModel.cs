@@ -44,12 +44,15 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Forums = new ObservableCollection<Forum>();
 
             NewThreadCommand = new RelayCommand(NewThreadCommand_Execute);
+            CloseForumCommand = new RelayCommand(CloseForumCommand_Execute, CloseForumCommand_CanExecute);
+            ViewForumCommand = new RelayCommand(ViewForumCommand_Execute);
 
             LoadForums();
         }
 
         public void LoadForums()
         {
+            Forums.Clear();
             var forums = _forumService.GetAll();
             foreach(Forum forum in forums)
             {
@@ -59,16 +62,28 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         #region COMMANDS
         public RelayCommand ViewForumCommand { get; }
+        public RelayCommand CloseForumCommand { get; }
         public RelayCommand NewThreadCommand { get; }
 
         public void ViewForumCommand_Execute(object? parameter)
         {
-
+            MainWindow.mainWindow.MainPreview.Content = new ThreadPage(LoggedUser, SelectedForum);
         }
 
         public void NewThreadCommand_Execute(object? parameter)
         {
             MainWindow.mainWindow.MainPreview.Content = new CreateThreadPage(LoggedUser);
+        }
+
+        public void CloseForumCommand_Execute(object? parameter)
+        {
+            _forumService.Close(SelectedForum);
+            LoadForums();
+        }
+
+        public bool CloseForumCommand_CanExecute(object? parameter)
+        {
+            return SelectedForum != null && SelectedForum.CreatorId == LoggedUser.Id && SelectedForum.Status.Equals("Open");
         }
         #endregion
     }
