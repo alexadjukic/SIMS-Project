@@ -23,26 +23,31 @@
     <SolidColorBrush x:Key="BasicLabelForeground" Color="Black" />
     <SolidColorBrush x:Key="MenuBackgroundColor" Color="#1d82a0" />
     <SolidColorBrush x:Key="MenuGridBackgroundColor" Color="#1d82a0" />
-    <SolidColorBrush x:Key="StandardButtonBackground" Color="#1d82a0" />
-    <SolidColorBrush x:Key="StandardButtonForeground" Color="Black"/>
+    <SolidColorBrush x:Key="StandardButtonBackground" Color="#ff9900" />
+    <SolidColorBrush x:Key="StandardButtonForeground" Color="white"/>
     <SolidColorBrush x:Key="StaandardSelectedButtonBackground" Color="#ff9900" />
     <SolidColorBrush x:Key="StandardSelectedButtonForeground" Color="Black" />
+    <SolidColorBrush x:Key="StandardHoveredButtonForeground" Color="#ff9900" />
     <SolidColorBrush x:Key="ListBoxSelectedBackground" Color="#1d82a0" />
     <SolidColorBrush x:Key="ListBoxSelectedForeground" Color="white" />
-    <SolidColorBrush x:Key="ListBoxButtonBackground" Color="#68acbf" />
+    <SolidColorBrush x:Key="ListBoxButtonBackground" Color="#ff9900" />
     <SolidColorBrush x:Key="ArrowButtonBackground" Color="#ff9900" />
+    <SolidColorBrush x:Key="ListBoxButtonForeground" Color="white" />
     <!--#endregion-->
     
     <!--#region MenuStyle-->
     <Style x:Key="MenuButton" TargetType="Button">
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Height" Value="50"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="white" />
                 <Setter Property="Foreground" Value="{StaticResource MenuBackgroundColor}" />
+                <Setter Property="Background" Value="White" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{StaticResource MenuBackgroundColor}" />
+                <Setter Property="Foreground" Value="white" />
             </Trigger>
 
             <Trigger Property="IsPressed" Value="True">
@@ -57,6 +62,7 @@
             <Trigger Property="IsEnabled" Value="True">
                 <Setter Property="Foreground" Value="white" />
                 <Setter Property="Background" Value="{StaticResource MenuBackgroundColor}" />
+                <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -75,6 +81,10 @@
 
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -240,8 +250,23 @@
         <Setter Property="Width" Value="80" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
-        <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource StandardButtonBackground}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
+                <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="black" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
+                <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="ListBoxButton" TargetType="Button">
@@ -249,15 +274,32 @@
         <Setter Property="Width" Value="80" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Background" Value="{StaticResource ListBoxButtonBackground}" />
-        <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource StandardButtonBackground}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
+                <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="black" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True" >
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     
     <Style x:Key="ArrowButton" TargetType="Button">
         <Setter Property="Height" Value="25" />
         <Setter Property="Width" Value="25" />
         <Setter Property="Background" Value="{StaticResource ArrowButtonBackground}" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <!--#endregion-->
     
@@ -305,8 +347,21 @@
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Width" Value="80" />
         <Setter Property="Height" Value="25" />
-        <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
-        <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource StandardButtonBackground}" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
+                <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="black" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <!--#endregion-->
     

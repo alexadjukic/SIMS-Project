@@ -46,7 +46,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             LoadForums();
 
-            OpenForumCommand = new RelayCommand(OpenForumCommand_Execute);
+            OpenForumCommand = new RelayCommand(OpenForumCommand_Execute, OpenForumCommand_CanExecute);
         }
 
         private void LoadForums()
@@ -64,8 +64,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void OpenForumCommand_Execute(object? parameter)
         {
-            ForumWindow forumWindow = new ForumWindow(SelectedForum);
+            ForumWindow forumWindow = new ForumWindow(SelectedForum, _owner);
             forumWindow.Show();
+        }
+
+        public bool OpenForumCommand_CanExecute(object? parameter)
+        {
+            return SelectedForum != null;
         }
         #endregion
     }

@@ -74,6 +74,9 @@ namespace InitialProject.Application.UseCases
                 if (ownersAccommodations.FirstOrDefault(oa => oa.LocationId == forum.LocationId) != null)
                 {
                     forum.Location = ownersAccommodations.FirstOrDefault(oa => oa.LocationId == forum.LocationId).Location;
+
+                    //CalculateUtility();
+
                     forumsForOwner.Add(forum);
                 }
             }

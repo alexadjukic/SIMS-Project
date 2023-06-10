@@ -18,10 +18,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="300*" />
-            <RowDefinition Height="240" />
+            <RowDefinition Height="210" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <ListBox Margin="10" Grid.Row="0" ItemContainerStyle="{StaticResource ListBoxItem}" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListBox Margin="10" Grid.Row="0" ItemContainerStyle="{StaticResource ListBoxItem}" ItemsSource="{Binding Path=Comments, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" SelectedItem="{Binding SelectedComment, UpdateSourceTrigger=PropertyChanged}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="130">
@@ -30,19 +30,22 @@
                             <ColumnDefinition Width="10*" />
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
-                            <StackPanel>
-                                <TextBlock TextWrapping="Wrap" Text="Guest:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}" />
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock TextWrapping="Wrap" Text="{Binding User.Role}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding User.Username}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
                             </StackPanel>
-                            <StackPanel>
-                                <TextBlock TextWrapping="Wrap" Text="Author: " TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}" />
-                            </StackPanel>
-                            <StackPanel>
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock TextWrapping="Wrap" Text="Number of reports: " TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}" />
+                                <TextBlock TextWrapping="Wrap" Text="{Binding NumberOfReports}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock TextWrapping="Wrap" Text="Comment: " TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}" />
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Text}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
                             </StackPanel>
                         </StackPanel>
 
                         <Grid Grid.Column="1">
-                            <Button Content="Report" VerticalAlignment="Bottom" Margin="0,0,0,20"  Style="{StaticResource ListBoxButton}" />
+                            <Button Content="Report" VerticalAlignment="Bottom" Margin="0,0,0,20"  Style="{StaticResource ListBoxButton}"   Command="{Binding DataContext.ReportCommentCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
                         </Grid>
 
                     </Grid>
@@ -59,13 +62,13 @@
 
             <Label Name="ForumComment" Grid.Row="0" Content="Type your comment here:" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{StaticResource BasicLabel}" />
 
-            <TextBox Name="TextBoxForumComment" Grid.Row="1" Width="570" Margin="0,0,0,0"  HorizontalAlignment="Center"/>
+            <TextBox Name="TextBoxForumComment" Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Width="570" Margin="0,0,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Center"/>
 
-            <Button Name="ButtonSend" Grid.Row="2" Content="Send" HorizontalAlignment="Right" Margin="0,0,20,0" Style="{StaticResource CloseButton}" />
+            <Button Name="ButtonSend" Grid.Row="2" Content="Send" HorizontalAlignment="Right" Margin="0,0,20,0" Style="{StaticResource CloseButton}" Command="{Binding SendCommentCommand}"/>
         </Grid>
 
         <Grid Grid.Row="2">
-            <Button Name="Button_Close" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0,0,20,0" Content="Close"/>
+            <Button Name="Button_Close" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0,0,20,0" Content="Close" Click="Button_Close_Click"/>
         </Grid>
     </Grid>
 </Window>

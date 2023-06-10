@@ -107,11 +107,6 @@
                                     <TextBlock TextWrapping="Wrap" Text="{Binding Location.City}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock TextWrapping="Wrap" Text="Creator:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                                    <TextBlock TextWrapping="Wrap" Text="" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
-                                </StackPanel>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock TextWrapping="Wrap" Text="Utility:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
                                     <TextBlock TextWrapping="Wrap" Text="{Binding Utility, Converter={StaticResource UtilityConverter}}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
                                 </StackPanel>
                             </StackPanel>

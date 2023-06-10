@@ -21,10 +21,15 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class ForumWindow : Window
     {
-        public ForumWindow(Forum SelectedForum)
+        public ForumWindow(Forum SelectedForum, User owner)
         {
             InitializeComponent();
-            this.DataContext = new ForumWindowViewModel(SelectedForum);
+            this.DataContext = new ForumWindowViewModel(SelectedForum, owner);
+        }
+
+        private void Button_Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

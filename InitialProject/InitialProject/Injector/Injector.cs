@@ -36,7 +36,8 @@ namespace InitialProject
             { typeof(IRequestedTourNotificationRepository), new RequestedTourNotificationRepository() },
             { typeof(ISuperGuestRepository), new SuperGuestRepository() },
             { typeof(IForumRepository), new ForumRepository() },
-            { typeof(ICommentRepository), new CommentRepository() }
+            { typeof(ICommentRepository), new CommentRepository() },
+            { typeof(IReportedCommentRepository), new ReportedCommentRepository() }
         };
 
         public static T CreateInstance<T>()
