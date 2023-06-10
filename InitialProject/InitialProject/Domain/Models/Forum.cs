@@ -15,6 +15,7 @@ namespace InitialProject.Domain.Models
         public int LocationId { get; set; }
         public int CreatorId { get; set; }
         public Location Location { get; set; }
+        public bool Utility { get; set; }
 
         public Forum() { }
 
@@ -24,6 +25,7 @@ namespace InitialProject.Domain.Models
             Status = status;
             LocationId = locationId;
             CreatorId = creatorId;
+            Utility = false;
         }
 
         public string[] ToCSV()

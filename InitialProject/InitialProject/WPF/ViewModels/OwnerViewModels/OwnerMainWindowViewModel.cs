@@ -246,7 +246,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public void SeeForumsCommand_Execute(object? parameter)
         {
-            SelectedPage = new ForumsOverviewPage();
+            SelectedPage = new ForumsOverviewPage(_user);
         }
 
         public bool SeeMyRenovationsCommand_CanExecute(object? parameter)

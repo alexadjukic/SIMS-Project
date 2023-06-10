@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Domain.Models;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,10 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class ForumsOverviewPage : Page
     {
-        public ForumsOverviewPage()
+        public ForumsOverviewPage(User owner)
         {
             InitializeComponent();
+            this.DataContext = new ForumOverviewPageViewModel(owner);
         }
     }
 }
