@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Domain.Models;
+using InitialProject.WPF.ViewModels.Guest1ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,11 @@ namespace InitialProject.WPF.Views.Guest1Views
     /// </summary>
     public partial class CreateThreadPage : Page
     {
-        public CreateThreadPage()
+        public CreateThreadPage(User user)
         {
             InitializeComponent();
+            this.DataContext = new CreateThreadViewModel(user);
+            MainWindow.mainWindow.MainPreview.Content = this;
         }
     }
 }

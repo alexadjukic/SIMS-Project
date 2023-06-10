@@ -30,7 +30,7 @@
             <Button Content="Accommodations" MinWidth="200" FontSize="18" Click="AccommodationsButton_Click" Style="{DynamicResource ButtonStyle}"/>
             <Button Content="Reservations" MinWidth="200" FontSize="18" Click="ReservationsButton_Click" Style="{DynamicResource ButtonStyle}"/>
             <Button Content="Reviews" MinWidth="200" FontSize="18" Style="{DynamicResource ButtonStyle}" Click="ReviewsButton_Click" />
-            <Button Content="Forum" MinWidth="200" FontSize="18" Style="{DynamicResource ButtonStyle}"/>
+            <Button Content="Forum" MinWidth="200" FontSize="18" Style="{DynamicResource ButtonStyle}" Click="ForumButton_Click"/>
         </StackPanel>
         <Frame x:Name="MainPreview" Margin="0,120,0,0"></Frame>
     </Grid>

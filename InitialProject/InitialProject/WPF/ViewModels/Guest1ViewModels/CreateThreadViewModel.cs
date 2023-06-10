@@ -1,6 +1,10 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Commands;
+using InitialProject.Domain.Models;
+using InitialProject.WPF.Views.Guest1Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,36 +14,37 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
     public class CreateThreadViewModel : ViewModelBase
     {
         #region PROPERTIES
-        private string _country;
-        public string Country
+        private string _selectedCountry;
+        public string SelectedCountry
         {
             get
             {
-                return _country;
+                return _selectedCountry;
             }
             set
             {
-                if (_country != value)
+                if (_selectedCountry != value)
                 {
-                    _country = value;
-                    OnPropertyChanged(nameof(Country));
+                    _selectedCountry = value;
+                    OnPropertyChanged(nameof(SelectedCountry));
+                    LoadCities();
                 }
             }
         }
 
-        private string _city;
-        public string City
+        private string _selectedCity;
+        public string SelectedCity
         {
             get
             {
-                return _city;
+                return _selectedCity;
             }
             set
             {
-                if (_city != value)
+                if (_selectedCity != value)
                 {
-                    _city = value;
-                    OnPropertyChanged(nameof(City));
+                    _selectedCity = value;
+                    OnPropertyChanged(nameof(SelectedCity));
                 }
             }
         }
@@ -60,10 +65,42 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
+        public List<string> Countries { get; set; }
+        public ObservableCollection<string> Cities { get; set; }
+        public User LoggedUser { get; set; }
+
+        private readonly ForumService _forumService;
+        private readonly LocationService _locationService;
         #endregion
-        public CreateThreadViewModel()
+        public CreateThreadViewModel(User user)
         {
+            _forumService = new ForumService();
+            _locationService = new LocationService();
+
+            LoggedUser = user;
+
+            Countries = new List<string>();
+            Cities = new ObservableCollection<string>();
+
             CreateThreadCommand = new RelayCommand(CreateThreadCommand_Execute, CreateThreadCommand_CanExecute);
+
+            LoadCountries();
+        }
+
+        private void LoadCountries()
+        {
+            Countries = _locationService.GetAllCountries().ToList();
+            Countries.Sort();
+        }
+
+        private void LoadCities()
+        {
+            Cities.Clear();
+            foreach (var location in _locationService.GetAll())
+            {
+                if (location.Country != SelectedCountry) continue;
+                Cities.Add(location.City);
+            }
         }
 
         #region COMMANDS
@@ -71,12 +108,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void CreateThreadCommand_Execute(object? parameter)
         {
-
+            _forumService.Save("Open", _locationService.GetByCountryAndCity(SelectedCountry, SelectedCity).Id, LoggedUser.Id);
+            MainWindow.mainWindow.MainPreview.Content = new ForumPage(LoggedUser);
         }
 
         public bool CreateThreadCommand_CanExecute(object? parameter)
         {
-            return true;
+            return !string.IsNullOrEmpty(SelectedCountry) && !string.IsNullOrEmpty(SelectedCity) && !string.IsNullOrEmpty(Comment);
         }
         #endregion
     }

@@ -10,12 +10,12 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="45"/>
             <RowDefinition Height="45"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="160"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*"/>
@@ -34,19 +34,19 @@
 
         <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
             <Label Content="Country:" FontSize="20" Style="{DynamicResource LabelStyle}"/>
-            <ComboBox IsEditable="True" FontSize="20" Height="38" Width="180" Margin="40,0,0,0"/>
+            <ComboBox SelectedValue="{Binding Path=SelectedCountry, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Countries}" IsEditable="True" FontSize="20" Height="38" Width="180" Margin="40,0,0,0"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal">
             <Label Content="City:" FontSize="20" Style="{DynamicResource LabelStyle}"/>
-            <ComboBox IsEditable="True" FontSize="20" Height="38" Width="180" Margin="76.5,0,0,0"/>
+            <ComboBox SelectedValue="{Binding Path=SelectedCity, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Cities}" IsEditable="True" FontSize="20" Height="38" Width="180" Margin="76.5,0,0,0"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal">
             <Label Content="Question:" FontSize="20" Style="{DynamicResource LabelStyle}"/>
-            <TextBox FontSize="15" Style="{DynamicResource TextBoxStyle}" Margin="30.2,4,0,40" Width="270"></TextBox>
+            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" FontSize="15" Style="{DynamicResource TextBoxStyle}" Margin="30.2,4,0,40" Width="270"></TextBox>
         </StackPanel>
 
-        <Button Grid.Column="2" Grid.Row="5" Content="Submit" FontSize="15" Height="35" Width="150" Style="{DynamicResource ButtonStyle}" Margin="213,26,64,101"></Button>
+        <Button Grid.Column="2" Grid.Row="5" Content="Submit" FontSize="15" Height="35" Width="140" Style="{DynamicResource ButtonStyle}" Margin="194,0,93,65" Command="{Binding CreateThreadCommand}"></Button>
     </Grid>
 </Page>

@@ -1,5 +1,7 @@
-﻿using InitialProject.Commands;
+﻿using InitialProject.Application.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using InitialProject.WPF.Views.Guest1Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,11 +30,31 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
                 }
             }
         }
+        public User LoggedUser;
         public ObservableCollection<Forum> Forums { get; set; }
-        #endregion
-        public ForumViewModel()
-        {
 
+        private readonly ForumService _forumService;
+        #endregion
+        public ForumViewModel(User user)
+        {
+            _forumService = new ForumService();
+
+            LoggedUser = user;
+
+            Forums = new ObservableCollection<Forum>();
+
+            NewThreadCommand = new RelayCommand(NewThreadCommand_Execute);
+
+            LoadForums();
+        }
+
+        public void LoadForums()
+        {
+            var forums = _forumService.GetAll();
+            foreach(Forum forum in forums)
+            {
+                Forums.Add(forum);
+            }
         }
 
         #region COMMANDS
@@ -42,6 +64,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public void ViewForumCommand_Execute(object? parameter)
         {
 
+        }
+
+        public void NewThreadCommand_Execute(object? parameter)
+        {
+            MainWindow.mainWindow.MainPreview.Content = new CreateThreadPage(LoggedUser);
         }
         #endregion
     }
