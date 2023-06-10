@@ -29,10 +29,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             }
         }
         public Forum SelectedForum { get; set; }
+        public User LoggedUser { get; set; }
         public ObservableCollection<Comment> Comments { get; set; }
         #endregion
-        public ThreadViewModel()
+        public ThreadViewModel(User user, Forum selectedForum)
         {
+            SelectedForum = selectedForum;
+            LoggedUser = user;
+
+            Comments = new ObservableCollection<Comment>();
+
 
         }
 

@@ -27,7 +27,7 @@
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBox Height="50" Width="1020" Margin="70,0,0,0" VerticalContentAlignment="Center" FontSize="15"></TextBox>
-            <Button Content="Post a comment" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" FontSize="20" Margin="40,0,0,0"/>
+            <Button Content="Post a comment" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" FontSize="20" Margin="20,0,0,0"/>
         </StackPanel>
     </Grid>
 </Page>

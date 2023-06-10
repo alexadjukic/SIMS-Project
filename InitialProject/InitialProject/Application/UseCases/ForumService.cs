@@ -58,5 +58,11 @@ namespace InitialProject.Application.UseCases
             }
             return forums;
         }
+
+        public void Close(Forum forum)
+        {
+            forum.Status = "Closed";
+            _forumRepository.Update(forum);
+        }
     }
 }
