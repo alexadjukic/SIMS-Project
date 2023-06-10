@@ -34,7 +34,7 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Button Content="Rate your stay" Command="{Binding RateYourStayCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,60,0,0" FontSize="20"/>
-            <Button Content="Change reservation dates" Command="{Binding ChangeReservationCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="16"/>
+            <Button Content="Change dates" Command="{Binding ChangeReservationCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
             <Button Content="Cancel reservation" Command="{Binding CancelReservationCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
             <Button Content="View all requests" Command="{Binding ViewAllChangeRequestsCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
         </StackPanel>

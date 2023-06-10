@@ -10,7 +10,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface IForumRepository
     {
         public List<Forum> GetAll();
-        public Forum Save(bool open, int locationId, int creatorId);
+        public Forum Save(string status, int locationId, int creatorId);
         public int NextId();
         public void Update(Forum forum);
     }

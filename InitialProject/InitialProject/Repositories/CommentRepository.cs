@@ -1,11 +1,12 @@
 ﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace InitialProject.Repositories
 {
-    public class CommentRepository
+    public class CommentRepository : ICommentRepository
     {
 
         private const string FilePath = "../../../Resources/Data/comments.csv";
