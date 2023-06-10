@@ -179,8 +179,10 @@ namespace InitialProject.WPF.Views
             {
                 //Guest2Menu guest2Menu = new Guest2Menu(user);
                 //guest2Menu.Show();
-                Guest2TourView guest2TourView = new Guest2TourView(user);
-                guest2TourView.Show();
+                //Guest2TourView guest2TourView = new Guest2TourView(user);
+                //guest2TourView.Show();
+                Guest2MainWindow guest2MainWindow = new Guest2MainWindow(user);
+                guest2MainWindow.Show();
                 Close();
             }
             else if (user.Role == UserRole.GUIDE)

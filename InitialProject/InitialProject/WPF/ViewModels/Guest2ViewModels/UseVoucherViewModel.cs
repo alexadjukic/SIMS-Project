@@ -1,6 +1,7 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using InitialProject.WPF.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -49,14 +50,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
 
         public ObservableCollection<Voucher> Vouchers { get; set; }
-        private readonly Window _useVouchersView;
         private readonly VoucherService _voucherService;
 
         #endregion
 
-        public UseVoucherViewModel(Window useVoucherView, User user)
+        public UseVoucherViewModel(User user)
         {
-            _useVouchersView = useVoucherView;
             Vouchers = new ObservableCollection<Voucher>();
             _voucherService = new VoucherService();
             LoggedUser = user;
@@ -86,13 +85,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 MessageBox.Show("Your reservation was successful.");
                 _voucherService.RemoveVoucher(SelectedVoucher);
                 MessageBox.Show("Congratulations, you've used one voucher!");
-                _useVouchersView.Close();
+                Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
+                //_useVouchersView.Close();
             }
         }
         public void CancelCommand_Execute(object? parameter)
         {
             MessageBox.Show("Your reservation was successful.");
-            _useVouchersView.Close();
+            Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
+            //_useVouchersView.Close();
         }
         #endregion
     }

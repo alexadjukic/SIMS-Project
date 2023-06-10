@@ -158,15 +158,13 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
-        private readonly Window _requestedTourStatisticsView;
         private readonly TourRequestService _tourRequestService;
         private readonly LocationService _locationService;
         private readonly TourRequestStatisticsService _tourRequestStatisticsService;
 
         #endregion
-        public RequestedTourStatisticsViewModel(Window requestedTourStatisticsView, User loggedUser)
+        public RequestedTourStatisticsViewModel(User loggedUser)
         {
-            _requestedTourStatisticsView = requestedTourStatisticsView;
             LoggedUser = loggedUser;
             _tourRequestService = new TourRequestService();
             _locationService = new LocationService();
@@ -174,13 +172,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             LanguageStats = new ObservableCollection<LanguageStatistics>();
             LocationStats = new ObservableCollection<LocationStatistics>();
             Years = new ObservableCollection<string>();
-
-            ShowReservedToursCommand = new RelayCommand(ShowReservedToursCommand_Execute);
-            OpenNotificationsCommand = new RelayCommand(OpenNotificationsCommand_Execute);
-            ShowVouchersCommand = new RelayCommand(ShowVouchersCommand_Execute);
-            ShowToursViewCommand = new RelayCommand(ShowToursViewCommand_Execute);
-            CloseStatisticsCommand = new RelayCommand(CloseStatisticsCommand_Execute);
-            ShowTourRequestsCommand = new RelayCommand(ShowTourRequestsCommand_Execute);
 
             LoadInitialStatistics();
         }
@@ -333,54 +324,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         }
 
         #region COMMANDS
+        public RelayCommand HomeCommand { get; }
 
-        public RelayCommand ShowToursViewCommand { get; }
-        public RelayCommand ShowReservedToursCommand { get; }
-        public RelayCommand OpenNotificationsCommand { get; }
-        public RelayCommand ShowVouchersCommand { get; }
-        public RelayCommand CloseStatisticsCommand { get; }
-        public RelayCommand ShowTourRequestsCommand { get; }
-
-        public void ShowTourRequestsCommand_Execute(object? parameter)
-        {
-            TourRequestFormView tourRequestFormView = new TourRequestFormView(LoggedUser);
-            tourRequestFormView.Show();
-            _requestedTourStatisticsView.Close();
-        }
-
-        public void CloseStatisticsCommand_Execute(object? parameter)
-        {
-            _requestedTourStatisticsView.Close();
-        }
-
-        public void OpenNotificationsCommand_Execute(object? parameter)
-        {
-            TourNotificationsView tourNotificationsView = new TourNotificationsView(LoggedUser);
-            tourNotificationsView.Show();
-            _requestedTourStatisticsView.Close();
-        }
-
-        public void ShowVouchersCommand_Execute(object? parameter)
-        {
-            VouchersView vouchersView = new VouchersView(LoggedUser);
-            vouchersView.Show();
-            _requestedTourStatisticsView.Close();
-        }
-
-        public void ShowReservedToursCommand_Execute(object? parameter)
-        {
-            ReservedToursView reservedToursView = new ReservedToursView(LoggedUser);
-            reservedToursView.Show();
-            _requestedTourStatisticsView.Close();
-        }
-
-        public void ShowToursViewCommand_Execute(object? parameter)
+        public void HomeCommand_Execute(object? parameter)
         {
             Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
-            guest2TourView.Show();
-            _requestedTourStatisticsView.Close();
         }
-
         #endregion
     }
 }

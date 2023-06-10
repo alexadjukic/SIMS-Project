@@ -20,12 +20,13 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for ReservedToursView.xaml
     /// </summary>
-    public partial class ReservedToursView : Window
+    public partial class ReservedToursView : Page
     {
         public ReservedToursView(User user)
         {
             InitializeComponent();
-            this.DataContext = new ReservedToursViewModel(this, user);
+            this.DataContext = new ReservedToursViewModel(user);
+            Guest2MainWindow.mainWindow.Guest2MainPreview.Content = this;
         }
     }
 }

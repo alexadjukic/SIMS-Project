@@ -20,12 +20,13 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for SelectedTourNotificationView.xaml
     /// </summary>
-    public partial class SelectedTourNotificationView : Window
+    public partial class SelectedTourNotificationView : Page
     {
         public SelectedTourNotificationView(User user, TourNotification selectedNotification)
         {
             InitializeComponent();
-            this.DataContext = new SelectedTourNotificationViewModel(this, user, selectedNotification);
+            this.DataContext = new SelectedTourNotificationViewModel(user, selectedNotification);
+            Guest2MainWindow.mainWindow.Guest2MainPreview.Content = this;
         }
     }
 }

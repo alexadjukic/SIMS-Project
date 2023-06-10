@@ -19,12 +19,13 @@ namespace InitialProject.WPF.Views.Guest2Views
     /// <summary>
     /// Interaction logic for RequestedToursStatistics.xaml
     /// </summary>
-    public partial class RequestedTourStatisticsView : Window
+    public partial class RequestedTourStatisticsView : Page
     {
         public RequestedTourStatisticsView(User loggedUser)
         {
             InitializeComponent();
-            this.DataContext = new RequestedTourStatisticsViewModel(this, loggedUser);
+            this.DataContext = new RequestedTourStatisticsViewModel(loggedUser);
+            Guest2MainWindow.mainWindow.Guest2MainPreview.Content = this;
         }
     }
 }
