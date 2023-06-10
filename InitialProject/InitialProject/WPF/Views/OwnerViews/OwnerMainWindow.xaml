@@ -65,56 +65,56 @@
                 <Button Name="ButtonAccommodations" Grid.Row="0" Style="{StaticResource MenuButton}" Command="{Binding SeeMyAccommodationsCommand}" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/building.png" Width="25" Height="30" HorizontalAlignment="Left"/>
-                        <TextBlock Text="Accommodations" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White" Background="Transparent"/>
+                        <TextBlock Text="Accommodations" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0"/>
                     </StackPanel>
                 </Button>
 
                 <Button Name="ButtonForums" Grid.Row="1" Style="{StaticResource MenuButton}" Grid.ColumnSpan="2" Command="{Binding SeeForumsCommand}">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/comment.png" Width="25" Height="30" HorizontalAlignment="Left"/>
-                        <TextBlock Text="Forums" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
+                        <TextBlock Text="Forums" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0"/>
                     </StackPanel>
                 </Button>
 
                 <Button Name="ButtonRenovations" Grid.Row="2" Style="{StaticResource MenuButton}" Command="{Binding SeeMyRenovationsCommand}" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/tools.png" Width="25" Height="30" HorizontalAlignment="Left"/>
-                        <TextBlock Text="Renovations" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
+                        <TextBlock Text="Renovations" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0"/>
                     </StackPanel>
                 </Button>
 
                 <Button Name="ButtonReservations" Grid.Row="3" Style="{StaticResource MenuButton}" Command="{Binding SeeMyReservationsCommand}" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/reservation.png" Width="25" Height="30" HorizontalAlignment="Left"/>
-                        <TextBlock Text="Reservations" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
+                        <TextBlock Text="Reservations" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0"/>
                     </StackPanel>
                 </Button>
 
                 <Button Name="ButtonReviews" Grid.Row="4" Style="{StaticResource MenuButton}" Command="{Binding SeeMyReviewsCommand}" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/star.png" Width="25" Height="30" HorizontalAlignment="Left"/>
-                        <TextBlock Text="Reviews" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
+                        <TextBlock Text="Reviews" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0"/>
                     </StackPanel>
                 </Button>
 
                 <Button Name="ButtonRequests" Grid.Row="5" Style="{StaticResource MenuButton}" Command="{Binding SeeMyRequestsCommand}" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/question_mark.png" Width="25" Height="30" HorizontalAlignment="Left"/>
-                        <TextBlock Text="Requests" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
+                        <TextBlock Text="Requests" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0"/>
                     </StackPanel>
                 </Button>
 
                 <Button Name="ButtonProfile"  Grid.Row="6" Style="{StaticResource MenuButton}" Command="{Binding SeeMyProfileCommand}" Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/user.png" Width="25" Height="30" HorizontalAlignment="Left"/>
-                        <TextBlock Text="Profile" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
+                        <TextBlock Text="Profile" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0"/>
                     </StackPanel>
                 </Button>
 
                 <Button Grid.Row="8" Style="{StaticResource MenuButton}" Command="{Binding CloseWindowCommand}" Grid.ColumnSpan="2" Margin="0,0,0,0" Grid.RowSpan="2">
                     <StackPanel Orientation="Horizontal" Width="200">
                         <Image Source="../../../Resources/Images/sign_out.png" Width="25" Height="30" HorizontalAlignment="Left"/>
-                        <TextBlock Text="Sign out" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0" Foreground="White"/>
+                        <TextBlock Text="Sign out" VerticalAlignment="Center" FontSize="20" Margin="10 0 20 0"/>
                     </StackPanel>
                 </Button>
             </Grid>

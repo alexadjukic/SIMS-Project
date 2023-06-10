@@ -65,7 +65,7 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <Button Name="Button_Close" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0,0,20,0" Content="Close" Click="Button_Close_Click"/>
+            <Button Name="Button_Close" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0,0,20,0" Content="Close"/>
         </Grid>
     </Grid>
 </Window>

@@ -63,14 +63,14 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             Username = user.Username;
 
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
-            SeeMyAccommodationsCommand = new RelayCommand(SeeMyAccommodationsCommand_Execute);
-            SeeMyReservationsCommand = new RelayCommand(SeeMyReservationsCommand_Execute);
-            SeeMyRequestsCommand = new RelayCommand(SeeMyRequestsCommand_Execute);
-            SeeMyReviewsCommand = new RelayCommand(SeeMyReviewsCommand_Execute);
-            SeeForumsCommand = new RelayCommand(SeeForumsCommand_Execute);
-            SeeMyRenovationsCommand = new RelayCommand(SeeMyRenovationsCommand_Execute);
-            SeeMyProfileCommand = new RelayCommand(SeeMyProfileCommand_Execute);
-            SeeNotificationsCommand = new RelayCommand(SeeNotificationsCommand_Execute);
+            SeeMyAccommodationsCommand = new RelayCommand(SeeMyAccommodationsCommand_Execute, SeeMyAccommodationsCommand_CanExecute);
+            SeeMyReservationsCommand = new RelayCommand(SeeMyReservationsCommand_Execute, SeeMyReservationsCommand_CanExecute);
+            SeeMyRequestsCommand = new RelayCommand(SeeMyRequestsCommand_Execute, SeeMyRequestsCommand_CanExecute);
+            SeeMyReviewsCommand = new RelayCommand(SeeMyReviewsCommand_Execute, SeeMyReviewsCommand_CanExecute);
+            SeeForumsCommand = new RelayCommand(SeeForumsCommand_Execute, SeeForumsCommand_CanExecute);
+            SeeMyRenovationsCommand = new RelayCommand(SeeMyRenovationsCommand_Execute, SeeMyRenovationsCommand_CanExecute);
+            SeeMyProfileCommand = new RelayCommand(SeeMyProfileCommand_Execute, SeeMyProfileCommand_CanExecute);
+            SeeNotificationsCommand = new RelayCommand(SeeNotificationsCommand_Execute, SeeNotificationsCommand_CanExecute);
 
             UpdateRenovationInformations();
             OpenReminderWindow();
@@ -199,9 +199,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _ownerMainWindow.Close();
         }
 
+        public bool SeeMyAccommodationsCommand_CanExecute(object? parameter)
+        {
+            return SelectedPage.GetType() != typeof(MyAccommodationsPage);
+        }
+
         public void SeeMyAccommodationsCommand_Execute(object? parameter)
         {
             SelectedPage = new MyAccommodationsPage(_user);
+        }
+
+        public bool SeeMyReservationsCommand_CanExecute(object? parameter)
+        {
+            return SelectedPage.GetType() != typeof(MyReservationsOverviewPage);
         }
 
         public void SeeMyReservationsCommand_Execute(object? parameter)
@@ -209,9 +219,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SelectedPage = new MyReservationsOverviewPage(_user);
         }
 
+        public bool SeeMyRequestsCommand_CanExecute(object? parameter)
+        {
+            return SelectedPage.GetType() != typeof(RequestsOverview);
+        }
+
         public void SeeMyRequestsCommand_Execute(object? parameter)
         {
             SelectedPage = new RequestsOverview(_user.Id);
+        }
+
+        public bool SeeMyReviewsCommand_CanExecute(object? parameter)
+        {
+            return SelectedPage.GetType() != typeof(RatedGuestsOverview);
         }
 
         public void SeeMyReviewsCommand_Execute(object? parameter)
@@ -219,9 +239,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SelectedPage = new RatedGuestsOverview(_user.Id);
         }
 
+        public bool SeeForumsCommand_CanExecute(object? parameter)
+        {
+            return SelectedPage.GetType() != typeof(ForumsOverviewPage);
+        }
+
         public void SeeForumsCommand_Execute(object? parameter)
         {
             SelectedPage = new ForumsOverviewPage();
+        }
+
+        public bool SeeMyRenovationsCommand_CanExecute(object? parameter)
+        {
+            return SelectedPage.GetType() != typeof(MyRenovationsOverviewPage);
         }
 
         public void SeeMyRenovationsCommand_Execute(object? parameter)
@@ -229,9 +259,19 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             SelectedPage = new MyRenovationsOverviewPage(_user.Id);
         }
 
+        public bool SeeMyProfileCommand_CanExecute(object? parameter)
+        {
+            return SelectedPage.GetType() != typeof(MyProfilePage);
+        }
+
         public void SeeMyProfileCommand_Execute(object? parameter)
         {
             SelectedPage = new MyProfilePage(_user.Id);
+        }
+
+        public bool SeeNotificationsCommand_CanExecute(object? parameter)
+        {
+            return SelectedPage.GetType() != typeof(NotificationsOverviewPage);
         }
 
         public void SeeNotificationsCommand_Execute(object? parameter)

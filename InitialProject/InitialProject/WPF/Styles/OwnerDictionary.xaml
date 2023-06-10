@@ -38,19 +38,25 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Height" Value="50"/>
-        <Setter Property="Foreground" Value="White"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource HighlightBrushKey}" />
-            </Trigger>
-
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="Background" Value="{StaticResource HighlightBrushKey}"/>
+                <Setter Property="Background" Value="white" />
+                <Setter Property="Foreground" Value="{StaticResource MenuBackgroundColor}" />
             </Trigger>
 
             <Trigger Property="IsPressed" Value="True">
                 <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource MenuBackgroundColor}" />
+                <Setter Property="Background" Value="AliceBlue" />
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Foreground" Value="white" />
+                <Setter Property="Background" Value="{StaticResource MenuBackgroundColor}" />
             </Trigger>
         </Style.Triggers>
     </Style>
