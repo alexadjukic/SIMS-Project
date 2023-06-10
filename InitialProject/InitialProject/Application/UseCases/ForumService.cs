@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace InitialProject.Application.UseCases
 {
@@ -21,23 +22,31 @@ namespace InitialProject.Application.UseCases
             _commentService = new CommentService();
         }
 
-        public Forum Save(string status, int locationId, int creatorId)
+        public Forum Save(string status, int locationId, int creatorId, string comment)
         {
-            if (IsAlreadyCreated(locationId))
+            if  (GetByLocationId(locationId) != null)
             {
-                //save comment
-                return null;
+                Forum forum = GetByLocationId(locationId);
+                if (forum.Status.Equals("Closed"))
+                {
+                    forum.Status = status;
+                    forum.CreatorId = creatorId;
+                    _forumRepository.Update(forum);
+                }
+                _commentService.Save(forum.Id, comment, creatorId);
+                return forum;
             }
             else
             {
-                //save comment
-                return _forumRepository.Save(status, locationId, creatorId);
+                Forum forum = _forumRepository.Save(status, locationId, creatorId);
+                _commentService.Save(forum.Id, comment, creatorId);
+                return forum;
             }
         }
 
-        private bool IsAlreadyCreated(int locationId)
+        private Forum GetByLocationId(int locationId)
         {
-            return _forumRepository.GetAll().Exists(x => x.LocationId == locationId);
+            return _forumRepository.GetAll().Find(x => x.LocationId == locationId);
         }
 
         public IEnumerable<Forum> GetAll()

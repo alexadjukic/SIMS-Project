@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.RepositoryInterfaces;
+﻿using InitialProject.Domain.Models;
+using InitialProject.Domain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,10 @@ namespace InitialProject.Application.UseCases
         {
             _commentRepository = Injector.CreateInstance<ICommentRepository>();
         }
-
-
+    
+        public void Save(int forumId, string text, int userId)
+        {
+            _commentRepository.Save(new Comment(-1, forumId, text, userId));
+        }
     }
 }

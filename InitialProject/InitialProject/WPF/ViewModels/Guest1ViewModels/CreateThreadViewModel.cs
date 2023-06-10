@@ -71,11 +71,13 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         private readonly ForumService _forumService;
         private readonly LocationService _locationService;
+        private readonly CommentService _commentService;
         #endregion
         public CreateThreadViewModel(User user)
         {
             _forumService = new ForumService();
             _locationService = new LocationService();
+            _commentService = new CommentService();
 
             LoggedUser = user;
 
@@ -108,7 +110,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void CreateThreadCommand_Execute(object? parameter)
         {
-            _forumService.Save("Open", _locationService.GetByCountryAndCity(SelectedCountry, SelectedCity).Id, LoggedUser.Id);
+            _forumService.Save("Open", _locationService.GetByCountryAndCity(SelectedCountry, SelectedCity).Id, LoggedUser.Id, Comment);
             MainWindow.mainWindow.MainPreview.Content = new ForumPage(LoggedUser);
         }
 
