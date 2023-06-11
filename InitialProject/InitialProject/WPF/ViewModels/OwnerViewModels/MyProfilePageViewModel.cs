@@ -1,5 +1,7 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Domain.Models;
+using LiveCharts;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,6 +70,11 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly AccommodationRatingService _accommodationRatingService;
         private readonly UserService _userService;
         private readonly SetOwnerRoleService _setOwnerRoleService;
+
+        public SeriesCollection SeriesCollection { get; set; }
+        public Func<int, string> Formatter { get; set; }
+        public string[] Labels { get; set; }
+        private HashSet<int> formattedValues = new HashSet<int>();
         #endregion
 
         public MyProfilePageViewModel(int ownerId)
@@ -75,10 +82,60 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _accommodationRatingService = new AccommodationRatingService();
             _setOwnerRoleService = new SetOwnerRoleService();
             _userService = new UserService();
+
             _ownerId = ownerId;
 
+            Labels = new string[0];
+
+            LoadColumns();
+            LoadReviews();
             SetOwnerRole();
             FindOwner();
+        }
+
+        private void LoadColumns()
+        {
+            SeriesCollection = new SeriesCollection() {
+                new ColumnSeries
+                {
+                    Title = "Cleanliness",
+                    Values = new ChartValues<int>(),
+                    ColumnPadding = -10
+                },
+                new ColumnSeries
+                {
+                    Title = "Correctness",
+                    Values = new ChartValues<int>(),
+                    ColumnPadding = -10
+                }
+            };
+        }
+
+        private void LoadReviews()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                int numberForCorrectness = _accommodationRatingService.CalculateNumberOfRatingsForCorrectness(i, _ownerId);
+                int numberForCleanliness = _accommodationRatingService.CalculateNumberOfRatingsForCleanliness(i, _ownerId);
+
+                Labels = Labels.Concat(new[] { i.ToString() }).ToArray();
+
+                SeriesCollection[0].Values.Add(numberForCleanliness);
+                SeriesCollection[1].Values.Add(numberForCorrectness);
+
+                Formatter = value =>
+                {
+                    if (!formattedValues.Contains(value))
+                    {
+                        formattedValues.Add(value);
+                        return value.ToString("N0");
+                    }
+                    else
+                    {
+                        return string.Empty;
+                    }
+                };
+            }
         }
 
         private void CalculateNumberOfRatings()

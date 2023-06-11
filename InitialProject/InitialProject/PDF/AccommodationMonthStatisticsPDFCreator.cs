@@ -78,6 +78,10 @@ namespace InitialProject.PDF
             float xPosition = 10;
             float yPosition = 10;
 
+            string dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            graphics.DrawString("Date and Time: " + dateTime, contentFont, PdfBrushes.Black, new PointF(page.Size.Width - 200, yPosition));
+            yPosition += contentFont.Size + 5;
+
             graphics.DrawString("Accommodation name: " + _selectedAccommodation.Name, titleFont, PdfBrushes.Black, new PointF(xPosition, yPosition));
             yPosition += titleFont.Size + 5;
 
@@ -104,7 +108,7 @@ namespace InitialProject.PDF
             PdfGridLayoutFormat layoutFormat = new PdfGridLayoutFormat();
             layoutFormat.Layout = PdfLayoutType.Paginate;
             PdfGrid firstGrid = CreateGridFromStatistics(monthStatistics);
-            PdfLayoutResult result = firstGrid.Draw(page, new PointF(10, 130), layoutFormat);
+            PdfLayoutResult result = firstGrid.Draw(page, new PointF(10, 155), layoutFormat);
             return result;
         }
 
