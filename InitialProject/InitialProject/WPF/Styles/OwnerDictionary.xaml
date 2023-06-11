@@ -69,6 +69,8 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{StaticResource MenuBackgroundColor}" />
                             <Setter Property="Background" Value="AliceBlue" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
                             <Setter Property="Cursor" Value="Hand"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
