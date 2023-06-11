@@ -63,5 +63,11 @@ namespace InitialProject.Application.UseCases
             voucher.GuideId = 0;
             _voucherRepository.Update(voucher);
         }
+
+        public Voucher Save(Voucher voucher)
+        {
+            return _voucherRepository.Save(voucher);
+        }
+
     }
 }

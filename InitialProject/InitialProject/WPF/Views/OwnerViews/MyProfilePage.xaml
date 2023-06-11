@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="700"
       Title="MyProfilePage">
@@ -21,8 +22,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*"/>
-                    <RowDefinition Height="20*"/>
-                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0">
@@ -43,6 +43,23 @@
                         <TextBlock TextWrapping="Wrap" Text="{Binding Owner.Role}" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BasicTextBlock}"/>
                     </StackPanel>
                 </StackPanel>
+
+                <lvc:CartesianChart Series="{Binding SeriesCollection}" Margin="-10,0,30,0" Grid.Row="2" LegendLocation="Left">
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="Rating" Labels="{Binding Labels}">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1" />
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="" LabelFormatter="{Binding Formatter}">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1" />
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
             </Grid>
         </GroupBox>
     </Grid>
