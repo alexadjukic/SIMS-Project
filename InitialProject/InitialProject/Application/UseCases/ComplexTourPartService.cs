@@ -23,5 +23,10 @@ namespace InitialProject.Application.UseCases
         {
             return _complexTourPartRepository.Save(complexTourPart);
         }
+
+        public IEnumerable<ComplexTourPart> GetAll()
+        {
+            return _complexTourPartRepository.GetAll();
+        }
     }
 }
