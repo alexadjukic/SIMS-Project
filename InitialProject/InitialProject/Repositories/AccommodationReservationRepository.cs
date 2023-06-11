@@ -84,6 +84,21 @@ namespace InitialProject.Repositories
             return guestReservations.FindAll(x => x.Status.Equals("Scheduled"));
         }
 
+        public List<AccommodationReservation> GetCancelledByGuestId(int guestId)
+        {
+            var guestReservations = new List<AccommodationReservation>();
+
+            foreach (var reservation in _serializer.FromCSV(FilePath))
+            {
+                if (reservation.GuestId == guestId)
+                {
+                    guestReservations.Add(reservation);
+                }
+            }
+
+            return guestReservations.FindAll(x => x.Status.Equals("Cancelled"));
+        }
+
         public void Remove(AccommodationReservation reservation)
         {
             _accommodationReservations = _serializer.FromCSV(FilePath);
