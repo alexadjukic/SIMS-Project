@@ -142,7 +142,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
         public void MakeReservationCommand_Execute(object? parameter)
         {
-            _accommodationReservationService.Save(SelectedAccommodation.StartDate, SelectedAccommodation.EndDate, Convert.ToInt32(DurationOfStay), new Accommodation(), SelectedAccommodation.Id, LoggedUser, LoggedUser.Id);
+            _accommodationReservationService.Save(SelectedAccommodation.StartDate, SelectedAccommodation.EndDate, Convert.ToInt32(DurationOfStay), new Accommodation(), SelectedAccommodation.Id, LoggedUser, LoggedUser.Id, "Scheduled");
             MainWindow.mainWindow.MainPreview.Content = new ReservationsPage(new ReservationsViewModel(LoggedUser.Id));
         }
         #endregion

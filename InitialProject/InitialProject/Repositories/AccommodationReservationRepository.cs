@@ -26,14 +26,14 @@ namespace InitialProject.Repositories
 
         public List<AccommodationReservation> GetAll()
         {
-            return _serializer.FromCSV(FilePath);
+            return _serializer.FromCSV(FilePath).FindAll(x => x.Status.Equals("Scheduled"));
         }
 
-        public AccommodationReservation Save(DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, int accommodationId, User guest, int guestId)
+        public AccommodationReservation Save(DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, int accommodationId, User guest, int guestId, string status)
         {
             int id = NextId();
 
-            AccommodationReservation accommodationReservation = new AccommodationReservation(id, startDate, endDate, lenghtOfStay, accommodation, guest, accommodationId);
+            AccommodationReservation accommodationReservation = new AccommodationReservation(id, startDate, endDate, lenghtOfStay, accommodation, guest, accommodationId, status);
 
             _accommodationReservations.Add(accommodationReservation);
             _serializer.ToCSV(FilePath, _accommodationReservations);
@@ -66,7 +66,7 @@ namespace InitialProject.Repositories
                 }
             }
 
-            return _reservations;
+            return _reservations.FindAll(x => x.Status.Equals("Scheduled"));
         }
 
         public List<AccommodationReservation> GetAllByGuestId(int guestId)
@@ -81,7 +81,7 @@ namespace InitialProject.Repositories
                 }
             }
 
-            return guestReservations;
+            return guestReservations.FindAll(x => x.Status.Equals("Scheduled"));
         }
 
         public void Remove(AccommodationReservation reservation)
