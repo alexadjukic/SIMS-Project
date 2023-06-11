@@ -28,6 +28,20 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             }
         }
 
+        private string _messageLabel;
+        public string MessageLabel
+        {
+            get => _messageLabel;
+            set
+            {
+                if (value != _messageLabel)
+                {
+                    _messageLabel = value;
+                    OnPropertyChanged("MessageLabel");
+                }
+            }
+        }
+
         private Comment _selectedComment;
         public Comment SelectedComment
         {
@@ -66,9 +80,24 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             _reportedCommentsService = new ReportedCommentsService();
 
             LoadComments();
+            LoadMessageLabel();
 
             SendCommentCommand = new RelayCommand(SendCommentCommand_Execute, SendCommentCommand_CanExecute);
             ReportCommentCommand = new RelayCommand(ReportCommentCommand_Execute, ReportCommentCommand_CanExecute);
+        }
+
+        private void LoadMessageLabel()
+        {
+            if (!_userLocationService.IsThisOwnersLocation(_owner.Id, _selectedForum.LocationId))
+            {
+                MessageLabel = "You can't leave comments on this forum!";
+            }
+            else
+            {
+                MessageLabel = "";
+            }
+
+            
         }
 
         private void LoadComments()
@@ -87,12 +116,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public bool SendCommentCommand_CanExecute(object? parameter)
         {
-            return Comment != "" && Comment != null;
+            return _userLocationService.IsThisOwnersLocation(_owner.Id, _selectedForum.LocationId) && Comment != "" && Comment != null;
         }
 
         public void SendCommentCommand_Execute(object? parameter)
         {
             Comment ownersComment = _commentService.Save(_selectedForum.Id, Comment, _owner.Id);
+            ownersComment.User = _owner;
             Comments.Add(ownersComment);
             Comment = "";
         }

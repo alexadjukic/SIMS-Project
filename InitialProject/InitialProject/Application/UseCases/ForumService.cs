@@ -15,6 +15,7 @@ namespace InitialProject.Application.UseCases
         private readonly LocationService _locationService;
         private readonly CommentService _commentService;
         private readonly AccommodationService _accommodationService;
+        private readonly UserLocationService _userLocationService;
 
         public ForumService()
         {
@@ -22,6 +23,7 @@ namespace InitialProject.Application.UseCases
             _locationService = new LocationService();
             _commentService = new CommentService();
             _accommodationService = new AccommodationService();
+            _userLocationService = new UserLocationService();
         }
 
         public Forum Save(string status, int locationId, int creatorId, string comment)
@@ -57,6 +59,7 @@ namespace InitialProject.Application.UseCases
             foreach(Forum forum in forums)
             {
                 forum.Location = _locationService.GetLocationById(forum.LocationId);
+                forum.Utility = CalculateUtility(forum).Utility;
             }
             return forums;
         }
@@ -75,14 +78,41 @@ namespace InitialProject.Application.UseCases
                 {
                     forum.Location = ownersAccommodations.FirstOrDefault(oa => oa.LocationId == forum.LocationId).Location;
 
-                    //CalculateUtility();
-
-                    forumsForOwner.Add(forum);
+                    forumsForOwner.Add(CalculateUtility(forum));
                 }
             }
 
             return forumsForOwner;
         }
+
+        public Forum CalculateUtility(Forum forum)
+        {
+            Forum updatedForum = forum;
+
+            List<Comment> comments = _commentService.GetAllByForumId(forum.Id);
+
+            List<Comment> ownersComments = comments.FindAll(c => c.User.Role == UserRole.OWNER || c.User.Role == UserRole.SUPER_OWNER);
+
+            List<Comment> guestsComments = comments.FindAll(c => c.User.Role == UserRole.GUEST1);
+
+            List<Comment> guestsOnLocation = new List<Comment>();
+
+            foreach(var comment in guestsComments)
+            {
+                if (_userLocationService.WasUserOnThisLocation(comment.UserId, forum.LocationId, -1))
+                {
+                    guestsOnLocation.Add(comment);
+                }
+            }
+
+            if (ownersComments.Count >= 10 && guestsOnLocation.Count >= 20)
+            {
+                updatedForum.Utility = true;
+            }
+
+            return updatedForum;
+        }
+
         public void Close(Forum forum)
         {
             forum.Status = "Closed";

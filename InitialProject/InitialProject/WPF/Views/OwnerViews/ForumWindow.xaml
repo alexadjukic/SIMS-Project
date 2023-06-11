@@ -59,12 +59,18 @@
                 <RowDefinition Height="100*" />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
 
-            <Label Name="ForumComment" Grid.Row="0" Content="Type your comment here:" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{StaticResource BasicLabel}" />
+            <Label Grid.ColumnSpan="2" Name="ForumComment" Grid.Row="0" Content="Type your comment here:" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{StaticResource BasicLabel}" />
 
-            <TextBox Name="TextBoxForumComment" Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Width="570" Margin="0,0,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Center"/>
+            <TextBox Grid.ColumnSpan="2" Name="TextBoxForumComment" Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Width="570" Margin="0,0,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" HorizontalAlignment="Center"/>
 
-            <Button Name="ButtonSend" Grid.Row="2" Content="Send" HorizontalAlignment="Right" Margin="0,0,20,0" Style="{StaticResource CloseButton}" Command="{Binding SendCommentCommand}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="{Binding MessageLabel, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MessageLabelStyle}"/>
+
+            <Button Grid.Column="1" Name="ButtonSend" Grid.Row="2" Content="Send" HorizontalAlignment="Right" Margin="0,0,20,0" Style="{StaticResource CloseButton}" Command="{Binding SendCommentCommand}"/>
         </Grid>
 
         <Grid Grid.Row="2">

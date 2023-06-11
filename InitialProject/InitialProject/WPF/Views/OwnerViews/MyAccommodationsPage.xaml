@@ -187,7 +187,7 @@
                     </Grid.RowDefinitions>
 
                     <Button Grid.Row="0" Name="ButtonInfo" Content="Info" Style="{StaticResource StandardButtonStyle}" Margin="0" Command="{Binding OpenAccommodationInfoCommand}"/>
-                    <Button Grid.Row="1" Name="ButtonCreateNew" Content="Create new" Style="{StaticResource StandardButtonStyle}" Margin="0" Command="{Binding CreateNewAccommodationCommand}"/>
+                    <Button Grid.Row="1" Name="ButtonCreateNew" Content="Create new" Style="{DynamicResource StandardButtonStyle}" Margin="0" Command="{Binding CreateNewAccommodationCommand}"/>
                     <Button Grid.Row="2" Name="ButtonRenovate" Content="Renovate" Style="{StaticResource StandardButtonStyle}" Margin="0" Command="{Binding RenovateAccommodationCommand}" IsEnabled="False"/>
                     <Button Grid.Row="3" Name="ButtonStatistics" Content="Statistics" Style="{StaticResource StandardButtonStyle}" Margin="0" Command="{Binding AccommodationStatisticsCommand}" IsEnabled="False"/>
                     <Button Grid.Row="4" Name="ButtonDelete" Content="Delete" Style="{StaticResource StandardButtonStyle}" Margin="0" IsEnabled="False"/>

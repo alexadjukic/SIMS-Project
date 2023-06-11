@@ -53,7 +53,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             Forums.Clear();
 
-            foreach(var forum in _forumService.GetForumsForOwner(_owner))
+            foreach(var forum in _forumService.GetAll())
             {
                 Forums.Add(forum);
             }

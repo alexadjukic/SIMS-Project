@@ -11,9 +11,11 @@ namespace InitialProject.Application.UseCases
     public class AccommodationNotificationService
     {
         private readonly IAccommodationNotificationRepository _accommodationNotificationRepository;
+        private readonly AccommodationService _accommodationService;
         public AccommodationNotificationService()
         {
             _accommodationNotificationRepository = Injector.CreateInstance<IAccommodationNotificationRepository>();
+            _accommodationService = new AccommodationService();
         }
 
         public List<AccommodationNotification> GetAllByReceiverId(int receiverId)
@@ -55,6 +57,26 @@ namespace InitialProject.Application.UseCases
         {
             var newNotification = new AccommodationNotification(textContent, false, senderId, receiverId);
             _accommodationNotificationRepository.Save(newNotification);
+        }
+
+        public void NotifyAllOwners(int locationId, int guestId, string guestUsername, Location location)
+        {
+            List<int> ownersId = new List<int>();
+
+            List<Accommodation> accommodations = _accommodationService.GetAll().FindAll(a => a.LocationId == locationId);
+
+            foreach(var accommodation in accommodations)
+            {
+                if (!ownersId.Contains(accommodation.OwnerId))
+                {
+                    ownersId.Add(accommodation.OwnerId);
+                }
+            }
+
+            foreach(var ownerId in ownersId)
+            {
+                NotifyUser($"{guestUsername} has created forum for {location.City}  {location.Country}.", guestId, ownerId);
+            }
         }
     }
 }
