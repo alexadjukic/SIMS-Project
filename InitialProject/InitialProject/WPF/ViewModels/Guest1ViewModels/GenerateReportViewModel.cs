@@ -1,8 +1,14 @@
 ﻿using InitialProject.Application.UseCases;
+using InitialProject.Commands;
 using InitialProject.Domain.Models;
+using Syncfusion.Pdf.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Linq;
+using System.Printing;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -70,9 +76,16 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
             Status = "Scheduled";
             LoggedUser = user;
+
+            GenerateReportCommand = new RelayCommand(GenerateReportCommand_Execute);
         }
 
         #region COMMANDS
+        public RelayCommand GenerateReportCommand { get; set; }
+        public void GenerateReportCommand_Execute(object? parameter)
+        {
+
+        }
         #endregion
     }
 }
