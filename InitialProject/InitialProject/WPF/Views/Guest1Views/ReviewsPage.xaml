@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      xmlns:lex="clr-namespace:InitialProject.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="1400"
       Title="Reviews">
@@ -14,7 +15,7 @@
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Reviews" FontSize="30" Margin="70,30,0,0" Style="{DynamicResource LabelStyle}"/>
+        <Label Grid.Row="0" Content="{lex:Loc Reviews}" FontSize="30" Margin="70,30,0,0" Style="{DynamicResource LabelStyle}"/>
 
         <ListBox Grid.Row="1" Margin="70,0,70,40" ItemsSource="{Binding Path=Ratings, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Style="{DynamicResource ListBoxStyle}">
             <ListBox.ItemTemplate>
@@ -27,19 +28,19 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Margin="0,10,0,0">
                             <Grid Grid.Row="0">
-                                <TextBlock TextWrapping="Wrap" Text="Name:" TextAlignment="Left" Margin="5,0,0,20" Height="25" FontSize="18" Style="{DynamicResource TextBlockStyle}"/>
+                                <TextBlock TextWrapping="Wrap" Text="{lex:Loc Name}" TextAlignment="Left" Margin="5,0,0,20" Height="25" FontSize="18" Style="{DynamicResource TextBlockStyle}"/>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.Accommodation.Name}" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="100,0,0,20" Height="25" FontSize="18"/>
                             </Grid>
                             <Grid Grid.Row="0">
-                                <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,20" Style="{DynamicResource TextBlockStyle}" Height="25" FontSize="18"/>
+                                <TextBlock TextWrapping="Wrap" Text="{lex:Loc Country}" TextAlignment="Left" Margin="5,0,0,20" Style="{DynamicResource TextBlockStyle}" Height="25" FontSize="18"/>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.Accommodation.Location.Country}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="100,0,0,20" Height="25" FontSize="18"/>
                             </Grid>
                             <Grid Grid.Row="0">
-                                <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
+                                <TextBlock TextWrapping="Wrap" Text="{lex:Loc City}" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.Accommodation.Location.City}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="100,0,0,20" Height="25" FontSize="18"/>
                             </Grid>
                             <Grid Grid.Row="0">
-                                <TextBlock TextWrapping="Wrap" Text="Type:" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
+                                <TextBlock TextWrapping="Wrap" Text="{lex:Loc Type}" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.Accommodation.Type}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="100,0,0,20" Height="25" FontSize="18"/>
                             </Grid>
                         </StackPanel>
@@ -48,22 +49,22 @@
 
                         <StackPanel Grid.Column="1" Margin="0,10,0,0">
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="Date:" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="5,0,0,20" Height="25" FontSize="18"/>
+                                <TextBlock TextWrapping="Wrap" Text="{lex:Loc DateDD}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="5,0,0,20" Height="25" FontSize="18"/>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="40,0,0,20" Height="25" FontSize="18"/>
                                 <Label Content=" -" Style="{DynamicResource LabelStyle}"/>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding Reservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="5,0,0,20" Height="25" FontSize="18"/>
                             </StackPanel>
                             <Grid Grid.Row="0">
-                                <TextBlock TextWrapping="Wrap" Text="Cleanliness:" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
+                                <TextBlock TextWrapping="Wrap" Text="{lex:Loc Cleanliness}" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding Cleanliness}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="180,0,0,20" Height="25" FontSize="18"/>
                             </Grid>
                             <Grid Grid.Row="0">
-                                <TextBlock TextWrapping="Wrap" Text="Following the rules:" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
+                                <TextBlock TextWrapping="Wrap" Text="{lex:Loc FollowingTheRules}" TextAlignment="Left" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,20" Height="25" FontSize="18"/>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding FollowingTheRules}" Style="{DynamicResource TextBlockStyle}" TextAlignment="Left" Margin="180,0,0,20" Height="25" FontSize="18"/>
                             </Grid>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,10,0,0">
-                            <Label Content="Comment:" FontSize="15" Style="{DynamicResource LabelStyle}"></Label>
+                            <Label Content="{lex:Loc CommentDD}" FontSize="15" Style="{DynamicResource LabelStyle}"></Label>
                             <TextBlock Width="460" Height="150" FontSize="15" TextWrapping="Wrap" Text="{Binding Comment}" Style="{DynamicResource TextBlockStyle}" Margin="5,0,0,0"></TextBlock>
                         </StackPanel>
 

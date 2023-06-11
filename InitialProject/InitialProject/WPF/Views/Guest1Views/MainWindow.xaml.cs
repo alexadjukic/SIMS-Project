@@ -1,6 +1,7 @@
 ﻿using InitialProject.Application.UseCases;
 using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Localization;
 using InitialProject.Repositories;
 using InitialProject.WPF.ViewModels;
 using InitialProject.WPF.ViewModels.Guest1ViewModels;
@@ -15,6 +16,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -40,8 +42,24 @@ namespace InitialProject.WPF.Views.Guest1Views
                 }
             }
         }
+        private string _language;
+        public string SelectedLanguage
+        {
+            get => _language;
+            set
+            {
+                if (_language != value)
+                {
+                    _language = value;
+                    OnPropertyChanged("SelectedLanguage");
+                }
+            }
+        }
         public static MainWindow mainWindow;
 
+        private App app;
+        private const string SRB = "sr-Latn-RS";
+        private const string ENG = "en-US";
         public User LoggedUser { get; set; }
         public readonly AccommodationRepository _accommodationRepository;
         public readonly LocationRepository _locationRepository;
@@ -64,8 +82,11 @@ namespace InitialProject.WPF.Views.Guest1Views
             _userRepository = userRepository;
             _accommodationRenovationService = new AccommodationRenovationService();
 
+            SelectedLanguage = "English";
             LoggedUser = user;
             ThemeButton = "OFF";
+            app = (App)System.Windows.Application.Current;
+            app.ChangeLanguage(ENG);
 
             MainPreview.Content = new AccommodationsPage(LoggedUser, _accommodationRepository, _locationRepository, _accommodationImageRepository, _accommodationReservationRepository, _userRepository);
 
@@ -170,6 +191,18 @@ namespace InitialProject.WPF.Views.Guest1Views
         private void NotificationsButton_Click(object sender, RoutedEventArgs e)
         {
             MainPreview.Content = new NotificationsPage(LoggedUser);
+        }
+
+        private void ChangeLanguage(object sender, SelectionChangedEventArgs e)
+        {
+            if (SelectedLanguage.Equals("English"))
+            {
+                app.ChangeLanguage(ENG);
+            }
+            else if (SelectedLanguage.Equals("Serbian"))
+            {
+                app.ChangeLanguage(SRB);
+            }
         }
     }
 }

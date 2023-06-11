@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      xmlns:lex="clr-namespace:InitialProject.Localization"
       mc:Ignorable="d"
       d:DesignHeight="630" d:DesignWidth="1400"
       Title="Forum">
@@ -19,20 +20,20 @@
 
         <DataGrid Grid.Row="1" Grid.Column="0" FontSize="18" ItemsSource="{Binding Path=Forums, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedForum, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserAddRows="False" Style="{DynamicResource DataGridStyle}" CanUserDeleteRows="False" IsReadOnly="True" Margin="70,0,70,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Country" Width="*" Binding="{Binding Location.Country}"/>
-                <DataGridTextColumn Header="City" Width="*" Binding="{Binding Location.City}"/>
+                <DataGridTextColumn Header="{lex:Loc CountryDG}" Width="*" Binding="{Binding Location.Country}"/>
+                <DataGridTextColumn Header="{lex:Loc CityDG}" Width="*" Binding="{Binding Location.City}"/>
                 <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}"/>
                 <DataGridTemplateColumn Width="160">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Style="{DynamicResource ButtonStyle}" Content="View" Command="{Binding DataContext.ViewForumCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"></Button>
+                            <Button Style="{DynamicResource ButtonStyle}" Content="{lex:Loc View}" Command="{Binding DataContext.ViewForumCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="160">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Style="{DynamicResource ButtonStyle}" Content="Close" Command="{Binding DataContext.CloseForumCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"></Button>
+                            <Button Style="{DynamicResource ButtonStyle}" Content="{lex:Loc Close}" Command="{Binding DataContext.CloseForumCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -40,7 +41,7 @@
         </DataGrid>
 
         <StackPanel Grid.Row="2">
-            <Button Content="Create a new thread" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" FontSize="20" Margin="1050,20,0,0" Command="{Binding NewThreadCommand}"/>
+            <Button Content="{lex:Loc CreateNewThread}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" FontSize="20" Margin="1050,20,0,0" Command="{Binding NewThreadCommand}"/>
         </StackPanel>
     </Grid>
 </Page>
