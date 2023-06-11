@@ -1,4 +1,6 @@
-﻿using InitialProject.Application.UseCases;
+﻿using ceTe.DynamicPDF.PageElements;
+using ceTe.DynamicPDF;
+using InitialProject.Application.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.DTOs;
 using InitialProject.Domain.Models;
@@ -11,7 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.Diagnostics;
+using System.Security.Cryptography.Xml;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -53,9 +56,44 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
+        private DateTime _dateFrom;
+        public DateTime DateFrom
+        {
+            get
+            {
+                return _dateFrom;
+            }
+            set
+            {
+                if (_dateFrom != value)
+                {
+                    _dateFrom = value;
+                    OnPropertyChanged(nameof(DateFrom));
+                }
+            }
+        }
+
+        private DateTime _dateTo;
+        public DateTime DateTo
+        {
+            get
+            {
+                return _dateTo;
+            }
+            set
+            {
+                if (_dateTo != value)
+                {
+                    _dateTo = value;
+                    OnPropertyChanged(nameof(DateTo));
+                }
+            }
+        }
+
         public ObservableCollection<TourCheckpoint> ReservedTours { get; set; }
         private readonly TourService _tourService;
         private readonly TourReviewService _tourReviewService;
+        private readonly TourReservationService _tourReservationService;
         #endregion
 
         public ReservedToursViewModel(User user)
@@ -64,10 +102,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             LoggedUser = user;
             ReservedTours = new ObservableCollection<TourCheckpoint>();
             _tourReviewService = new TourReviewService();
+            _tourReservationService = new TourReservationService();
 
             HomeCommand = new RelayCommand(HomeCommand_Execute);
             OpenRateTourAndGuideWindowCommand = new RelayCommand(OpenRateTourAndGuideWindowCommand_Execute);
             //IsEnabled = false;
+            GeneratePDFCommand = new RelayCommand(GeneratePDFCommand_Execute);
             LoadReservedTours();
         }
 
@@ -88,17 +128,112 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             return false;
         }
 
+
+
         public bool IsAlreadyRated(int tourId, int userId)
         {
             return _tourReviewService.HasAlreadyBeenRated(tourId, userId);
         }
 
+        public void GeneratePDF(DateTime fromDate, DateTime toDate, User user, List<TourReservation> reservedTours)
+        {
+            Document document = new Document();
+            Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 45.0f);
+            document.Pages.Add(page);
+
+            string title = "Tours That You Attended This Year";
+            Label label = new Label(title, 0, 0, 504, 100, Font.TimesBold, 30, TextAlign.Center);
+            page.Elements.Add(label);
+
+            List<Tour> tours = new List<Tour>();
+            foreach(var reservation in reservedTours)
+            {
+                if(reservation.UserId == user.Id)
+                {
+                    tours.Add(_tourService.GetById(reservation.TourId));
+                }
+            }
+
+            foreach(var tour in tours.ToList())
+            {
+                if(DateTime.Compare(fromDate, tour.StartTime) > 0 || DateTime.Compare(toDate, tour.StartTime.AddHours(tour.Duration)) < 0)
+                {
+                    tours.Remove(tour);
+                }
+            }
+
+            Table2 table = new Table2(0, 50, 600, 600);
+
+            Column2 column1 = table.Columns.Add(40);
+            column1.CellDefault.Align = TextAlign.Center;
+            table.Columns.Add(150);
+            table.Columns.Add(150);
+            table.Columns.Add(150);
+            table.Columns.Add(150);
+
+            Row2 row1 = table.Rows.Add(40, Font.TimesBold, 16, Grayscale.Black,
+               Grayscale.Gray);
+            row1.CellDefault.Align = TextAlign.Center;
+            row1.CellDefault.VAlign = VAlign.Center;
+            row1.Cells.Add("");
+            row1.Cells.Add("Tour Name");
+            row1.Cells.Add("Started On:");
+            row1.Cells.Add("Language:");
+            row1.Cells.Add("Duration(h):");
+
+            int i = 1;
+            foreach (var tour in tours)
+            {
+                Row2 row2 = table.Rows.Add(30);
+                Cell2 cell1 = row2.Cells.Add($"{i}", Font.HeiseiKakuGothicW5, 16,
+                    Grayscale.Black, Grayscale.Gray, 1);
+                cell1.Align = TextAlign.Center;
+                cell1.VAlign = VAlign.Center;
+                row2.Cells.Add($"{tour.Name}");
+                row2.Cells.Add($"{tour.StartTime}");
+                row2.Cells.Add($"{tour.Language}");
+                row2.Cells.Add($"{tour.Duration}");
+                i++;
+            }
+
+            table.CellDefault.Padding.Value = 5.0f;
+            table.CellSpacing = 5.0f;
+            table.Border.Top.Color = RgbColor.Violet;
+            table.Border.Bottom.Color = RgbColor.Violet;
+            table.Border.Top.Width = 2;
+            table.Border.Bottom.Width = 2;
+            table.Border.Left.LineStyle = LineStyle.None;
+            table.Border.Right.LineStyle = LineStyle.None;
+
+            page.Elements.Add(table);
+            
+
+            string guestName = $"Guest: {LoggedUser.Username}";
+            Label guestNameLabel = new Label(guestName, 0, 700, 504, 100, Font.TimesRoman, 20, TextAlign.Right);
+            page.Elements.Add(guestNameLabel);
+
+            document.Draw($"../../../Reports/toursReport.pdf");
+
+            string absolutePath = AppDomain.CurrentDomain.BaseDirectory + $"../../../Reports/toursReport.pdf";
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = absolutePath,
+                UseShellExecute = true
+            });
+        }
+
+
         #region COMMANDS
 
         public RelayCommand HomeCommand { get; }
         public RelayCommand OpenRateTourAndGuideWindowCommand { get; }
+        public RelayCommand GeneratePDFCommand { get; }
 
-        
+        public void GeneratePDFCommand_Execute(object? parameter)
+        {
+            GeneratePDF(DateFrom, DateTo, LoggedUser, _tourReservationService.GetAll());
+        }
 
         public void HomeCommand_Execute(object? parameter)
         {
