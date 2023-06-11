@@ -35,6 +35,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         }
 
         public ObservableCollection<AccommodationReservation> Reservations { get; set; }
+        public User LoggedUser { get; set; }
 
         private readonly int _guestId;
         private readonly Window _reservationsView;
@@ -45,6 +46,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private readonly AccommodationYearStatisticsService _accommodationYearStatisticsService;
         private readonly AccommodationMonthStatisticsService _accommodationMonthStatisticsService;
         private readonly ReservationRequestService _reservationRequestService;
+        private readonly UserService _userService;
         #endregion
 
         public ReservationsViewModel(int guestId)
@@ -55,8 +57,10 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             _accommodationYearStatisticsService = new AccommodationYearStatisticsService();
             _accommodationMonthStatisticsService = new AccommodationMonthStatisticsService();
             _reservationRequestService = new ReservationRequestService();
+            _userService = new UserService();
 
             _guestId = guestId;
+            LoggedUser = _userService.GetById(_guestId);
 
             Reservations = new ObservableCollection<AccommodationReservation>();
 
@@ -64,6 +68,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             RateYourStayCommand = new RelayCommand(RateYourStayCommand_Execute, RateYourStayCommand_CanExecute);
             ChangeReservationCommand = new RelayCommand(ChangeReservationCommand_Execute, ChangeReservationCommand_CanExecute);
             ViewAllChangeRequestsCommand = new RelayCommand(ViewAllChangeRequestsCommand_Execute);
+            GenerateReportCommand = new RelayCommand(GenerateReportCommand_Execute);
 
             LoadReservations();
         }
@@ -100,6 +105,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public RelayCommand CancelReservationCommand { get; }
         public RelayCommand ViewAllChangeRequestsCommand { get; }
         public RelayCommand RateYourStayCommand { get; }
+        public RelayCommand GenerateReportCommand { get; }
 
         public void CancelReservationCommand_Execute(object? parameter)
         {
@@ -169,6 +175,11 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         public void ViewAllChangeRequestsCommand_Execute(object? parameter)
         {
             MainWindow.mainWindow.MainPreview.Content = new ReservationChangeRequestsPage(new ReservationChangeRequestsViewModel(_reservationsView, _guestId));
+        }
+
+        public void GenerateReportCommand_Execute(object? parameter)
+        {
+            MainWindow.mainWindow.MainPreview.Content = new GenerateReportPage(LoggedUser);
         }
         #endregion
     }

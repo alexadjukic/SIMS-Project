@@ -120,6 +120,32 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             _tourService.UpdateTour(SelectedTour);
         }
 
+        public void CheckForYearlyVoucher(User user)
+        {
+            int count = 0;
+            string ThisYear = "";
+            List<TourReservation> _reservations = new List<TourReservation>();
+            _reservations = _tourReservationService.GetAllByUserId(LoggedUser.Id);
+
+            foreach (var reservation in _tourReservationService.GetAllByUserId(LoggedUser.Id))
+            {
+                reservation.Tour = _tourService.GetById(reservation.TourId);
+                
+                if(reservation.Tour.StartTime.Year == DateTime.Now.Year)
+                {
+                    ThisYear = "Year " + DateTime.Now.Year.ToString() + " Voucher";
+                    count++;
+                }
+            }
+
+            if (count == 5)
+            {
+                //TODO Daj vaucer
+                Voucher voucher = new Voucher(ThisYear, DateTime.Now.AddMonths(6), LoggedUser.Id, 0);
+                _voucherService.Save(voucher);
+            }
+        }
+
         #region COMMANDS
 
         public RelayCommand HomeCommand { get; }
@@ -140,6 +166,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             {
                 UseVoucher();
                 MakeNewReservation();
+                CheckForYearlyVoucher(LoggedUser);
                 //_selectedTourView.Close();
             }
         }

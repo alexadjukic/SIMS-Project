@@ -12,7 +12,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
     public interface IAccommodationReservationRepository
     {
         public List<AccommodationReservation> GetAll();
-        public AccommodationReservation Save(DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, int accommodationId, User guest, int guestId);
+        public AccommodationReservation Save(DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, int accommodationId, User guest, int guestId, string status);
         public int NextId();
         public List<AccommodationReservation> GetAllByOwnerId(int ownerId, AccommodationRepository accommodationRepository, UserRepository userRepository);
         public List<AccommodationReservation> GetAllByGuestId(int guestId);
