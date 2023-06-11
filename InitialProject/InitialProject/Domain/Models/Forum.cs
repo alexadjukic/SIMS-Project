@@ -11,18 +11,21 @@ namespace InitialProject.Domain.Models
     public class Forum : ISerializable
     {
         public int Id { get; set; }
-        public bool Open { get; set; }
+        public string Status { get; set; }
         public int LocationId { get; set; }
         public int CreatorId { get; set; }
+        public Location Location { get; set; }
+        public bool Utility { get; set; }
 
         public Forum() { }
 
-        public Forum(int id, bool open, int locationId, int creatorId)
+        public Forum(int id, string status, int locationId, int creatorId)
         {
             Id = id;
-            Open = open;
+            Status = status;
             LocationId = locationId;
             CreatorId = creatorId;
+            Utility = false;
         }
 
         public string[] ToCSV()
@@ -30,7 +33,7 @@ namespace InitialProject.Domain.Models
             string[] csvValues =
             {
                 Id.ToString(),
-                Open.ToString(),
+                Status,
                 LocationId.ToString(),
                 CreatorId.ToString()
             };
@@ -41,9 +44,9 @@ namespace InitialProject.Domain.Models
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Open = Convert.ToBoolean(values[1]);
-            LocationId = Convert.ToInt32(values[1]);
-            CreatorId = Convert.ToInt32(values[2]);
+            Status = values[1];
+            LocationId = Convert.ToInt32(values[2]);
+            CreatorId = Convert.ToInt32(values[3]);
         }
     }
 }

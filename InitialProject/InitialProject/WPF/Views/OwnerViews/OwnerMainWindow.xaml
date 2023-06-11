@@ -41,7 +41,7 @@
             <Border>
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
                     <Image Source="../../../Resources/Images/user.png" Margin="50,0,45,0" Width="105" Height="105"/>
-                    <Label Content="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="0,9,0,0" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="18" Foreground="White"></Label>
+                    <Label Content="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="0,9,0,0" HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="18" Foreground="Black"></Label>
                 </StackPanel>
             </Border>
 

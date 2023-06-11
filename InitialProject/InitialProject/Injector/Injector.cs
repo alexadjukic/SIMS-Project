@@ -35,6 +35,9 @@ namespace InitialProject
             { typeof(IAccommodationRenovationSuggestionRepository), new AccommodationRenovationSuggestionRepository() },
             { typeof(IRequestedTourNotificationRepository), new RequestedTourNotificationRepository() },
             { typeof(ISuperGuestRepository), new SuperGuestRepository() },
+            { typeof(IForumRepository), new ForumRepository() },
+            { typeof(ICommentRepository), new CommentRepository() },
+            { typeof(IReportedCommentRepository), new ReportedCommentRepository() },
             { typeof(IComplexTourRequestRepository), new ComplexTourRequestRepository() },
             { typeof(IComplexTourPartRepository), new ComplexTourPartRepository() },
             { typeof(ISuperGuideRepository), new SuperGuideRepository() }

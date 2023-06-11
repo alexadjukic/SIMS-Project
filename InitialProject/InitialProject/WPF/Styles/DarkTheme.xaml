@@ -16,7 +16,7 @@
     <!-- Button Style -->
     <Style TargetType="Button" x:Key="ButtonStyle">
         <Setter Property="Background" Value="{StaticResource AccentBrush}" />
-        <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
     </Style>
 

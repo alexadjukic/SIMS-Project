@@ -1,32 +1,34 @@
 ﻿using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace InitialProject.Repositories
 {
-    public class CommentRepository : ICommentRepository
+    public class ReportedCommentRepository : IReportedCommentRepository
     {
+        private const string FilePath = "../../../Resources/Data/reportedComments.csv";
 
-        private const string FilePath = "../../../Resources/Data/comments.csv";
+        private readonly Serializer<ReportedComments> _serializer;
 
-        private readonly Serializer<Comment> _serializer;
+        private List<ReportedComments> _comments;
 
-        private List<Comment> _comments;
-
-        public CommentRepository()
+        public ReportedCommentRepository()
         {
-            _serializer = new Serializer<Comment>();
+            _serializer = new Serializer<ReportedComments>();
             _comments = _serializer.FromCSV(FilePath);
         }
 
-        public List<Comment> GetAll()
+        public List<ReportedComments> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public Comment Save(Comment comment)
+        public ReportedComments Save(ReportedComments comment)
         {
             comment.Id = NextId();
             _comments = _serializer.FromCSV(FilePath);
@@ -45,29 +47,23 @@ namespace InitialProject.Repositories
             return _comments.Max(c => c.Id) + 1;
         }
 
-        public void Delete(Comment comment)
+        public void Delete(ReportedComments comment)
         {
             _comments = _serializer.FromCSV(FilePath);
-            Comment founded = _comments.Find(c => c.Id == comment.Id);
+            ReportedComments founded = _comments.Find(c => c.Id == comment.Id);
             _comments.Remove(founded);
             _serializer.ToCSV(FilePath, _comments);
         }
 
-        public Comment Update(Comment comment)
+        public ReportedComments Update(ReportedComments comment)
         {
             _comments = _serializer.FromCSV(FilePath);
-            Comment current = _comments.Find(c => c.Id == comment.Id);
+            ReportedComments current = _comments.Find(c => c.Id == comment.Id);
             int index = _comments.IndexOf(current);
             _comments.Remove(current);
             _comments.Insert(index, comment);       // keep ascending order of ids in file 
             _serializer.ToCSV(FilePath, _comments);
             return comment;
-        }
-
-        public List<Comment> GetByUser(User user)
-        {
-            _comments = _serializer.FromCSV(FilePath);
-            return _comments.FindAll(c => c.UserId == user.Id);
         }
     }
 }

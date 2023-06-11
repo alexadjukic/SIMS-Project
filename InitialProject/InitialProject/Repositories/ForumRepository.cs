@@ -28,11 +28,11 @@ namespace InitialProject.Repositories
             return _serializer.FromCSV(FilePath);
         }
 
-        public Forum Save(bool open, int locationId, int creatorId)
+        public Forum Save(string status, int locationId, int creatorId)
         {
             int id = NextId();
 
-            Forum forum = new Forum(id, open, locationId, creatorId);
+            Forum forum = new Forum(id, status, locationId, creatorId);
             _forums.Add(forum);
             _serializer.ToCSV(FilePath, _forums);
             return forum;
@@ -56,7 +56,7 @@ namespace InitialProject.Repositories
             {
                 if (f.Id == forum.Id)
                 {
-                    f.Open = forum.Open;
+                    f.Status = forum.Status;
                     f.LocationId = forum.LocationId;
                     f.CreatorId = forum.CreatorId;
                 }

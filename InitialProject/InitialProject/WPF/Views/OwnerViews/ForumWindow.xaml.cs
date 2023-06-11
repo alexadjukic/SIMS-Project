@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Domain.Models;
+using InitialProject.WPF.ViewModels.OwnerViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,15 @@ namespace InitialProject.WPF.Views.OwnerViews
     /// </summary>
     public partial class ForumWindow : Window
     {
-        public ForumWindow()
+        public ForumWindow(Forum SelectedForum, User owner)
         {
             InitializeComponent();
+            this.DataContext = new ForumWindowViewModel(SelectedForum, owner);
+        }
+
+        private void Button_Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
