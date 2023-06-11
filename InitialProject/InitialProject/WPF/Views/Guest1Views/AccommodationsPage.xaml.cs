@@ -408,5 +408,10 @@ namespace InitialProject.WPF.Views.Guest1Views
         {
             if (SelectedAccommodation != null) BookButton = true;
         }
+
+        private void AnytimeAnywhereButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.mainWindow.MainPreview.Content = new AnytimeAnywherePage(LoggedUser);
+        }
     }
 }

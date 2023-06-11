@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace InitialProject.Application.UseCases
 {
@@ -254,6 +255,11 @@ namespace InitialProject.Application.UseCases
                     lastYearReservations.Add(reservation);
             }
             return lastYearReservations;
+        }
+
+        public AccommodationReservation Save(DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, int accommodationId, User guest, int guestId)
+        {
+            return _accommodationReservationRepository.Save(startDate, endDate, lenghtOfStay, accommodation, accommodationId, guest, guestId);
         }
     }
 }

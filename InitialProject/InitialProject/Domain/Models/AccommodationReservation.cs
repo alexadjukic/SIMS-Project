@@ -21,14 +21,14 @@ namespace InitialProject.Domain.Models
 
         public AccommodationReservation() { }
 
-        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, User guest)
+        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, User guest, int accommodationId)
         {
             Id = id;
             StartDate = startDate;
             EndDate = endDate;
             LenghtOfStay = lenghtOfStay;
             Accommodation = accommodation;
-            AccommodationId = accommodation.Id;
+            AccommodationId = accommodationId;
             Guest = guest;
             GuestId = guest.Id;
         }
