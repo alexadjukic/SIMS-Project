@@ -95,10 +95,9 @@
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Name="ButtonClose" Grid.Column="0" Style="{StaticResource StandardButtonStyle}" Content="Close" HorizontalAlignment="Center" Click="ButtonClose_Click"/>
-            <Button Grid.Column="1" Name="ButtonRenovate" Content="Renovate" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center" Command="{Binding RenovateAccommodationCommand}"/>
-            <Button Grid.Column="2" Name="ButtonStatistics1" Content="Statistics" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center" Command="{Binding AccommodationStatisticsCommand}"/>
-            <Button Grid.Column="3" Name="ButtonDelete1" Content="Delete" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center"/>
+            <Button Name="ButtonClose" Grid.Column="1" Style="{StaticResource StandardButtonStyle}" Content="Close" HorizontalAlignment="Center" Click="ButtonClose_Click"/>
+            <Button Grid.Column="2" Name="ButtonRenovate" Content="Renovate" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center" Command="{Binding RenovateAccommodationCommand}"/>
+            <Button Grid.Column="3" Name="ButtonStatistics1" Content="Statistics" Style="{StaticResource StandardButtonStyle}" HorizontalAlignment="Center" Command="{Binding AccommodationStatisticsCommand}"/>
         </Grid>
     </Grid>
 </Window>

@@ -32,7 +32,6 @@ namespace InitialProject.WPF.Views.OwnerViews
         {
             ButtonRenovate.IsEnabled = true;
             ButtonStatistics.IsEnabled = true;
-            ButtonDelete.IsEnabled = true;
         }
     }
 }
