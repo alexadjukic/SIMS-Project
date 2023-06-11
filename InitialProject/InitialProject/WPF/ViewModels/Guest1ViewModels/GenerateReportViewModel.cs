@@ -88,7 +88,7 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 45.0f);
             document.Pages.Add(page);
 
-            string title = "All " + Status + " reservations from " + SelectedStartDate.ToString("dd/M/yyyy") + " to " + SelectedEndDate.ToString("dd/M/yyyy");
+            string title = "All " + Status.ToLower() + " reservations from " + SelectedStartDate.ToString("dd/M/yyyy") + " to " + SelectedEndDate.ToString("dd/M/yyyy");
             Label label = new Label(title, 0, 0, 504, 100, Font.TimesBold, 20, TextAlign.Center);
             page.Elements.Add(label);
 
