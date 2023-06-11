@@ -44,7 +44,7 @@
             <Button Grid.Column="6" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20"  Click="Notifications_Click">
                 <TextBlock Text="Notifications" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
-            <Button Grid.Column="7" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Click="Demo_Click">
+            <Button Grid.Column="7" VerticalAlignment="Top" FontWeight="Bold" Height="96" FontSize="20" Click="SignOut_Click">
                 <TextBlock Text="Sign Out" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
         </Grid>

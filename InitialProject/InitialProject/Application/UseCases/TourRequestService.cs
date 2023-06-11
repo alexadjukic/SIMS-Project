@@ -86,5 +86,15 @@ namespace InitialProject.Application.UseCases
             }
             return locations;
         }
+
+        public TourRequest GetById(int id)
+        {
+            var request = new TourRequest();
+            request = _tourRequestRepository.GetById(id);
+
+            request.Guide = _userService.GetById(request.GuideId);
+            request.Location = _locationService.GetLocationById(request.LocationId);
+            return request; 
+        }
     }
 }

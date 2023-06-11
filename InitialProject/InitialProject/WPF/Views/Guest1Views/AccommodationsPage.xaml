@@ -57,7 +57,7 @@
         </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button Content="Anytime/anywhere" FontSize="18" Style="{DynamicResource ButtonStyle}" Margin="480,0,0,0" Height="38" Width="200"></Button>
+            <Button Content="Anytime/anywhere" FontSize="18" Style="{DynamicResource ButtonStyle}" Margin="480,0,0,0" Height="38" Width="200" Click="AnytimeAnywhereButton_Click"></Button>
             <Button Content="Search" Click="FilterButton_Click" Style="{DynamicResource ButtonStyle}" FontSize="18" Margin="40,0,0,0" Height="38" Width="200"></Button>
         </StackPanel>
 

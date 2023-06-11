@@ -33,7 +33,7 @@ namespace InitialProject.Repositories
         {
             int id = NextId();
 
-            AccommodationReservation accommodationReservation = new AccommodationReservation(id, startDate, endDate, lenghtOfStay, accommodation, guest);
+            AccommodationReservation accommodationReservation = new AccommodationReservation(id, startDate, endDate, lenghtOfStay, accommodation, guest, accommodationId);
 
             _accommodationReservations.Add(accommodationReservation);
             _serializer.ToCSV(FilePath, _accommodationReservations);
