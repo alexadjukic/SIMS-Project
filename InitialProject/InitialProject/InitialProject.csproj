@@ -99,6 +99,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Tutorial\" />
     <Folder Include="Reports\" />
   </ItemGroup>
 
