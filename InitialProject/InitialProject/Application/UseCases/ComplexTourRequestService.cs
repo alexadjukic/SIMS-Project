@@ -24,5 +24,9 @@ namespace InitialProject.Application.UseCases
             return _complexTourRequestRepository.Save(complexTourRequest);
         }
 
+        public IEnumerable<ComplexTourRequest> GetAll()
+        {
+            return _complexTourRequestRepository.GetAll();
+        }
     }
 }

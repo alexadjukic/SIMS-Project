@@ -28,5 +28,10 @@ namespace InitialProject.Application.UseCases
         {
             return _complexTourPartRepository.GetAll().ToList().Find(p => p.TourRequestId == tourRequest.Id);
         }
+
+        public IEnumerable<ComplexTourPart> GetAllByComplexRequest(ComplexTourRequest complexTourRequest)
+        {
+            return _complexTourPartRepository.GetAll().Where(p => p.ComplexTourId == complexTourRequest.Id);
+        }
     }
 }
