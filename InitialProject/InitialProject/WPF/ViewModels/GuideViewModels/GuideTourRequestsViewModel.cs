@@ -140,6 +140,7 @@ namespace InitialProject.WPF.ViewModels
 
         private readonly TourRequestService _tourRequestService;
         private readonly LocationService _locationService;
+        private readonly ComplexTourPartService _complexTourPartService;
 
         private readonly User _guide;
 
@@ -150,6 +151,7 @@ namespace InitialProject.WPF.ViewModels
 
             _tourRequestService = new TourRequestService();
             _locationService = new LocationService();
+            _complexTourPartService = new ComplexTourPartService();
 
             Requests = new ObservableCollection<TourRequest>();
             Countries = new List<string>();
@@ -190,6 +192,7 @@ namespace InitialProject.WPF.ViewModels
             Requests.Clear();
             foreach (var request in _tourRequestService.GetAllByGuide(_guide))
             {
+                if (_complexTourPartService.IsComplexTourPart(request)) continue;
                 Requests.Add(request);
             }
         }
@@ -199,6 +202,7 @@ namespace InitialProject.WPF.ViewModels
             Requests.Clear();
             foreach (var request in _tourRequestService.GetAllByGuide(_guide))
             {
+                if (_complexTourPartService.IsComplexTourPart(request)) continue;
                 if (request.Location.Country != country && country is not null) continue;
                 if (request.Location.City != city && city is not null) continue;
                 if (request.Language != language && language is not null) continue;

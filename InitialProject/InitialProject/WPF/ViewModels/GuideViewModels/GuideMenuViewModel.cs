@@ -150,12 +150,12 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
 
         public void ComplexTourRequestsCommand_Execute(object? parameter)
         {
-
+            CurrentViewModel = new ComplexTourRequestsViewModel(Guide);
         }
 
         public bool ComplexTourRequestsCommand_CanExecute(object? parameter)
         {
-            return true;
+            return CurrentViewModel.GetType() != typeof(ComplexTourRequestsViewModel);
         }
 
         public void YourTourStatisticsCommand_Execute(object? parameter)
