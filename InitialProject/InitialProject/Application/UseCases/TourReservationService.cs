@@ -72,5 +72,18 @@ namespace InitialProject.Application.UseCases
         {
             _tourReservationRepository.Save(selectedTourId, userId, numberOfGuests, age);
         }
+
+        public List<TourReservation> GetAllByUserId(int userId)
+        {
+            List<TourReservation> _reservations = new List<TourReservation>();
+            foreach(var reservation in  _tourReservationRepository.GetAll())
+            {
+                if(reservation.UserId == userId)
+                {
+                    _reservations.Add(reservation);
+                }
+            }
+            return _reservations;
+        }
     }
 }
