@@ -152,8 +152,13 @@ namespace InitialProject.WPF.ViewModels
             page.Elements.Add(table);
 
             string guideName = $"Guide: {_guide.Username}";
-            Label guideNameLabel = new Label(guideName, 0, 700, 504, 100, Font.TimesRoman, 20, TextAlign.Right);
+            Label guideNameLabel = new Label(guideName, 0, 630, 504, 100, Font.TimesRoman, 20, TextAlign.Right);
             page.Elements.Add(guideNameLabel);
+
+            Line line = new Line(380, 700, 530, 700, 1, Grayscale.Black,
+           LineStyle.Solid);
+
+            page.Elements.Add(line);
 
             document.Draw($"../../../Reports/{tour.Name}.pdf");
 

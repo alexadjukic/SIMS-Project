@@ -29,6 +29,7 @@
         <KeyBinding Key="F10" Command="{Binding SettingsCommand}"/>
         <KeyBinding Modifiers="Ctrl" Key="Z" Command="{Binding UndoCommand}"/>
         <KeyBinding Modifiers="Ctrl+Shift" Key="S" Command="{Binding SwitchMenuSideCommand}"/>
+        <KeyBinding Modifiers="Ctrl+Shift" Key="T" Command="{Binding TutorialCommand}"/>
     </Window.InputBindings>
 
     <Border Background="{DynamicResource BackgroundColor}">
@@ -189,7 +190,7 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Style="{DynamicResource MenuItemStyle1}" Header="_Help">
-                    <MenuItem Header="_Tutorial" InputGestureText="Ctrl+Shift+T">
+                    <MenuItem Header="_Tutorial" InputGestureText="Ctrl+Shift+T" Command="{Binding TutorialCommand}">
                         <MenuItem.Icon>
                             <iconPacks:PackIconMaterial Kind="Video"/>
                         </MenuItem.Icon>
@@ -228,6 +229,9 @@
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewModel:ComplexTourRequestsViewModel}">
                         <local:ComplexTourRequestsView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:TutorialViewModel}">
+                        <local:TutorialView/>
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>
