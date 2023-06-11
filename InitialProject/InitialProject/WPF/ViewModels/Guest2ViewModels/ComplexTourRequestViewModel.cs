@@ -65,7 +65,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
             LoadRequests();
 
-            CreateRequestFormCommand = new RelayCommand(CreateRequestFormCommand_Execute);
+            ShowTourRequestFormCommand = new RelayCommand(ShowTourRequestFormCommand_Execute);
             ViewComplexTourCommand = new RelayCommand(ViewComplexTourCommand_Execute);
         }
 
@@ -134,7 +134,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
         #region COMMANDS
 
-        public RelayCommand CreateRequestFormCommand { get; }
+        public RelayCommand ShowTourRequestFormCommand { get; }
         public RelayCommand ViewComplexTourCommand { get; }
 
         public void ViewComplexTourCommand_Execute(object? parameter)
@@ -143,7 +143,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             SelectedComplexTourRequestView selectedComplexTourRequestView = new SelectedComplexTourRequestView(LoggedUser, _complexTourRequestService.GetById(SelectedComplexTourRequest.ComplexTourRequestId));
         }
 
-        public void CreateRequestFormCommand_Execute(object? parameter)
+        public void ShowTourRequestFormCommand_Execute(object? parameter)
         {
             ComplexTourRequestFormView complexTourRequestFormView = new ComplexTourRequestFormView (LoggedUser);
         }
