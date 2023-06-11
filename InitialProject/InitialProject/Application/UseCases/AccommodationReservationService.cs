@@ -110,6 +110,15 @@ namespace InitialProject.Application.UseCases
             return guestReservations;
         }
 
+        public IEnumerable<AccommodationReservation> GetGuestsCancelledReservations(int guestId)
+        {
+            var guestReservations = _accommodationReservationRepository.GetCancelledByGuestId(guestId);
+            guestReservations = LoadAccommodations(guestReservations);
+            guestReservations = LoadGuests(guestReservations);
+
+            return guestReservations;
+        }
+
         public void CancelReservation(AccommodationReservation reservation)
         {
             reservation.Status = "Cancelled";
