@@ -171,8 +171,12 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             page.Elements.Add(table);
 
             string guestName = $"Guest: {LoggedUser.Username}";
-            Label guestNameLabel = new Label(guestName, 0, 700, 504, 100, Font.TimesRoman, 20, TextAlign.Right);
+            Label guestNameLabel = new Label(guestName, 0, 700, 504, 30, Font.TimesRoman, 20, TextAlign.Right);
             page.Elements.Add(guestNameLabel);
+
+            //string currentTime = $"{DateTime.Now}";
+            //Label currentTimeLabel = new Label(currentTime, 200, 600, 100, 30, Font.TimesRoman, 18, TextAlign.Right);
+            //page.Elements.Add(currentTimeLabel);
 
             document.Draw("../../../Reports/reservationsReport.pdf");
 

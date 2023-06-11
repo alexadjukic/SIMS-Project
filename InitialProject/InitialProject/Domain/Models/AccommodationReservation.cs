@@ -54,8 +54,8 @@ namespace InitialProject.Domain.Models
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            StartDate = DateTime.Parse(values[1]);
-            EndDate = DateTime.Parse(values[2]);
+            StartDate = DateTime.ParseExact(values[1], "dd/MM/yyyy HH:mm:ss", null);
+            EndDate = DateTime.ParseExact(values[2], "dd/MM/yyyy HH:mm:ss", null);
             LenghtOfStay = Convert.ToInt32(values[3]);
             AccommodationId = Convert.ToInt32(values[4]);
             GuestId = Convert.ToInt32(values[5]);

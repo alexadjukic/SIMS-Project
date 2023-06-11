@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using InitialProject.Localization;
 
 namespace InitialProject
 {
@@ -29,6 +30,10 @@ namespace InitialProject
         {
             ThemeDictionary.MergedDictionaries.Clear();
             ThemeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = uri });
+        }
+        public void ChangeLanguage(string lang)
+        {
+            TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo(lang);
         }
     }
 }
