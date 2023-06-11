@@ -47,7 +47,12 @@ namespace InitialProject.Application.UseCases
 
         public List<Accommodation> GetAll()
         {
-            return _accommodationRepository.GetAll();
+            var accommodations = _accommodationRepository.GetAll();
+            foreach (var accommodation in accommodations)
+            {
+                accommodation.Location = LoadLocation(accommodation.LocationId);
+            }
+            return accommodations;
         }
     }
 }
