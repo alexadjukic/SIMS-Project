@@ -23,5 +23,10 @@ namespace InitialProject.Application.UseCases
         {
             return _complexTourPartRepository.Save(complexTourPart);
         }
+
+        public ComplexTourPart GetByRequest(TourRequest tourRequest)
+        {
+            return _complexTourPartRepository.GetAll().ToList().Find(p => p.TourRequestId == tourRequest.Id);
+        }
     }
 }

@@ -190,6 +190,7 @@ namespace InitialProject.WPF.ViewModels
             Requests.Clear();
             foreach (var request in _tourRequestService.GetAllByGuide(_guide))
             {
+                if (_tourRequestService.IsComplexTourPart(request)) continue;
                 Requests.Add(request);
             }
         }
@@ -199,6 +200,7 @@ namespace InitialProject.WPF.ViewModels
             Requests.Clear();
             foreach (var request in _tourRequestService.GetAllByGuide(_guide))
             {
+                if (_tourRequestService.IsComplexTourPart(request)) continue;
                 if (request.Location.Country != country && country is not null) continue;
                 if (request.Location.City != city && city is not null) continue;
                 if (request.Language != language && language is not null) continue;

@@ -14,6 +14,7 @@ namespace InitialProject.Application.UseCases
         private readonly ILocationRepository _locationRepository;
         private readonly LocationService _locationService;
         private readonly UserService _userService;
+        private readonly ComplexTourPartService _complexTourPartService;
 
         public TourRequestService()
         {
@@ -21,6 +22,7 @@ namespace InitialProject.Application.UseCases
             _locationRepository = Injector.CreateInstance<ILocationRepository>();
             _locationService = new LocationService();
             _userService = new UserService();
+            _complexTourPartService = new ComplexTourPartService();
         }
 
         public IEnumerable<TourRequest> GetAll()
@@ -85,6 +87,11 @@ namespace InitialProject.Application.UseCases
                 locations.Add(req.Location);
             }
             return locations;
+        }
+
+        public bool IsComplexTourPart(TourRequest tourRequest)
+        {
+            return _complexTourPartService.GetByRequest(tourRequest) is not null;
         }
     }
 }
