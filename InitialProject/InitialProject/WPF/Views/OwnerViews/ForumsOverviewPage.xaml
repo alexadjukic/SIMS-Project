@@ -10,6 +10,10 @@
       d:DesignHeight="633" d:DesignWidth="700"
       Title="ForumsOverviewPage">
 
+    <Page.InputBindings>
+        <KeyBinding Command="{Binding OpenForumCommand}" Gesture="CTRL+F" />
+    </Page.InputBindings>
+
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

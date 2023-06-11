@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="Renovate accommodation" Height="800" Width="500" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
 
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding ScheduleRenovationCommand}" Gesture="CTRL+S" />
+    </Window.InputBindings>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -113,9 +117,8 @@
             </Grid.ColumnDefinitions>
             
             
-            <Button Name="Button_Close" Grid.Column="1" Style="{StaticResource CloseButton}" HorizontalAlignment="Center" Content="Close" Click="Button_Close_Click"/>
-            <Button Name="Button_Schedule_Renovation" Style="{StaticResource CloseButton}" Grid.Column="2" HorizontalAlignment="Center" Content="Schedule" Command="{Binding ScheduleRenovationCommand}" />
-            <Button Name="Button_See_All" Style="{StaticResource CloseButton}" Grid.Column="3" HorizontalAlignment="Center" Content="See all" />
+            <Button Name="Button_Close" Grid.Column="2" Style="{StaticResource CloseButton}" HorizontalAlignment="Center" Content="Close" Click="Button_Close_Click"/>
+            <Button Name="Button_Schedule_Renovation" Style="{StaticResource CloseButton}" Grid.Column="3" HorizontalAlignment="Center" Content="Schedule" Command="{Binding ScheduleRenovationCommand}" />
         </Grid>
     </Grid>
 </Window>

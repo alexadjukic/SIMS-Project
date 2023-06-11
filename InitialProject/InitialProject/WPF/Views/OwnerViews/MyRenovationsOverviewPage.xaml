@@ -9,6 +9,10 @@
       d:DesignHeight="630" d:DesignWidth="700"
       Title="MyRenovationsOverviewPage">
 
+    <Page.InputBindings>
+        <KeyBinding Command="{Binding DeclineRenovationCommand}" Gesture="CTRL+G" />
+    </Page.InputBindings>
+
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

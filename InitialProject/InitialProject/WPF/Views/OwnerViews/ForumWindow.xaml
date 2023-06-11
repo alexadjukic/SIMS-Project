@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:InitialProject.WPF.Views.OwnerViews"
         mc:Ignorable="d"
         Title="Location accommodations" Height="600" Width="600" WindowStartupLocation="CenterScreen">
-    
+
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding ReportCommentCommand}" Gesture="CTRL+R" />
+        <KeyBinding Command="{Binding SendCommentCommand}" Gesture="ENTER" />
+    </Window.InputBindings>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

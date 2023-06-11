@@ -8,6 +8,11 @@
         mc:Ignorable="d"
         Title="Statistics" Height="550" Width="800" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
 
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding CreatePDFWithYearsCommand}" Gesture="CTRL+P" />
+        <KeyBinding Command="{Binding ShowMonthlyStatisticsCommand}" Gesture="CTRL+M" />
+    </Window.InputBindings>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
