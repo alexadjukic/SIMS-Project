@@ -33,5 +33,19 @@ namespace InitialProject.Application.UseCases
             var accommodationRatings = _accommodationRatingRepository.GetAll();
             return accommodationRatings.Exists(x => x.ReservationId == reservationId && x.RaterId == guestId);
         }
+
+        public int CalculateNumberOfRatingsForCorrectness(int i, int ownerId)
+        {
+            List<AccommodationRating> ownerRatings = _accommodationRatingRepository.GetAll().FindAll(ar => ar.OwnerId == ownerId);
+
+            return ownerRatings.FindAll(or => or.Correctness == i).Count();
+        }
+
+        internal int CalculateNumberOfRatingsForCleanliness(int i, int ownerId)
+        {
+            List<AccommodationRating> ownerRatings = _accommodationRatingRepository.GetAll().FindAll(ar => ar.OwnerId == ownerId);
+
+            return ownerRatings.FindAll(or => or.Cleanliness == i).Count();
+        }
     }
 }
