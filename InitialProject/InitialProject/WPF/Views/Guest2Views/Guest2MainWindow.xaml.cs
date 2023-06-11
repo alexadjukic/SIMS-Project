@@ -70,9 +70,11 @@ namespace InitialProject.WPF.Views.Guest2Views
             Guest2MainPreview.Content = new TourNotificationsView(LoggedUser);
         }
 
-        private void Demo_Click(object sender, RoutedEventArgs e)
+        private void SignOut_Click(object sender, RoutedEventArgs e)
         {
-            //TO-DO
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            Close();
         }
     }
 }

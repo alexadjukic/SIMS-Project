@@ -3,6 +3,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,5 +25,19 @@ namespace InitialProject.Application.UseCases
             return _complexTourRequestRepository.Save(complexTourRequest);
         }
 
+        public IEnumerable<ComplexTourRequest> GetAll()
+        {
+            return _complexTourRequestRepository.GetAll();
+        }
+
+        public ComplexTourRequest GetById(int id)
+        {
+            return _complexTourRequestRepository.GetById(id);
+        }
+
+        public ComplexTourRequest Update(ComplexTourRequest complexTourRequest)
+        {
+            return _complexTourRequestRepository.Update(complexTourRequest);
+        }
     }
 }

@@ -348,7 +348,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             HomeCommand = new RelayCommand(HomeCommand_Execute);
             RequestTourCommand = new RelayCommand(RequestTourCommand_Execute, RequestTourCommand_CanExecute);
             AddComplexedPartCommand = new RelayCommand(AddComplexedPartCommand_Execute);
-            
+            ShowComplexTourRequestsCommand = new RelayCommand(ShowComplexTourRequestsCommand_Execute);
 
         }
 
@@ -482,6 +482,13 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand HomeCommand { get; }
         public RelayCommand RequestTourCommand { get; }
         public RelayCommand AddComplexedPartCommand { get; }
+        public RelayCommand ShowComplexTourRequestsCommand {  get; }
+
+
+        public void ShowComplexTourRequestsCommand_Execute(object? parameter)
+        {
+            ComplexTourRequestView complexTourRequestView = new ComplexTourRequestView(LoggedUser);
+        }
 
         public void AddComplexedPartCommand_Execute(object? parameter)
         {
@@ -509,15 +516,21 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         {
             SortByDate();
 
-            _firstTourRequest = _tourRequests[0];
+
+            List<TourRequest> newTourRequests = new List<TourRequest>();
+            foreach(var req in _tourRequests)
+            {
+                var reqTemp = _tourRequestService.Save(req);
+                newTourRequests.Add(reqTemp);
+            }
+
+            _firstTourRequest = newTourRequests[0];
             ComplexTourRequest complexTourRequest = new ComplexTourRequest(LoggedUser.Id, TourRequestStatus.ON_HOLD, _firstTourRequest.Id);
             complexTourRequest = _complexTourRequestService.Save(complexTourRequest);
 
-
-            foreach (var req in _tourRequests)
+            foreach (var req in newTourRequests)
             {
-                var reqTemp = _tourRequestService.Save(req);
-                ComplexTourPart complexTourPart = new ComplexTourPart(reqTemp.Id, reqTemp, complexTourRequest.Id, complexTourRequest);
+                ComplexTourPart complexTourPart = new ComplexTourPart(req.Id, req, complexTourRequest.Id, complexTourRequest);
                 _complexTourPartService.Save(complexTourPart);
             }
 
