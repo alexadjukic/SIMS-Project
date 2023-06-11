@@ -3,6 +3,7 @@ using InitialProject.Commands;
 using InitialProject.Domain.DTOs;
 using InitialProject.Domain.Models;
 using InitialProject.Repositories;
+using InitialProject.WPF.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace InitialProject.WPF.ViewModels
             foreach (var request in _complexTourRequestService.GetAll())
             {
                 var parts = _complexTourPartService.GetAllByComplexRequest(request);
-                ComplexRequestInfo.Add(new ComplexTourInfo(_tourRequestService.GetById(request.FirstPartId).Location, _tourRequestService.GetById(parts.First().TourRequestId).StartDate, _tourRequestService.GetById(parts.Last().TourRequestId).EndDate));
+                ComplexRequestInfo.Add(new ComplexTourInfo(_tourRequestService.GetById(request.FirstPartId).Location, _tourRequestService.GetById(parts.First().TourRequestId).StartDate, _tourRequestService.GetById(parts.Last().TourRequestId).EndDate, request.Id));
             }
         }
 
@@ -47,12 +48,15 @@ namespace InitialProject.WPF.ViewModels
 
         public void DetailsCommand_Execute(object? parameter)
         {
-
+            var complexTourInfo = parameter as ComplexTourInfo;
+            var complexTourRequestDetailsView = new ComplexTourRequestDetailsView(_complexTourRequestService.GetById(complexTourInfo.ComplexTourRequestId), _guide);
+            complexTourRequestDetailsView.Show();
         }
 
         public bool DetailsCommand_CanExecute(object? parameter)
         {
-            return true;
+            var complexTourInfo = parameter as ComplexTourInfo;
+            return complexTourInfo is not null;
         } 
         #endregion
     }

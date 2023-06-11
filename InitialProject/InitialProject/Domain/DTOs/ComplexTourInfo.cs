@@ -10,11 +10,12 @@ namespace InitialProject.Domain.DTOs
         public DateTime EndDate { get; set; }
         public int ComplexTourRequestId { get; set; }
 
-        public ComplexTourInfo(Location startLocation, DateTime startDate, DateTime endDate)
+        public ComplexTourInfo(Location startLocation, DateTime startDate, DateTime endDate, int complexTourRequestId)
         {
             StartLocation = startLocation;
             StartDate = startDate;
             EndDate = endDate;
+            ComplexTourRequestId = complexTourRequestId;
         }
     }
 }

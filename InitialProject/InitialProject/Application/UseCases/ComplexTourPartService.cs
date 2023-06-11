@@ -12,11 +12,13 @@ namespace InitialProject.Application.UseCases
     {
         private readonly IComplexTourRequestRepository _complexTourRequestRepository;
         private readonly IComplexTourPartRepository _complexTourPartRepository;
+        private readonly TourRequestService _tourRequestService;
 
         public ComplexTourPartService()
         {
             _complexTourRequestRepository = Injector.CreateInstance<IComplexTourRequestRepository>();
             _complexTourPartRepository = Injector.CreateInstance<IComplexTourPartRepository>();
+            _tourRequestService = new TourRequestService();
         }
 
         public ComplexTourPart Save(ComplexTourPart complexTourPart)
@@ -31,7 +33,17 @@ namespace InitialProject.Application.UseCases
 
         public IEnumerable<ComplexTourPart> GetAllByComplexRequest(ComplexTourRequest complexTourRequest)
         {
-            return _complexTourPartRepository.GetAll().Where(p => p.ComplexTourId == complexTourRequest.Id);
+            var parts = _complexTourPartRepository.GetAll().Where(p => p.ComplexTourId == complexTourRequest.Id);
+            foreach (var part in parts)
+            {
+                part.TourRequest = _tourRequestService.GetById(part.TourRequestId);
+            }
+            return parts;
+        }
+
+        public bool IsComplexTourPart(TourRequest tourRequest)
+        {
+            return this.GetByRequest(tourRequest) is not null;
         }
     }
 }
