@@ -12,12 +12,19 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5.3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4.3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        
         <Grid Grid.Row="0" Background="Azure">
-            <DataGrid x:Name="DataGridTours" ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="10,30,10,20" >
+            <Button Content="Report" HorizontalAlignment="Right" Margin="0,30,90,0" VerticalAlignment="Top" Width="120" FontSize="16" FontWeight="Bold" Command="{Binding GeneratePDFCommand}"/>
+            <Label Margin="0,25,495,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="110" Height="31" FontWeight="Bold" FontSize="16">Report from:</Label>
+            <DatePicker SelectedDate="{Binding Path=DateFrom, UpdateSourceTrigger=PropertyChanged}" Margin="0,30,385,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="110" Height="24"></DatePicker>
+            <Label Margin="0,25,340,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="31" FontWeight="Bold" FontSize="16" >To:</Label>
+            <DatePicker SelectedDate="{Binding Path=DateTo, UpdateSourceTrigger=PropertyChanged}" Margin="0,30,225,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="110" Height="24"></DatePicker>
+        </Grid>
+        <Grid Grid.Row="1" Background="Azure">
+            <DataGrid x:Name="DataGridTours" ItemsSource="{Binding ReservedTours, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedReservedTour, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="10,10,10,20" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="*" Binding="{Binding TourName}"/>
                     <DataGridTextColumn Header="Current Checkpoint" Width="*" Binding="{Binding CheckpointName}" />
@@ -25,9 +32,10 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Grid Grid.Row="1" Background="Azure">
+        <Grid Grid.Row="2" Background="Azure">
             <Button Content="Home" HorizontalAlignment="Left" Margin="90,30,0,0" VerticalAlignment="Top" Width="120" Command="{Binding HomeCommand}" FontSize="16" FontWeight="Bold"/>
             <Button Name="ChooseButton" Content="Rate" HorizontalAlignment="Right" Margin="0,30,90,0" VerticalAlignment="Top" Width="120" FontSize="16" FontWeight="Bold" Command="{Binding OpenRateTourAndGuideWindowCommand}"/>
+            
         </Grid>
     </Grid>
 </Page>

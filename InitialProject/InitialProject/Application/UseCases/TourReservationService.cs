@@ -85,5 +85,10 @@ namespace InitialProject.Application.UseCases
             }
             return _reservations;
         }
+
+        public List<TourReservation> GetAll()
+        {
+            return _tourReservationRepository.GetAll();
+        }
     }
 }

@@ -19,5 +19,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public void Remove(AccommodationReservation reservation);
         public AccommodationReservation GetById(int reservationId);
         public AccommodationReservation Update(AccommodationReservation accommodationReservation);
+        public List<AccommodationReservation> GetCancelledByGuestId(int guestId);
     }
 }
