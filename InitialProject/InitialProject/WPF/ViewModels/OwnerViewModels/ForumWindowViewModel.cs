@@ -92,6 +92,10 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             {
                 MessageLabel = "You can't leave comments on this forum!";
             }
+            else if (_selectedForum.Status == "Closed")
+            {
+                MessageLabel = "This forum is closed";
+            }
             else
             {
                 MessageLabel = "";
@@ -116,7 +120,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         public bool SendCommentCommand_CanExecute(object? parameter)
         {
-            return _userLocationService.IsThisOwnersLocation(_owner.Id, _selectedForum.LocationId) && Comment != "" && Comment != null;
+            return _userLocationService.IsThisOwnersLocation(_owner.Id, _selectedForum.LocationId) && Comment != "" && Comment != null && _selectedForum.Status == "Open";
         }
 
         public void SendCommentCommand_Execute(object? parameter)
