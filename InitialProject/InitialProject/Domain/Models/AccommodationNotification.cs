@@ -13,7 +13,9 @@ namespace InitialProject.Domain.Models
         public string TextContent { get; set; }
         public bool Seen { get; set; }
         public int SenderId { get; set; }
+        public User Sender { get; set; }
         public int ReceiverId { get; set; }
+        public string NotificationInfo { get; set; }
 
         public AccommodationNotification() { }
 

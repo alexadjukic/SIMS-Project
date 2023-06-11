@@ -166,5 +166,10 @@ namespace InitialProject.WPF.Views.Guest1Views
         {
             MainPreview.Content = new ForumPage(LoggedUser);
         }
+
+        private void NotificationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainPreview.Content = new NotificationsPage(LoggedUser);
+        }
     }
 }
