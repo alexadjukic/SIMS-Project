@@ -56,5 +56,16 @@ namespace InitialProject.Repositories
             _vouchers.Remove(found);
             _serializer.ToCSV(FilePath, _vouchers);
         }
+
+        public Voucher Update(Voucher voucher)
+        {
+            _vouchers = _serializer.FromCSV(FilePath);
+            Voucher current = _vouchers.Find(v => v.Id == voucher.Id);
+            int index = _vouchers.IndexOf(current);
+            _vouchers.Remove(current);
+            _vouchers.Insert(index, voucher);
+            _serializer.ToCSV(FilePath, _vouchers);
+            return voucher;
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace InitialProject.Application.UseCases
             return reservations;
         }
 
-        public void DeleteAllReservationsForCancelledTour(Tour tour, User guide)
+        public void DeleteAllReservationsForCancelledTour(Tour tour, User? guide)
         {
             var reservations = _tourReservationRepository.GetAll().Where(r => r.TourId == tour.Id);
             foreach (var reservation in reservations)

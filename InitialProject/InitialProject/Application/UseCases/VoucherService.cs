@@ -47,10 +47,21 @@ namespace InitialProject.Application.UseCases
             return vouchers;
         }
 
-        public Voucher Create(User user, User guide)
+        public Voucher Create(User user, User? guide)
         {
-            var voucher = new Voucher("Voucher", DateTime.MaxValue, user.Id, guide is null ? 0 : guide.Id);
+            var voucher = new Voucher("Voucher", DateTime.Now.AddYears(2), user.Id, guide is null ? 0 : guide.Id);
             return _voucherRepository.Save(voucher);
+        }
+
+        public void MakeVouchersForSpecificGuideAvailibleForAllGuides(User guide)
+        {
+            _voucherRepository.GetAll().Where(v => v.GuideId == guide.Id).ToList().ForEach(v => this.RemoveGuide(v));
+        }
+
+        public void RemoveGuide(Voucher voucher)
+        {
+            voucher.GuideId = 0;
+            _voucherRepository.Update(voucher);
         }
     }
 }

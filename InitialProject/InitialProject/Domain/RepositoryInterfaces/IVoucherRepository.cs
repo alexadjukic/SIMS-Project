@@ -14,5 +14,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public Voucher Save(Voucher voucher);
         public int NextId();
         public void Remove(Voucher voucher);
+        public Voucher Update(Voucher voucher);
     }
 }

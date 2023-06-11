@@ -17,6 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="9*"/>
+            <RowDefinition Height="1.2*"/>
         </Grid.RowDefinitions>
         <Label Style="{DynamicResource ReviewLabel}" Content="Your statistics" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <DataGrid Grid.Row="1" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ItemsSource="{Binding Path=GuideStatistics, UpdateSourceTrigger=PropertyChanged}">
@@ -51,5 +52,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Style="{DynamicResource MostVisitedTourButton}" Grid.Row="2" Content="Resign" Command="{Binding ResignCommand}"/>
     </Grid>
 </UserControl>
