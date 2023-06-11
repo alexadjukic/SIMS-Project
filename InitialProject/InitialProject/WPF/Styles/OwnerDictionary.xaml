@@ -33,60 +33,78 @@
     <SolidColorBrush x:Key="ListBoxButtonBackground" Color="#ff9900" />
     <SolidColorBrush x:Key="ArrowButtonBackground" Color="#ff9900" />
     <SolidColorBrush x:Key="ListBoxButtonForeground" Color="white" />
+    <SolidColorBrush x:Key="HoveredButtonColor" Color="AliceBlue" />
     <!--#endregion-->
     
     <!--#region MenuStyle-->
     <Style x:Key="MenuButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Height" Value="50"/>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource MenuBackgroundColor}" />
-                <Setter Property="Background" Value="White" />
-            </Trigger>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource MenuBackgroundColor}" />
+                            <Setter Property="Background" Value="{StaticResource HoveredButtonColor}" />
+                        </Trigger>
 
-            <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="{StaticResource MenuBackgroundColor}" />
-                <Setter Property="Foreground" Value="white" />
-            </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="{StaticResource MenuBackgroundColor}" />
+                            <Setter Property="Foreground" Value="white" />
+                        </Trigger>
 
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Opacity" Value="0.5"/>
-            </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
 
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{StaticResource MenuBackgroundColor}" />
-                <Setter Property="Background" Value="AliceBlue" />
-            </Trigger>
-
-            <Trigger Property="IsEnabled" Value="True">
-                <Setter Property="Foreground" Value="white" />
-                <Setter Property="Background" Value="{StaticResource MenuBackgroundColor}" />
-                <Setter Property="Cursor" Value="Hand"/>
-            </Trigger>
-        </Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource MenuBackgroundColor}" />
+                            <Setter Property="Background" Value="AliceBlue" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style x:Key="MenuNotificationButton" TargetType="Button">
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Height" Value="40"/>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource HighlightBrushKey}" />
-            </Trigger>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource HoveredButtonColor}" />
+                        </Trigger>
 
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="Background" Value="{StaticResource HighlightBrushKey}"/>
-            </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="{StaticResource HoveredButtonColor}"/>
+                        </Trigger>
 
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Opacity" Value="0.5"/>
-            </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
 
-            <Trigger Property="IsEnabled" Value="True">
-                <Setter Property="Cursor" Value="Hand"/>
-            </Trigger>
-        </Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style x:Key="MenuBackground" TargetType="Border">
         <Setter Property="Background" Value="{StaticResource MenuBackgroundColor}"/>
@@ -108,12 +126,12 @@
     <!--#region LabelStyle-->
     <Style x:Key="BasicLabel" TargetType="Label">
         <Setter Property="Label.Foreground" Value="{StaticResource BasicLabelForeground}" />
-        <Setter Property="Label.FontSize" Value="12" />
+        <Setter Property="Label.FontSize" Value="13" />
     </Style>
 
     <Style x:Key="BoldLabel" TargetType="Label">
         <Setter Property="Label.Foreground" Value="{StaticResource BoldLabelForeground}" />
-        <Setter Property="Label.FontSize" Value="12" />
+        <Setter Property="Label.FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
     <!--#endregion-->
@@ -189,6 +207,7 @@
     </Style>
 
     <Style x:Key="DataGridCellStyle" TargetType="{x:Type DataGridCell}">
+        <Setter Property="FontSize" Value="13" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{StaticResource DataGridSelectedBackground}" />
@@ -200,6 +219,7 @@
 
     <Style x:Key="DataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{StaticResource Foreground}" />
         <Setter Property="Background" Value="{StaticResource HeaderRow}" />
         <Setter Property="Height" Value="25"/>
@@ -210,20 +230,20 @@
     <!--#region TextBlockStyle-->
     <Style x:Key="BasicTextBlock" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource BasicTextBlockForeground}" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="Height" Value="19" />
     </Style>
     
     <Style x:Key="BoldTextBloxk" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource BoldTextBloxkForeground}" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="Height" Value="19" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
 
     <Style x:Key="UnderlinedBoldTextBlock" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource UnderlinedBoldTextBlockForeground}" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="Height" Value="19" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextDecorations" Value="Underline" />
@@ -237,7 +257,7 @@
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" FontWeight="Bold" Style="{StaticResource BoldTextBloxk}"/>
+                    <TextBlock Text="{Binding}" FontWeight="Bold" FontSize="13" Style="{StaticResource BoldTextBloxk}"/>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -248,47 +268,69 @@
     <Style x:Key="CloseButton" TargetType="Button">
         <Setter Property="Height" Value="25" />
         <Setter Property="Width" Value="80" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource StandardButtonBackground}" />
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
-                <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="black" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="True">
-                <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
-                <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
-                <Setter Property="Cursor" Value="Hand"/>
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource StandardButtonBackground}" />
+                            <Setter Property="Background" Value="{StaticResource HoveredButtonColor}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
+                            <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="black" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True" >
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="ListBoxButton" TargetType="Button">
         <Setter Property="Height" Value="25" />
         <Setter Property="Width" Value="80" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource StandardButtonBackground}" />
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
-                <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="black" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="True" >
-                <Setter Property="Cursor" Value="Hand"/>
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource StandardButtonBackground}" />
+                            <Setter Property="Background" Value="{StaticResource HoveredButtonColor}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
+                            <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="black" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True" >
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     
     <Style x:Key="ArrowButton" TargetType="Button">
@@ -343,25 +385,36 @@
     
     <!--#region ButtonStyle-->
     <Style x:Key="StandardButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Width" Value="80" />
         <Setter Property="Height" Value="25" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource StandardButtonBackground}" />
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="False">
-                <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
-                <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="black" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="True">
-                <Setter Property="Cursor" Value="Hand"/>
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter x:Name="Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{StaticResource StandardButtonBackground}" />
+                            <Setter Property="Background" Value="{StaticResource HoveredButtonColor}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="{StaticResource StandardButtonBackground}" />
+                            <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="black" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <!--#endregion-->
     

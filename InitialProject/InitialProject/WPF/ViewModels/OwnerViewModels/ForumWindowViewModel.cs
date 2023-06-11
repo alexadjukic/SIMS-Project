@@ -93,6 +93,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public void SendCommentCommand_Execute(object? parameter)
         {
             Comment ownersComment = _commentService.Save(_selectedForum.Id, Comment, _owner.Id);
+            ownersComment.User = _owner;
             Comments.Add(ownersComment);
             Comment = "";
         }

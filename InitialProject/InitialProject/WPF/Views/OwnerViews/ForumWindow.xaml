@@ -62,7 +62,7 @@
 
             <Label Name="ForumComment" Grid.Row="0" Content="Type your comment here:" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{StaticResource BasicLabel}" />
 
-            <TextBox Name="TextBoxForumComment" Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Width="570" Margin="0,0,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Center"/>
+            <TextBox Name="TextBoxForumComment" Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Width="570" Margin="0,0,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" HorizontalAlignment="Center"/>
 
             <Button Name="ButtonSend" Grid.Row="2" Content="Send" HorizontalAlignment="Right" Margin="0,0,20,0" Style="{StaticResource CloseButton}" Command="{Binding SendCommentCommand}"/>
         </Grid>
