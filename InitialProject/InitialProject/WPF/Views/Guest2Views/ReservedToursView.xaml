@@ -35,7 +35,7 @@
         <Grid Grid.Row="2" Background="Azure">
             <Button Content="Home" HorizontalAlignment="Left" Margin="90,30,0,0" VerticalAlignment="Top" Width="120" Command="{Binding HomeCommand}" FontSize="16" FontWeight="Bold"/>
             <Button Name="ChooseButton" Content="Rate" HorizontalAlignment="Right" Margin="0,30,90,0" VerticalAlignment="Top" Width="120" FontSize="16" FontWeight="Bold" Command="{Binding OpenRateTourAndGuideWindowCommand}"/>
-            
+            <Button Content="{Binding DemoButtonContent}" HorizontalAlignment="Left" Margin="450,30,0,0" VerticalAlignment="Top" Width="120" Command="{Binding DemoCommand}" FontSize="16" Height="30" FontWeight="Bold"/>
         </Grid>
     </Grid>
 </Page>

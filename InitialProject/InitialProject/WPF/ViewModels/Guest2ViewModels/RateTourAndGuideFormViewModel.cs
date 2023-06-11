@@ -16,6 +16,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -190,6 +191,25 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
+        private string _demoButtonContent;
+        public string DemoButtonContent
+        {
+            get
+            {
+                return _demoButtonContent;
+            }
+            set
+            {
+                if (_demoButtonContent != value)
+                {
+                    _demoButtonContent = value;
+                    OnPropertyChanged(nameof(DemoButtonContent));
+                }
+            }
+        }
+
+        public DispatcherTimer Timer { get; set; }
+
         public List<BitmapImage> Images { get; set; }
         private readonly TourService _tourService;
         private readonly TourReviewService _tourReviewService;
@@ -203,12 +223,15 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             TourId = tourId;
             Images = new List<BitmapImage>();
 
+            DemoButtonContent = "Demo";
+
             RateTourAndGuideCommand = new RelayCommand(RateTourAndGuideCommand_Execute);
             CancelRatingCommand = new RelayCommand(CancelRatingCommand_Execute);
             AddImageCommand = new RelayCommand(AddImageCommand_Execute);
             NextImageCommand = new RelayCommand(NextImageCommand_Execute);
             PreviousImageCommand = new RelayCommand(PreviousImageCommand_Execute);
             RemoveImageCommand = new RelayCommand(RemoveImageCommand_Execute);
+            DemoCommand = new RelayCommand(DemoCommand_Execute);
         }
 
         public bool IsEligibleForRating()
@@ -271,6 +294,77 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
+        private void RunDemo()
+        {
+            var demoGuidesKnowledgeGrade = "3";
+            var demoGuidesLanguageGrade = "2";
+            var demoInterestingGrade = "4";
+            var demoAdditionalComment = "Jako volim demo";
+
+            Timer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(0.2)
+            };
+
+            this.ResetFields();
+            int i = 0;
+
+            Timer.Tick += delegate (object? sender, EventArgs e)
+            {
+                if (i < 10)
+                {
+                    GuidesKnowledgeGrade = demoGuidesKnowledgeGrade;
+                }
+                else if (i < 20)
+                {
+                    GuidesLanguageGrade = demoGuidesLanguageGrade;
+                }
+                else if (i < 30)
+                {
+                    InterestingGrade = demoInterestingGrade;
+                }
+                else if (i < 45)
+                {
+                    AdditionalComment += demoAdditionalComment[i - 30];
+                }
+                else if (i < 46)
+                {
+                    this.AddImageCommand_Execute(null);
+                }
+                else if (i < 60)
+                {
+                    this.RemoveImageCommand_Execute(null);
+                }
+                else if (i < 70)
+                {
+                    this.RateTourAndGuideCommand_Execute(null);
+                    StopDemo();
+                }
+                else
+                {
+                    Timer.Stop();
+                }
+                i++;
+            };
+            Timer.Start();
+            DemoButtonContent = "Stop";
+        }
+
+        public void StopDemo()
+        {
+            DemoButtonContent = "Demo";
+            Timer.Stop();
+            ResetFields();
+        }
+
+        private void ResetFields()
+        {
+            GuidesKnowledgeGrade = "";
+            GuidesLanguageGrade = "";
+            InterestingGrade = "";
+            AdditionalComment = "";
+        }
+
         #region COMMANDS
 
         public RelayCommand RateTourAndGuideCommand { get; }
@@ -279,7 +373,19 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
         public RelayCommand NextImageCommand { get; }
         public RelayCommand PreviousImageCommand { get; }
         public RelayCommand RemoveImageCommand { get; }
-        
+        public RelayCommand DemoCommand { get; }
+
+        public void DemoCommand_Execute(object? parameter)
+        {
+            if (DemoButtonContent.Equals("Demo"))
+            {
+                RunDemo();
+            }
+            else
+            {
+                StopDemo();
+            }
+        }
 
         public void RemoveImageCommand_Execute(object? parameter)
         {

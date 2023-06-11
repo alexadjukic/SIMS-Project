@@ -28,14 +28,14 @@
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="5"/>
             </ComboBox>
-            <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=InterestingGrade, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="300,71,0,0" VerticalAlignment="Top" Width="100" Height="44.5">
+            <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=GuidesLanguageGrade, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="300,71,0,0" VerticalAlignment="Top" Width="100" Height="44.5">
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
                 <ComboBoxItem Content="3"/>
                 <ComboBoxItem Content="4"/>
                 <ComboBoxItem Content="5"/>
             </ComboBox>
-            <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=GuidesLanguageGrade, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="300,132,0,0" VerticalAlignment="Top" Width="100" Height="44.5">
+            <ComboBox SelectedValuePath="Content" SelectedValue="{Binding Path=InterestingGrade, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="300,132,0,0" VerticalAlignment="Top" Width="100" Height="44.5">
                 <ComboBoxItem Content="1"/>
                 <ComboBoxItem Content="2"/>
                 <ComboBoxItem Content="3"/>
@@ -68,6 +68,7 @@
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="Azure">
             <Button Command="{Binding RateTourAndGuideCommand}" Content="Rate" HorizontalAlignment="Right" Margin="0,30,95,0" VerticalAlignment="Top" FontSize="20" Width="150" FontWeight="Bold"/>
             <Button Command ="{Binding CancelRatingCommand}" Content="Cancel" HorizontalAlignment="Left" Margin="95,30,0,0" VerticalAlignment="Top" FontSize="20" Width="150" FontWeight="Bold"/>
+            <Button Command ="{Binding DemoCommand}" Content="{Binding DemoButtonContent}" HorizontalAlignment="Left" Margin="440,30,0,0" VerticalAlignment="Top" FontSize="20" Width="150" FontWeight="Bold" Height="30"/>
         </Grid>
     </Grid>
 </Page>

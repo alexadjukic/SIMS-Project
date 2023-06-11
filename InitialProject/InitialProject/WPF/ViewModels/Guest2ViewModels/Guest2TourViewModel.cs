@@ -1,4 +1,5 @@
-﻿using InitialProject.Application.UseCases;
+﻿using HarfBuzzSharp;
+using InitialProject.Application.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Models;
 using InitialProject.WPF.Views;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -173,6 +175,25 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
+        private string _demoButtonContent;
+        public string DemoButtonContent
+        {
+            get
+            {
+                return _demoButtonContent;
+            }
+            set
+            {
+                if (_demoButtonContent != value)
+                {
+                    _demoButtonContent = value;
+                    OnPropertyChanged(nameof(DemoButtonContent));
+                }
+            }
+        }
+
+        public DispatcherTimer Timer { get; set; }
+
         private readonly TourService _tourService;
         private readonly LocationService _locationService;
 
@@ -189,9 +210,12 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             
             ShowInitialTourOptions();
 
+            DemoButtonContent = "Demo";
+
             CloseWindowCommand = new RelayCommand(CloseWindowCommand_Execute);
             ApplyFilterCommand = new RelayCommand(ApplyFilterCommand_Execute);
             ChooseTourCommand = new RelayCommand(ChooseTourCommand_Execute);
+            DemoCommand = new RelayCommand(DemoCommand_Execute);
         }
 
         private void ShowInitialTourOptions()
@@ -338,10 +362,101 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
+        private void RunDemo()
+        {
+            var demoSelectedCountry = "Japan";
+            var demoSelectedCity = "Tokyo";
+            var demoSelectedLanguage = "Serbian";
+            var demoTourDuration = 105;
+            var demoMaxGuests = 15;
+
+            Timer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(0.2)
+            };
+
+            this.ResetFields();
+            int i = 0;
+
+            Timer.Tick += delegate (object? sender, EventArgs e)
+            {
+                if (i < 5)
+                {
+                    SelectedCountry += demoSelectedCountry[i];
+                }
+                else if (i < 10)
+                {
+                    SelectedCity += demoSelectedCity[i - 5];
+                }
+                else if (i < 17)
+                {
+                    SelectedLanguage += demoSelectedLanguage[i - 10];
+                }
+                else if (i < 30)
+                {
+                    TourDuration = demoTourDuration;
+                }
+                else if (i < 40)
+                {
+                    MaxGuests = demoMaxGuests;
+                }
+                else if(i < 41)
+                {
+                    this.ApplyFilterCommand_Execute(null);
+                }
+                else if(i < 50)
+                {
+                    SelectedTour = Tours[0];
+                }
+                else if(i < 61)
+                {
+                    this.ChooseTourCommand_Execute(null);
+                    StopDemo();
+                }
+                else
+                {
+                    Timer.Stop();
+                }
+                i++;
+            };
+            Timer.Start();
+            DemoButtonContent = "Stop";
+        }
+
+        public void StopDemo()
+        {
+            DemoButtonContent = "Demo";
+            Timer.Stop();
+            ResetFields();
+            this.ApplyFilterCommand_Execute(null);
+        }
+
+        private void ResetFields()
+        {
+            SelectedCountry = "";
+            SelectedCity = "";
+            SelectedLanguage = "";
+            TourDuration = 0;
+            MaxGuests = 0;
+        }
+
         #region COMMANDS
         public RelayCommand CloseWindowCommand { get; }
         public RelayCommand ApplyFilterCommand { get; }
         public RelayCommand ChooseTourCommand { get; }
+        public RelayCommand DemoCommand { get; }
+
+        public void DemoCommand_Execute(object? parameter)
+        {
+            if (DemoButtonContent.Equals("Demo"))
+            {
+                RunDemo();
+            }
+            else
+            {
+                StopDemo();
+            }
+        }
 
         public void ChooseTourCommand_Execute(object? parameter)
         {
