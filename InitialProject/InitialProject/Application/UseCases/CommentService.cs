@@ -12,11 +12,13 @@ namespace InitialProject.Application.UseCases
     {
         private readonly ICommentRepository _commentRepository;
         private readonly UserService _userService;
+        private readonly AccommodationReservationService _accommodationReservationService;
 
         public CommentService()
         {
             _commentRepository = Injector.CreateInstance<ICommentRepository>();
             _userService = new UserService();
+            _accommodationReservationService = new AccommodationReservationService();
         }
     
         public Comment Save(int forumId, string text, int userId)
@@ -53,6 +55,23 @@ namespace InitialProject.Application.UseCases
         {
             selectedComment.NumberOfReports++;
             _commentRepository.Update(selectedComment);
+        }
+
+        public List<Comment> CheckIfUsersHaveBeenOnLocation(List<Comment> comments, int locationId)
+        {
+            foreach (var comment in comments)
+            {
+                if (_accommodationReservationService.GetGuestsReservations(comment.UserId).ToList().Exists(x => x.Accommodation.LocationId == locationId))
+                {
+                    comment.UserBeenThere = "Yes";
+                }
+                else
+                {
+                    comment.UserBeenThere = "No";
+                }
+            }
+
+            return comments;
         }
     }
 }
