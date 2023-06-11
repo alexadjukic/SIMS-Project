@@ -59,6 +59,7 @@ namespace InitialProject.Application.UseCases
             foreach(Forum forum in forums)
             {
                 forum.Location = _locationService.GetLocationById(forum.LocationId);
+                forum.Utility = CalculateUtility(forum).Utility;
             }
             return forums;
         }

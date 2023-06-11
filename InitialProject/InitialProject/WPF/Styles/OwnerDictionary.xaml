@@ -34,6 +34,8 @@
     <SolidColorBrush x:Key="ArrowButtonBackground" Color="#ff9900" />
     <SolidColorBrush x:Key="ListBoxButtonForeground" Color="white" />
     <SolidColorBrush x:Key="HoveredButtonColor" Color="AliceBlue" />
+    <SolidColorBrush x:Key="MessageLabelForegroundColor" Color="#ff9900" />
+    <SolidColorBrush x:Key="ButtonDisabledBackground" Color="#ffcc80" />
     <!--#endregion-->
     
     <!--#region MenuStyle-->
@@ -131,6 +133,12 @@
 
     <Style x:Key="BoldLabel" TargetType="Label">
         <Setter Property="Label.Foreground" Value="{StaticResource BoldLabelForeground}" />
+        <Setter Property="Label.FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style x:Key="MessageLabelStyle" TargetType="Label">
+        <Setter Property="Label.Foreground" Value="{StaticResource MessageLabelForegroundColor}" />
         <Setter Property="Label.FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
@@ -288,7 +296,8 @@
                             <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="black" />
+                            <Setter Property="Background" Value="{StaticResource ButtonDisabledBackground}" />
+                            <Setter Property="Foreground" Value="white" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="True" >
                             <Setter Property="Cursor" Value="Hand"/>
@@ -322,7 +331,8 @@
                             <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="black" />
+                            <Setter Property="Background" Value="{StaticResource ButtonDisabledBackground}" />
+                            <Setter Property="Foreground" Value="white" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="True" >
                             <Setter Property="Cursor" Value="Hand"/>
@@ -406,7 +416,8 @@
                             <Setter Property="Foreground" Value="{StaticResource StandardButtonForeground}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="black" />
+                            <Setter Property="Background" Value="{StaticResource ButtonDisabledBackground}" />
+                            <Setter Property="Foreground" Value="white" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="True">
                             <Setter Property="Cursor" Value="Hand"/>
