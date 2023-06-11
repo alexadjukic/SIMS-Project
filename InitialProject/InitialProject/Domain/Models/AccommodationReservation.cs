@@ -18,10 +18,11 @@ namespace InitialProject.Domain.Models
         public int AccommodationId { get; set; }
         public User Guest { get; set; }
         public int GuestId { get; set; }
+        public string Status { get; set; }
 
         public AccommodationReservation() { }
 
-        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, User guest, int accommodationId)
+        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, User guest, int accommodationId, string status)
         {
             Id = id;
             StartDate = startDate;
@@ -31,6 +32,7 @@ namespace InitialProject.Domain.Models
             AccommodationId = accommodationId;
             Guest = guest;
             GuestId = guest.Id;
+            Status = status;
         }
 
         public string[] ToCSV()
@@ -43,6 +45,7 @@ namespace InitialProject.Domain.Models
                 LenghtOfStay.ToString(),
                 AccommodationId.ToString(),
                 GuestId.ToString(),
+                Status,
             };
 
             return csvValues;
@@ -56,6 +59,7 @@ namespace InitialProject.Domain.Models
             LenghtOfStay = Convert.ToInt32(values[3]);
             AccommodationId = Convert.ToInt32(values[4]);
             GuestId = Convert.ToInt32(values[5]);
+            Status = values[6];
         }
     }
 }

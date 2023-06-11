@@ -37,6 +37,7 @@
             <Button Content="Change dates" Command="{Binding ChangeReservationCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
             <Button Content="Cancel reservation" Command="{Binding CancelReservationCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
             <Button Content="View all requests" Command="{Binding ViewAllChangeRequestsCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
+            <Button Content="Generate a report" Command="{Binding GenerateReportCommand}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" Margin="0,30,0,0" FontSize="20"/>
         </StackPanel>
     </Grid>
 </Page>

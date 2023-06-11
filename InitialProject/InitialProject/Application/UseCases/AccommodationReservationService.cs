@@ -112,7 +112,8 @@ namespace InitialProject.Application.UseCases
 
         public void CancelReservation(AccommodationReservation reservation)
         {
-            _accommodationReservationRepository.Remove(reservation);
+            reservation.Status = "Cancelled";
+            _accommodationReservationRepository.Update(reservation);
         }
 
         public bool IsAccommodationAvailable(DateTime startDate, DateTime endDate, int reservationId, int accommodationId)
@@ -257,9 +258,9 @@ namespace InitialProject.Application.UseCases
             return lastYearReservations;
         }
 
-        public AccommodationReservation Save(DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, int accommodationId, User guest, int guestId)
+        public AccommodationReservation Save(DateTime startDate, DateTime endDate, int lenghtOfStay, Accommodation accommodation, int accommodationId, User guest, int guestId, string status)
         {
-            return _accommodationReservationRepository.Save(startDate, endDate, lenghtOfStay, accommodation, accommodationId, guest, guestId);
+            return _accommodationReservationRepository.Save(startDate, endDate, lenghtOfStay, accommodation, accommodationId, guest, guestId, status);
         }
     }
 }
