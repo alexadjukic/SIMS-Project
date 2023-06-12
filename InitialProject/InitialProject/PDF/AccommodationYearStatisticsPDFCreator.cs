@@ -50,7 +50,7 @@ namespace InitialProject.PDF
 
         private FileStream CreateAndSaveDocument(PdfDocument document)
         {
-            FileStream stream = File.Create(@"yearStatistics.pdf");
+            FileStream stream = File.Create($"../../../Reports/yearStatistics.pdf");
             document.Save(stream);
             return stream;
         }

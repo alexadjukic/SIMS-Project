@@ -8,6 +8,7 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -206,7 +207,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             AccommodationYearStatisticsPDFCreator pdfCreator = new AccommodationYearStatisticsPDFCreator(_accommodationYearStatisticsService, SelectedAccommodation);
             pdfCreator.CreatePDF();
-            System.Diagnostics.Process.Start("explorer", "yearStatistics.pdf");
+            /*System.Diagnostics.Process.Start("explorer", "yearStatistics.pdf");*/
+            string absolutePath = AppDomain.CurrentDomain.BaseDirectory + $"../../../Reports/yearStatistics.pdf";
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = absolutePath,
+                UseShellExecute = true
+            });
         }
 
         public bool ShowMonthlyStatisticsCommand_CanExecute(object? parameter)

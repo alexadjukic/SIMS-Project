@@ -7,6 +7,7 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -188,7 +189,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         {
             AccommodationMonthStatisticsPDFCreator pdfCreator = new AccommodationMonthStatisticsPDFCreator(_accommodationMonthStatisticsService, SelectedYearStatistics, SelectedAccommodation);
             pdfCreator.CreatePDF();
-            System.Diagnostics.Process.Start("explorer", "monthStatistics.pdf");
+            //System.Diagnostics.Process.Start("explorer", "monthStatistics.pdf");
+            string absolutePath = AppDomain.CurrentDomain.BaseDirectory + $"../../../Reports/monthStatistics.pdf";
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = absolutePath,
+                UseShellExecute = true
+            });
         }
         #endregion
     }
