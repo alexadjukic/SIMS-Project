@@ -38,7 +38,7 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="{StaticResource Background}">
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Guest name:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Guest.Username}" TextAlignment="Left" Margin="40,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Guest.Username}" TextAlignment="Left" Margin="43,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Accommodation:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
@@ -46,19 +46,19 @@
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="61,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.Country}" TextAlignment="Left" Margin="65,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.City}" TextAlignment="Left" Margin="85,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.Accommodation.Location.City}" TextAlignment="Left" Margin="90,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Start date:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="51,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.StartDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="55,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="End date:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="57,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodationReservation.EndDate, StringFormat={}{0:dd.MM.yyyy}}" TextAlignment="Left" Margin="62,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
         </StackPanel>
 

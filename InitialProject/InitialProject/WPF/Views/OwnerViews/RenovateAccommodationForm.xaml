@@ -33,15 +33,15 @@
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.Country}" TextAlignment="Left" Margin="77,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.Country}" TextAlignment="Left" Margin="80,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.City}" TextAlignment="Left" Margin="101,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.City}" TextAlignment="Left" Margin="106,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Type:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Type}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Type}" TextAlignment="Left" Margin="101,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
         </StackPanel>
 
@@ -76,7 +76,7 @@
             <Grid Grid.Row="1" Grid.Column="0" Margin="20,10,20,0">
                 <StackPanel HorizontalAlignment="Left">
                     <Label Name="Label_DurationOfRenovation" Content="Duration of renovation:" Style="{StaticResource BasicLabel}"/>
-                    <TextBox x:Name="TextBox_DurationOfRenovation" Text="{Binding Path=LenghtOfRenovation}" Style="{StaticResource ValidationTemplateTextBox}" Width="179"/>
+                    <TextBox x:Name="TextBox_DurationOfRenovation" Text="{Binding Path=LenghtOfRenovation}" Style="{StaticResource ValidationTemplateTextBox}" BorderBrush="Gray" Width="179"/>
                 </StackPanel>
             </Grid>
 
@@ -102,7 +102,7 @@
             <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,10,20,0">
                 <StackPanel>
                     <Label Name="Label_DescriptionOfRenovation" Content="Description of renovation:" Style="{StaticResource BasicLabel}"/>
-                    <TextBox x:Name="TextBox_DescriptionOfRenovation" Style="{StaticResource MultilineTextBox}" Text="{Binding Path=Description}" Height="70" Width="430"/>
+                    <TextBox x:Name="TextBox_DescriptionOfRenovation" Style="{StaticResource MultilineTextBox}" Text="{Binding Path=Description}" BorderBrush="Gray" Height="70" Width="430"/>
                 </StackPanel>
             </Grid>
             

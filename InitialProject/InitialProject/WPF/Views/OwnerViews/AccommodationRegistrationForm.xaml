@@ -73,6 +73,11 @@
         <StackPanel Grid.Row="0" Grid.Column="1">
             <Label Content="Type:" Style="{StaticResource BasicLabel}" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <ComboBox IsEditable="True" Name="ComboBoxAccommodationType" HorizontalAlignment="Center" Margin="0,10,0,15" Width="247" Height="24" SelectedValuePath="Content" ItemsSource="{Binding Path=Types}">
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxStyle}" />
+                    </Style>
+                </ComboBox.Style>
                 <ComboBox.Text>
                     <Binding  Path="Type" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -103,6 +108,11 @@
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Label Content="Country:" Style="{StaticResource BasicLabel}" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <ComboBox Name="ComboBoxCountry" IsEditable="True" Width="247" HorizontalAlignment="Center" Margin="0,10,0,15" Height="23.94" ItemsSource="{Binding Path=Countries}">
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxStyle}" />
+                    </Style>
+                </ComboBox.Style>
                 <ComboBox.SelectedItem>
                     <Binding  Path="Country" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -138,6 +148,11 @@
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Label Content="City:" Style="{StaticResource BasicLabel}" HorizontalAlignment="Center" Width="247" Margin="0,15,0,0"/>
             <ComboBox x:Name="ComboBoxCity" IsEditable="True" HorizontalAlignment="Center" Width="247" Margin="0,10,0,15" Height="23.94" ItemsSource="{Binding Path=Cities}">
+                <ComboBox.Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxStyle}" />
+                    </Style>
+                </ComboBox.Style>
                 <ComboBox.SelectedItem>
                     <Binding  Path="City" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
