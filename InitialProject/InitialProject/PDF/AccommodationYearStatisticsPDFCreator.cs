@@ -19,6 +19,7 @@ namespace InitialProject.PDF
     {
         private readonly AccommodationYearStatisticsService _accommodationYearStatisticsService;
         private Accommodation _selectedAccommodation;
+        private User _owner;
 
         public AccommodationYearStatisticsPDFCreator(AccommodationYearStatisticsService accommodationYearStatisticsService, Accommodation selectedAccommodation)
         {
@@ -26,13 +27,14 @@ namespace InitialProject.PDF
             _selectedAccommodation = selectedAccommodation;
         }
 
-        public void CreatePDF()
+        public void CreatePDF(User owner)
         {
             try
             {
                 List<AccommodationYearStatistic> yearStatistics = _accommodationYearStatisticsService.GetAllByAccommodationId(_selectedAccommodation.Id);
                 PdfDocument document = new PdfDocument();
-                DrawAllGrids(document, yearStatistics);
+                _owner = owner;
+                DrawAllGrids(document, yearStatistics, owner);
                 FileStream stream = CreateAndSaveDocument(document);
                 CloseStreams(stream, document);
             }
@@ -55,7 +57,7 @@ namespace InitialProject.PDF
             return stream;
         }
 
-        private void DrawAllGrids(PdfDocument document, List<AccommodationYearStatistic> yearStatistics)
+        private void DrawAllGrids(PdfDocument document, List<AccommodationYearStatistic> yearStatistics, User owner)
         {
             PdfPage page = document.Pages.Add();
 
@@ -77,7 +79,10 @@ namespace InitialProject.PDF
             float yPosition = 10;
 
             string dateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            graphics.DrawString("Date and Time: " + dateTime, contentFont, PdfBrushes.Black, new PointF(page.Size.Width - 200, yPosition));
+            graphics.DrawString("Date and Time: " + dateTime, contentFont, PdfBrushes.Black, new PointF(page.Size.Width - 300, yPosition));
+            yPosition += contentFont.Size + 5;
+
+            graphics.DrawString("Created by " + owner.Username, contentFont, PdfBrushes.Black, new PointF(page.Size.Width - 300, yPosition));
             yPosition += contentFont.Size + 5;
 
             graphics.DrawString("Accommodation name: " + _selectedAccommodation.Name, titleFont, PdfBrushes.Black, new PointF(xPosition, yPosition));
