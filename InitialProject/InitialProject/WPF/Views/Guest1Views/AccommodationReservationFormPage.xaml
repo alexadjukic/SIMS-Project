@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      xmlns:lex="clr-namespace:InitialProject.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="1400"
       Title="Accommodation reservation form">
@@ -23,7 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <Label Content="Accommodation info" FontSize="30" Margin="0,45,0,0" Padding="0" Style="{DynamicResource LabelStyle}"/>
+            <Label Content="{lex:Loc AccommodationInfo}" FontSize="30" Margin="0,45,0,0" Padding="0" Style="{DynamicResource LabelStyle}"/>
             <Label Content="{Binding SelectedAccommodation.Name}" FontSize="25" Padding="0" Style="{DynamicResource LabelStyle}"/>
             <TextBlock FontSize="20" Padding="0" Style="{DynamicResource TextBlockStyle}">
                 <TextBlock.Text>
@@ -36,7 +37,7 @@
             <Label Content="{Binding SelectedAccommodation.Type}" FontSize="20" Padding="0" Style="{DynamicResource LabelStyle}"/>
         </StackPanel>
 
-        <Label Grid.Row="1" Grid.Column="1" Content="Images" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="146,0,0,0" Style="{DynamicResource LabelStyle}"/>
+        <Label Grid.Row="1" Grid.Column="1" Content="{lex:Loc ImagePreview}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="146,0,0,0" Style="{DynamicResource LabelStyle}"/>
 
         <Image Grid.Row="2" Grid.Column="1" Source="{Binding CurrentImage.Url}" Margin="0,0,60,0"/>
 
@@ -56,36 +57,36 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <Label Content="From" HorizontalAlignment="Center" Margin="0,45,0,0" Padding="0" Style="{DynamicResource LabelStyle}"/>
+                <Label Content="{lex:Loc From}" HorizontalAlignment="Center" Margin="0,45,0,0" Padding="0" Style="{DynamicResource LabelStyle}"/>
                 <Calendar SelectedDate="{Binding Path=SelectedStartDate}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Label Content="To" HorizontalAlignment="Center" Margin="0,45,0,0" Padding="0" Style="{DynamicResource LabelStyle}"/>
+                <Label Content="{lex:Loc To}" HorizontalAlignment="Center" Margin="0,45,0,0" Padding="0" Style="{DynamicResource LabelStyle}"/>
                 <Calendar SelectedDate="{Binding Path=SelectedEndDate}"/>
             </StackPanel>
         </Grid>
 
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
-            <Label Content="Duration of stay:" FontSize="15" VerticalAlignment="Center" Margin="20,0,0,0" Style="{DynamicResource LabelStyle}"/>
+            <Label Content="{lex:Loc Duration}" FontSize="15" VerticalAlignment="Center" Margin="20,0,0,0" Style="{DynamicResource LabelStyle}"/>
             <TextBox Text="{Binding Path=LenghtOfStay}" FontSize="15" VerticalContentAlignment="Center" Style="{DynamicResource TextBoxStyle}" Width="40" Height="30" Margin="10,0,0,0" VerticalAlignment="Center"/>
             <Button Content="Find available dates" Click="SearchDatesButton_Click" FontSize="13" Height="30" Width="130" Margin="40,0,0,0" Style="{DynamicResource ButtonStyle}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="2">
-            <Label Content="Available dates" Padding="0" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{DynamicResource LabelStyle}"/>
+            <Label Content="{lex:Loc AvailableDates}" Padding="0" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{DynamicResource LabelStyle}"/>
             <DataGrid Name="DateDataGrid" ItemsSource="{Binding AvailableDates, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource DataGridStyle}" SelectionMode="Single" AutoGenerateColumns="False" SelectedItem="{Binding SelectedAvailableDate}" CanUserAddRows="False" Validation.ErrorTemplate="{x:Null}" Height="210" Margin="10,0,5,0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding StartDate, Mode=OneWay, StringFormat={}{0:dd.MM.yyyy}}" Header="From" Width="*"/>
-                    <DataGridTextColumn Binding="{Binding EndDate, Mode=OneWay, StringFormat={}{0:dd.MM.yyyy}}" Header="To" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding StartDate, Mode=OneWay, StringFormat={}{0:dd.MM.yyyy}}" Header="{lex:Loc From}" Width="*"/>
+                    <DataGridTextColumn Binding="{Binding EndDate, Mode=OneWay, StringFormat={}{0:dd.MM.yyyy}}" Header="{lex:Loc To}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal">
-            <Label Content="Number of guests:" FontSize="15" VerticalAlignment="Top" Margin="20,0,0,0" Style="{DynamicResource LabelStyle}"/>
+            <Label Content="{lex:Loc GuestNumber}" FontSize="15" VerticalAlignment="Top" Margin="20,0,0,0" Style="{DynamicResource LabelStyle}"/>
             <TextBox Text="{Binding Path=GuestNumber}" FontSize="15" VerticalContentAlignment="Center" Width="40" Height="30" Margin="10,0,0,0" VerticalAlignment="Top" Style="{DynamicResource TextBoxStyle}"/>
-            <Button Content="Make reservation" Click="MakeReservationButton_Click" FontSize="13" Height="30" Width="130" Margin="25,0,0,30" Style="{DynamicResource ButtonStyle}"/>
+            <Button Content="{lex:Loc MakeReservation}" Click="MakeReservationButton_Click" FontSize="13" Height="30" Width="130" Margin="25,0,0,30" Style="{DynamicResource ButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Page>

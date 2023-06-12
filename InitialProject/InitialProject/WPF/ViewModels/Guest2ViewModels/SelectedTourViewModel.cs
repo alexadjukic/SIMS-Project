@@ -1,4 +1,5 @@
-﻿using InitialProject.Application.UseCases;
+﻿using HarfBuzzSharp;
+using InitialProject.Application.UseCases;
 using InitialProject.Commands;
 using InitialProject.Domain.Models;
 using InitialProject.Domain.RepositoryInterfaces;
@@ -12,9 +13,12 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.ObjectiveC;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -81,6 +85,25 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
+        private string _demoButtonContent;
+        public string DemoButtonContent
+        {
+            get
+            {
+                return _demoButtonContent;
+            }
+            set
+            {
+                if (_demoButtonContent != value)
+                {
+                    _demoButtonContent = value;
+                    OnPropertyChanged(nameof(DemoButtonContent));
+                }
+            }
+        }
+
+        public DispatcherTimer Timer { get; set; }
+
         private readonly VoucherService _voucherService;
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
@@ -95,8 +118,11 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
 
+            DemoButtonContent = "Demo";
+
             HomeCommand = new RelayCommand(HomeCommand_Execute);
             ReserveTourCommand = new RelayCommand(ReserveTourCommand_Execute);
+            DemoCommand = new RelayCommand(DemoCommand_Execute);
         }
 
         public void UseVoucher()
@@ -146,10 +172,70 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
+
+        private void RunDemo()
+        {
+            var demoNumberOfNewGuests = 2;
+
+            Timer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(0.5)
+            };
+
+            this.ResetFields();
+            int i = 0;
+
+            Timer.Tick += delegate (object? sender, EventArgs e)
+            {
+                if (i < 10)
+                {
+                    NumberOfNewGuests = demoNumberOfNewGuests;
+                }
+                else if (i < 20)
+                {
+                    this.ReserveTourCommand_Execute(null);
+                    StopDemo();
+                }
+                else
+                {
+                    Timer.Stop();
+                }
+                i++;
+            };
+            Timer.Start();
+            DemoButtonContent = "Stop";
+        }
+
+        public void StopDemo()
+        {
+            DemoButtonContent = "Demo";
+            Timer.Stop();
+            ResetFields();
+        }
+
+        private void ResetFields()
+        {
+            NumberOfNewGuests = 0;
+        }
+
         #region COMMANDS
 
         public RelayCommand HomeCommand { get; }
         public RelayCommand ReserveTourCommand { get; }
+        public RelayCommand DemoCommand { get; }
+
+        public void DemoCommand_Execute(object? parameter)
+        {
+            if (DemoButtonContent.Equals("Demo"))
+            {
+                RunDemo();
+            }
+            else
+            {
+                StopDemo();
+            }
+        }
+
 
         public void ReserveTourCommand_Execute(object? parameter)
         {

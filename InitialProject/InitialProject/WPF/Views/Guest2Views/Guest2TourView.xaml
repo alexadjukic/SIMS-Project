@@ -42,6 +42,7 @@
         <Grid Background="LightYellow" Grid.Row="2">
             <Button Content="Close"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="120" Command="{Binding CloseWindowCommand}" Margin="58,0,0,0" FontWeight="Bold"/>
             <Button Name="ChooseButton" Content="Choose"  VerticalAlignment="Center" Command="{Binding ChooseTourCommand}" Margin="828,0,58,0" FontWeight="Bold" HorizontalAlignment="Left" Width="120"/>
+            <Button Name="Demo" Height="20" Content="{Binding DemoButtonContent}"  VerticalAlignment="Center" Command="{Binding DemoCommand}" Margin="460,0,58,0" FontWeight="Bold" HorizontalAlignment="Left" Width="120"/>
         </Grid>
     </Grid>
 </Page>

@@ -49,6 +49,7 @@
             <TextBox HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Margin="320,0,0,150" TextWrapping="Wrap" Text="{Binding Path=NumberOfNewGuests, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"  Width="50" Height="31" IsEnabled="True"/>
             <TextBlock  TextAlignment="Center" HorizontalAlignment="Left" Margin="320,0,0,60" TextWrapping="Wrap" Text="{Binding Path=SelectedTour.MaxGuests, TargetNullValue='' ,UpdateSourceTrigger=PropertyChanged}" Width="50" Height="31"/>
             <Button Content="Home" Margin="80,201,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="80" FontWeight="Bold" FontSize="16" Command="{Binding HomeCommand}"/>
+            <Button Content="{Binding DemoButtonContent}" Margin="250,201,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="80" FontWeight="Bold" FontSize="16" Command="{Binding DemoCommand}"/>
             <Button Content="Reserve" Margin="0,201,80,0" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30"  Width="80" FontWeight="Bold" FontSize="16" Command="{Binding ReserveTourCommand}" />
         </Grid>
     </Grid>

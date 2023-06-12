@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.WPF.Views.Guest1Views"
+      xmlns:lex="clr-namespace:InitialProject.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="630" d:DesignWidth="1400"
       Title="Thread preview">
@@ -29,15 +30,15 @@
 
         <DataGrid Grid.Row="1" Grid.Column="0" RowHeight="30" FontSize="18" ItemsSource="{Binding Path=Comments, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserAddRows="False" Style="{DynamicResource DataGridStyle}" CanUserDeleteRows="False" IsReadOnly="True" Margin="70,0,70,0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="User" Width="*" Binding="{Binding User.Username}"/>
-                <DataGridTextColumn Header="Comment" Width="6*" Binding="{Binding Text}"/>
-                <DataGridTextColumn Header="Was user there?" Width="0.9*" Binding="{Binding UserBeenThere}"/>
+                <DataGridTextColumn Header="{lex:Loc User}" Width="*" Binding="{Binding User.Username}"/>
+                <DataGridTextColumn Header="{lex:Loc Comment}" Width="6*" Binding="{Binding Text}"/>
+                <DataGridTextColumn Header="{lex:Loc WasUserThere}" Width="0.9*" Binding="{Binding UserBeenThere}"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBox Text="{Binding NewComment, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="1020" Margin="70,0,0,0" VerticalContentAlignment="Center" FontSize="15" Style="{DynamicResource TextBoxStyle}"></TextBox>
-            <Button Content="Post a comment" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" FontSize="20" Margin="20,0,0,0" Command="{Binding PostCommentCommand}"/>
+            <Button Content="{lex:Loc PostAComment}" Style="{DynamicResource ButtonStyle}" Height="50" Width="200" FontSize="20" Margin="20,0,0,0" Command="{Binding PostCommentCommand}"/>
         </StackPanel>
     </Grid>
 </Page>

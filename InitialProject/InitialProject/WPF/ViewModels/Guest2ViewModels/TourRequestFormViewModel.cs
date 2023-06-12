@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Collections.ObjectModel;
 using InitialProject.Application.UseCases;
+using System.Windows.Threading;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -285,6 +286,25 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
+        private string _demoButtonContent;
+        public string DemoButtonContent
+        {
+            get
+            {
+                return _demoButtonContent;
+            }
+            set
+            {
+                if (_demoButtonContent != value)
+                {
+                    _demoButtonContent = value;
+                    OnPropertyChanged(nameof(DemoButtonContent));
+                }
+            }
+        }
+
+        public DispatcherTimer Timer { get; set; }
+
         private readonly LocationService _locationService;
         private readonly UserService _userService;
         private readonly TourRequestService _tourRequestService;
@@ -303,15 +323,18 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
             ShowInitialTourOptions();
 
+            DemoButtonContent = "Demo";
+
             HomeCommand = new RelayCommand(HomeCommand_Execute);
             RequestTourCommand = new RelayCommand(RequestTourCommand_Execute);
             ShowTourRequestsCommand = new RelayCommand(ShowTourRequestsCommand_Execute);
+            DemoCommand = new RelayCommand(DemoCommand_Execute);
 
         }
         public void FillTourRequestFields()
         {
             Location = _tourRequestService.FillLocation(SelectedCountry, SelectedCity);
-            LocationId = Location.Id; //sta onda vraca ?
+            LocationId = Location.Id; 
 
             Guide = _userService.GetUserByName(SelectedGuide);
             GuideId = Guide.Id;
@@ -394,11 +417,111 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
+        private void RunDemo()
+        {
+            var demoSelectedCountry = "Japan";
+            var demoSelectedCity = "Tokyo";
+            var demoSelectedLanguage = "Serbian";
+            var demoSelectedGuide = "Mika";
+            var demoDescription = "Jako lep opis";
+            var demoStartDate = DateTime.Parse("1.1.2023.");
+            var demoEndDate = DateTime.Parse("15.1.2023.");
+            var demoGuestsNumber = 15;
+
+            Timer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(0.2)
+            };
+
+            this.ResetFields();
+            int i = 0;
+
+            Timer.Tick += delegate (object? sender, EventArgs e)
+            {
+                if (i < 5)
+                {
+                    SelectedCountry += demoSelectedCountry[i];
+                }
+                else if (i < 10)
+                {
+                    SelectedCity += demoSelectedCity[i - 5];
+                }
+                else if (i < 17)
+                {
+                    SelectedLanguage += demoSelectedLanguage[i - 10];
+                }
+                else if (i < 30)
+                {
+                    Description += demoDescription[i - 17];
+                }
+                else if (i < 45)
+                {
+                    SelectedGuide = demoSelectedGuide;
+                }
+                else if (i < 55)
+                {
+                    StartDate = demoStartDate;
+                }
+                else if (i < 65)
+                {
+                    EndDate = demoEndDate;
+                }
+                else if (i < 75)
+                {
+                    GuestsNumber = demoGuestsNumber;
+                }
+                else if (i < 85)
+                {
+                    this.RequestTourCommand_Execute(null);
+                    StopDemo();
+                }
+                else
+                {
+                    Timer.Stop();
+                }
+                i++;
+            };
+            Timer.Start();
+            DemoButtonContent = "Stop";
+        }
+
+        public void StopDemo()
+        {
+            DemoButtonContent = "Demo";
+            Timer.Stop();
+            ResetFields();
+        }
+
+        private void ResetFields()
+        {
+            SelectedCountry = "";
+            SelectedCity = "";
+            SelectedLanguage = "";
+            SelectedGuide = "";
+            Description = "";
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now;
+            GuestsNumber = 0;
+        }
+
         #region COMMANDS
 
         public RelayCommand HomeCommand { get; }
         public RelayCommand RequestTourCommand { get; }
         public RelayCommand ShowTourRequestsCommand { get; }
+        public RelayCommand DemoCommand { get; }
+
+        public void DemoCommand_Execute(object? parameter)
+        {
+            if (DemoButtonContent.Equals("Demo"))
+            {
+                RunDemo();
+            }
+            else
+            {
+                StopDemo();
+            }
+        }
 
         public void ShowTourRequestsCommand_Execute(object? parameter)
         {
@@ -418,10 +541,6 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
                 Guest2TourView guest2TourView = new Guest2TourView(LoggedUser);
                 //guest2TourView.Show();
                 //_tourRequestFormView.Close();
-            }
-            else
-            {
-                MessageBox.Show("Ovo je provera dal je uslo u false");
             }
         }
 

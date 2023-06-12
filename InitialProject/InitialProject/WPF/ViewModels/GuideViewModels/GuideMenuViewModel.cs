@@ -73,6 +73,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
             SwitchMenuSideCommand = new RelayCommand(SwitchMenuSideCommand_Execute);
             UndoCommand = new RelayCommand(UndoCommand_Execute, UndoCommand_CanExecute);
             ProfileCommand = new RelayCommand(ProfileCommand_Execute, ProfileCommand_CanExecute);
+            TutorialCommand = new RelayCommand(TutorialCommand_Execute);
         }
 
         #region COMMANDS
@@ -91,6 +92,7 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public RelayCommand SwitchMenuSideCommand { get; }
         public RelayCommand UndoCommand { get; }
         public RelayCommand ProfileCommand { get; }
+        public RelayCommand TutorialCommand { get; }
 
 
         public void CreateNewTourCommand_Execute(object? parameter)
@@ -232,6 +234,11 @@ namespace InitialProject.WPF.ViewModels.GuideViewModels
         public bool ProfileCommand_CanExecute(object? parameter)
         {
             return CurrentViewModel.GetType() != typeof(SuperGuideViewModel);
+        }
+
+        public void TutorialCommand_Execute(object? parameter)
+        {
+            CurrentViewModel = new TutorialViewModel();
         }
         #endregion
     }

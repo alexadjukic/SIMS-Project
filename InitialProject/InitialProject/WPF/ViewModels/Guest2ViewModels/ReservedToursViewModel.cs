@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Diagnostics;
 using System.Security.Cryptography.Xml;
+using System.Windows.Threading;
 
 namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 {
@@ -90,6 +91,25 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             }
         }
 
+        private string _demoButtonContent;
+        public string DemoButtonContent
+        {
+            get
+            {
+                return _demoButtonContent;
+            }
+            set
+            {
+                if (_demoButtonContent != value)
+                {
+                    _demoButtonContent = value;
+                    OnPropertyChanged(nameof(DemoButtonContent));
+                }
+            }
+        }
+
+        public DispatcherTimer Timer { get; set; }
+
         public ObservableCollection<TourCheckpoint> ReservedTours { get; set; }
         private readonly TourService _tourService;
         private readonly TourReviewService _tourReviewService;
@@ -104,10 +124,14 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             _tourReviewService = new TourReviewService();
             _tourReservationService = new TourReservationService();
 
+            DemoButtonContent = "Demo";
+
             HomeCommand = new RelayCommand(HomeCommand_Execute);
             OpenRateTourAndGuideWindowCommand = new RelayCommand(OpenRateTourAndGuideWindowCommand_Execute);
             //IsEnabled = false;
             GeneratePDFCommand = new RelayCommand(GeneratePDFCommand_Execute);
+            DemoCommand = new RelayCommand(DemoCommand_Execute);
+
             LoadReservedTours();
         }
 
@@ -141,7 +165,7 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 45.0f);
             document.Pages.Add(page);
 
-            string title = "Tours That You Attended This Year";
+            string title = "Tours That You Attended";
             Label label = new Label(title, 0, 0, 504, 100, Font.TimesBold, 30, TextAlign.Center);
             page.Elements.Add(label);
 
@@ -166,10 +190,10 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
 
             Column2 column1 = table.Columns.Add(40);
             column1.CellDefault.Align = TextAlign.Center;
-            table.Columns.Add(150);
-            table.Columns.Add(150);
-            table.Columns.Add(150);
-            table.Columns.Add(150);
+            table.Columns.Add(70);
+            table.Columns.Add(140);
+            table.Columns.Add(100);
+            table.Columns.Add(100);
 
             Row2 row1 = table.Rows.Add(40, Font.TimesBold, 16, Grayscale.Black,
                Grayscale.Gray);
@@ -223,12 +247,75 @@ namespace InitialProject.WPF.ViewModels.Guest2ViewModels
             });
         }
 
+        private void RunDemo()
+        {
+            var demoDateFrom = DateTime.Parse("1.1.2019.");
+            var demoDateTo = DateTime.Parse("1.1.2024.");
+
+            Timer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(0.2)
+            };
+
+            this.ResetFields();
+            int i = 0;
+
+            Timer.Tick += delegate (object? sender, EventArgs e)
+            {
+                if (i < 5)
+                {
+                    DateFrom = demoDateFrom;
+                }
+                else if (i < 25)
+                {
+                    DateTo = demoDateTo;
+                }
+                else if (i < 35)
+                {
+                    this.GeneratePDFCommand_Execute(null);
+                    StopDemo();
+                }
+                else
+                {
+                    Timer.Stop();
+                }
+                i++;
+            };
+            Timer.Start();
+            DemoButtonContent = "Stop";
+        }
+
+        public void StopDemo()
+        {
+            DemoButtonContent = "Demo";
+            Timer.Stop();
+            ResetFields();
+        }
+
+        private void ResetFields()
+        {
+            DateFrom = DateTime.Now;
+            DateTo = DateTime.Now;
+        }
 
         #region COMMANDS
 
         public RelayCommand HomeCommand { get; }
         public RelayCommand OpenRateTourAndGuideWindowCommand { get; }
         public RelayCommand GeneratePDFCommand { get; }
+        public RelayCommand DemoCommand { get; }
+
+        public void DemoCommand_Execute(object? parameter)
+        {
+            if (DemoButtonContent.Equals("Demo"))
+            {
+                RunDemo();
+            }
+            else
+            {
+                StopDemo();
+            }
+        }
 
         public void GeneratePDFCommand_Execute(object? parameter)
         {
