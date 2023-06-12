@@ -97,10 +97,13 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private readonly AccommodationYearStatisticsService _accommodationYearStatisticsService;
         private readonly AccommodationReservationService _accommodationReservationService;
+        private readonly UserService _userService;
 
         public SeriesCollection SeriesCollection { get; set; }
         public Func<int, string> Formatter { get; set; }
         private HashSet<int> formattedValues = new HashSet<int>();
+
+        private User _owner;
         #endregion
 
         public AccommodationStatisticsOverviewWindowViewModel(Accommodation selectedAccommodation)
@@ -109,6 +112,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             _accommodationYearStatisticsService = new AccommodationYearStatisticsService();
             _accommodationReservationService = new AccommodationReservationService();
+            _userService = new UserService();
 
             AccommodationYearStatistics = new ObservableCollection<AccommodationYearStatistic>();
             Years = new ObservableCollection<string>();
@@ -117,6 +121,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
             CreatePDFWithYearsCommand = new RelayCommand(CreatePDFWithYears_Execute);
 
             Labels = new string[0];
+
+            _owner = _userService.GetById(selectedAccommodation.OwnerId);
 
             LoadColumns();
             LoadYearStatistics();
@@ -206,7 +212,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public void CreatePDFWithYears_Execute(object? parameter)
         {
             AccommodationYearStatisticsPDFCreator pdfCreator = new AccommodationYearStatisticsPDFCreator(_accommodationYearStatisticsService, SelectedAccommodation);
-            pdfCreator.CreatePDF();
+            pdfCreator.CreatePDF(_owner);
             /*System.Diagnostics.Process.Start("explorer", "yearStatistics.pdf");*/
             string absolutePath = AppDomain.CurrentDomain.BaseDirectory + $"../../../Reports/yearStatistics.pdf";
             Process.Start(new ProcessStartInfo

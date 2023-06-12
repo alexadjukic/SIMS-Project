@@ -222,8 +222,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
         private void LoadData()
         {
-            //LoadMostPopularLocation();
-            //LoadLeastPopularLocation();
+            LoadMostPopularLocation();
+            LoadLeastPopularLocation();
             AccommodationRegistrationLoaded();
             LoadAccommodations();
             FillInTypes();

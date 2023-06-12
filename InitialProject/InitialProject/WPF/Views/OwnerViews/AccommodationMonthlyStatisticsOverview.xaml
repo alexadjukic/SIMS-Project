@@ -38,19 +38,19 @@
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Country:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.Country}" TextAlignment="Left" Margin="77,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.Country}" TextAlignment="Left" Margin="82,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="City:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.City}" TextAlignment="Left" Margin="101,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Location.City}" TextAlignment="Left" Margin="109,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Type:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Type}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedAccommodation.Type}" TextAlignment="Left" Margin="103,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock TextWrapping="Wrap" Text="Year:" TextAlignment="Left" Margin="5,0,0,0" Style="{StaticResource BoldTextBloxk}"/>
-                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedYearStatistics.Year}" TextAlignment="Left" Margin="96,0,0,0" Style="{StaticResource BasicTextBlock}"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding SelectedYearStatistics.Year}" TextAlignment="Left" Margin="106,0,0,0" Style="{StaticResource BasicTextBlock}"/>
             </StackPanel>
         </StackPanel>
 

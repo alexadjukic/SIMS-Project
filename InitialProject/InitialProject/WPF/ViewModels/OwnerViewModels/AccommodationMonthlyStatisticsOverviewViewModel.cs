@@ -76,6 +76,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private readonly AccommodationMonthStatisticsService _accommodationMonthStatisticsService;
         private readonly AccommodationReservationService _accommodationReservationService;
 
+        private readonly UserService _userService;
+
         public string[] Labels { get; set; }
         public SeriesCollection SeriesCollection { get; set; }
         public Func<int, string> Formatter { get; set; }
@@ -83,6 +85,8 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         private HashSet<int> formattedValues = new HashSet<int>();
 
         private double? previousFormattedValue = null;
+
+        private User _owner;
         #endregion
 
         public AccommodationMonthlyStatisticsOverviewViewModel(Accommodation selectedAccommodation, AccommodationYearStatistic selectedYearStatistic)
@@ -94,6 +98,9 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
 
             _accommodationMonthStatisticsService = new AccommodationMonthStatisticsService();
             _accommodationReservationService = new AccommodationReservationService();
+            _userService = new UserService();
+
+            _owner = _userService.GetById(selectedAccommodation.OwnerId);
 
             LoadLabels();
             LoadColumns();
@@ -188,7 +195,7 @@ namespace InitialProject.WPF.ViewModels.OwnerViewModels
         public void CreatePDFForMonthsCommand_Execute(object? parameter)
         {
             AccommodationMonthStatisticsPDFCreator pdfCreator = new AccommodationMonthStatisticsPDFCreator(_accommodationMonthStatisticsService, SelectedYearStatistics, SelectedAccommodation);
-            pdfCreator.CreatePDF();
+            pdfCreator.CreatePDF(_owner);
             //System.Diagnostics.Process.Start("explorer", "monthStatistics.pdf");
             string absolutePath = AppDomain.CurrentDomain.BaseDirectory + $"../../../Reports/monthStatistics.pdf";
             Process.Start(new ProcessStartInfo
