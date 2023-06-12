@@ -28,7 +28,7 @@
             </Grid.RowDefinitions>
             
             <Grid Grid.Column="0">
-                <Label Content="{lex:Loc Accommodations}" FontSize="30" Margin="70,30,0,0" Style="{DynamicResource LabelStyle}"/>
+                <Label Content="{lex:Loc Accommodations}" FontSize="30" Margin="70,10,0,0" Style="{DynamicResource LabelStyle}"/>
                 <Label Content="{lex:Loc Name}" FontSize="20" Height="38" Width="100" Style="{DynamicResource LabelStyle}" HorizontalAlignment="Right" Margin="0,45,15,45" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></Label>
                 <Label Content="{lex:Loc Country}" FontSize="20" Height="38" Width="100" Style="{DynamicResource LabelStyle}" HorizontalAlignment="Right" Margin="0,0,15,-89" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"></Label>
             </Grid>

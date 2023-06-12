@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="{lex:Loc YourProfile}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{DynamicResource LabelStyle}"/>
+        <Label Content="{lex:Loc YourProfile}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource LabelStyle}"/>
 
         <Grid Grid.Row="1" Width="380" Height="40">
             <TextBlock Text="{lex:Loc Username}" FontSize="25" VerticalAlignment="Center" Margin="5,0,0,0" Style="{DynamicResource TextBlockStyle}"/>

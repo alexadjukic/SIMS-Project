@@ -9,7 +9,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Printing;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 {
@@ -103,6 +105,8 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         private readonly AccommodationService _accommodationService;
         private readonly AccommodationAvailabilityService _accommodationAvailabilityService;
         private readonly AccommodationReservationService _accommodationReservationService;
+
+        private Regex _NaturalNumberRegex = new Regex("^[1-9][0-9]*$");
         #endregion
 
         public AnytimeAnywhereViewModel(User user)
@@ -119,7 +123,40 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
             MakeReservationCommand = new RelayCommand(MakeReservationCommand_Execute);
         }
 
+        private bool IsDateSearchInputValid()
+        {
+            if (DateTime.Compare(SelectedStartDate, SelectedEndDate) >= 0)
+            {
+                MessageBox.Show("First date must be before the second one.");
+                return false;
+            }
 
+            if (DateTime.Compare(DateTime.Now.Date, SelectedStartDate.Date) > 0)
+            {
+                MessageBox.Show("You can't travel to the past.");
+                return false;
+            }
+
+            if (DurationOfStay == null || DurationOfStay == "")
+            {
+                MessageBox.Show("Duration of stay field can't be empty.");
+                return false;
+            }
+
+            if (!_NaturalNumberRegex.Match(DurationOfStay).Success)
+            {
+                MessageBox.Show("Please enter a valid value.");
+                return false;
+            }
+
+            if ((SelectedEndDate.Date - SelectedStartDate.Date).Days < Convert.ToInt32(DurationOfStay) - 1)
+            {
+                MessageBox.Show("Calendar and Duration of stay values don't match.");
+                return false;
+            }
+
+            return true;
+        }
 
         #region COMMANDS
         public RelayCommand SearchDatesCommand { get; }
@@ -127,15 +164,18 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
 
         public void SearchDatesCommand_Execute(object? parameter)
         {
-            Accommodations.Clear();
-            var accommodations = _accommodationAvailabilityService.GetAllAvailableAccommodations(SelectedStartDate, SelectedEndDate, Convert.ToInt32(DurationOfStay));
-            foreach (var accommodation in accommodations)
+            if (IsDateSearchInputValid())
             {
-                if (accommodation.MaxGuests >= Convert.ToInt32(GuestNumber) && accommodation.MinReservationDays <= Convert.ToInt32(DurationOfStay))
+                Accommodations.Clear();
+                var accommodations = _accommodationAvailabilityService.GetAllAvailableAccommodations(SelectedStartDate, SelectedEndDate, Convert.ToInt32(DurationOfStay));
+                foreach (var accommodation in accommodations)
                 {
-                    foreach (var date in accommodation.AvailableDates)
+                    if (accommodation.MaxGuests >= Convert.ToInt32(GuestNumber) && accommodation.MinReservationDays <= Convert.ToInt32(DurationOfStay))
                     {
-                        Accommodations.Add(new AccommodationInfo(accommodation.Id, accommodation.Name, accommodation.Country, accommodation.City, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays, date.StartDate, date.EndDate, accommodation.Dates));
+                        foreach (var date in accommodation.AvailableDates)
+                        {
+                            Accommodations.Add(new AccommodationInfo(accommodation.Id, accommodation.Name, accommodation.Country, accommodation.City, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays, date.StartDate, date.EndDate, accommodation.Dates));
+                        }
                     }
                 }
             }
