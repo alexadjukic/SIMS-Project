@@ -18,7 +18,7 @@
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="{lex:Loc DateChangeRequests}" FontSize="30" Margin="70,30,0,0" Style="{DynamicResource LabelStyle}"/>
+        <Label Grid.Row="0" Content="{lex:Loc DateChangeRequests}" FontSize="30" Margin="70,10,0,0" Style="{DynamicResource LabelStyle}"/>
 
         <ListBox Grid.Row="1" Margin="70,0,70,40" ItemsSource="{Binding Path=Requests, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Style="{DynamicResource ListBoxStyle}">
             <ListBox.ItemTemplate>

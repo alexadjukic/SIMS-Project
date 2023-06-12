@@ -181,6 +181,6 @@ namespace InitialProject.WPF.ViewModels.Guest1ViewModels
         {
             MainWindow.mainWindow.MainPreview.Content = new GenerateReportPage(LoggedUser);
         }
-        #endregion
+#endregion
     }
 }

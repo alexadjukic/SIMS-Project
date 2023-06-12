@@ -16,7 +16,7 @@
             <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Forum" FontSize="30" Margin="70,30,0,0" Style="{DynamicResource LabelStyle}"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Forum" FontSize="30" Margin="70,10,0,0" Style="{DynamicResource LabelStyle}"/>
 
         <DataGrid Grid.Row="1" Grid.Column="0" FontSize="18" ItemsSource="{Binding Path=Forums, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedForum, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" CanUserAddRows="False" Style="{DynamicResource DataGridStyle}" CanUserDeleteRows="False" IsReadOnly="True" Margin="70,0,70,0">
             <DataGrid.Columns>
